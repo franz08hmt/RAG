@@ -1,0 +1,12 @@
+question_id,question,category,answerability,status,expected_document,evidence_page,notes
+P001,Điều kiện để sinh viên được xét công nhận tốt nghiệp gồm những gì?,xet_tot_nghiep,answerable,draft,,,
+P002,Sinh viên được rút bớt học phần trong trường hợp nào?,dang_ky_hoc_phan,answerable,draft,,,
+P003,Cảnh báo học vụ được xác định theo những tiêu chí nào?,canh_bao_hoc_vu,answerable,draft,,,
+P004,Quy định về đăng ký học lại được nêu như thế nào?,dang_ky_hoc_lai,answerable,draft,,,
+P005,Điều kiện để sinh viên đăng ký thực tập là gì?,thuc_tap,answerable,draft,,,
+P006,Sinh viên cần đáp ứng điều kiện nào để thực hiện đồ án tốt nghiệp?,do_an_tot_nghiep,answerable,draft,,,
+P007,Thủ tục xin tạm dừng học được quy định ra sao?,tam_dung_hoc,answerable,draft,,,
+P008,Các trường hợp bị buộc thôi học được quy định như thế nào?,buoc_thoi_hoc,answerable,draft,,,
+P009,Lịch thi của lớp cụ thể vào tuần tới là khi nào?,lich_thi,unanswerable,draft,,,Câu hỏi kiểm tra cơ chế từ chối nếu corpus không chứa lịch thi
+P010,Học phí của học kỳ tiếp theo là bao nhiêu?,hoc_phi,unanswerable,draft,,,Câu hỏi kiểm tra cơ chế từ chối nếu corpus không chứa thông báo học phí
+

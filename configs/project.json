@@ -1,0 +1,10 @@
+{
+  "project_name": "HCMUTE Academic Documents RAG PoC",
+  "language": "vi",
+  "domain": "academic_regulations",
+  "citation_fields": ["document_title", "page_number", "evidence_text"],
+  "out_of_scope_policy": "abstain_when_evidence_is_insufficient",
+  "corpus_manifest": "data/manifests/corpus_manifest.csv",
+  "pilot_question_set": "data/question_sets/pilot_questions.csv"
+}
+
