@@ -1,0 +1,5 @@
+{
+  "status": "unavailable",
+  "model": "BAAI/bge-m3",
+  "reason": "Khong tai duoc model 'BAAI/bge-m3' (co the do moi truong khong co quyen truy cap huggingface.co hoac khong du tai nguyen): 403 Forbidden"
+}
