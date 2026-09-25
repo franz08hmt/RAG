@@ -124,8 +124,8 @@ thật hoặc chạy lại lệnh, **không suy đoán từ nội dung báo cáo
   trang bìa; đã xác minh riêng bằng XML rằng DOCX thật có 2 section tách biệt và Word sẽ ngắt trang
   đúng chỗ). Khuyến nghị: người nhận vẫn nên tự mở bằng Word thật trước khi nộp để soát khoảng trắng/
   ngắt trang lần cuối.
-- **Chưa push/commit bản v2 này lên nhánh tại thời điểm viết ghi chú này** — sẽ thực hiện ngay sau khi
-  gửi các tài liệu bàn giao này, cùng một commit, không tạo PR mới, không đụng `main`.
+- Bản v2 và ghi chú này đã được commit và push lên `claude/nifty-dirac-h6u5b6` ở commit `93b559f`
+  (ngay sau `4f0031a`), cùng PR #1, không tạo PR mới, không đụng `main`.
 - Các giới hạn về nội dung đã nêu trong báo cáo (hiệu lực `HCMUTE_QCDT_1727_2021` chưa xác định đầy
   đủ, P006 chưa có gold evidence, Dense không thắng tuyệt đối, mẫu đánh giá nhỏ) không đổi so với v1 —
   đây là giới hạn thật của Đợt 1, không phải điều cần "sửa".
