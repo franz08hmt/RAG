@@ -79,12 +79,16 @@ chưa xác định số in, số chunk...).
 
 ```bash
 python scripts/query_bm25.py --query "Điều kiện để sinh viên được xét công nhận tốt nghiệp gồm những gì?" --top-k 5
-python scripts/query_dense.py --query "..." --top-k 5   # BGE-M3 + FAISS, cần tải model từ huggingface.co
+python scripts/query_dense.py --query "..." --top-k 5   # BGE-M3 + FAISS, cần tải model BAAI/bge-m3
 ```
 
-`query_dense.py` sẽ in `DENSE_RETRIEVAL_UNAVAILABLE` kèm lý do cụ thể (thiếu thư viện hoặc không tải
-được model) thay vì lỗi khó hiểu, nếu môi trường không có mạng/tài nguyên phù hợp - xem giới hạn ở
-mục "Trạng thái hiện tại" bên dưới.
+`query_dense.py` cần cài `pip install -e ".[dense]"` và tải model `BAAI/bge-m3` (~2.2GB) lần đầu chạy.
+Nếu môi trường lọc egress theo whitelist tên miền: cần mở **cả hai** `huggingface.co` (nơi khai báo
+model) **và** tên miền lưu trọng số thật mà Hugging Face chuyển hướng tới khi tải file (ví dụ
+`us.aws.cdn.hf.co` - hạ tầng "Xet storage"; dùng `curl -I` xem header `Location` để biết đúng tên miền
+cần mở trong môi trường của bạn) - nếu chỉ mở `huggingface.co`, lệnh tải model vẫn thất bại. Nếu vẫn
+thiếu thư viện hoặc không tải được model, lệnh in `DENSE_RETRIEVAL_UNAVAILABLE` kèm lý do cụ thể thay
+vì lỗi khó hiểu.
 
 ## Bước 4 - Đánh giá trên bộ câu hỏi pilot
 
@@ -110,12 +114,11 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
   làm sạch → chunk có metadata → snapshot tái lập được, retrieval baseline BM25 chạy được qua CLI, bộ
   10 câu hỏi pilot đã rà soát với gold evidence (7/10 có bằng chứng xác nhận được trong corpus hiện
   tại), Recall@5/MRR đã tính trên tập đó, 20 test tự động.
-- Đã thử nhưng chưa đạt: Dense Retrieval (BGE-M3 + FAISS) - mã nguồn đã viết đầy đủ và tự kiểm tra
-  được tính khả dụng, nhưng môi trường phiên làm việc này không được cấp quyền truy cập
-  `huggingface.co` để tải model, nên chưa có kết quả Dense thật. Xem
-  `docs/evidence/runs/dense_unavailable_*.json`.
+- Đã hoàn thành (mới): Dense Retrieval (BGE-M3 + FAISS) chạy thành công với kết quả thật trên cùng
+  corpus và bộ câu hỏi - Recall@5 = 6/7 (0,857), MRR@10 = 0,643, cải thiện rõ so với BM25 (0,429/0,371)
+  nhưng không thắng tuyệt đối ở mọi câu (xem `docs/evidence/case_studies.md` và
+  `docs/evidence/runs/metrics_summary.md`).
 - Dự kiến mốc sau: xác nhận hiệu lực đầy đủ của `HCMUTE_QCDT_1727_2021` (có dấu hiệu văn bản 2025 mới
-  hơn), bổ sung nguồn cho câu hỏi về khóa luận/đồ án tốt nghiệp (P006), chạy Dense Retrieval khi có
-  quyền mạng phù hợp, mở rộng bộ câu hỏi pilot, và triển khai hybrid + reranker + refusal guard đã
-  hiệu chỉnh.
+  hơn), bổ sung nguồn cho câu hỏi về khóa luận/đồ án tốt nghiệp (P006), mở rộng bộ câu hỏi pilot, và
+  triển khai hybrid (RRF) + reranker + refusal guard đã hiệu chỉnh (cho cả điểm BM25 lẫn cosine Dense).
 
