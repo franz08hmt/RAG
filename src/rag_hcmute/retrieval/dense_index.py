@@ -11,6 +11,7 @@ from rag_hcmute.retrieval.common import RetrievalHit, hit_from_chunk, load_chunk
 
 DEFAULT_MODEL_NAME = "BAAI/bge-m3"
 NORMALIZATION = "l2_normalize_embeddings_cosine_via_inner_product"
+MAX_SEQ_LENGTH = 1024
 
 
 class DenseRetrievalUnavailable(RuntimeError):
@@ -43,6 +44,11 @@ class DenseRetriever:
 
         try:
             self._model = SentenceTransformer(model_name)
+            # BGE-M3 defaults to max_seq_length=8192 for long-document support; our chunks are
+            # capped at ~560 whitespace-tokens by design (see ingestion/chunk.py), so encoding at
+            # the full 8192-token budget only wastes CPU. 1024 leaves generous headroom for BPE
+            # subword expansion over a 560-whitespace-token chunk without truncating real content.
+            self._model.max_seq_length = MAX_SEQ_LENGTH
         except Exception as exc:
             raise DenseRetrievalUnavailable(
                 f"Khong tai duoc model '{model_name}' (co the do moi truong khong co quyen "

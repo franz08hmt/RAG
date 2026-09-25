@@ -59,6 +59,7 @@ def run_pilot_evaluation(
     method_name: str,
     retriever,
     top_k: int = MRR_CONSIDERED_K,
+    config: dict | None = None,
 ) -> dict:
     questions = load_pilot_questions(questions_path)
     per_question_results = []
@@ -95,6 +96,7 @@ def run_pilot_evaluation(
         "questions_path": str(questions_path),
         "python_version": sys.version.split()[0],
         "platform": platform.platform(),
+        "config": config or {},
         "metrics": {
             "recall_at_5": {"value": recall, "hits": recall_hits, "denominator": recall_n},
             "mrr": {"value": mrr, "denominator": mrr_n, "considered_top_k": MRR_CONSIDERED_K},

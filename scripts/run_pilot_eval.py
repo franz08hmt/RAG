@@ -36,11 +36,21 @@ def main() -> int:
     if args.snapshot_manifest.is_file():
         snapshot_id = json.loads(args.snapshot_manifest.read_text(encoding="utf-8"))["snapshot_id"]
 
+    config: dict = {}
     if args.method == "bm25":
         retriever = BM25Retriever.from_snapshot(args.chunks)
         method_name = "bm25"
+        from rag_hcmute.retrieval.bm25_index import BM25_LIBRARY
+
+        config = {"library": BM25_LIBRARY, "tokenizer": "regex_\\w+_unicode_lowercase"}
     else:
-        from rag_hcmute.retrieval.dense_index import DEFAULT_MODEL_NAME, DenseRetrievalUnavailable, DenseRetriever
+        from rag_hcmute.retrieval.dense_index import (
+            DEFAULT_MODEL_NAME,
+            MAX_SEQ_LENGTH,
+            NORMALIZATION,
+            DenseRetrievalUnavailable,
+            DenseRetriever,
+        )
 
         model_name = args.dense_model or DEFAULT_MODEL_NAME
         try:
@@ -57,6 +67,14 @@ def main() -> int:
             print(f"Da ghi trang thai vao {status_path}")
             return 2
         method_name = "dense_bge_m3"
+        config = {
+            "model": model_name,
+            "embedding_dim": retriever._dim,
+            "normalization": NORMALIZATION,
+            "faiss_index": "IndexFlatIP",
+            "max_seq_length": MAX_SEQ_LENGTH,
+            "query_instruction_prefix": "khong_can (theo model card BAAI/bge-m3, khac cac ban BGE truoc)",
+        }
 
     report = run_pilot_evaluation(
         questions_path=args.questions,
@@ -64,6 +82,7 @@ def main() -> int:
         snapshot_id=snapshot_id,
         method_name=method_name,
         retriever=retriever,
+        config=config,
     )
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
