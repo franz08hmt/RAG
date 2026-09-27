@@ -1,0 +1,1258 @@
+{
+  "run_id": "dense_bge_m3_5da3bd4d5de54492_20260925T040111Z",
+  "created_at": "2026-09-25T04:01:11.507742+00:00",
+  "method": "dense_bge_m3",
+  "snapshot_id": "5da3bd4d5de54492",
+  "chunks_path": "/home/user/RAG/data/processed/chunks/chunks.jsonl",
+  "questions_path": "/home/user/RAG/data/question_sets/pilot_questions.csv",
+  "python_version": "3.11.15",
+  "platform": "Linux-6.18.44-fc-v37-x86_64-with-glibc2.39",
+  "config": {
+    "model": "BAAI/bge-m3",
+    "embedding_dim": 1024,
+    "normalization": "l2_normalize_embeddings_cosine_via_inner_product",
+    "faiss_index": "IndexFlatIP",
+    "max_seq_length": 1024,
+    "query_instruction_prefix": "khong_can (theo model card BAAI/bge-m3, khac cac ban BGE truoc)"
+  },
+  "metrics": {
+    "recall_at_5": {
+      "value": 0.8571428571428571,
+      "hits": 6,
+      "denominator": 7
+    },
+    "mrr": {
+      "value": 0.6428571428571429,
+      "denominator": 7,
+      "considered_top_k": 10
+    }
+  },
+  "results": [
+    {
+      "question_id": "P001",
+      "question": "Điều kiện để sinh viên được xét công nhận tốt nghiệp gồm những gì?",
+      "category": "xet_tot_nghiep",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0036"
+      ],
+      "hit_rank": 1,
+      "latency_ms": 121.15,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0036",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 22,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 16",
+          "score": 0.7970929145812988,
+          "text_preview": "Điều 16. Công nhận tốt nghiệp và cấp bằng tốt nghiệp 1. Sinh viên được xét và công nhận tốt nghiệp khi có đủ các điều kiện sau: a) Tích lũy đủ học phần, số tín chỉ và hoàn thành các nội dung bắt buộc khác theo yêu cầu…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0021",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": null,
+          "score": 0.708375871181488,
+          "text_preview": "Phòng Tuyển sinh và Công tác SV, Đội ngũ tư vấn viên để nắm bắt tình hình học tập của SV và thực hiện tư vấn; d) Phòng Tuyển sinh và Công tác SV gửi thông báo đến phụ huynh qua thư điện tử hoặc số điện thoại của phụ…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0037",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 12",
+          "score": 0.6999583840370178,
+          "text_preview": "Điều 12 của Quy chế này trong đó hạng tốt nghiệp của sinh viên có ĐTBTL loại xuất sắc và giỏi sẽ bị giảm đi một mức nếu thuộc một trong các trường hợp sau: a) Khối lượng của các học phần phải học lại vượt quá 5% so với…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0022",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 29,
+          "section_path": null,
+          "score": 0.6757510900497437,
+          "text_preview": "thể dục - thể thao; 21 g) Đạt yêu cầu chuẩn đầu ra ngoại ngữ do Trường quy định. Xét tốt nghiệp được thực hiện 4 lần/năm học theo thông báo của phòng Đào tạo và đăng ký xét tốt nghiệp qua trang quản lý đào tạo trực…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0051",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 32,
+          "pdf_page_end": 32,
+          "section_path": "Chương V > Điều 24",
+          "score": 0.6679786443710327,
+          "text_preview": "báo cáo khóa luận tốt nghiệp, xét tốt nghiệp. 2. Sinh viên được công nhận đã tham gia nghiên cứu khoa học khi thực hiện một trong những yêu cầu sau: a) Tham gia nghiên cứu khoa học theo nhóm nghiên cứu do các giảng viên…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0034",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 21,
+          "pdf_page_end": 22,
+          "section_path": "Chương III > Điều 15",
+          "score": 0.6523122191429138,
+          "text_preview": "Điều 15. Công nhận kết quả học tập và chuyển đổi tín chỉ 1. Kết quả học tập của người học đã tích lũy từ một trình độ đào tạo khác, một ngành đào tạo hoặc một chương trình đào tạo khác, một khóa học khác hoặc từ một cơ…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0043",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 25,
+          "pdf_page_end": 26,
+          "section_path": "Chương IV > Điều 20",
+          "score": 0.6435202360153198,
+          "text_preview": "Điều 20. Học cùng lúc hai chương trình 1. Sinh viên có thể đăng ký học thêm các học phần của một chương trình khác, ngành khác khi điều kiện của Trường cho phép, nhưng chỉ được hưởng các quyền lợi chính thức và được xem…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0051",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 56,
+          "pdf_page_end": 57,
+          "section_path": null,
+          "score": 0.639649510383606,
+          "text_preview": "của SV tham gia giải quyết các vấn đề đang được nhà trường và xã hội quan tâm, góp phần thiết thực vào sự phát triển kinh tế - xã hội của TP. Hồ Chí Minh và của đất nước. - Nâng cao ý thức trách nhiệm của SV đối với bản…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0044",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 26,
+          "pdf_page_end": 26,
+          "section_path": "Chương IV > Điều 21",
+          "score": 0.6343218088150024,
+          "text_preview": "Điều 21. Học liên thông đối với người có văn bằng khác 1. Người đã tốt nghiệp các trình độ đào tạo của giáo dục nghề nghiệp được dự tuyển và học liên thông lên trình độ đại học theo quy định pháp luật hiện hành và quy…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0010",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 16,
+          "pdf_page_end": 17,
+          "section_path": null,
+          "score": 0.633255660533905,
+          "text_preview": "vào học đúng ngành, nghề đã đăng ký dự tuyển nếu đủ các điều kiện trúng tuyển theo quy định của Bộ Giáo dục và Đào tạo và của Trường. 2. Được tôn trọng và đối xử bình đẳng; được cung cấp đầy đủ thông tin cá nhân về việc…"
+        }
+      ]
+    },
+    {
+      "question_id": "P002",
+      "question": "Sinh viên được rút bớt học phần trong trường hợp nào?",
+      "category": "dang_ky_hoc_phan",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0021"
+      ],
+      "hit_rank": 3,
+      "latency_ms": 135.334,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0026",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 32,
+          "pdf_page_end": 33,
+          "section_path": null,
+          "score": 0.6695955991744995,
+          "text_preview": "trường về việc ban hành Quy định về việc miễn, giảm học phí đối với sinh viên đại học của Trường Đại học Sư phạm Kỹ thuật TP.Hồ Chí Minh) 1. Đối tượng được Miễn học phí (Trích Điều 3, Quyết định số 1102/QĐ-ĐHSPKT) - Các…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0037",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 12",
+          "score": 0.6589546799659729,
+          "text_preview": "Điều 12 của Quy chế này trong đó hạng tốt nghiệp của sinh viên có ĐTBTL loại xuất sắc và giỏi sẽ bị giảm đi một mức nếu thuộc một trong các trường hợp sau: a) Khối lượng của các học phần phải học lại vượt quá 5% so với…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0021",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 12,
+          "pdf_page_end": 12,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6566393375396729,
+          "text_preview": "theo lớp, lớp học được tổ chức bắt buộc cho tất cả sinh viên của lớp. Phòng Đào tạo và các đơn vị liên quan sẽ xem xét mở lớp trong các trường hợp đặc biệt khác. Cho phép các Đơn vị đào tạo yêu cầu xếp số sinh viên tối…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0015",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 21,
+          "pdf_page_end": 22,
+          "section_path": null,
+          "score": 0.6371194124221802,
+          "text_preview": "mỗi chương trình đào tạo. - SV năm thứ nhất mới nhập học sẽ học theo thời khóa biểu do Trường xếp ở học kỳ đầu tiên. SV thuộc đối tượng này có thể xin rút bớt học phần trong tuần rút môn học không rút học phí theo thông…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 24,
+          "section_path": "Chương IV > Điều 17",
+          "score": 0.6358638405799866,
+          "text_preview": "Điều 17. Nghỉ học tạm thời, thôi học 1. Sinh viên được xin nghỉ học tạm thời và bảo lưu kết quả đã học trong các trường hợp sau: a) Được điều động vào các lực lượng vũ trang; b) Được cơ quan có thẩm quyền điều động, đại…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0019",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 10,
+          "pdf_page_end": 11,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.624879002571106,
+          "text_preview": "rút môn học không rút học phí theo thông báo của Trường. b) Sinh viên từ học kỳ 2 năm thứ nhất trở đi thực hiện tự đăng ký học phần trực tuyến trong thời gian quy định theo thông báo Phòng Đào tạo. c) Những sinh viên…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0022",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 12,
+          "pdf_page_end": 13,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6225457191467285,
+          "text_preview": "phải đóng học phí cho các học phần đã rút. 8. Đăng ký học lại a) Sinh viên có điểm đánh giá học phần không đạt phải đăng ký học lại theo quy định tại Điều 4 của Quy chế này; điểm lần học cuối là điểm chính thức của học…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0032",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 20,
+          "pdf_page_end": 20,
+          "section_path": "Chương III > Điều 13",
+          "score": 0.6173374652862549,
+          "text_preview": "Điều 13. Xử lý kết quả học tập theo tín chỉ 1. Cuối mỗi học kỳ chính, sinh viên bị cảnh báo học tập khi thuộc một trong các điều kiện sau: a) Tổng số tín chỉ không đạt trong học kỳ vượt quá 50% số tín chỉ đã đăng ký…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0021",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": null,
+          "score": 0.6172792911529541,
+          "text_preview": "Phòng Tuyển sinh và Công tác SV, Đội ngũ tư vấn viên để nắm bắt tình hình học tập của SV và thực hiện tư vấn; d) Phòng Tuyển sinh và Công tác SV gửi thông báo đến phụ huynh qua thư điện tử hoặc số điện thoại của phụ…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0027",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 33,
+          "pdf_page_end": 34,
+          "section_path": null,
+          "score": 0.6166783571243286,
+          "text_preview": "học lại, học cải thiện, học ngoài chương trình đào tạo không áp dụng chính sách miễn, giảm học phí. - Việc miễn, giảm học phí sẽ được thực hiện trong suốt thời gian học tập tại trường (áp dụng vào các học kỳ chính thức…"
+        }
+      ]
+    },
+    {
+      "question_id": "P003",
+      "question": "Cảnh báo học tập được xác định theo những tiêu chí nào?",
+      "category": "canh_bao_hoc_tap",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0032",
+        "HCMUTE_QCDT_1727_2021__c0033"
+      ],
+      "hit_rank": 2,
+      "latency_ms": 116.839,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0020",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 25,
+          "pdf_page_end": 27,
+          "section_path": null,
+          "score": 0.6849609613418579,
+          "text_preview": "theo học kỳ dựa vào ĐTBHK, theo năm học dựa vào ĐTBNH, hoặc xếp loại học tập năm học, xét tốt nghiệp dựa trên ĐTBTL: 19 Thang điểm 10 Quy đổi điểm chữ Quy đổi thang điểm 4 Phân loại 9,0 – 10 A+ 4,0 Đạt 8,5 – 8,9 A 3,7…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0032",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 20,
+          "pdf_page_end": 20,
+          "section_path": "Chương III > Điều 13",
+          "score": 0.6786985993385315,
+          "text_preview": "Điều 13. Xử lý kết quả học tập theo tín chỉ 1. Cuối mỗi học kỳ chính, sinh viên bị cảnh báo học tập khi thuộc một trong các điều kiện sau: a) Tổng số tín chỉ không đạt trong học kỳ vượt quá 50% số tín chỉ đã đăng ký…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0033",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 20,
+          "pdf_page_end": 21,
+          "section_path": "Chương III > Điều 14",
+          "score": 0.6452819108963013,
+          "text_preview": "Điều 14. Xử lý kết quả học tập theo niên chế 1. Cuối mỗi năm học, SV được đánh giá đạt tiến độ học tập bình thường và được học tiếp lên năm học sau nếu đạt cả hai điều kiện sau: 20 a) Điểm trung bình năm học đạt từ 2,5…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0046",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 51,
+          "pdf_page_end": 52,
+          "section_path": null,
+          "score": 0.6441243886947632,
+          "text_preview": "học hoặc các cuộc thi học thuật cấp trường hoặc tương đương 3 điểm/thành tích I.9.3 Đạt giải III (hoặc giải C), khuyến khích trong nghiên cứu khoa học hoặc các cuộc thi học thuật cấp tỉnh, thành phố trực thuộc Trung…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0041",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 46,
+          "pdf_page_end": 48,
+          "section_path": null,
+          "score": 0.5993337631225586,
+          "text_preview": "các câu lạc bộ học thuật, các hoạt động học thuật, hoạt động ngoại khóa, tham quan, kiến tập, hoạt động nghiên cứu khoa học; c) Ý thức và thái độ tham gia các kỳ thi, cuộc thi học thuật; 40 d) Tinh thần vượt khó, phấn…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0047",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 52,
+          "pdf_page_end": 53,
+          "section_path": null,
+          "score": 0.5939322710037231,
+          "text_preview": "2 lần II.8.3 - Khiển trách -8 1 lần II.8.4 - Cảnh cáo -16 1 lần II.9 Vi phạm quy định về bảo hiểm y tế II.9.1 - Vi phạm 1 lần -4 1 lần II.9.2 - Vi phạm 2 lần -8 2 lần II.9.3 - Vi phạm 3 lần -16 3 lần II.9.4 - Vi phạm 4…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0030",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 18,
+          "pdf_page_end": 19,
+          "section_path": "Chương III > Điều 12",
+          "score": 0.5862239003181458,
+          "text_preview": "Điều 12. Đánh giá kết quả học tập theo học kỳ, năm học 1. Kết quả học tập của sinh viên được đánh giá sau từng học kỳ, từng năm học, dựa trên kết quả các học phần nằm trong yêu cầu của chương trình đào tạo mà sinh viên…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0019",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 25,
+          "pdf_page_end": 26,
+          "section_path": null,
+          "score": 0.577305257320404,
+          "text_preview": "tập của sinh viên Kết quả học tập của SV được đánh giá sau từng học kỳ, từng năm học, dựa trên kết quả các học phần nằm trong yêu cầu của chương trình đào tạo mà SV đã học và có điểm. Kết quả đánh giá dựa trên điểm…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0026",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 15,
+          "pdf_page_end": 16,
+          "section_path": "Chương III > Điều 11",
+          "score": 0.5753688812255859,
+          "text_preview": "thang điểm 10 và điểm chữ. Điểm chữ được quy đổi sang điểm số theo thang điểm 4 để tính điểm trung bình học kỳ và điểm trung bình tích lũy quy định tại Điều 12. 15 c) Đào tạo theo niên chế sử dụng thang điểm 10 và điểm…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0066",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 72,
+          "pdf_page_end": 73,
+          "section_path": null,
+          "score": 0.5726176500320435,
+          "text_preview": "cáo đến buộc thôi học; nếu nghiêm trọng, giao cho cơ quan chức năng xử lý theo quy định của pháp luật. c) Tổ chức hoặc tham gia tổ chức đua xe trái pháp luật: xử lý buộc thôi học và giao cho cơ quan chức năng xử lý theo…"
+        }
+      ]
+    },
+    {
+      "question_id": "P004",
+      "question": "Quy định về đăng ký học lại được nêu như thế nào?",
+      "category": "dang_ky_hoc_lai",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0021"
+      ],
+      "hit_rank": 6,
+      "latency_ms": 94.733,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0022",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 12,
+          "pdf_page_end": 13,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6629812717437744,
+          "text_preview": "phải đóng học phí cho các học phần đã rút. 8. Đăng ký học lại a) Sinh viên có điểm đánh giá học phần không đạt phải đăng ký học lại theo quy định tại Điều 4 của Quy chế này; điểm lần học cuối là điểm chính thức của học…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0018",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 10,
+          "pdf_page_end": 10,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6612430810928345,
+          "text_preview": "Điều 9. Tổ chức đăng ký học tập 1. Trước khi bắt đầu mỗi học kỳ, Trường sẽ có thông báo hướng dẫn cho sinh viên đăng ký học tập trên trang đăng ký học phần trực tuyến của Trường, được công bố chậm nhất là 1 tuần trước…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0019",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 10,
+          "pdf_page_end": 11,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6488397717475891,
+          "text_preview": "rút môn học không rút học phí theo thông báo của Trường. b) Sinh viên từ học kỳ 2 năm thứ nhất trở đi thực hiện tự đăng ký học phần trực tuyến trong thời gian quy định theo thông báo Phòng Đào tạo. c) Những sinh viên…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0043",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 25,
+          "pdf_page_end": 26,
+          "section_path": "Chương IV > Điều 20",
+          "score": 0.6379345655441284,
+          "text_preview": "Điều 20. Học cùng lúc hai chương trình 1. Sinh viên có thể đăng ký học thêm các học phần của một chương trình khác, ngành khác khi điều kiện của Trường cho phép, nhưng chỉ được hưởng các quyền lợi chính thức và được xem…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0015",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 21,
+          "pdf_page_end": 22,
+          "section_path": null,
+          "score": 0.6375722885131836,
+          "text_preview": "mỗi chương trình đào tạo. - SV năm thứ nhất mới nhập học sẽ học theo thời khóa biểu do Trường xếp ở học kỳ đầu tiên. SV thuộc đối tượng này có thể xin rút bớt học phần trong tuần rút môn học không rút học phí theo thông…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0021",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 12,
+          "pdf_page_end": 12,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6246023774147034,
+          "text_preview": "theo lớp, lớp học được tổ chức bắt buộc cho tất cả sinh viên của lớp. Phòng Đào tạo và các đơn vị liên quan sẽ xem xét mở lớp trong các trường hợp đặc biệt khác. Cho phép các Đơn vị đào tạo yêu cầu xếp số sinh viên tối…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0009",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 5,
+          "pdf_page_end": 6,
+          "section_path": "Chương I > Điều 3",
+          "score": 0.6131327152252197,
+          "text_preview": "cho học phần hoặc một nhóm học phần thuộc chương trình đào tạo của ngành/chuyên ngành khác không còn tổ chức giảng dạy. i) Các học phần hay nhóm các học phần thay thế hoặc tương đương do Khoa, Viện, Trung tâm quản lý…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0018",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 24,
+          "pdf_page_end": 25,
+          "section_path": null,
+          "score": 0.6119823455810547,
+          "text_preview": "các giấy tờ của cơ quan y tế nộp văn phòng Khoa, sau khi có xác nhận của Khoa thì nộp về phòng Đào tạo. 4.7. Cập nhật danh sách sinh viên đăng ký môn học Danh sách SV đăng ký học phần mỗi học kỳ được phòng Tuyển sinh và…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0011",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 6,
+          "pdf_page_end": 7,
+          "section_path": "Chương I > Điều 4",
+          "score": 0.6081075668334961,
+          "text_preview": "Điều 4. Phương thức tổ chức đào tạo 1. Đào tạo theo tín chỉ: a) Tất cả các sinh viên trình độ đại học chính quy được đào tạo theo hệ thống tín chỉ. b) Đào tạo theo tín chỉ là phương thức tổ chức đào tạo theo từng lớp…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0047",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": "Chương V > Điều 24",
+          "score": 0.6054658889770508,
+          "text_preview": "Điều 24. Những quy định đã ban hành trái với Quy chế này không áp dụng đối với khoá tuyển sinh từ 2021 trở đi. Trong quá trình thực hiện nếu có những nội dung chưa phù hợp, các đơn vị có trách nhiệm báo cáo với Trường…"
+        }
+      ]
+    },
+    {
+      "question_id": "P005",
+      "question": "Điều kiện để sinh viên đăng ký học phần Thực tập tốt nghiệp là gì?",
+      "category": "thuc_tap",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_FIT_TTTN_2022__c0000"
+      ],
+      "hit_rank": 1,
+      "latency_ms": 119.569,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_FIT_TTTN_2022__c0000",
+          "document_id": "HCMUTE_FIT_TTTN_2022",
+          "document_title": "Hướng dẫn thực hiện học phần Thực tập tốt nghiệp (Khoa Công nghệ Thông tin)",
+          "pdf_page_start": 1,
+          "pdf_page_end": 1,
+          "section_path": null,
+          "score": 0.7206297516822815,
+          "text_preview": "HƯỚNG DẪN THỰC HIỆN HỌC PHẦN THỰC TẬP TỐT NGHIỆP I. Thời điểm đăng ký học phần: Học kỳ 7. - SV đăng ký học phần “Thực tập tốt nghiệp” để có tên trong danh sách ghi điểm, giáo viên hướng dẫn (GVHD) sẽ dựa vào báo cáo và…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0036",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 22,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 16",
+          "score": 0.6775598526000977,
+          "text_preview": "Điều 16. Công nhận tốt nghiệp và cấp bằng tốt nghiệp 1. Sinh viên được xét và công nhận tốt nghiệp khi có đủ các điều kiện sau: a) Tích lũy đủ học phần, số tín chỉ và hoàn thành các nội dung bắt buộc khác theo yêu cầu…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0021",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 12,
+          "pdf_page_end": 12,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.6643475890159607,
+          "text_preview": "theo lớp, lớp học được tổ chức bắt buộc cho tất cả sinh viên của lớp. Phòng Đào tạo và các đơn vị liên quan sẽ xem xét mở lớp trong các trường hợp đặc biệt khác. Cho phép các Đơn vị đào tạo yêu cầu xếp số sinh viên tối…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0037",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 12",
+          "score": 0.6587987542152405,
+          "text_preview": "Điều 12 của Quy chế này trong đó hạng tốt nghiệp của sinh viên có ĐTBTL loại xuất sắc và giỏi sẽ bị giảm đi một mức nếu thuộc một trong các trường hợp sau: a) Khối lượng của các học phần phải học lại vượt quá 5% so với…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0017",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 23,
+          "pdf_page_end": 24,
+          "section_path": null,
+          "score": 0.6405946612358093,
+          "text_preview": "Giáo dục thể chất: 50 - 70 SV/nhóm. + Thực tập/thí nghiệm xưởng: 25 - 35 SV/nhóm đối với các học phần đại cương, cơ sở ngành; 15 - 25 SV/nhóm đối với các học phần chuyên ngành. Số lượng SV tối thiểu để tổ chức lớp Thực…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0013",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 19,
+          "pdf_page_end": 20,
+          "section_path": null,
+          "score": 0.6377552151679993,
+          "text_preview": "học phần tự chọn được xếp theo từng nhóm với quy định cụ thể về số tín chỉ tối thiểu phải tích lũy cho mỗi nhóm. Để đủ điều kiện tốt nghiệp, SV phải đạt số tín chỉ tối thiểu được quy định cho nhóm học phần tự chọn. c)…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0021",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": null,
+          "score": 0.630446195602417,
+          "text_preview": "Phòng Tuyển sinh và Công tác SV, Đội ngũ tư vấn viên để nắm bắt tình hình học tập của SV và thực hiện tư vấn; d) Phòng Tuyển sinh và Công tác SV gửi thông báo đến phụ huynh qua thư điện tử hoặc số điện thoại của phụ…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0022",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 29,
+          "section_path": null,
+          "score": 0.6292288899421692,
+          "text_preview": "thể dục - thể thao; 21 g) Đạt yêu cầu chuẩn đầu ra ngoại ngữ do Trường quy định. Xét tốt nghiệp được thực hiện 4 lần/năm học theo thông báo của phòng Đào tạo và đăng ký xét tốt nghiệp qua trang quản lý đào tạo trực…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0014",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 20,
+          "pdf_page_end": 21,
+          "section_path": null,
+          "score": 0.6267282962799072,
+          "text_preview": "hành, thí nghiệm hoặc thảo luận; = 45 - 90 giờ thực tập tại cơ sở; = 45 - 60 giờ làm tiểu luận, bài tập lớn hoặc đồ án, khoá luận tốt nghiệp. Một tiết học được tính bằng 50 phút. Đối với những học phần lý thuyết hoặc…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0043",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 25,
+          "pdf_page_end": 26,
+          "section_path": "Chương IV > Điều 20",
+          "score": 0.6236507892608643,
+          "text_preview": "Điều 20. Học cùng lúc hai chương trình 1. Sinh viên có thể đăng ký học thêm các học phần của một chương trình khác, ngành khác khi điều kiện của Trường cho phép, nhưng chỉ được hưởng các quyền lợi chính thức và được xem…"
+        }
+      ]
+    },
+    {
+      "question_id": "P006",
+      "question": "Sinh viên cần đáp ứng điều kiện nào để thực hiện khóa luận (đồ án) tốt nghiệp?",
+      "category": "khoa_luan_tot_nghiep",
+      "answerability_label": "unanswerable",
+      "gold_chunk_ids": [],
+      "hit_rank": null,
+      "latency_ms": 119.746,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0051",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 32,
+          "pdf_page_end": 32,
+          "section_path": "Chương V > Điều 24",
+          "score": 0.6913045644760132,
+          "text_preview": "báo cáo khóa luận tốt nghiệp, xét tốt nghiệp. 2. Sinh viên được công nhận đã tham gia nghiên cứu khoa học khi thực hiện một trong những yêu cầu sau: a) Tham gia nghiên cứu khoa học theo nhóm nghiên cứu do các giảng viên…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0036",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 22,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 16",
+          "score": 0.6503129005432129,
+          "text_preview": "Điều 16. Công nhận tốt nghiệp và cấp bằng tốt nghiệp 1. Sinh viên được xét và công nhận tốt nghiệp khi có đủ các điều kiện sau: a) Tích lũy đủ học phần, số tín chỉ và hoàn thành các nội dung bắt buộc khác theo yêu cầu…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0037",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 23,
+          "section_path": "Chương III > Điều 12",
+          "score": 0.6210960745811462,
+          "text_preview": "Điều 12 của Quy chế này trong đó hạng tốt nghiệp của sinh viên có ĐTBTL loại xuất sắc và giỏi sẽ bị giảm đi một mức nếu thuộc một trong các trường hợp sau: a) Khối lượng của các học phần phải học lại vượt quá 5% so với…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0051",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 56,
+          "pdf_page_end": 57,
+          "section_path": null,
+          "score": 0.6081446409225464,
+          "text_preview": "của SV tham gia giải quyết các vấn đề đang được nhà trường và xã hội quan tâm, góp phần thiết thực vào sự phát triển kinh tế - xã hội của TP. Hồ Chí Minh và của đất nước. - Nâng cao ý thức trách nhiệm của SV đối với bản…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0009",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 15,
+          "pdf_page_end": 16,
+          "section_path": null,
+          "score": 0.6008506417274475,
+          "text_preview": "1. Nhiệm vụ của sinh viên (Trích Điều 4, Thông tư 10/2016/TT-BGDĐT) 1. Chấp hành chủ trương, đường lối của Đảng, chính sách, pháp luật của Nhà nước, Điều lệ trường đại học và các quy chế, nội quy của Nhà trường. 2. Học…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0050",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 31,
+          "pdf_page_end": 32,
+          "section_path": "Chương V > Điều 24",
+          "score": 0.5899094343185425,
+          "text_preview": "trình đào tạo giảng dạy bằng tiếng Anh được quy định dựa vào tiếng Anh; chuẩn đầu ra ngoại ngữ đối với chương trình đào tạo chính quy chất lượng cao tiếng Nhật được quy định dựa vào tiếng Nhật. 2. Sinh viên phải có các…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0011",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 16,
+          "pdf_page_end": 18,
+          "section_path": null,
+          "score": 0.5872853994369507,
+          "text_preview": "phí khi sử dụng các dịch vụ công cộng về giao thông, giải trí, tham quan bảo tàng, di tích lịch sử, công trình văn hóa theo quy định của Nhà nước. 10 5. Được góp ý kiến, tham gia quản lý và giám sát hoạt động giáo dục…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0021",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": null,
+          "score": 0.5853190422058105,
+          "text_preview": "Phòng Tuyển sinh và Công tác SV, Đội ngũ tư vấn viên để nắm bắt tình hình học tập của SV và thực hiện tư vấn; d) Phòng Tuyển sinh và Công tác SV gửi thông báo đến phụ huynh qua thư điện tử hoặc số điện thoại của phụ…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0010",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 16,
+          "pdf_page_end": 17,
+          "section_path": null,
+          "score": 0.585296630859375,
+          "text_preview": "vào học đúng ngành, nghề đã đăng ký dự tuyển nếu đủ các điều kiện trúng tuyển theo quy định của Bộ Giáo dục và Đào tạo và của Trường. 2. Được tôn trọng và đối xử bình đẳng; được cung cấp đầy đủ thông tin cá nhân về việc…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0056",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 61,
+          "pdf_page_end": 63,
+          "section_path": null,
+          "score": 0.584680438041687,
+          "text_preview": "nhiệm cuối năm/tính theo năm học ) 20→40 2→4 006102 Hoàn thành nhiệm vụ cán bộ đoàn, hội cấp khoa/TT & tương đương (có QĐ bổ nhiệm, chuẩn y, giao nhiệm vụ, đánh giá trách nhiệm cuối năm/tính theo năm học ) 15→30 1,5→3…"
+        }
+      ]
+    },
+    {
+      "question_id": "P007",
+      "question": "Thủ tục xin nghỉ học tạm thời được quy định ra sao?",
+      "category": "nghi_hoc_tam_thoi",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0038"
+      ],
+      "hit_rank": 1,
+      "latency_ms": 113.463,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 24,
+          "section_path": "Chương IV > Điều 17",
+          "score": 0.7498698830604553,
+          "text_preview": "Điều 17. Nghỉ học tạm thời, thôi học 1. Sinh viên được xin nghỉ học tạm thời và bảo lưu kết quả đã học trong các trường hợp sau: a) Được điều động vào các lực lượng vũ trang; b) Được cơ quan có thẩm quyền điều động, đại…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0023",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 28,
+          "pdf_page_end": 30,
+          "section_path": null,
+          "score": 0.6894367933273315,
+          "text_preview": "học tạm thời và bảo lưu kết quả đã học trong các trường hợp sau: a) Được điều động vào các lực lượng vũ trang; 22 b) Được cơ quan có thẩm quyền điều động, đại diện quốc gia tham dự các kỳ thi, giải đấu quốc tế; c) Bị…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0021",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": null,
+          "score": 0.623709499835968,
+          "text_preview": "Phòng Tuyển sinh và Công tác SV, Đội ngũ tư vấn viên để nắm bắt tình hình học tập của SV và thực hiện tư vấn; d) Phòng Tuyển sinh và Công tác SV gửi thông báo đến phụ huynh qua thư điện tử hoặc số điện thoại của phụ…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0022",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 29,
+          "section_path": null,
+          "score": 0.614636242389679,
+          "text_preview": "thể dục - thể thao; 21 g) Đạt yêu cầu chuẩn đầu ra ngoại ngữ do Trường quy định. Xét tốt nghiệp được thực hiện 4 lần/năm học theo thông báo của phòng Đào tạo và đăng ký xét tốt nghiệp qua trang quản lý đào tạo trực…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0022",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 12,
+          "pdf_page_end": 13,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.597801923751831,
+          "text_preview": "phải đóng học phí cho các học phần đã rút. 8. Đăng ký học lại a) Sinh viên có điểm đánh giá học phần không đạt phải đăng ký học lại theo quy định tại Điều 4 của Quy chế này; điểm lần học cuối là điểm chính thức của học…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0028",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 33,
+          "pdf_page_end": 35,
+          "section_path": null,
+          "score": 0.5941062569618225,
+          "text_preview": "được làm hồ sơ để tiếp tục được hưởng chế độ miễn, giảm học phí. 27 4. Hồ sơ đề nghị miễn, giảm học phí (Trích Điều 7, Quyết định số 1102/QĐ-ĐHSPKT) - Đơn đề nghị miễn, giảm học phí (theo mẫu); - Giấy khai sinh (bản…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0066",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 72,
+          "pdf_page_end": 73,
+          "section_path": null,
+          "score": 0.5936440229415894,
+          "text_preview": "cáo đến buộc thôi học; nếu nghiêm trọng, giao cho cơ quan chức năng xử lý theo quy định của pháp luật. c) Tổ chức hoặc tham gia tổ chức đua xe trái pháp luật: xử lý buộc thôi học và giao cho cơ quan chức năng xử lý theo…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0014",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 20,
+          "pdf_page_end": 21,
+          "section_path": null,
+          "score": 0.592933177947998,
+          "text_preview": "hành, thí nghiệm hoặc thảo luận; = 45 - 90 giờ thực tập tại cơ sở; = 45 - 60 giờ làm tiểu luận, bài tập lớn hoặc đồ án, khoá luận tốt nghiệp. Một tiết học được tính bằng 50 phút. Đối với những học phần lý thuyết hoặc…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0038",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 43,
+          "pdf_page_end": 45,
+          "section_path": null,
+          "score": 0.5916443467140198,
+          "text_preview": "nhưng không vượt quá 30 ngày trong một chương trình. - Các trường hợp khác do Hiệu trưởng phê duyệt căn cứ vào Tờ trình của đơn vị chức năng liên quan và thông qua P.TSCTSV tham mưu. 37 CHÍNH SÁCH TRỢ CẤP KHÓ KHĂN CHO…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0015",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 21,
+          "pdf_page_end": 22,
+          "section_path": null,
+          "score": 0.5908128619194031,
+          "text_preview": "mỗi chương trình đào tạo. - SV năm thứ nhất mới nhập học sẽ học theo thời khóa biểu do Trường xếp ở học kỳ đầu tiên. SV thuộc đối tượng này có thể xin rút bớt học phần trong tuần rút môn học không rút học phí theo thông…"
+        }
+      ]
+    },
+    {
+      "question_id": "P008",
+      "question": "Các trường hợp bị buộc thôi học được quy định như thế nào?",
+      "category": "buoc_thoi_hoc",
+      "answerability_label": "answerable",
+      "gold_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0032",
+        "HCMUTE_QCDT_1727_2021__c0033"
+      ],
+      "hit_rank": 2,
+      "latency_ms": 136.002,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0021",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": null,
+          "score": 0.68011474609375,
+          "text_preview": "Phòng Tuyển sinh và Công tác SV, Đội ngũ tư vấn viên để nắm bắt tình hình học tập của SV và thực hiện tư vấn; d) Phòng Tuyển sinh và Công tác SV gửi thông báo đến phụ huynh qua thư điện tử hoặc số điện thoại của phụ…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0032",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 20,
+          "pdf_page_end": 20,
+          "section_path": "Chương III > Điều 13",
+          "score": 0.6606863737106323,
+          "text_preview": "Điều 13. Xử lý kết quả học tập theo tín chỉ 1. Cuối mỗi học kỳ chính, sinh viên bị cảnh báo học tập khi thuộc một trong các điều kiện sau: a) Tổng số tín chỉ không đạt trong học kỳ vượt quá 50% số tín chỉ đã đăng ký…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0066",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 72,
+          "pdf_page_end": 73,
+          "section_path": null,
+          "score": 0.6541788578033447,
+          "text_preview": "cáo đến buộc thôi học; nếu nghiêm trọng, giao cho cơ quan chức năng xử lý theo quy định của pháp luật. c) Tổ chức hoặc tham gia tổ chức đua xe trái pháp luật: xử lý buộc thôi học và giao cho cơ quan chức năng xử lý theo…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0065",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 71,
+          "pdf_page_end": 72,
+          "section_path": null,
+          "score": 0.6403496861457825,
+          "text_preview": "đến buộc thôi học; nếu nghiêm trọng, giao cho cơ quan chức năng xử lý theo quy định của pháp luật. c) Làm hư hỏng tài sản trong KTX và các tài sản khác của trường: Tuỳ theo mức độ xử lý từ khiển trách đến buộc thôi học…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 23,
+          "pdf_page_end": 24,
+          "section_path": "Chương IV > Điều 17",
+          "score": 0.6367663145065308,
+          "text_preview": "Điều 17. Nghỉ học tạm thời, thôi học 1. Sinh viên được xin nghỉ học tạm thời và bảo lưu kết quả đã học trong các trường hợp sau: a) Được điều động vào các lực lượng vũ trang; b) Được cơ quan có thẩm quyền điều động, đại…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0023",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 28,
+          "pdf_page_end": 30,
+          "section_path": null,
+          "score": 0.6295938491821289,
+          "text_preview": "học tạm thời và bảo lưu kết quả đã học trong các trường hợp sau: a) Được điều động vào các lực lượng vũ trang; 22 b) Được cơ quan có thẩm quyền điều động, đại diện quốc gia tham dự các kỳ thi, giải đấu quốc tế; c) Bị…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0033",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 20,
+          "pdf_page_end": 21,
+          "section_path": "Chương III > Điều 14",
+          "score": 0.6248610615730286,
+          "text_preview": "Điều 14. Xử lý kết quả học tập theo niên chế 1. Cuối mỗi năm học, SV được đánh giá đạt tiến độ học tập bình thường và được học tiếp lên năm học sau nếu đạt cả hai điều kiện sau: 20 a) Điểm trung bình năm học đạt từ 2,5…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0064",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 70,
+          "pdf_page_end": 71,
+          "section_path": null,
+          "score": 0.610462486743927,
+          "text_preview": "hay đóng học phí đợt 1 nhưng không đóng hoàn tất học phí đợt II của học kỳ theo quy định: Xử lý khiển trách. b) Không đóng học phí đợt I và đợt II của học kỳ: Xử lý cảnh cáo. c) Xóa tên khỏi danh sách SV đối với các…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0063",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 69,
+          "pdf_page_end": 70,
+          "section_path": null,
+          "score": 0.607428789138794,
+          "text_preview": "học. b) Thi, kiểm tra thay, hoặc nhờ thi, kiểm tra thay; làm thay, nhờ làm hoặc sao chép tiểu luận, đồ án môn học, khoá luận tốt nghiệp: Vi phạm lần 1, xử lý đình chỉ học tập 01 năm; tái phạm, xử lý buộc thôi học. c) Tổ…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0049",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 29,
+          "pdf_page_end": 31,
+          "section_path": "Chương V > Điều 24",
+          "score": 0.6030340194702148,
+          "text_preview": "trú ở ngoài khu vực đã quy định thuộc đối tượng 01; + Con thương binh, con bệnh binh, con của người được hưởng chính sách như thương binh bị suy giảm khả năng lao động dưới 81%; + Con của người hoạt động kháng chiến bị…"
+        }
+      ]
+    },
+    {
+      "question_id": "P009",
+      "question": "Lịch thi của lớp cụ thể vào tuần tới là khi nào?",
+      "category": "lich_thi",
+      "answerability_label": "unanswerable",
+      "gold_chunk_ids": [],
+      "hit_rank": null,
+      "latency_ms": 97.583,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0014",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 20,
+          "pdf_page_end": 21,
+          "section_path": null,
+          "score": 0.5605847239494324,
+          "text_preview": "hành, thí nghiệm hoặc thảo luận; = 45 - 90 giờ thực tập tại cơ sở; = 45 - 60 giờ làm tiểu luận, bài tập lớn hoặc đồ án, khoá luận tốt nghiệp. Một tiết học được tính bằng 50 phút. Đối với những học phần lý thuyết hoặc…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0054",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 59,
+          "pdf_page_end": 60,
+          "section_path": null,
+          "score": 0.5502312183380127,
+          "text_preview": "chương trình (04 ngày) 10→20 1→2 Tiếp sức mùa thi 001501 Tham gia suốt chương trình cấp thành (01 tháng) 20→40 2→4 001502 Tham gia suốt chương trình cấp trường (02 tuần) 20→30 2→3 Tư vấn hướng nghiệp-tuyển sinh 001601…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0017",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 9,
+          "pdf_page_end": 10,
+          "section_path": "Chương II > Điều 8",
+          "score": 0.548668622970581,
+          "text_preview": "học kỳ chính là 30 tuần. 4. Thời khoá biểu của các lớp học thể hiện thời gian, địa điểm, hoạt động dạy và học của từng lớp thuộc các khoá học, hình thức, và chương trình đào tạo. Thời khóa biểu của các lớp học bình…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0043",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 48,
+          "pdf_page_end": 50,
+          "section_path": null,
+          "score": 0.5482786297798157,
+          "text_preview": "công bố trên phần mềm chuyên biệt liên quan đến việc đánh giá và cho điểm rèn luyện đối với mỗi hoạt động tham gia trong thời gian hai tuần kể từ ngày điểm được công bố. 42 6.3. Việc đánh giá kết quả rèn luyện học kỳ…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0056",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 61,
+          "pdf_page_end": 63,
+          "section_path": null,
+          "score": 0.5431997776031494,
+          "text_preview": "nhiệm cuối năm/tính theo năm học ) 20→40 2→4 006102 Hoàn thành nhiệm vụ cán bộ đoàn, hội cấp khoa/TT & tương đương (có QĐ bổ nhiệm, chuẩn y, giao nhiệm vụ, đánh giá trách nhiệm cuối năm/tính theo năm học ) 15→30 1,5→3…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0016",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 9,
+          "pdf_page_end": 9,
+          "section_path": "Chương II > Điều 8",
+          "score": 0.5389620065689087,
+          "text_preview": "Điều 8. Kế hoạch giảng dạy và học tập 1. Việc quản lý đào tạo được thực hiện bởi các đơn vị chức năng: Phòng Đào tạo, Phòng Đào tạo Không chính quy, Khoa Đào tạo chất lượng cao, Trung tâm Hợp tác đào tạo quốc tế (Khoa…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0047",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 27,
+          "pdf_page_end": 28,
+          "section_path": "Chương V > Điều 24",
+          "score": 0.5311470031738281,
+          "text_preview": "Điều 24. Những quy định đã ban hành trái với Quy chế này không áp dụng đối với khoá tuyển sinh từ 2021 trở đi. Trong quá trình thực hiện nếu có những nội dung chưa phù hợp, các đơn vị có trách nhiệm báo cáo với Trường…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0002",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 1,
+          "pdf_page_end": 1,
+          "section_path": "Điều 2",
+          "score": 0.5250808596611023,
+          "text_preview": "Điều 2. Quyết định này có hiệu lực kể từ ngày ký và được áp dụng bắt đầu từ khóa tuyển sinh 2021."
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0041",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 46,
+          "pdf_page_end": 48,
+          "section_path": null,
+          "score": 0.5239224433898926,
+          "text_preview": "các câu lạc bộ học thuật, các hoạt động học thuật, hoạt động ngoại khóa, tham quan, kiến tập, hoạt động nghiên cứu khoa học; c) Ý thức và thái độ tham gia các kỳ thi, cuộc thi học thuật; 40 d) Tinh thần vượt khó, phấn…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0044",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 49,
+          "pdf_page_end": 50,
+          "section_path": null,
+          "score": 0.5186044573783875,
+          "text_preview": "đề nghị cộng điểm. - Phòng Tuyển sinh và công tác SV có trách nhiệm quản lý và vận hành phần mềm tính điểm rèn luyện học kỳ cho SV toàn trường - SV có trách nhiệm kiểm tra tổng điểm rèn luyện và xác nhận điểm rèn luyện…"
+        }
+      ]
+    },
+    {
+      "question_id": "P010",
+      "question": "Học phí của học kỳ tiếp theo là bao nhiêu?",
+      "category": "hoc_phi",
+      "answerability_label": "unanswerable",
+      "gold_chunk_ids": [],
+      "hit_rank": null,
+      "latency_ms": 104.986,
+      "top_k": [
+        {
+          "rank": 1,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0014",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 20,
+          "pdf_page_end": 21,
+          "section_path": null,
+          "score": 0.6323344707489014,
+          "text_preview": "hành, thí nghiệm hoặc thảo luận; = 45 - 90 giờ thực tập tại cơ sở; = 45 - 60 giờ làm tiểu luận, bài tập lớn hoặc đồ án, khoá luận tốt nghiệp. Một tiết học được tính bằng 50 phút. Đối với những học phần lý thuyết hoặc…"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0034",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 40,
+          "pdf_page_end": 41,
+          "section_path": null,
+          "score": 0.6211015582084656,
+          "text_preview": "nhân hệ số, không cộng điểm ưu tiên) từ 26 điểm trở lên. - Giá trị học bổng được xác định bằng tổng số điểm thi tốt nghiệp trung học phổ thông 03 môn trong tổ hợp xét tuyển (không nhân hệ số, không cộng điểm ưu tiên)…"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0030",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 36,
+          "pdf_page_end": 37,
+          "section_path": null,
+          "score": 0.6152485609054565,
+          "text_preview": "viên Sư phạm được nhà nước hỗ trợ 3,63 triệu đồng/tháng để chi trả chi phí sinh hoạt trong thời gian học tập tại Trường. - Thời gian hỗ trợ tiền đóng học phí trong toàn khóa học (08 học kỳ chính) và chi phí sinh hoạt…"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0032",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 38,
+          "pdf_page_end": 39,
+          "section_path": null,
+          "score": 0.5955168008804321,
+          "text_preview": "từ khóa 2023 trở đi). Trường hợp số tín chỉ nhỏ hơn 15 thì phải lớn hơn hoặc bằng số tín chỉ được thiết kế của học kỳ trong CTĐT; các trường hợp đặc biệt do Hội đồng xét học bổng xem xét quyết định. Học kỳ lấy kết quả…"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0013",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 19,
+          "pdf_page_end": 20,
+          "section_path": null,
+          "score": 0.5902329087257385,
+          "text_preview": "học phần tự chọn được xếp theo từng nhóm với quy định cụ thể về số tín chỉ tối thiểu phải tích lũy cho mỗi nhóm. Để đủ điều kiện tốt nghiệp, SV phải đạt số tín chỉ tối thiểu được quy định cho nhóm học phần tự chọn. c)…"
+        },
+        {
+          "rank": 6,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0020",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 25,
+          "pdf_page_end": 27,
+          "section_path": null,
+          "score": 0.584069550037384,
+          "text_preview": "theo học kỳ dựa vào ĐTBHK, theo năm học dựa vào ĐTBNH, hoặc xếp loại học tập năm học, xét tốt nghiệp dựa trên ĐTBTL: 19 Thang điểm 10 Quy đổi điểm chữ Quy đổi thang điểm 4 Phân loại 9,0 – 10 A+ 4,0 Đạt 8,5 – 8,9 A 3,7…"
+        },
+        {
+          "rank": 7,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0007",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 4,
+          "pdf_page_end": 4,
+          "section_path": "Chương I > Điều 3",
+          "score": 0.5824899673461914,
+          "text_preview": "Điều 3. Học phần và tín chỉ 1. Học phần: a) Học phần là khối lượng kiến thức tương đối trọn vẹn, thuận tiện cho sinh viên tích luỹ trong quá trình học tập. Phần lớn học phần có khối lượng từ 2 đến 4 tín chỉ, nội dung…"
+        },
+        {
+          "rank": 8,
+          "chunk_id": "HCMUTE_SOTAYSV_2024__c0029",
+          "document_id": "HCMUTE_SOTAYSV_2024",
+          "document_title": "Sổ tay Sinh viên 2024",
+          "pdf_page_start": 35,
+          "pdf_page_end": 36,
+          "section_path": null,
+          "score": 0.574399471282959,
+          "text_preview": "- Trợ cấp 140.000 đồng/SV/tháng áp dụng đối với đối tượng a) ở trên. - Trợ cấp 100.000 đồng/SV/tháng áp dụng đối với các đối tượng b), c), d) ở trên. - Trợ cấp xã hội được cấp theo từng học kỳ và cấp 6 tháng/học kỳ. 3.…"
+        },
+        {
+          "rank": 9,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0018",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 10,
+          "pdf_page_end": 10,
+          "section_path": "Chương II > Điều 9",
+          "score": 0.5716904997825623,
+          "text_preview": "Điều 9. Tổ chức đăng ký học tập 1. Trước khi bắt đầu mỗi học kỳ, Trường sẽ có thông báo hướng dẫn cho sinh viên đăng ký học tập trên trang đăng ký học phần trực tuyến của Trường, được công bố chậm nhất là 1 tuần trước…"
+        },
+        {
+          "rank": 10,
+          "chunk_id": "HCMUTE_QCDT_1727_2021__c0008",
+          "document_id": "HCMUTE_QCDT_1727_2021",
+          "document_title": "Quy chế đào tạo trình độ đại học",
+          "pdf_page_start": 4,
+          "pdf_page_end": 5,
+          "section_path": "Chương I > Điều 3",
+          "score": 0.5709567070007324,
+          "text_preview": "dạy học phần trên hệ thống trực tuyến của Trường trước khi học kỳ áp dụng ít nhất 1 tuần. 2. Các loại học phần: a) Học phần bắt buộc: là các học phần chứa đựng những nội dung kiến thức chính yếu của mỗi chương trình đào…"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "snapshot_id": "5da3bd4d5de54492",
+  "created_at": "2026-09-24T11:16:31.582319+00:00",
+  "config": {
+    "chunk_tokens": 500,
+    "overlap_tokens": 80,
+    "tokenizer": "whitespace_split_v1",
+    "extraction_tool": "pymupdf==1.28.2"
+  },
+  "manifest_path": "data/manifests/corpus_manifest.csv",
+  "totals": {
+    "document_count": 3,
+    "skipped_document_count": 0,
+    "page_count": 182,
+    "chunk_count": 156,
+    "probable_scan_page_count": 26
+  },
+  "documents": [
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "document_title": "Quy chế đào tạo trình độ đại học",
+      "page_count": 32,
+      "chunk_count": 52,
+      "dieu_structured": true,
+      "dieu_markers_found": 31,
+      "probable_scan_pages": [],
+      "printed_page_unresolved_pages": [
+        1,
+        2
+      ],
+      "boilerplate_lines_removed": 0,
+      "file_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa"
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "document_title": "Hướng dẫn thực hiện học phần Thực tập tốt nghiệp (Khoa Công nghệ Thông tin)",
+      "page_count": 1,
+      "chunk_count": 1,
+      "dieu_structured": false,
+      "dieu_markers_found": 0,
+      "probable_scan_pages": [],
+      "printed_page_unresolved_pages": [
+        1
+      ],
+      "boilerplate_lines_removed": 0,
+      "file_sha256": "80c932a92dee7f92228f8cb6e8ffaf45d342559b6b1491939be103c946f003ab"
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "document_title": "Sổ tay Sinh viên 2024",
+      "page_count": 149,
+      "chunk_count": 103,
+      "dieu_structured": false,
+      "dieu_markers_found": 2,
+      "probable_scan_pages": [
+        1,
+        107,
+        109,
+        110,
+        111,
+        112,
+        116,
+        117,
+        121,
+        123,
+        124,
+        125,
+        126,
+        127,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        149
+      ],
+      "printed_page_unresolved_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "boilerplate_lines_removed": 0,
+      "file_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47"
+    }
+  ],
+  "skipped_documents": [],
+  "chunks_file": "data/processed/chunks/chunks.jsonl"
+}

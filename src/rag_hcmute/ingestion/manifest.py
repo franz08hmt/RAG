@@ -124,7 +124,13 @@ def format_report(rows: Iterable[dict[str, str]], issues: list[AuditIssue]) -> s
     if issues:
         details = "\n".join(f"- {issue.format()}" for issue in issues)
         return f"Manifest audit FAILED: documents={row_count}, issues={len(issues)}\n{details}"
-    return f"Manifest audit PASSED: documents={row_count}, issues=0"
+    if row_count == 0:
+        return (
+            "Manifest audit PASSED (schema hop le), documents=0.\n"
+            "CORPUS CHUA SAN SANG: day chi la schema rong, khong duoc bao cao la da "
+            "hoan thanh buoc thu thap corpus."
+        )
+    return f"Manifest audit PASSED: documents={row_count}, issues=0.\nCORPUS SAN SANG (schema hop le va co du lieu)."
 
 
 def build_parser() -> argparse.ArgumentParser:
