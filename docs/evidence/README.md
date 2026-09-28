@@ -11,3 +11,8 @@ Mỗi vòng thực nghiệm cần giữ lại:
 - bảng metric được tính từ kết quả thô;
 - một số trường hợp đúng, sai và từ chối để phân tích nguyên nhân.
 
+Các lượt thử OCR hiện có:
+
+- `OCR_PSM_SWEEP_20260928.md`: sweep ban đầu trên ba trang (107, 109, 136).
+- `OCR_PSM_PAGE116_20260928.md`: mở rộng thêm page 116 và tính lại số gộp trên cùng bốn trang. Reference đầy đủ vẫn lưu cục bộ trong thư mục Git-ignored `artifacts/results/`.
+

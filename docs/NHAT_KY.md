@@ -59,3 +59,11 @@
 - Giữ DPI 200, chạy `scripts/evaluate_ocr_sample.py` với PSM 3, 4, 6, 11, 13 trên từng trang. Reference nội bộ vẫn ở thư mục Git-ignored.
 - CER/WER gộp có trọng số theo PSM: 3 = 0,2624/0,3589; 4 = 0,2632/0,3620; 6 = 0,3511/0,4294; 11 = 0,2855/0,3926; 13 = 0,9986/1,0000. PSM 3 tốt nhất trên hai trang văn bản; PSM 11 tốt nhất trên trang sơ đồ nhưng CER/WER còn rất cao.
 - Không đổi mặc định PSM 6 vì mẫu chỉ có ba trang và kết quả phụ thuộc loại layout. Ghi chi tiết từng trang, cách tính và giới hạn tại `docs/evidence/OCR_PSM_SWEEP_20260928.md`.
+
+## 2026-09-28 — Bổ sung OCR reference và so sánh PSM trên page 116
+
+- Xác minh SHA-256 Sổ tay Sinh viên khớp manifest, render PDF page 116 (trang in 109) và chọn trang có các khối chữ/danh sách cùng minh họa; không chứa thông tin cá nhân nhận diện người học. Reference chép thủ công, rà theo trang nguồn, lưu ở `artifacts/results/g1_ocr_reference_page116.json` (Git-ignored).
+- Chạy PSM 3/4/6/11/13 ở DPI 200, cùng Tesseract/model đã ghim; chỉ log số liệu CER/WER/confidence, không in hypothesis OCR.
+- Page 116: PSM 6 CER thấp nhất (21,97%); PSM 4 WER thấp nhất (27,41%). Khi chạy lại cùng cấu hình trên cả 4 trang 107/109/116/136, PSM 4 đạt CER/WER gộp thấp nhất: 24,89%/32,21%. Page 116 chiếm 48,4% ký tự reference, do đó mẫu gộp còn bị ảnh hưởng bởi một trang dài; không đổi mặc định PSM 6.
+- Ghi cấu hình, bảng kết quả và giới hạn tại `docs/evidence/OCR_PSM_PAGE116_20260928.md`; cập nhật checkpoint Giai đoạn 1. Không thay snapshot OCR, corpus baseline, chunk hay pipeline retrieval.
+- Xác minh `pytest`: 39 passed; smoke tests: 2/2 passed; reference page 116 vẫn bị Git ignore. Không gọi Gemini, không push, không thay `main`/PR #2.
