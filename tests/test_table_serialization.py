@@ -3,8 +3,11 @@ import pytest
 from rag_hcmute.ingestion.tables import (
     TableProvenance,
     table_as_markdown,
+    table_as_markdown_chunk,
+    table_as_row_chunks,
     table_as_row_records,
 )
+from rag_hcmute.retrieval.bm25_index import BM25Retriever
 
 
 @pytest.fixture()
@@ -83,3 +86,43 @@ def test_provenance_requires_positive_page_and_safe_table_id() -> None:
 
     with pytest.raises(ValueError, match="table_id"):
         TableProvenance(document_id="DOC", pdf_page=1, table_id="table/1")
+
+
+def test_table_variants_convert_to_existing_chunk_schema(provenance) -> None:
+    headers = ["Năm", "Tổng số tín chỉ"]
+    rows = [["Năm thứ nhất", "dưới 36"], ["Năm thứ ba", "72 đến 107"]]
+
+    markdown_chunk = table_as_markdown_chunk(
+        provenance, "Quy chế kiểm thử", headers, rows
+    )
+    row_chunks = table_as_row_chunks(provenance, "Quy chế kiểm thử", headers, rows)
+
+    assert markdown_chunk.chunk_method == "table_markdown"
+    assert markdown_chunk.pdf_page_start == markdown_chunk.pdf_page_end == 3
+    assert markdown_chunk.printed_page_start is None
+    assert markdown_chunk.token_count > 0
+    assert len(markdown_chunk.text_sha256) == 64
+    assert all(chunk.chunk_method == "table_row_context" for chunk in row_chunks)
+    assert [chunk.chunk_id for chunk in row_chunks] == [
+        "TEST_DOC__table_01__row001",
+        "TEST_DOC__table_01__row002",
+    ]
+
+
+def test_row_context_chunks_work_with_existing_bm25_retriever(provenance) -> None:
+    chunks = table_as_row_chunks(
+        provenance,
+        "Quy chế kiểm thử",
+        headers=["Năm", "Tổng số tín chỉ"],
+        rows=[
+            ["Năm thứ nhất", "dưới 36"],
+            ["Năm thứ hai", "36 đến 71"],
+            ["Năm thứ ba", "72 đến 107"],
+            ["Năm thứ tư", "108 đến 149"],
+        ],
+    )
+
+    result = BM25Retriever(chunks).query("năm thứ ba 72 107", top_k=3)
+
+    assert result.hits[0].chunk_id == "TEST_DOC__table_01__row003"
+    assert result.hits[0].pdf_page_start == 3

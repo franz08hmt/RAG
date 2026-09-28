@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import hashlib
 import re
 from dataclasses import asdict, dataclass
 from typing import Sequence
+
+from rag_hcmute.ingestion.chunk import Chunk, tokenize
 
 
 @dataclass(frozen=True)
@@ -143,3 +146,76 @@ def table_as_row_records(
             )
         )
     return records
+
+
+def _as_chunk(
+    provenance: TableProvenance,
+    document_title: str,
+    chunk_id: str,
+    text: str,
+    chunk_method: str,
+    section_path: str,
+) -> Chunk:
+    if not document_title.strip():
+        raise ValueError("document_title must not be empty.")
+    return Chunk(
+        chunk_id=chunk_id,
+        document_id=provenance.document_id,
+        document_title=document_title,
+        pdf_page_start=provenance.pdf_page,
+        pdf_page_end=provenance.pdf_page,
+        printed_page_start=None,
+        printed_page_end=None,
+        section_path=section_path,
+        text=text,
+        token_count=len(tokenize(text)),
+        text_sha256=hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        chunk_method=chunk_method,
+    )
+
+
+def table_as_markdown_chunk(
+    provenance: TableProvenance,
+    document_title: str,
+    headers: Sequence[object],
+    rows: Sequence[Sequence[object]],
+) -> Chunk:
+    """Create one standard RAG chunk containing a reviewed table in Markdown."""
+    label = provenance.title.strip() or provenance.table_id
+    return _as_chunk(
+        provenance=provenance,
+        document_title=document_title,
+        chunk_id=f"{provenance.document_id}__{provenance.table_id}__markdown",
+        text=table_as_markdown(provenance, headers, rows),
+        chunk_method="table_markdown",
+        section_path=f"Bảng: {label}",
+    )
+
+
+def table_as_row_chunks(
+    provenance: TableProvenance,
+    document_title: str,
+    headers: Sequence[object],
+    rows: Sequence[Sequence[object]],
+    *,
+    verified_group_context_by_row: dict[int, str] | None = None,
+) -> list[Chunk]:
+    """Convert reviewed row-context records to the existing RAG ``Chunk`` schema."""
+    label = provenance.title.strip() or provenance.table_id
+    records = table_as_row_records(
+        provenance,
+        headers,
+        rows,
+        verified_group_context_by_row=verified_group_context_by_row,
+    )
+    return [
+        _as_chunk(
+            provenance=provenance,
+            document_title=document_title,
+            chunk_id=record.chunk_id,
+            text=record.text,
+            chunk_method="table_row_context",
+            section_path=f"Bảng: {label} > Hàng dữ liệu {record.row_index}",
+        )
+        for record in records
+    ]

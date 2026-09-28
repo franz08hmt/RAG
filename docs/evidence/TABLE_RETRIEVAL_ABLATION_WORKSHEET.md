@@ -12,7 +12,7 @@ Thử nghiệm này kiểm tra liệu cách biểu diễn bảng có giúp retri
 
 T1 và T2 chỉ là hai cách biểu diễn ứng viên, chưa phải quyết định thiết kế. Cần kiểm tra bảng nguồn trước khi đưa vào index; ô gộp, hàng tiêu đề nhiều tầng, đơn vị và ghi chú phải được giữ đúng. Không suy diễn giá trị cho ô trống nếu tài liệu không thể hiện rõ quan hệ đó.
 
-Prototype serializer hiện nằm ở `src/rag_hcmute/ingestion/tables.py`: `table_as_markdown()` tạo T1 và `table_as_row_records()` tạo T2 từ header/hàng đã được rà soát. Prototype giữ ô trống, yêu cầu nhãn cột tường minh và không tự điền tiếp ô gộp; ngữ cảnh nhóm chỉ được thêm khi truyền vào bằng chứng đã đối chiếu. Đây chưa phải PDF table extractor và chưa được gọi từ pipeline hoặc retriever.
+Prototype serializer hiện nằm ở `src/rag_hcmute/ingestion/tables.py`: `table_as_markdown()`/`table_as_markdown_chunk()` tạo T1 và `table_as_row_records()`/`table_as_row_chunks()` tạo T2 từ header/hàng đã được rà soát. Prototype giữ ô trống, yêu cầu nhãn cột tường minh và không tự điền tiếp ô gộp; ngữ cảnh nhóm chỉ được thêm khi truyền vào bằng chứng đã đối chiếu. Các adapter trả về `Chunk` tương thích retriever hiện tại, nhưng chưa được gọi từ pipeline mặc định và chưa tạo benchmark.
 
 ## Cách giữ phép so sánh công bằng
 
