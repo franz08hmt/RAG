@@ -52,3 +52,10 @@
 - Chạy lệnh trên HCMUTE Quy chế 1727, PDF page 20, table index 2. PyMuPDF trích bảng 6×2; đối chiếu trực quan khớp header và 5 dòng. Sidecar có 1 T1 Markdown chunk và 5 T2 row-context chunks; JSONL đọc lại được qua schema `Chunk`.
 - BM25 smoke probe theo cụm từ của dòng “năm thứ ba” xếp row 3 lên đầu ở T2. Đây chỉ là kiểm tra chức năng trên một bảng nhỏ; không phải benchmark hay kết luận T2 tốt hơn T1.
 - Thêm kiểm thử cho SHA guard/path guard và adapter chunk; test suite: 39 passed, smoke tests: 2/2 passed. Cần chạy ablation B0/T1/T2 sau khi có câu hỏi bảng do sinh viên xác nhận và gold location.
+
+## 2026-09-28 — Mở rộng OCR PSM pilot
+
+- Xác minh SHA-256 Sổ tay Sinh viên khớp manifest; dùng ba trang đã có reference thủ công (PDF page 107, 109, 136), không tạo reference mới và không in/lưu OCR hypothesis.
+- Giữ DPI 200, chạy `scripts/evaluate_ocr_sample.py` với PSM 3, 4, 6, 11, 13 trên từng trang. Reference nội bộ vẫn ở thư mục Git-ignored.
+- CER/WER gộp có trọng số theo PSM: 3 = 0,2624/0,3589; 4 = 0,2632/0,3620; 6 = 0,3511/0,4294; 11 = 0,2855/0,3926; 13 = 0,9986/1,0000. PSM 3 tốt nhất trên hai trang văn bản; PSM 11 tốt nhất trên trang sơ đồ nhưng CER/WER còn rất cao.
+- Không đổi mặc định PSM 6 vì mẫu chỉ có ba trang và kết quả phụ thuộc loại layout. Ghi chi tiết từng trang, cách tính và giới hạn tại `docs/evidence/OCR_PSM_SWEEP_20260928.md`.
