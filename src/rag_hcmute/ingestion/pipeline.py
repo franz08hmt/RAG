@@ -12,7 +12,7 @@ import pymupdf
 
 from rag_hcmute.ingestion.chunk import DEFAULT_CHUNK_TOKENS, DEFAULT_OVERLAP_TOKENS, Chunk, chunk_document
 from rag_hcmute.ingestion.clean import clean_document_pages
-from rag_hcmute.ingestion.extract import extract_pdf_pages, write_pages_jsonl
+from rag_hcmute.ingestion.extract import OCRSettings, extract_pdf_pages, ocr_settings_metadata, write_pages_jsonl
 from rag_hcmute.ingestion.manifest import read_manifest, sha256_file
 from rag_hcmute.ingestion.sectioning import find_section_markers, is_document_structured
 
@@ -23,6 +23,7 @@ class DocumentBuildStats:
     document_title: str
     page_count: int
     probable_scan_pages: list[int]
+    ocr_page_count: int
     printed_page_unresolved_pages: list[int]
     chunk_count: int
     dieu_structured: bool
@@ -44,7 +45,19 @@ def build_snapshot(
     build_log_path: Path,
     chunk_tokens: int = DEFAULT_CHUNK_TOKENS,
     overlap_tokens: int = DEFAULT_OVERLAP_TOKENS,
+    ocr_settings: OCRSettings | None = None,
 ) -> dict:
+    project_root = project_root.resolve()
+
+    def resolve_project_path(path: Path) -> Path:
+        return (path if path.is_absolute() else project_root / path).resolve()
+
+    manifest_path = resolve_project_path(manifest_path)
+    pages_output_dir = resolve_project_path(pages_output_dir)
+    chunks_output_dir = resolve_project_path(chunks_output_dir)
+    snapshot_manifest_path = resolve_project_path(snapshot_manifest_path)
+    build_log_path = resolve_project_path(build_log_path)
+
     _, rows = read_manifest(manifest_path)
 
     usable_rows = []
@@ -66,6 +79,7 @@ def build_snapshot(
         "overlap_tokens": overlap_tokens,
         "tokenizer": "whitespace_split_v1",
         "extraction_tool": f"pymupdf=={pymupdf.pymupdf_version}",
+        "ocr": ocr_settings_metadata(ocr_settings) if ocr_settings is not None else {"enabled": False},
     }
     document_hashes = [(row["document_id"], h) for row, _, h in usable_rows]
     snapshot_id = _snapshot_id(document_hashes, config)
@@ -83,7 +97,7 @@ def build_snapshot(
         document_id = row["document_id"]
         document_title = row["document_title"]
 
-        pages = extract_pdf_pages(local_path, document_id)
+        pages = extract_pdf_pages(local_path, document_id, ocr_settings=ocr_settings)
         write_pages_jsonl(pages, pages_output_dir / f"{document_id}.jsonl")
 
         cleaned_pages, clean_result = clean_document_pages(pages)
@@ -98,6 +112,7 @@ def build_snapshot(
         all_chunks.extend(chunks)
 
         scan_pages = [p.pdf_page for p in pages if p.is_probable_scan]
+        ocr_page_count = sum(p.extraction_method == "ocr" for p in pages)
         unresolved_printed = [p.pdf_page for p in pages if p.printed_page is None]
 
         stats = DocumentBuildStats(
@@ -105,6 +120,7 @@ def build_snapshot(
             document_title=document_title,
             page_count=len(pages),
             probable_scan_pages=scan_pages,
+            ocr_page_count=ocr_page_count,
             printed_page_unresolved_pages=unresolved_printed,
             chunk_count=len(chunks),
             dieu_structured=structured,
@@ -114,7 +130,10 @@ def build_snapshot(
         doc_stats.append(stats)
 
         log_lines.append(f"[{document_id}] {document_title}")
-        log_lines.append(f"  pages={len(pages)} chunks={len(chunks)} dieu_structured={structured} dieu_markers={len(dieu_markers)}")
+        log_lines.append(
+            f"  pages={len(pages)} ocr_pages={ocr_page_count} chunks={len(chunks)} "
+            f"dieu_structured={structured} dieu_markers={len(dieu_markers)}"
+        )
         if scan_pages:
             log_lines.append(f"  CANH BAO trang nghi la PDF scan / trich xuat kem: {scan_pages}")
         if unresolved_printed:
@@ -144,6 +163,7 @@ def build_snapshot(
             "page_count": sum(s.page_count for s in doc_stats),
             "chunk_count": len(all_chunks),
             "probable_scan_page_count": sum(len(s.probable_scan_pages) for s in doc_stats),
+            "ocr_page_count": sum(s.ocr_page_count for s in doc_stats),
         },
         "documents": [
             {
@@ -151,6 +171,7 @@ def build_snapshot(
                 "document_title": s.document_title,
                 "page_count": s.page_count,
                 "chunk_count": s.chunk_count,
+                "ocr_page_count": s.ocr_page_count,
                 "dieu_structured": s.dieu_structured,
                 "dieu_markers_found": s.dieu_markers_found,
                 "probable_scan_pages": s.probable_scan_pages,

@@ -72,6 +72,8 @@ def clean_document_pages(pages: list[PageText]) -> tuple[list[PageText], CleanRe
                 printed_page=page.printed_page,
                 printed_page_confidence=page.printed_page_confidence,
                 notes=list(page.notes),
+                extraction_method=page.extraction_method,
+                ocr_confidence_mean=page.ocr_confidence_mean,
             )
         )
 

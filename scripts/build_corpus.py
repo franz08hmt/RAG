@@ -10,6 +10,7 @@ SRC_ROOT = PROJECT_ROOT / "src"
 sys.path.insert(0, str(SRC_ROOT))
 
 from rag_hcmute.ingestion.chunk import DEFAULT_CHUNK_TOKENS, DEFAULT_OVERLAP_TOKENS  # noqa: E402
+from rag_hcmute.ingestion.extract import OCRSettings  # noqa: E402
 from rag_hcmute.ingestion.pipeline import build_snapshot  # noqa: E402
 
 
@@ -25,11 +26,34 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--build-log", type=Path, default=PROJECT_ROOT / "artifacts/logs/build_corpus.log")
     parser.add_argument("--chunk-tokens", type=int, default=DEFAULT_CHUNK_TOKENS)
     parser.add_argument("--overlap-tokens", type=int, default=DEFAULT_OVERLAP_TOKENS)
+    parser.add_argument("--ocr", action="store_true", help="Bat OCR fallback cho trang co it text native va co anh.")
+    parser.add_argument("--ocr-language", default="vie")
+    parser.add_argument("--ocr-dpi", type=int, default=200)
+    parser.add_argument("--ocr-min-native-chars", type=int, default=15)
+    parser.add_argument("--tessdata-dir", type=Path, help="Thu muc chua <language>.traineddata.")
+    parser.add_argument(
+        "--tesseract-cmd",
+        type=Path,
+        help="Duong dan executable Tesseract; mac dinh tim trong env hien tai roi den PATH.",
+    )
     return parser
 
 
 def main() -> int:
-    args = build_parser().parse_args()
+    parser = build_parser()
+    args = parser.parse_args()
+
+    ocr_settings = None
+    if args.ocr:
+        if args.tessdata_dir is None:
+            parser.error("--ocr yeu cau --tessdata-dir tro den thu muc model ngon ngu.")
+        ocr_settings = OCRSettings(
+            language=args.ocr_language,
+            tessdata_dir=args.tessdata_dir.resolve(),
+            tesseract_cmd=args.tesseract_cmd.resolve() if args.tesseract_cmd else None,
+            dpi=args.ocr_dpi,
+            minimum_native_chars=args.ocr_min_native_chars,
+        )
 
     snapshot = build_snapshot(
         manifest_path=args.manifest,
@@ -40,6 +64,7 @@ def main() -> int:
         build_log_path=args.build_log,
         chunk_tokens=args.chunk_tokens,
         overlap_tokens=args.overlap_tokens,
+        ocr_settings=ocr_settings,
     )
 
     totals = snapshot["totals"]
@@ -47,7 +72,7 @@ def main() -> int:
     print(
         f"Documents: {totals['document_count']} (skipped: {totals['skipped_document_count']}) | "
         f"Pages: {totals['page_count']} | Chunks: {totals['chunk_count']} | "
-        f"Probable-scan pages: {totals['probable_scan_page_count']}"
+        f"Probable-scan pages: {totals['probable_scan_page_count']} | OCR pages: {totals['ocr_page_count']}"
     )
     if totals["document_count"] == 0:
         print("CANH BAO: khong co tai lieu nao duoc xu ly. Kiem tra manifest va data/raw/.")

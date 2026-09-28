@@ -1,8 +1,8 @@
 # Giai đoạn 1 — Khảo sát xử lý tài liệu đầu vào
 
-**Trạng thái:** Đã kiểm tra corpus, cài OCR cục bộ và chạy khảo sát thử trên các trang nghi scan; chưa tích hợp OCR vào pipeline.
+**Trạng thái:** Đã khảo sát corpus, tích hợp OCR fallback có điều kiện và dựng snapshot thử riêng; baseline Giai đoạn 0 được giữ nguyên.
 **Phạm vi:** YC4 — tài liệu PDF có lớp chữ, trang scan, bảng và hình ảnh.
-**Snapshot khảo sát:** `5da3bd4d5de54492` — 3 tài liệu, 182 trang.
+**Baseline:** `5da3bd4d5de54492` — 3 tài liệu, 182 trang. **Snapshot OCR thử:** `cc57c028f3816a3d`.
 
 ## 1. Kết quả kiểm tra corpus
 
@@ -22,15 +22,16 @@ PyMuPDF đánh dấu 11 và 28 **ứng viên** bảng bằng `Page.find_tables()
 
 ## 2. Pipeline hiện tại đang làm gì
 
-- `extract_pdf_pages()` dùng `page.get_text("text")` để đọc lớp chữ PDF. Hàm chỉ gắn cờ `is_probable_scan`; hiện chưa gọi OCR, chưa bóc tách bảng thành hàng/cột và chưa nhận diện nội dung hình.
-- `PageText` giữ `document_id`, trang PDF, text, `char_count`, cờ scan và số trang in nếu nhận diện được. Chưa có trường cho phương thức trích xuất, confidence OCR hoặc tọa độ block.
+- Mặc định, `extract_pdf_pages()` vẫn lấy text native bằng `page.get_text("text")` và không gọi OCR. Khi bật `OCRSettings`, fallback chỉ chạy nếu text native ít hơn ngưỡng cấu hình (mặc định 15 ký tự) **và** trang có ảnh raster; trang có đủ text không bị OCR chỉ vì có ảnh. Nếu OCR không trả text, giữ kết quả native.
+- `PageText` lưu phương thức trích xuất (`native`/`ocr`) và mean word confidence do Tesseract trả về; thông tin này được giữ qua bước làm sạch và được tổng hợp vào `Chunk`. Snapshot ghi cấu hình OCR, phiên bản engine, ngôn ngữ, DPI, PSM và SHA-256 của traineddata, không ghi đường dẫn máy cụ thể.
+- Chưa bóc tách bảng thành hàng/cột để đưa vào retrieval và chưa diễn giải nội dung hình chỉ mang tính thị giác.
 - `chunk_document()` dùng whitespace token, mặc định 500 token và overlap 80. Tài liệu nhận diện được cấu trúc Điều thì ưu tiên ranh giới Điều; tài liệu không nhận diện được cấu trúc dùng cửa sổ trượt trên luồng trang. Trang đầu/cuối mỗi chunk được lưu, nhưng hàng bảng chưa được bảo vệ khỏi việc bị tách giữa các chunk.
-- Bản sao pipeline thử nghiệm Giai đoạn 0 nằm trong vùng Git ignore; snapshot và baseline đợt 1 không bị ghi đè.
+- OCR chỉ bật khi truyền `--ocr` cho `scripts/build_corpus.py`; nếu không bật, extraction giữ hành vi native-only. Không truyền `--tesseract-cmd` thì code ưu tiên executable nằm trong Python environment hiện tại rồi mới dò `PATH`. Dữ liệu OCR thử được ghi vào `data/processed/g1_ocr/` (Git ignored), không ghi đè snapshot G0.
 
 ## 3. Cách xử lý đề xuất
 
 1. **Ưu tiên lớp chữ PDF.** Giữ PyMuPDF native extraction cho trang có chữ có thể chọn được. Việc có ảnh trên trang không tự động kích hoạt OCR, vì trang Sổ tay có ảnh lớn nhưng phần lớn vẫn có lớp chữ.
-2. **OCR có điều kiện, chạy hoàn toàn local.** Chỉ OCR trang có tín hiệu thiếu chữ sau bước native extraction. Lưu song song nguồn trích xuất (`native`/`ocr`), trang PDF, ngôn ngữ, phiên bản engine và confidence nếu lấy được; không âm thầm thay thế text native. OCR chỉ giúp lấy chữ từ ảnh, không bảo đảm hiểu bố cục hay quan hệ giữa các cột.
+2. **OCR có điều kiện, chạy hoàn toàn local.** Giữ native text làm mặc định; chỉ chọn OCR text thay cho text native khi trang thiếu text và có ảnh raster. Trường `extraction_method` cho biết nguồn nào được dùng, còn PDF gốc vẫn là nguồn đối chiếu. Ghi lại confidence và cấu hình, nhưng không dùng confidence làm xác suất đúng. OCR chỉ giúp lấy chữ từ ảnh, không tự hiểu bố cục hay quan hệ giữa cột.
 3. **Bảng thành dữ liệu có cấu trúc.** Dùng `Page.find_tables()` để tạo ứng viên, kiểm tra số hàng/cột và đối chiếu thủ công trên các trang phù hợp. Khi đưa vào retrieval, giữ tiêu đề bảng, header cột, nhóm hàng cùng đơn vị; nếu phải chia bảng dài thì lặp header và lưu `table_id`, trang nguồn, chỉ số hàng. Bảng không viền hoặc chỉ phân tách bằng màu nền có thể bị bỏ sót; không xem kết quả detector là ground truth.
 4. **Hình ảnh và sơ đồ.** Lưu metadata vị trí/loại ảnh và trang nguồn. Với hình có chữ, thử OCR cục bộ; với hình chỉ mang thông tin thị giác, ghi nhận là chưa diễn giải được cho retrieval cho tới khi có caption được kiểm chứng. Không gửi Sổ tay hoặc nội dung phát sinh từ nó tới Gemini/LLM cloud.
 5. **Giữ tương thích với baseline.** Mọi trường schema mới nên là optional hoặc có `schema_version`; giữ nguyên cách tạo snapshot/baseline cũ để so sánh trên snapshot mới riêng. Kết quả OCR/table được lưu trong `data/processed/` (đang Git ignore), không commit PDF hay toàn văn.
@@ -40,8 +41,16 @@ PyMuPDF đánh dấu 11 và 28 **ứng viên** bảng bằng `Page.find_tables()
 - Tạo bảng audit theo trang: ký tự native, ảnh phủ trang, trạng thái OCR, số bảng/shape và số trang chưa có nguồn trích xuất usable. Chỉ xuất metadata, không xuất nội dung nhạy cảm.
 - Đã chạy thử OCR cục bộ trên cả 26 trang nghi scan của Sổ tay Sinh viên, ở 200 DPI, ngôn ngữ `vie`, page segmentation mode 6. Các trang có trung vị 3 ký tự native; OCR nhận tổng cộng 3.650 từ, median của confidence trung bình theo từng trang là 86,06/100. Đây là chỉ số confidence do engine ước lượng, **không phải** accuracy/CER/WER và chưa chứng minh từng từ được nhận dạng đúng.
 - Các trang có confidence trung bình thấp nhất trong lượt khảo sát là trang 1 (61,55), 136 (73,66), 149 (75,80), 137 (77,44) và 109 (79,08). Đây là danh sách ưu tiên rà soát, không phải ngưỡng loại trang. Trước khi đưa OCR text vào corpus cần chọn trang không chứa PII để tạo ground truth ngắn, đối chiếu thủ công và ghi nhận lỗi chữ, dấu tiếng Việt, số hiệu cùng bố cục.
-- Audit `find_tables()` đã thu được số trang và shape hàng/cột nhưng chưa kiểm tra trực quan. Bước đánh giá tiếp theo là chọn một vài bảng không nhạy cảm, so số hàng/cột và header theo PDF gốc, rồi thử cách giữ header/nhóm hàng khi chunking. Không dùng các trang danh bạ làm mẫu benchmark.
-- Sau khi pipeline thay đổi, tạo snapshot mới và chạy lại cùng bộ câu hỏi pilot; báo rõ thay đổi đến từ extraction/chunking, không so trực tiếp các snapshot khác nhau như thể cùng dữ liệu.
+- Đã kiểm tra trực quan một bảng không nhạy cảm ở Quy chế 1727 (PDF page 3). Bảng có cấu trúc phân cấp 14×5; `find_tables()` và `extract()` cùng trả shape 14×5, với 53 ô có text và 17 ô rỗng. Ảnh trang cho thấy có nhóm hàng/ô gộp, nên không thể coi mọi ô rỗng là lỗi detector; cũng chưa đủ để khẳng định mọi giá trị từng ô đều đúng.
+- Dựng snapshot OCR mới `cc57c028f3816a3d`: 3 tài liệu, 182 trang, 165 chunks (so với 156 chunk ở baseline), 26 trang OCR và 12 chunks mang provenance OCR (4 OCR-only, 8 trộn native/OCR). Cả 26 trang OCR đều giữ số PDF page; không trang nào nhận diện được printed page, do đó citation hiện phải dùng rõ số trang PDF, không suy đoán số trang in.
+- Chạy lại cùng pilot 10 câu (7 câu có gold evidence, 3 câu không trả lời được); mọi gold chunk ID cũ vẫn tồn tại và trỏ đúng document/PDF-page range. Kết quả retrieval:
+
+| Retriever | Baseline Hit@5 | Snapshot OCR Hit@5 | Baseline MRR@10 | Snapshot OCR MRR@10 |
+|---|---:|---:|---:|---:|
+| BM25 | 3/7 (0,429) | 3/7 (0,429) | 0,371 | 0,351 |
+| BGE-M3 dense | 6/7 (0,857) | 6/7 (0,857) | 0,643 | 0,786 |
+
+  Trên bộ nhỏ này, Hit@5 không đổi; BM25 có một câu tăng hạng và một câu giảm hạng, dense có hai câu tăng hạng và không câu nào giảm hạng. Chưa được diễn giải thành kết luận tổng quát hay bằng chứng OCR làm chất lượng tăng: pilot nhỏ, không phải test set độc lập, và OCR confidence chưa được đối chiếu với ground truth.
 
 ## 5. Cấu hình OCR đã cài và phạm vi kết quả
 
@@ -50,9 +59,11 @@ OCR local là cần thiết để khảo sát các trang thiếu lớp chữ the
 - Cài `tesseract=5.5.3` và `pytesseract=0.3.13` bằng Conda-forge trong env `rag-hcmute`. Dry-run dự kiến 34 package link, 2 package thay phiên bản và 217.060.448 byte tải xuống; transaction không thay Python 3.11 hoặc Torch/CUDA. Cài đặt đã hoàn tất và project vẫn qua test suite.
 - Tesseract không đi kèm bộ ngôn ngữ trong transaction; model `vie` được tải riêng từ [`tesseract-ocr/tessdata_best`](https://github.com/tesseract-ocr/tessdata_best/blob/main/vie.traineddata), bộ model ưu tiên độ chính xác hơn tốc độ và phát hành theo Apache-2.0 ([README/license](https://github.com/tesseract-ocr/tessdata_best)). File 12.435.550 byte nằm ngoài repo tại `D:\RAG\models\tesseract\tessdata\vie.traineddata`, SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
 - Phiên bản kiểm tra: Tesseract 5.5.3, pytesseract 0.3.13, PyMuPDF 1.28.2. OCR dùng trực tiếp trên máy, không gọi API và không gửi văn bản corpus ra ngoài.
-- Kết quả chỉ được ghi dưới dạng metadata trong `artifacts/results/g1_ocr_survey.json` (đã bị Git ignore); file không chứa OCR text. Thử nghiệm xác nhận engine có thể đọc các trang scan, nhưng chưa thay đổi `extract_pdf_pages()`, chưa tạo snapshot mới và chưa dùng OCR text để truy xuất.
+- Chỉ số khảo sát nằm ở `artifacts/results/g1_ocr_survey.json`; không chứa OCR text. OCR text của snapshot thử được lưu cục bộ trong `data/processed/g1_ocr/pages/` (Git ignored), không in ra terminal, không commit và không gửi tới cloud. Snapshot/chunks/log cùng nằm trong `data/processed/g1_ocr/`.
+- `pytest`: 26 passed; smoke test 2/2 passed; `pip check` không phát hiện dependency hỏng. CUDA vẫn khả dụng. BGE-M3 được chạy bằng snapshot model đã lưu local, không gọi Hugging Face trong lần đánh giá OCR.
+- Đã thử gọi OCR trực tiếp trên trang bìa PDF page 1 bằng Python executable của env, không truyền đường dẫn Tesseract riêng: executable được phân giải từ env, OCR trả 232 ký tự với confidence trung bình 61,55. Chỉ ghi số liệu tích hợp, không in nội dung trang ra terminal; đây không phải ground-truth accuracy.
 
-**Giới hạn cần giữ rõ:** confidence 86,06 không được trình bày thành “OCR chính xác 86,06%”. Trước khi tích hợp, cần xác lập ground truth trên một trang phù hợp, rà soát các trang confidence thấp, kiểm tra cách giữ số trang và nguồn trích dẫn, sau đó mới so sánh chunk/retrieval trên snapshot riêng. Các trang có ảnh nhưng đã có text native không nên OCR tự động nếu việc đó làm lặp nội dung.
+**Giới hạn cần giữ rõ:** confidence 86,06 không được trình bày thành “OCR chính xác 86,06%”. Cần tạo ground truth ngắn trên trang không nhạy cảm, rà soát trang confidence thấp và dùng số PDF page khi printed page chưa nhận diện được. Các trang có ảnh nhưng đã có text native không nên OCR tự động vì có thể lặp nội dung. Bảng phân cấp và hình chỉ mang thông tin thị giác vẫn chưa được tích hợp thành dữ liệu retrieval.
 
 ### Tài liệu kỹ thuật đã đối chiếu
 
@@ -63,5 +74,6 @@ OCR local là cần thiết để khảo sát các trang thiếu lớp chữ the
 - [Tesseract — so sánh tessdata, tessdata_fast và tessdata_best](https://github.com/tesseract-ocr/tessdoc/blob/main/Data-Files.md)
 - [tessdata_best — Vietnamese traineddata và giấy phép Apache-2.0](https://github.com/tesseract-ocr/tessdata_best)
 - [ADR-002 — nguồn dữ liệu, tái phân phối và PII](decisions/ADR-002-corpus-sourcing-and-redistribution.md)
+- [ADR-003 — quyết định OCR fallback có điều kiện](decisions/ADR-003-conditional-local-ocr.md)
 
-**Checkpoint hiện tại:** Hoàn tất audit metadata cho ba PDF, OCR cục bộ trên 26 trang nghi scan và audit shape bảng (không lưu cell text). Chưa tích hợp OCR vào ingestion code, chưa OCR bảng/hình riêng, chưa tạo snapshot mới, chưa thay baseline, chưa commit/push. Bước kỹ thuật kế tiếp là kiểm tra thủ công một trang scan và một bảng không nhạy cảm để chốt quy tắc OCR có điều kiện, provenance/confidence và cách giữ cấu trúc bảng trước khi sửa pipeline.
+**Checkpoint hiện tại:** OCR fallback đã tích hợp và được chạy trên snapshot riêng; baseline G0 không bị thay đổi. Đã kiểm tra trực quan một bảng mẫu nhưng chưa có bộ chuyển đổi bảng thành chunk giữ nhóm hàng/header. Kế tiếp là kiểm chứng OCR bằng ground truth không nhạy cảm và xây prototype serialize bảng theo title/header/group/row cùng page provenance; sau đó mới quyết định có đưa hai loại dữ liệu này vào benchmark chính hay không.

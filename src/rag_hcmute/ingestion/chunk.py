@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import hashlib
-from dataclasses import asdict, dataclass
+import statistics
+from dataclasses import asdict, dataclass, field
 
 from rag_hcmute.ingestion.extract import PageText
 from rag_hcmute.ingestion.sectioning import find_section_markers, is_document_structured
@@ -29,6 +30,8 @@ class Chunk:
     token_count: int
     text_sha256: str
     chunk_method: str
+    extraction_methods: list[str] = field(default_factory=lambda: ["native"])
+    ocr_confidence_mean: float | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -39,18 +42,30 @@ class _TokenStream:
     tokens: list[str]
     token_pdf_page: list[int]
     token_printed_page: list[int | None]
+    token_extraction_method: list[str]
+    token_ocr_confidence: list[float | None]
 
 
 def _build_token_stream(pages: list[PageText]) -> _TokenStream:
     tokens: list[str] = []
     token_pdf_page: list[int] = []
     token_printed_page: list[int | None] = []
+    token_extraction_method: list[str] = []
+    token_ocr_confidence: list[float | None] = []
     for page in pages:
         page_tokens = tokenize(page.text)
         tokens.extend(page_tokens)
         token_pdf_page.extend([page.pdf_page] * len(page_tokens))
         token_printed_page.extend([page.printed_page] * len(page_tokens))
-    return _TokenStream(tokens=tokens, token_pdf_page=token_pdf_page, token_printed_page=token_printed_page)
+        token_extraction_method.extend([page.extraction_method] * len(page_tokens))
+        token_ocr_confidence.extend([page.ocr_confidence_mean] * len(page_tokens))
+    return _TokenStream(
+        tokens=tokens,
+        token_pdf_page=token_pdf_page,
+        token_printed_page=token_printed_page,
+        token_extraction_method=token_extraction_method,
+        token_ocr_confidence=token_ocr_confidence,
+    )
 
 
 def _make_chunk_id(document_id: str, index: int) -> str:
@@ -71,6 +86,12 @@ def _slice_chunk(
     text = " ".join(token_slice)
     pages_in_range = stream.token_pdf_page[start:end]
     printed_in_range = [p for p in stream.token_printed_page[start:end] if p is not None]
+    extraction_methods = sorted(set(stream.token_extraction_method[start:end]))
+    ocr_confidences = [
+        confidence
+        for confidence in stream.token_ocr_confidence[start:end]
+        if confidence is not None
+    ]
 
     return Chunk(
         chunk_id=_make_chunk_id(document_id, index),
@@ -85,6 +106,8 @@ def _slice_chunk(
         token_count=len(token_slice),
         text_sha256=hashlib.sha256(text.encode("utf-8")).hexdigest(),
         chunk_method=chunk_method,
+        extraction_methods=extraction_methods or ["native"],
+        ocr_confidence_mean=round(statistics.fmean(ocr_confidences), 2) if ocr_confidences else None,
     )
 
 

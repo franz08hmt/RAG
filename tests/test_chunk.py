@@ -4,7 +4,7 @@ import pytest
 
 from rag_hcmute.ingestion.chunk import chunk_document, tokenize
 from rag_hcmute.ingestion.clean import clean_document_pages
-from rag_hcmute.ingestion.extract import extract_pdf_pages
+from rag_hcmute.ingestion.extract import PageText, extract_pdf_pages
 from rag_hcmute.ingestion.sectioning import find_section_markers, is_document_structured
 
 FIXTURE = Path(__file__).parent / "fixtures" / "sample_quy_dinh.pdf"
@@ -79,3 +79,28 @@ def test_magic_strings_land_in_the_expected_dieu_chunk(chunks) -> None:
 
     chunk_with_ma_ba = next(c for c in chunks if "MA_KIEM_THU_DIEU_BA" in c.text)
     assert chunk_with_ma_ba.section_path == "Chương II > Điều 3"
+
+
+def test_chunk_preserves_ocr_provenance() -> None:
+    text = "Đây là nội dung được nhận dạng từ trang scan."
+    pages = [
+        PageText(
+            document_id="OCR_DOC",
+            pdf_page=4,
+            text=text,
+            char_count=len(text),
+            is_probable_scan=True,
+            printed_page=3,
+            printed_page_confidence="ocr_detected",
+            extraction_method="ocr",
+            ocr_confidence_mean=82.75,
+        )
+    ]
+
+    cleaned, _ = clean_document_pages(pages)
+    chunks = chunk_document(cleaned, "OCR_DOC", "Tài liệu kiểm thử OCR")
+
+    assert len(chunks) == 1
+    assert cleaned[0].extraction_method == "ocr"
+    assert chunks[0].extraction_methods == ["ocr"]
+    assert chunks[0].ocr_confidence_mean == 82.75

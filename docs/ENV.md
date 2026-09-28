@@ -10,7 +10,7 @@ Cập nhật: 2026-09-28. Các trạng thái bên dưới phân biệt rõ môi 
 - Python hệ thống mặc định: 3.13.9; không dùng cho project vì project yêu cầu Python `>=3.11,<3.13` và môi trường base có cảnh báo OpenMP.
 - Môi trường riêng: Conda `rag-hcmute`, Python 3.11.16 tại `C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe`.
 - Dung lượng trống lúc bắt đầu: ổ C khoảng 77.3 GiB, ổ D khoảng 24.9 GiB.
-- Ollama chưa được cài; dự kiến dùng ở Giai đoạn 7. Tesseract được cài riêng trong env project khi bắt đầu Giai đoạn 1; không thêm vào PATH toàn hệ thống.
+- Ollama chưa được cài; dự kiến dùng ở Giai đoạn 7. Tesseract được cài riêng trong env project ở Giai đoạn 1; executable không thêm vào PATH toàn hệ thống.
 - Kiểm tra HTTPS HEAD tới PyPI, Hugging Face, HCMUTE và GitHub đều nhận HTTP 200. Đã xác minh tải BGE-M3 pinned revision thành công; việc tải model/dataset khác vẫn phải kiểm tra dung lượng và nguồn riêng trước khi thực hiện.
 
 ## Trạng thái PyTorch và khóa API
@@ -30,15 +30,33 @@ Cập nhật: 2026-09-28. Các trạng thái bên dưới phân biệt rõ môi 
 - Tái dựng snapshot trong thư mục scratch bị ignore: 3 tài liệu, 182 trang, 156 chunks; snapshot ID `5da3bd4d5de54492`.
 - Tái lập BM25 trên pilot set: Hit@5 = 3/7 (0.429), MRR@10 = 0.371; kết quả khớp baseline đã lưu ở mốc trước. Không gọi các chỉ số này là Recall@5 vì phép đo đếm câu hỏi có ít nhất một kết quả liên quan trong Top-5.
 - Tái lập Dense từ snapshot scratch bằng model revision nêu trên: Hit@5 = 6/7 (0.857), MRR@10 = 0.643; khớp kết quả Dense lịch sử trong repo. Script hiện in nhãn `Recall@5`, nhưng phép đo trên bộ pilot này đếm câu hỏi có ít nhất một gold chunk trong Top-5, do đó được diễn giải là Hit@5.
-- Gemini chưa được gọi; cần khóa mới sau khi khóa đã lộ được thu hồi/đổi. OCR engine đã cài ở Giai đoạn 1 nhưng chưa tích hợp vào ingestion pipeline.
+- Gemini chưa được gọi; cần khóa mới sau khi khóa đã lộ được thu hồi/đổi. OCR engine đã được tích hợp dưới dạng fallback tùy chọn; mặc định pipeline vẫn chỉ dùng native extraction.
 
 ## OCR cục bộ — Giai đoạn 1
 
 - Tesseract 5.5.3 và pytesseract 0.3.13 được cài vào Conda env `rag-hcmute`. Executable: `C:\Users\Dell\anaconda3\envs\rag-hcmute\Library\bin\tesseract.exe`.
-- Model tiếng Việt `vie.traineddata` lấy từ [`tesseract-ocr/tessdata_best`](https://github.com/tesseract-ocr/tessdata_best), giấy phép Apache-2.0; file nằm ngoài repo tại `D:\RAG\models\tesseract\tessdata\vie.traineddata`, dung lượng 12.435.550 byte, SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
-- Khi gọi Tesseract từ Python, chỉ rõ model bằng `--tessdata-dir D:\RAG\models\tesseract\tessdata`; lệnh kiểm tra: `& 'C:\Users\Dell\anaconda3\envs\rag-hcmute\Library\bin\tesseract.exe' --tessdata-dir 'D:\RAG\models\tesseract\tessdata' --list-langs`.
-- Đã khảo sát 26 trang nghi scan ở 200 DPI, `lang=vie`, `psm=6`; các metric tổng hợp nằm ở `artifacts/results/g1_ocr_survey.json` (bị Git ignore, không lưu nội dung OCR). Confidence chưa được xem là độ chính xác; cần ground truth thủ công trước khi dùng OCR text trong corpus.
-- Sau cài đặt, xác minh `torch==2.14.0+cu126`, `torch.cuda.is_available() == True`, `pytest` 20 passed, smoke tests 2/2 passed.
+- Tesseract cần language model riêng; `vie.traineddata` lấy từ [`tesseract-ocr/tessdata_best`](https://github.com/tesseract-ocr/tessdata_best), giấy phép Apache-2.0; file nằm ngoài repo tại `D:\RAG\models\tesseract\tessdata\vie.traineddata`, dung lượng 12.435.550 byte, SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
+- Transaction cài đặt OCR dự kiến 34 package link, 2 package thay phiên bản và tải 217.060.448 byte; không thay Python 3.11 hay Torch/CUDA. `pyproject.toml` khai báo extra `ocr` cho wrapper và Pillow; executable Tesseract cùng traineddata vẫn cần cài riêng.
+- Khi chạy, chỉ rõ model bằng `--tessdata-dir D:\RAG\models\tesseract\tessdata`. Nếu không truyền `--tesseract-cmd`, code tìm executable trong env Python hiện hành trước rồi mới tìm trên `PATH`; có thể truyền đường dẫn đầy đủ để cố định phiên bản. Lệnh kiểm tra ngôn ngữ: `& 'C:\Users\Dell\anaconda3\envs\rag-hcmute\Library\bin\tesseract.exe' --tessdata-dir 'D:\RAG\models\tesseract\tessdata' --list-langs`.
+- OCR chỉ chạy khi có flag `--ocr`, và chỉ cho trang có dưới 15 ký tự native **đồng thời** có ảnh raster. Cấu hình và SHA-256 model được ghi vào snapshot manifest; `PageText` và chunks giữ `extraction_method` và OCR confidence.
+- Khảo sát 26 trang ở 200 DPI, `lang=vie`, `psm=6`: median text native 3 ký tự; 3.650 từ OCR; median theo trang của confidence trung bình 86,06/100. Đây không phải accuracy. Các metric không kèm OCR text nằm trong `artifacts/results/g1_ocr_survey.json` (Git ignored).
+- Snapshot riêng: `cc57c028f3816a3d`, 3 tài liệu/182 trang/165 chunks, 26 trang OCR. Toàn văn trích xuất và OCR nằm tại `data/processed/g1_ocr/` (Git ignored); không in toàn văn ra terminal, không commit và không gửi ra cloud.
+- Pilot cùng 10 câu (7 answerable): BM25 Hit@5 3/7, MRR@10 0,351; Dense Hit@5 6/7, MRR@10 0,786. Các số này chỉ để kiểm tra smoke retrieval trên tập nhỏ, chưa phải kết luận nghiên cứu hay test set độc lập. Raw retrieval previews nằm trong `artifacts/results/g1_ocr_eval/` (Git ignored).
+- Sau thay đổi, `pytest`: 26 passed; smoke tests: 2/2 passed; `pip check` không có dependency hỏng; CUDA vẫn khả dụng. Đã chạy OCR thật trên trang bìa PDF page 1 khi gọi thẳng Python executable: nhận 232 ký tự, confidence 61,55; đây là integration smoke test, không phải đo độ chính xác OCR.
+
+Ví dụ dựng snapshot OCR vào thư mục thử nghiệm riêng (không ghi đè baseline):
+
+```powershell
+$py = 'C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe'
+& $py -c 'import sys; print(sys.executable)'
+& $py scripts/build_corpus.py `
+  --ocr --ocr-language vie --ocr-dpi 200 --ocr-min-native-chars 15 `
+  --tessdata-dir 'D:\RAG\models\tesseract\tessdata' `
+  --pages-output-dir data/processed/g1_ocr/pages `
+  --chunks-output-dir data/processed/g1_ocr/chunks `
+  --snapshot-manifest data/processed/g1_ocr/corpus_snapshot.json `
+  --build-log data/processed/g1_ocr/build.log
+```
 
 ## Lệnh chạy thống nhất
 
