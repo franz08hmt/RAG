@@ -12,7 +12,18 @@ Thử nghiệm này kiểm tra liệu cách biểu diễn bảng có giúp retri
 
 T1 và T2 chỉ là hai cách biểu diễn ứng viên, chưa phải quyết định thiết kế. Cần kiểm tra bảng nguồn trước khi đưa vào index; ô gộp, hàng tiêu đề nhiều tầng, đơn vị và ghi chú phải được giữ đúng. Không suy diễn giá trị cho ô trống nếu tài liệu không thể hiện rõ quan hệ đó.
 
-Prototype serializer hiện nằm ở `src/rag_hcmute/ingestion/tables.py`: `table_as_markdown()`/`table_as_markdown_chunk()` tạo T1 và `table_as_row_records()`/`table_as_row_chunks()` tạo T2 từ header/hàng đã được rà soát. Prototype giữ ô trống, yêu cầu nhãn cột tường minh và không tự điền tiếp ô gộp; ngữ cảnh nhóm chỉ được thêm khi truyền vào bằng chứng đã đối chiếu. Các adapter trả về `Chunk` tương thích retriever hiện tại, nhưng chưa được gọi từ pipeline mặc định và chưa tạo benchmark.
+Prototype serializer hiện nằm ở `src/rag_hcmute/ingestion/tables.py`: `table_as_markdown()`/`table_as_markdown_chunk()` tạo T1 và `table_as_row_records()`/`table_as_row_chunks()` tạo T2 từ header/hàng đã được rà soát. Lệnh `scripts/prepare_table_variants.py` đọc một PDF được chỉ định trong manifest, kiểm SHA-256, yêu cầu chọn trang/bảng/hàng header bằng tay và ghi sidecar dưới `artifacts/results/table_variants/` (Git-ignored). Prototype giữ ô trống, yêu cầu nhãn cột tường minh và không tự điền tiếp ô gộp; ngữ cảnh nhóm chỉ được thêm khi truyền vào bằng chứng đã đối chiếu. Các adapter trả về `Chunk` tương thích retriever hiện tại, nhưng chưa được gọi từ pipeline mặc định và chưa tạo benchmark.
+
+Ví dụ tái lập cho bảng đã kiểm tra (lệnh in executable Python đang chạy trước khi xử lý):
+
+```powershell
+conda run -n rag-hcmute python scripts/prepare_table_variants.py `
+  --document-id HCMUTE_QCDT_1727_2021 `
+  --pdf-page 20 --table-index 2 --header-row-index 1 `
+  --title "Bảng 5: Xếp hạng năm đào tạo sinh viên"
+```
+
+Lệnh tạo một chunk T1 và năm chunk T2 tại `artifacts/results/table_variants/HCMUTE_QCDT_1727_2021_p020_t02/`. Đây là đầu ra local bị Git ignore; script không ghi đè thư mục đã tồn tại.
 
 ## Cách giữ phép so sánh công bằng
 
@@ -52,13 +63,13 @@ notes:
 
 Không cần điền `chunk_id` trước khi snapshot T1/T2 tồn tại. Một câu có thể cần nhiều gold chunk nếu đáp án phụ thuộc vào nhiều hàng hoặc nhiều bảng; ghi đầy đủ các bằng chứng đó thay vì chọn một chunk gần đúng.
 
-## Khi nào mới chuyển sang hiện thực
+## Khi nào mới chuyển sang ablation retrieval
 
-Sau khi danh sách câu hỏi và gold evidence được rà soát, bước kế tiếp là chọn một bảng không chứa PII, kiểm tra extraction thủ công với trang PDF, rồi tạo T1/T2 thành snapshot riêng. Sau đó chạy cùng retriever và cùng câu hỏi trên B0/T1/T2, lưu cấu hình, kết quả từng câu và các trường hợp lỗi. Chỉ cân nhắc tích hợp một biểu diễn vào pipeline chính nếu bằng chứng đo được đủ rõ và không làm mất khả năng truy nguyên nguồn.
+Sidecar T1/T2 của Bảng 5 đã được tạo riêng sau khi kiểm tra hash và đối chiếu bảng với trang PDF. Pilot hiện tại không có câu hỏi cần tra giá trị từ bảng này, vì vậy chưa đủ gold evidence để chạy ablation có ý nghĩa. Sau khi người học viết/duyệt câu hỏi và xác minh trang, hàng, ô cần thiết, chạy cùng retriever trên B0/T1/T2, lưu cấu hình và kết quả từng câu. Chỉ cân nhắc tích hợp một biểu diễn vào pipeline chính nếu bằng chứng đo được đủ rõ và không làm mất khả năng truy nguyên nguồn.
 
 ## Giới hạn hiện tại
 
 - Chưa có bộ câu hỏi bảng được người học xác nhận; phiếu này không chứa câu hỏi hay gold answer dựng sẵn.
-- Chưa tích hợp table chunks vào retrieval mặc định.
-- Kết quả trước đây về một bảng ở Quy chế 1727 (PDF page 3, 14×5 theo PyMuPDF) chỉ xác nhận hình dạng trích xuất; chưa chứng minh mọi ô được đọc đúng và không tự động được dùng làm dữ liệu đánh giá.
+- Sidecar T1/T2 hiện chỉ được dùng trong smoke test truy xuất; table chunks chưa tham gia retrieval mặc định và chưa có metric benchmark.
+- Một bảng phân cấp khác ở Quy chế 1727 (PDF page 3, 14×5 theo PyMuPDF) còn ô nhóm/ô gộp chưa giải quyết; không dùng bảng đó cho phép thử hiện tại.
 - Chỉ dùng tài liệu thuộc corpus HCMUTE đã cho phép. Bỏ qua vùng chứa dữ liệu cá nhân; không gửi PDF, trích đoạn nhạy cảm hoặc câu hỏi có PII lên dịch vụ cloud.

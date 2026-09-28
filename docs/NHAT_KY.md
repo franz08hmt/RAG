@@ -44,3 +44,11 @@
 - Tạo bộ ground truth thủ công local cho PDF page 107, 109 và 136 của Sổ tay (không có dữ liệu cá nhân); thêm hàm CER/WER, CLI `scripts/evaluate_ocr_sample.py` và test metric. `pytest`: 29 passed. PSM 6 so với 11 trên ba trang: CER/WER tổng hợp có trọng số 35,1%/42,9% so với 28,6%/39,3%; mẫu nhỏ, chưa đổi mặc định. Reference JSON bị ignore, không đưa nội dung handbook vào Git.
 - Prototype bảng Quy chế PDF page 3: `find_tables()` trả 14×5; 53 ô có text/17 ô trống; quy tắc nhóm hàng tạo được 11 bản ghi chi tiết. Chỉ khảo sát một bảng, chưa nối vào retrieval. Tài liệu PyMuPDF lưu ý cách phát hiện phụ thuộc đường kẻ/cách dựng bảng; bảng không viền có thể cần `strategy="text"` hoặc logic không gian riêng.
 - Commit checkpoint tài liệu ban đầu: `316dd63` (`docs: record G1 input and OCR survey`). Các thay đổi code và cập nhật tài liệu sau checkpoint còn local trên `tim-hieu-rag-dot2`; không push, không tạo PR, `main` và PR #2 không đổi.
+
+## 2026-09-28 — Prototype table variants có kiểm soát
+
+- Đối chiếu trực quan PDF page 20–21 vì câu P003/P008 trỏ vào vùng này. Bảng 5 ở PDF page 20 (printed page 19) là bảng 6×2 về xếp hạng năm đào tạo; bằng chứng cho P003/P008 là văn bản ở Điều 13–14, không phải bảng này. Pilot hiện chưa có câu hỏi tra bảng phù hợp.
+- Thêm `scripts/prepare_table_variants.py`: chỉ đọc PDF được chọn trong manifest sau khi kiểm SHA-256; người chạy phải chỉ định document, PDF page, table index, header row đầu tiên và title đã kiểm chứng. Đầu ra T1/T2 cùng `selection.json` chỉ được ghi trong `artifacts/results/table_variants/` (Git-ignored), không in full table text và không thay snapshot mặc định.
+- Chạy lệnh trên HCMUTE Quy chế 1727, PDF page 20, table index 2. PyMuPDF trích bảng 6×2; đối chiếu trực quan khớp header và 5 dòng. Sidecar có 1 T1 Markdown chunk và 5 T2 row-context chunks; JSONL đọc lại được qua schema `Chunk`.
+- BM25 smoke probe theo cụm từ của dòng “năm thứ ba” xếp row 3 lên đầu ở T2. Đây chỉ là kiểm tra chức năng trên một bảng nhỏ; không phải benchmark hay kết luận T2 tốt hơn T1.
+- Thêm kiểm thử cho SHA guard/path guard và adapter chunk; test suite: 39 passed, smoke tests: 2/2 passed. Cần chạy ablation B0/T1/T2 sau khi có câu hỏi bảng do sinh viên xác nhận và gold location.
