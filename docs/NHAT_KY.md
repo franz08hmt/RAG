@@ -1,0 +1,39 @@
+# Nhật ký Giai đoạn 0
+
+## 2026-09-28 — Khởi tạo, thiết lập môi trường và tái lập baseline
+
+- Clone repository từ nhánh `moc1-progress-report` (commit gốc `4d60860e7a5c27571f5b8e4612e191e653978c4b`) vào `D:\RAG\rag-hcmute-dot2`; tạo nhánh làm việc `tim-hieu-rag-dot2`.
+- Tạo Conda env `rag-hcmute` với Python 3.11.16. Sau khi được duyệt, cài Torch CUDA `2.14.0+cu126` trước extras `dev,dense`, cùng `python-dotenv`.
+- Xác minh Torch/CUDA: `torch.cuda.is_available() == True`, CUDA runtime 12.6, GPU NVIDIA GeForce RTX 3060 Laptop GPU; phép tính CUDA nhỏ chạy thành công.
+- Xác minh import các gói chính và `pip check` (không có dependency bị hỏng). `pytest`: 20 passed; smoke tests: 2/2 passed.
+- Đưa PDF Quy chế 1727 đã có vào `data/raw/`, tải hai PDF còn lại từ URL trong manifest; cả ba SHA-256 đều khớp manifest.
+- Chạy `scripts/audit_corpus.py`: 3 tài liệu, 0 lỗi; manifest báo corpus sẵn sàng.
+- Xác nhận ba PDF trong `data/raw/` được `.gitignore` loại khỏi Git. Không in nội dung văn bản có thể chứa dữ liệu cá nhân.
+- Dựng corpus vào thư mục scratch bị ignore để tránh ghi đè snapshot có sẵn: 3 tài liệu, 182 trang, 156 chunks; snapshot ID `5da3bd4d5de54492`.
+- Tái lập BM25 trên pilot set: Hit@5 = 3/7 (0.429), MRR@10 = 0.371; khớp baseline trước đó. Ghi rõ Hit@5 thay vì Recall@5 để đúng định nghĩa triển khai hiện tại.
+- Sau khi được duyệt, tải 10 tệp PyTorch/Sentence Transformers của BGE-M3 revision `5617a9f61b028005a4858fdac845db406aefb181` vào cache ngoài repo `D:\RAG\models\huggingface` (2.136 GiB); không tải ONNX checkpoint thứ hai. `pytorch_model.bin` 2,271,145,830 byte, SHA-256 `b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38`.
+- Tái lập Dense trên snapshot scratch: script in `Recall@5 = 0.857 (6/7)` và `MRR@10 = 0.643`; khớp bản ghi Dense lịch sử. Do metric hiện tại đếm câu hỏi có ít nhất một gold chunk ở Top-5, nhật ký diễn giải đúng là Hit@5, không coi đây là recall theo số lượng gold chunks.
+- Chưa gọi Gemini do khóa đã dán trong hội thoại phải được thu hồi/đổi trước; chưa cài Tesseract vì thuộc Giai đoạn 1.
+- Chỉnh `.gitignore` để bỏ qua thư mục `*.egg-info/` do editable install tạo ra.
+- Không sửa báo cáo đã nộp, không commit, không push, không merge và không tạo PR.
+
+## Trạng thái checkpoint Giai đoạn 0 — hoàn tất
+
+1. Môi trường, test suite, corpus hashes, snapshot scratch, BM25 và Dense baseline đều đã được kiểm tra/tái lập. BM25: Hit@5 3/7 (0.429), MRR@10 0.371; Dense: Hit@5 6/7 (0.857), MRR@10 0.643.
+2. Các tài liệu nguồn và kết quả thô nằm trong các thư mục bị ignore; cache model đặt ngoài repo. Không gửi nội dung corpus lên dịch vụ ngoài.
+3. Gemini không thuộc các bước Giai đoạn 0 đã chạy và vẫn tạm dừng cho tới khi khóa cũ được thu hồi/đổi, khóa mới được cấu hình an toàn và các tác vụ được giới hạn theo phê duyệt chi phí. OCR/Tesseract bắt đầu ở Giai đoạn 1 sau khi đề xuất cài đặt.
+4. Mọi thay đổi còn local trên `tim-hieu-rag-dot2`; chưa commit/push/merge/tạo PR. Giữ nguyên `main` và PR #2.
+
+## 2026-09-28 — Giai đoạn 1: khảo sát xử lý PDF đầu vào
+
+- Khảo sát cục bộ metadata của 3 PDF trong snapshot hiện tại; không đưa text hoặc nội dung ảnh vào output.
+- Xác định 26 trang trong Sổ tay Sinh viên có ảnh phủ gần toàn trang nhưng lớp chữ native dưới 15 ký tự; đây là scan candidates, không phải xác nhận chất lượng OCR.
+- PyMuPDF `find_tables()` phát hiện 11 ứng viên trên 8 trang của Quy chế 1727 và 28 ứng viên trên 25 trang của Sổ tay. Các con số chưa được người kiểm tra xác nhận; một số trang ứng viên giao với mục danh bạ có PII nêu ở ADR-002.
+- Đối chiếu code: extractor hiện chỉ lấy text native và gắn cờ scan; chưa OCR, chưa lưu block/layout, chưa trích bảng có cấu trúc. Chunker chưa giữ header bảng khi chia hàng.
+- Tạo `docs/G1_KHAO_SAT_DU_LIEU_DAU_VAO.md` ghi số liệu audit, giới hạn hiện tại, hướng xử lý và kế hoạch kiểm chứng. Đã đối chiếu tài liệu chính thức của PyMuPDF, Tesseract, Conda-forge và pytesseract.
+- Sau khi sinh viên duyệt phương án, chạy dry-run và cài Tesseract 5.5.3 + pytesseract 0.3.13 trong env `rag-hcmute`; transaction tải 217.060.448 byte, link 34 package và thay phiên bản 2 dependency (OpenSSL/XZ). Python 3.11 và Torch 2.14.0+cu126 không bị thay đổi; `torch.cuda.is_available()` vẫn là `True`.
+- Vì Conda không cung cấp model ngôn ngữ trong transaction, tải riêng `vie.traineddata` từ repo chính thức `tesseract-ocr/tessdata_best`; file đặt tại `D:\RAG\models\tesseract\tessdata\vie.traineddata`, ngoài repo, 12.435.550 byte, SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
+- Chạy OCR cục bộ trên 26 trang nghi scan của Sổ tay ở 200 DPI, `lang=vie`, `psm=6`. Native text median = 3 ký tự; OCR trả về 3.650 từ, median của confidence trung bình theo trang = 86,06/100. Confidence là chỉ số của engine, không phải accuracy; chưa tạo ground truth nên chưa công bố CER/WER. Chỉ lưu metric theo trang, không lưu OCR text, tại `artifacts/results/g1_ocr_survey.json` (Git ignored).
+- Audit `find_tables()` chỉ lưu trang và số hàng/cột, loại trang PDF 140–147 của Sổ tay khỏi lượt này. Kết quả: Quy chế 1727 có 11 ứng viên trên 8 trang; Sổ tay có 20 ứng viên trên 17 trang còn lại; hướng dẫn thực tập có 0. Ứng viên lớn nhất 36×4. Chưa xác nhận bằng kiểm tra trực quan; metadata tại `artifacts/results/g1_table_audit.json` (Git ignored, không chứa cell text).
+- Sau cài đặt, `pytest`: 20 passed; smoke test: 2/2 passed; CUDA tiếp tục khả dụng. Chưa tích hợp OCR vào ingestion code, chưa OCR bảng/hình, chưa dựng snapshot mới, không thay baseline.
+- Không commit/push; `main` và PR #2 vẫn giữ nguyên.
