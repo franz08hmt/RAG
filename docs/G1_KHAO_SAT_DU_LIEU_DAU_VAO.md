@@ -40,8 +40,24 @@ PyMuPDF đánh dấu 11 và 28 **ứng viên** bảng bằng `Page.find_tables()
 
 - Tạo bảng audit theo trang: ký tự native, ảnh phủ trang, trạng thái OCR, số bảng/shape và số trang chưa có nguồn trích xuất usable. Chỉ xuất metadata, không xuất nội dung nhạy cảm.
 - Đã chạy thử OCR cục bộ trên cả 26 trang nghi scan của Sổ tay Sinh viên, ở 200 DPI, ngôn ngữ `vie`, page segmentation mode 6. Các trang có trung vị 3 ký tự native; OCR nhận tổng cộng 3.650 từ, median của confidence trung bình theo từng trang là 86,06/100. Đây là chỉ số confidence do engine ước lượng, **không phải** accuracy/CER/WER và chưa chứng minh từng từ được nhận dạng đúng.
-- Các trang có confidence trung bình thấp nhất trong lượt khảo sát là trang 1 (61,55), 136 (73,66), 149 (75,80), 137 (77,44) và 109 (79,08). Đây là danh sách ưu tiên rà soát, không phải ngưỡng loại trang. Trước khi đưa OCR text vào corpus cần chọn trang không chứa PII để tạo ground truth ngắn, đối chiếu thủ công và ghi nhận lỗi chữ, dấu tiếng Việt, số hiệu cùng bố cục.
+- Các trang có confidence trung bình thấp nhất trong lượt khảo sát là trang 1 (61,55), 136 (73,66), 149 (75,80), 137 (77,44) và 109 (79,08). Đây là danh sách ưu tiên rà soát, không phải ngưỡng loại trang.
+- Đã tạo ground truth thủ công cục bộ cho ba trang không chứa dữ liệu cá nhân: PDF page 107 (infographic), 109 (đoạn văn kèm minh họa) và 136 (sơ đồ hướng dẫn). Reference JSON bị Git ignore; script `scripts/evaluate_ocr_sample.py` chỉ xuất số liệu, không in OCR text. Chuẩn hóa metric: Unicode NFC, không phân biệt hoa/thường, gộp whitespace; CER giữ dấu câu, WER coi dấu câu là ranh giới token, dấu tiếng Việt được giữ nguyên.
+- So sánh thử trên ba trang cho thấy cấu hình OCR ảnh hưởng đáng kể và khác nhau theo kiểu bố cục:
+
+| PDF page / kiểu nội dung | DPI / PSM | CER | WER | Mean confidence |
+|---|---:|---:|---:|---:|
+| 107 — infographic | 200 / 6 | 19,5% | 32,2% | 88,31 |
+| 107 — infographic | 300 / 6 | 20,3% | 34,4% | 87,64 |
+| 107 — infographic | 200 / 11 | 9,9% | 16,7% | 90,36 |
+| 109 — văn bản và minh họa | 200 / 6 | 23,0% | 24,0% | 79,08 |
+| 109 — văn bản và minh họa | 200 / 11 | 17,6% | 29,3% | 87,23 |
+| 136 — sơ đồ có nhiều nhãn nhỏ | 200 / 6 | 78,8% | 87,2% | 73,66 |
+| 136 — sơ đồ có nhiều nhãn nhỏ | 200 / 11 | 73,6% | 80,2% | 78,00 |
+
+  PSM 11 giảm CER trên cả ba trang nhưng WER tăng ở page 109; tăng DPI từ 200 lên 300 không cải thiện page 107. Page 136 vẫn có lỗi lớn vì nhãn nhỏ nằm trong sơ đồ. Đây là mẫu khảo sát ba trang, ground truth được một người chép và chưa có đánh giá chéo; chưa đủ để đổi mặc định OCR cho toàn corpus. Kết quả cũng cho thấy confidence cao không thể thay CER/WER.
 - Đã kiểm tra trực quan một bảng không nhạy cảm ở Quy chế 1727 (PDF page 3). Bảng có cấu trúc phân cấp 14×5; `find_tables()` và `extract()` cùng trả shape 14×5, với 53 ô có text và 17 ô rỗng. Ảnh trang cho thấy có nhóm hàng/ô gộp, nên không thể coi mọi ô rỗng là lỗi detector; cũng chưa đủ để khẳng định mọi giá trị từng ô đều đúng.
+- Prototype cục bộ trên bảng này nhận diện hai hàng nhóm rồi biểu diễn thành 11 bản ghi chi tiết (6 + 5 hàng), mỗi bản ghi lặp metadata tài liệu/trang/bảng, nhóm đào tạo, tên cột và giá trị hàng. Dạng này giữ được ngữ cảnh khi một hàng trở thành retrieval unit; hiện mới thử trên một bảng có đường kẻ và text layer, chưa tích hợp vào pipeline hay đánh giá retrieval.
+- Ba cách biểu diễn cần so sánh trước khi chốt: (1) Markdown cho toàn bảng — gọn, PyMuPDF hỗ trợ xuất, nhưng ô gộp/nhóm hàng có thể vẫn để trống; (2) mỗi hàng thành đoạn văn có lặp caption, nhóm và header — truy vấn hàng cụ thể rõ hơn nhưng tăng token và cần quy tắc phát hiện dòng nhóm; (3) lưu bảng cha có cấu trúc cùng row-child chunks — truy xuất chính xác và có thể ghép ngữ cảnh, đổi lại cần schema/retriever xử lý bảng. Hướng thử tiếp theo là so sánh (1) và (2) trên tập câu hỏi riêng cho bảng; chưa thay indexing chính.
 - Dựng snapshot OCR mới `cc57c028f3816a3d`: 3 tài liệu, 182 trang, 165 chunks (so với 156 chunk ở baseline), 26 trang OCR và 12 chunks mang provenance OCR (4 OCR-only, 8 trộn native/OCR). Cả 26 trang OCR đều giữ số PDF page; không trang nào nhận diện được printed page, do đó citation hiện phải dùng rõ số trang PDF, không suy đoán số trang in.
 - Chạy lại cùng pilot 10 câu (7 câu có gold evidence, 3 câu không trả lời được); mọi gold chunk ID cũ vẫn tồn tại và trỏ đúng document/PDF-page range. Kết quả retrieval:
 
@@ -60,14 +76,15 @@ OCR local là cần thiết để khảo sát các trang thiếu lớp chữ the
 - Tesseract không đi kèm bộ ngôn ngữ trong transaction; model `vie` được tải riêng từ [`tesseract-ocr/tessdata_best`](https://github.com/tesseract-ocr/tessdata_best/blob/main/vie.traineddata), bộ model ưu tiên độ chính xác hơn tốc độ và phát hành theo Apache-2.0 ([README/license](https://github.com/tesseract-ocr/tessdata_best)). File 12.435.550 byte nằm ngoài repo tại `D:\RAG\models\tesseract\tessdata\vie.traineddata`, SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
 - Phiên bản kiểm tra: Tesseract 5.5.3, pytesseract 0.3.13, PyMuPDF 1.28.2. OCR dùng trực tiếp trên máy, không gọi API và không gửi văn bản corpus ra ngoài.
 - Chỉ số khảo sát nằm ở `artifacts/results/g1_ocr_survey.json`; không chứa OCR text. OCR text của snapshot thử được lưu cục bộ trong `data/processed/g1_ocr/pages/` (Git ignored), không in ra terminal, không commit và không gửi tới cloud. Snapshot/chunks/log cùng nằm trong `data/processed/g1_ocr/`.
-- `pytest`: 26 passed; smoke test 2/2 passed; `pip check` không phát hiện dependency hỏng. CUDA vẫn khả dụng. BGE-M3 được chạy bằng snapshot model đã lưu local, không gọi Hugging Face trong lần đánh giá OCR.
+- `pytest`: 29 passed; smoke test 2/2 passed; `pip check` không phát hiện dependency hỏng. CUDA vẫn khả dụng. BGE-M3 được chạy bằng snapshot model đã lưu local, không gọi Hugging Face trong lần đánh giá OCR.
 - Đã thử gọi OCR trực tiếp trên trang bìa PDF page 1 bằng Python executable của env, không truyền đường dẫn Tesseract riêng: executable được phân giải từ env, OCR trả 232 ký tự với confidence trung bình 61,55. Chỉ ghi số liệu tích hợp, không in nội dung trang ra terminal; đây không phải ground-truth accuracy.
 
-**Giới hạn cần giữ rõ:** confidence 86,06 không được trình bày thành “OCR chính xác 86,06%”. Cần tạo ground truth ngắn trên trang không nhạy cảm, rà soát trang confidence thấp và dùng số PDF page khi printed page chưa nhận diện được. Các trang có ảnh nhưng đã có text native không nên OCR tự động vì có thể lặp nội dung. Bảng phân cấp và hình chỉ mang thông tin thị giác vẫn chưa được tích hợp thành dữ liệu retrieval.
+**Giới hạn cần giữ rõ:** confidence 86,06 không được trình bày thành “OCR chính xác 86,06%”. Ground truth hiện mới có ba trang mẫu, chưa đại diện cho toàn bộ tài liệu; cần mở rộng tập đối chiếu và rà soát thủ công lỗi dấu/số liệu. Dùng số PDF page khi printed page chưa nhận diện được. Các trang có ảnh nhưng đã có text native không nên OCR tự động vì có thể lặp nội dung. Bảng phân cấp và hình chỉ mang thông tin thị giác vẫn chưa được tích hợp thành dữ liệu retrieval.
 
 ### Tài liệu kỹ thuật đã đối chiếu
 
-- [PyMuPDF — table extraction và giới hạn của find_tables](https://pymupdf.readthedocs.io/en/latest/faq/index.html)
+- [PyMuPDF — API table extraction, `find_tables`, `Table.extract()` và `Table.to_markdown()`](https://pymupdf.readthedocs.io/en/latest/page.html)
+- [PyMuPDF — giới hạn phát hiện bảng không viền / chỉ tô nền và phương án `strategy="text"`](https://pymupdf.readthedocs.io/en/latest/faq/index.html)
 - [Tesseract — bản phát hành upstream](https://github.com/tesseract-ocr/tesseract/releases)
 - [Conda-forge — Tesseract 5.5.3, Windows-64, giấy phép Apache-2.0](https://anaconda.org/conda-forge/tesseract)
 - [pytesseract — cài wrapper và cấu hình đường dẫn executable](https://github.com/madmaze/pytesseract)
@@ -76,4 +93,4 @@ OCR local là cần thiết để khảo sát các trang thiếu lớp chữ the
 - [ADR-002 — nguồn dữ liệu, tái phân phối và PII](decisions/ADR-002-corpus-sourcing-and-redistribution.md)
 - [ADR-003 — quyết định OCR fallback có điều kiện](decisions/ADR-003-conditional-local-ocr.md)
 
-**Checkpoint hiện tại:** OCR fallback đã tích hợp và được chạy trên snapshot riêng; baseline G0 không bị thay đổi. Đã kiểm tra trực quan một bảng mẫu nhưng chưa có bộ chuyển đổi bảng thành chunk giữ nhóm hàng/header. Kế tiếp là kiểm chứng OCR bằng ground truth không nhạy cảm và xây prototype serialize bảng theo title/header/group/row cùng page provenance; sau đó mới quyết định có đưa hai loại dữ liệu này vào benchmark chính hay không.
+**Checkpoint hiện tại:** OCR fallback đã tích hợp và chạy trên snapshot riêng; baseline G0 không bị thay đổi. Có metric CER/WER thủ công trên ba trang mẫu và prototype serialize một bảng thành 11 bản ghi có nhóm/header/page provenance; chưa tích hợp table chunks vào retrieval. Bước tiếp theo là mở rộng OCR validation sang mẫu trang scan thuần văn bản và sơ đồ; sau đó chạy ablation retrieval nhỏ giữa Markdown-table và row-context chunks trên cùng câu hỏi/gold evidence trước khi chốt thiết kế.

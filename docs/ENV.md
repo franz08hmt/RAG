@@ -42,7 +42,7 @@ Cập nhật: 2026-09-28. Các trạng thái bên dưới phân biệt rõ môi 
 - Khảo sát 26 trang ở 200 DPI, `lang=vie`, `psm=6`: median text native 3 ký tự; 3.650 từ OCR; median theo trang của confidence trung bình 86,06/100. Đây không phải accuracy. Các metric không kèm OCR text nằm trong `artifacts/results/g1_ocr_survey.json` (Git ignored).
 - Snapshot riêng: `cc57c028f3816a3d`, 3 tài liệu/182 trang/165 chunks, 26 trang OCR. Toàn văn trích xuất và OCR nằm tại `data/processed/g1_ocr/` (Git ignored); không in toàn văn ra terminal, không commit và không gửi ra cloud.
 - Pilot cùng 10 câu (7 answerable): BM25 Hit@5 3/7, MRR@10 0,351; Dense Hit@5 6/7, MRR@10 0,786. Các số này chỉ để kiểm tra smoke retrieval trên tập nhỏ, chưa phải kết luận nghiên cứu hay test set độc lập. Raw retrieval previews nằm trong `artifacts/results/g1_ocr_eval/` (Git ignored).
-- Sau thay đổi, `pytest`: 26 passed; smoke tests: 2/2 passed; `pip check` không có dependency hỏng; CUDA vẫn khả dụng. Đã chạy OCR thật trên trang bìa PDF page 1 khi gọi thẳng Python executable: nhận 232 ký tự, confidence 61,55; đây là integration smoke test, không phải đo độ chính xác OCR.
+- Sau thay đổi, `pytest`: 29 passed; smoke tests: 2/2 passed; `pip check` không có dependency hỏng; CUDA vẫn khả dụng. OCR thật đã được chạy trên ba trang có ground truth thủ công bằng `scripts/evaluate_ocr_sample.py`; reference JSON ở `artifacts/results/g1_ocr_reference_page*.json` (Git ignored), script chỉ xuất metric và không in nội dung OCR.
 
 Ví dụ dựng snapshot OCR vào thư mục thử nghiệm riêng (không ghi đè baseline):
 
