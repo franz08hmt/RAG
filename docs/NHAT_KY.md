@@ -67,3 +67,12 @@
 - Page 116: PSM 6 CER thấp nhất (21,97%); PSM 4 WER thấp nhất (27,41%). Khi chạy lại cùng cấu hình trên cả 4 trang 107/109/116/136, PSM 4 đạt CER/WER gộp thấp nhất: 24,89%/32,21%. Page 116 chiếm 48,4% ký tự reference, do đó mẫu gộp còn bị ảnh hưởng bởi một trang dài; không đổi mặc định PSM 6.
 - Ghi cấu hình, bảng kết quả và giới hạn tại `docs/evidence/OCR_PSM_PAGE116_20260928.md`; cập nhật checkpoint Giai đoạn 1. Không thay snapshot OCR, corpus baseline, chunk hay pipeline retrieval.
 - Xác minh `pytest`: 39 passed; smoke tests: 2/2 passed; reference page 116 vẫn bị Git ignore. Không gọi Gemini, không push, không thay `main`/PR #2.
+
+## 2026-09-29 — Khảo sát class tài liệu và độ nhạy kích thước chunk
+
+- Phân loại sơ bộ theo cấu trúc: Quy chế 1727 có 31 mốc Điều và 52 chunk; Sổ tay có 2 dòng khớp mẫu Điều (dưới ngưỡng 4), nên fallback thành 103 sliding-window chunks ở native-only G0; hướng dẫn thực tập một trang tạo 1 chunk. Số liệu lấy từ snapshot, không in nội dung nguồn.
+- Phát hiện page span tối đa của chunk Sổ tay là 36 trang ở G0 native-only do các trang scan thiếu text; snapshot G1 OCR có max 8 trang. Đây là giới hạn của citation `pdf_page_start/end` dạng khoảng; chưa thay schema.
+- Thêm `src/rag_hcmute/evaluation/chunking_ablation.py`, CLI `scripts/run_chunking_ablation.py` và unit tests. Chạy 250/40, 500/80, 750/120 trên cùng native-only G0 `5da3bd4d5de54492`, giữ nguyên section-aware rule và 7 câu answerable hiện có. Do chunk ID thay đổi, ánh xạ gold theo `section_path` hoặc trang nguồn; metric chỉ là section/page proxy, không so trực tiếp với exact-chunk baseline.
+- BM25 section/page Hit@5 giữ ở 4/7 cho cả ba cấu hình; MRR@10 là 0,500 / 0,419 / 0,399. BGE-M3 lần lượt 7/7, MRR 0,929 / 0,762 / 0,833. Không diễn giải thành kết luận chọn 250/40 vì gold location proxy tạo nhiều ứng viên cùng Điều ở chunk nhỏ.
+- Ghi nhận giới hạn BGE-M3 `max_seq_length=1024`: 250/40 có 0/297 chunk quá dài; 500/80 có 4/156; 750/120 có 20/111 (max 1.626 subword). Dense results phản ánh cả truncation với cấu hình model hiện tại.
+- Raw metadata-only output nằm trong `artifacts/results/chunking_ablation/` (Git-ignored). Chi tiết tại `docs/evidence/CHUNK_SIZE_ABLATION_20260929.md`; `pytest`: 42 passed; smoke tests: 2/2 passed. Model chạy local trên CUDA, không có mạng/cloud API. Baseline/snapshot không bị ghi đè; chưa push.
