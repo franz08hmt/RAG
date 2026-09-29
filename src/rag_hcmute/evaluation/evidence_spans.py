@@ -27,6 +27,7 @@ class EvidenceSpan:
     token_start: int
     token_end: int
     normalized_anchor_sha256: str
+    label: str = ""
 
     @property
     def token_count(self) -> int:
@@ -84,18 +85,37 @@ def load_exact_evidence_spans(
     questions_path: Path,
     annotations_path: Path,
     pages_by_document: dict[str, list[PageText]],
+    snapshot_id: str,
 ) -> tuple[dict[str, list[EvidenceSpan]], dict]:
-    """Resolve manually selected excerpt fragments to verified local source offsets.
+    """Load reviewed page-local offsets and verify them against the local snapshot.
 
-    The output contains only offsets and hashes. Evidence text is read locally and
-    is never copied into the returned metadata.
+    Only offsets, labels and hashes are emitted; source text is never copied.
     """
     annotation = json.loads(annotations_path.read_text(encoding="utf-8"))
     with questions_path.open("r", encoding="utf-8-sig", newline="") as stream:
         rows = {row["question_id"]: row for row in csv.DictReader(stream)}
+    if annotation.get("snapshot_id") != snapshot_id:
+        raise ValueError(
+            "Evidence-span annotations target a different corpus snapshot; "
+            "review the page offsets before using them."
+        )
+    answerable_ids = {
+        question_id
+        for question_id, row in rows.items()
+        if row.get("answerability") == "answerable"
+        and row.get("expected_chunk_id", "").strip()
+    }
+    annotated_ids = set(annotation.get("questions", {}))
+    if answerable_ids != annotated_ids:
+        missing = sorted(answerable_ids - annotated_ids)
+        extra = sorted(annotated_ids - answerable_ids)
+        raise ValueError(
+            f"Evidence annotation coverage mismatch; missing={missing}, extra={extra}."
+        )
 
     resolved: dict[str, list[EvidenceSpan]] = {}
     serialized_spans: list[dict] = []
+    all_span_ids: set[str] = set()
     for question_id, question_annotation in annotation["questions"].items():
         row = rows.get(question_id)
         if row is None:
@@ -116,37 +136,40 @@ def load_exact_evidence_spans(
             page_token_starts[page.pdf_page] = token_cursor
             token_cursor += len(page.text.split())
 
-        fragments = split_evidence_fragments(row.get("evidence_text", ""))
         question_spans: list[EvidenceSpan] = []
-        for span_number, span_annotation in enumerate(question_annotation["spans"], start=1):
-            fragment_index = int(span_annotation["fragment_index"])
-            if not 1 <= fragment_index <= len(fragments):
-                raise ValueError(
-                    f"{question_id}: evidence fragment index {fragment_index} is invalid."
-                )
+        for span_annotation in question_annotation["spans"]:
             pdf_page = int(span_annotation["pdf_page"])
             page = pages_by_number.get(pdf_page)
             if page is None:
                 raise ValueError(f"{question_id}: source PDF page {pdf_page} is not available.")
-
-            excerpt = fragments[fragment_index - 1]
-            intervals = locate_excerpt_on_page(page.text, excerpt)
-            if len(intervals) != 1:
+            page_tokens = page.text.split()
+            page_start = int(span_annotation["page_token_start"])
+            page_end = int(span_annotation["page_token_end"])
+            if not 0 <= page_start < page_end <= len(page_tokens):
                 raise ValueError(
-                    f"{question_id}: expected one exact evidence match on PDF page {pdf_page}; "
-                    f"found {len(intervals)}. No evidence text was emitted."
+                    f"{question_id}: evidence token interval on PDF page {pdf_page} is invalid."
                 )
-            local_start, local_end = intervals[0]
-            words = normalized_words(excerpt)
+            words = normalized_words(" ".join(page_tokens[page_start:page_end]))
             anchor_digest = hashlib.sha256(" ".join(words).encode("utf-8")).hexdigest()
+            expected_digest = span_annotation["normalized_anchor_sha256"]
+            if anchor_digest != expected_digest:
+                raise ValueError(
+                    f"{question_id}: evidence anchor hash mismatch on PDF page {pdf_page}; "
+                    "the source snapshot or annotation may have changed."
+                )
+            span_id = span_annotation["span_id"]
+            if span_id in all_span_ids:
+                raise ValueError(f"Duplicate evidence span ID: {span_id}.")
+            all_span_ids.add(span_id)
             span = EvidenceSpan(
                 question_id=question_id,
-                span_id=f"{question_id}-S{span_number}",
+                span_id=span_id,
                 document_id=document_id,
                 pdf_page=pdf_page,
-                token_start=page_token_starts[pdf_page] + local_start,
-                token_end=page_token_starts[pdf_page] + local_end,
-                normalized_anchor_sha256=anchor_digest,
+                token_start=page_token_starts[pdf_page] + page_start,
+                token_end=page_token_starts[pdf_page] + page_end,
+                normalized_anchor_sha256=expected_digest,
+                label=span_annotation.get("label", ""),
             )
             question_spans.append(span)
             serialized_spans.append(serialize_evidence_span(span))
@@ -154,10 +177,10 @@ def load_exact_evidence_spans(
 
     metadata = {
         "annotation_version": annotation["annotation_version"],
-        "matching_rule": annotation["matching_rule"],
+        "snapshot_id": snapshot_id,
+        "offset_unit": annotation["offset_unit"],
         "annotated_question_count": len(resolved),
         "evidence_span_count": len(serialized_spans),
-        "pending_manual_review_question_ids": sorted(annotation.get("pending_manual_review", {})),
         "spans": serialized_spans,
     }
     return resolved, metadata
@@ -173,6 +196,7 @@ def serialize_evidence_span(span: EvidenceSpan) -> dict:
         "token_end": span.token_end,
         "token_count": span.token_count,
         "normalized_anchor_sha256": span.normalized_anchor_sha256,
+        "label": span.label,
     }
 
 

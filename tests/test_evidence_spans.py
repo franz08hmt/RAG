@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 
 from rag_hcmute.evaluation.evidence_spans import (
@@ -77,7 +78,13 @@ def test_annotation_loader_resolves_offsets_without_emitting_excerpt(tmp_path) -
     with questions_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(
             stream,
-            fieldnames=("question_id", "answerability", "expected_document", "evidence_text"),
+            fieldnames=(
+                "question_id",
+                "answerability",
+                "expected_document",
+                "expected_chunk_id",
+                "evidence_text",
+            ),
         )
         writer.writeheader()
         writer.writerow(
@@ -85,18 +92,31 @@ def test_annotation_loader_resolves_offsets_without_emitting_excerpt(tmp_path) -
                 "question_id": "Q1",
                 "answerability": "answerable",
                 "expected_document": "DOC",
+                "expected_chunk_id": "GOLD",
                 "evidence_text": "Heading ... Evidence phrase exactly.",
             }
         )
     annotations_path.write_text(
         json.dumps(
             {
-                "annotation_version": 1,
-                "matching_rule": "exact",
+                "annotation_version": 2,
+                "snapshot_id": "SNAP",
+                "offset_unit": "page-local whitespace tokens",
                 "questions": {
                     "Q1": {
                         "document_id": "DOC",
-                        "spans": [{"fragment_index": 2, "pdf_page": 1}],
+                        "spans": [
+                            {
+                                "span_id": "Q1-S1",
+                                "pdf_page": 1,
+                                "page_token_start": 2,
+                                "page_token_end": 5,
+                                "label": "test clause",
+                                "normalized_anchor_sha256": hashlib.sha256(
+                                    b"evidence phrase exactly"
+                                ).hexdigest(),
+                            }
+                        ],
                     }
                 },
             }
@@ -122,6 +142,7 @@ def test_annotation_loader_resolves_offsets_without_emitting_excerpt(tmp_path) -
         questions_path=questions_path,
         annotations_path=annotations_path,
         pages_by_document=pages,
+        snapshot_id="SNAP",
     )
 
     span = spans["Q1"][0]

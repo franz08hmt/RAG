@@ -85,3 +85,12 @@
 - Cập nhật evaluator đo Evidence-span Recall@5, Complete-evidence Hit@5 và First-evidence MRR@10. BM25 theo 250/40, 500/80, 750/120: span recall 3/5, 4/5, 4/5; complete hit 2/4, 3/4, 3/4. Dense BGE-M3: lần lượt 5/5 và 4/4 ở cả ba cấu hình; đây là mẫu phát triển rất nhỏ, chưa dùng chọn default.
 - Giữ nguyên snapshot G0, nhãn pilot gốc, default 500/80, OCR/generation và corpus. Dense dùng model local/CUDA/offline; không gọi Gemini hay API trả phí.
 - `pytest`: 48 passed; smoke tests: 2/2 passed. Raw BM25/Dense metadata-only logs ở `artifacts/results/chunking_ablation/` (Git-ignored); chi tiết tại `docs/evidence/CHUNK_SIZE_EXACT_EVIDENCE_20260929.md`. Chưa push.
+
+## 2026-09-29 — Hoàn thiện nhãn exact evidence cho toàn bộ pilot answerable
+
+- Rà trực tiếp các đoạn tại PDF pages 12, 20 và 21 của Quy chế 1727; bổ sung nhãn cho P003 (tiêu chí cảnh báo theo hai chế độ), P004 (đăng ký học lại) và P008 (các trường hợp buộc thôi học theo hai chế độ).
+- Chuẩn hóa sidecar thành annotation version 2: page-local whitespace-token offsets, điều/khoản, hash nội dung đã chuẩn hóa và `snapshot_id` G0. Loader kiểm tra coverage đủ 7/7 answerable, đúng document/page và hash trước khi tính điểm; không ghi trích đoạn nguồn vào repo/output.
+- Sửa offset/hash P005 sau khi hash guard phát hiện offset nhầm sang trang cùng số của tài liệu khác; offset được tính lại từ đúng tài liệu Hướng dẫn Thực tập tốt nghiệp. P007 tiếp tục truy nguyên ra PDF pages 23–24; CSV cũ chỉ ghi page 23.
+- Chạy lại BM25 và Dense trên 7 câu/10 span. BM25: Evidence-span Recall@5 = 5/10, 4/10, 4/10; Complete-evidence Hit@5 = 3/7 ở cả ba cấu hình. Dense: 10/10, 9/10, 9/10; Complete-evidence Hit@5 = 7/7, 6/7, 6/7 tương ứng 250/40, 500/80, 750/120.
+- Số liệu bốn câu/năm span ở phiên bản annotation trước chỉ là bước trung gian, được ghi rõ là superseded trong báo cáo. Chưa đổi default 500/80 vì pilot nhỏ, Dense chunk lớn có truncation và chưa có số đo latency/chi phí.
+- Xác nhận `pytest`: 48 passed, smoke tests: 2/2 passed; raw output Git-ignored và metadata-only. Không thay snapshot G0/corpus, không gọi API ngoài, không sửa DOCX và không push.

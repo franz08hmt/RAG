@@ -147,6 +147,7 @@ def main() -> int:
         questions_path=args.questions,
         annotations_path=args.evidence_annotations,
         pages_by_document=pages_by_document,
+        snapshot_id=snapshot["snapshot_id"],
     )
 
     report = {

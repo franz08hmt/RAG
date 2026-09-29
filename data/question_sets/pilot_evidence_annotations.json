@@ -1,37 +1,122 @@
 {
-  "annotation_version": 1,
-  "source_field": "pilot_questions.csv:evidence_text",
-  "matching_rule": "exact normalized word sequence on the reviewed PDF page",
+  "annotation_version": 2,
+  "snapshot_id": "5da3bd4d5de54492",
+  "offset_unit": "zero-based whitespace-token offsets within the cleaned PDF page; end exclusive",
   "questions": {
     "P001": {
       "document_id": "HCMUTE_QCDT_1727_2021",
       "spans": [
-        {"fragment_index": 1, "pdf_page": 22}
+        {
+          "span_id": "P001-S1",
+          "pdf_page": 22,
+          "page_token_start": 339,
+          "page_token_end": 448,
+          "label": "Điều 16, khoản 1: các điều kiện công nhận tốt nghiệp",
+          "normalized_anchor_sha256": "7691452fbb5a24d79823fb7f24e3a864a99892b13e751e3f066f22c06d83f8a7"
+        }
       ]
     },
     "P002": {
       "document_id": "HCMUTE_QCDT_1727_2021",
       "spans": [
-        {"fragment_index": 2, "pdf_page": 12}
+        {
+          "span_id": "P002-S1",
+          "pdf_page": 12,
+          "page_token_start": 431,
+          "page_token_end": 452,
+          "label": "Điều 9, mục 7(b): điều kiện rút bớt học phần",
+          "normalized_anchor_sha256": "352e4b851ba28f2c3eac44c6edc0632f3db8780c628800578d5d8d0caee6766e"
+        }
+      ]
+    },
+    "P003": {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "spans": [
+        {
+          "span_id": "P003-S1",
+          "pdf_page": 20,
+          "page_token_start": 70,
+          "page_token_end": 194,
+          "label": "Điều 13, khoản 1(a-c): tiêu chí cảnh báo theo tín chỉ",
+          "normalized_anchor_sha256": "a12c43dc53bf8c90a269f9e1e5f6e64e7c98249f034a05f9ba7292b622485f30"
+        },
+        {
+          "span_id": "P003-S2",
+          "pdf_page": 21,
+          "page_token_start": 49,
+          "page_token_end": 129,
+          "label": "Điều 14, khoản 2(a-b): tiêu chí cảnh báo theo niên chế",
+          "normalized_anchor_sha256": "a96bbf663e820fb71d5c67dd9243422f8a96b791a5a77b26b77f5a56c031d41d"
+        }
+      ]
+    },
+    "P004": {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "spans": [
+        {
+          "span_id": "P004-S1",
+          "pdf_page": 12,
+          "page_token_start": 536,
+          "page_token_end": 622,
+          "label": "Điều 9, mục 8(a-b): đăng ký học lại",
+          "normalized_anchor_sha256": "a277cb568bf79ca25f5280287af87a8173a42128b08e1035cde226dc8a899b32"
+        }
       ]
     },
     "P005": {
       "document_id": "HCMUTE_FIT_TTTN_2022",
       "spans": [
-        {"fragment_index": 1, "pdf_page": 1}
+        {
+          "span_id": "P005-S1",
+          "pdf_page": 1,
+          "page_token_start": 10,
+          "page_token_end": 59,
+          "label": "Hướng dẫn học phần Thực tập tốt nghiệp: thời điểm đăng ký",
+          "normalized_anchor_sha256": "5c27af4eb9ee408c9a0942db21333554a596ab9af43712585dee722568b809e7"
+        }
       ]
     },
     "P007": {
       "document_id": "HCMUTE_QCDT_1727_2021",
       "spans": [
-        {"fragment_index": 1, "pdf_page": 23},
-        {"fragment_index": 2, "pdf_page": 24}
+        {
+          "span_id": "P007-S1",
+          "pdf_page": 23,
+          "page_token_start": 443,
+          "page_token_end": 491,
+          "label": "Điều 17, khoản 1: các trường hợp nghỉ học tạm thời",
+          "normalized_anchor_sha256": "7162fb0e90a301c06e3d39976f744f2fc46da0f26ca291aafe03fc553b12f5c1"
+        },
+        {
+          "span_id": "P007-S2",
+          "pdf_page": 24,
+          "page_token_start": 32,
+          "page_token_end": 70,
+          "label": "Điều 17, khoản 3: thủ tục và thời hạn nộp đơn",
+          "normalized_anchor_sha256": "0b3b697bcaf6805fa57706b8afc7decfbbe84dcf5683903f82da013b31e74567"
+        }
+      ]
+    },
+    "P008": {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "spans": [
+        {
+          "span_id": "P008-S1",
+          "pdf_page": 20,
+          "page_token_start": 285,
+          "page_token_end": 349,
+          "label": "Điều 13, khoản 2(a-c): trường hợp buộc thôi học theo tín chỉ",
+          "normalized_anchor_sha256": "128c04b8a003095a9b304d9be8a8c6d178398c1410ebbaf59724a7d23d06c79a"
+        },
+        {
+          "span_id": "P008-S2",
+          "pdf_page": 21,
+          "page_token_start": 185,
+          "page_token_end": 285,
+          "label": "Điều 14, khoản 3(a-đ): trường hợp buộc thôi học theo niên chế",
+          "normalized_anchor_sha256": "3c70e0776f2f0b9bf34732a368ae98123d55d824aa2b322d5f7013867c01953c"
+        }
       ]
     }
-  },
-  "pending_manual_review": {
-    "P003": "The current evidence note does not contain a uniquely locatable exact passage for every answer condition.",
-    "P004": "The current evidence note does not exactly match a source passage in the reviewed page.",
-    "P008": "The current evidence note summarizes multiple provisions; exact passages need to be selected from the source."
   }
 }
