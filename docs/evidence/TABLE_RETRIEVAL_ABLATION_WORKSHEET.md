@@ -40,6 +40,8 @@ Nên bắt đầu với khoảng 5–10 câu hỏi có thể trả lời trực 
 
 Đã chuẩn bị 5 câu **ứng viên nháp** cho Bảng 5 tại [`data/question_sets/table_question_candidates_for_student_review.csv`](../../data/question_sets/table_question_candidates_for_student_review.csv). Đây chỉ là gợi ý để người học đối chiếu và tự sửa/xác nhận, không phải câu hỏi đã duyệt; không đưa vào pilot hoặc chạy metric trước khi xác minh vị trí hàng/cột trên PDF.
 
+Ánh xạ chunk ứng viên B0/T1/T2 được chuẩn bị riêng tại [`data/question_sets/table_candidate_chunk_mapping.csv`](../../data/question_sets/table_candidate_chunk_mapping.csv). Đây là ánh xạ đề xuất theo snapshot G0 và sidecar table variants; chưa phải gold annotation cho tới khi người học xác nhận câu hỏi và hàng/cột nguồn.
+
 Sao chép khối dưới đây cho mỗi câu hỏi. Chưa đưa các câu đang để trống vào bộ đánh giá hoặc chạy script.
 
 ```text

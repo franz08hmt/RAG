@@ -100,3 +100,9 @@
 - Theo chỉ đạo của sinh viên, khi hoàn tất mỗi đợt/mốc tiến độ sẽ cập nhật DOCX tương ứng ngay trong lượt hoàn tất, bảo đảm trả lời góp ý mới nhất của giảng viên và chỉ đưa vào kết quả đã kiểm chứng.
 - Giữ định dạng báo cáo đã thống nhất; phân biệt rõ việc đã làm, kết quả đo được, việc còn hạn chế và kế hoạch tiếp theo.
 - Mốc 1 chưa đóng: chưa chỉnh DOCX trong bước này. Khi nội dung/minh chứng mốc 1 đã được rà soát và chốt, cập nhật DOCX mốc 1 trước khi chuyển sang bàn giao mốc kế tiếp.
+
+## 2026-09-29 — Ánh xạ ứng viên bảng sang chunk B0/T1/T2
+
+- Đối chiếu G0 `5da3bd4d5de54492` và sidecar Bảng 5 (PDF page 20). Toàn bộ nội dung bảng có trong B0 chunk `HCMUTE_QCDT_1727_2021__c0031`; T1 có một chunk toàn bảng; T2 có năm chunk theo hàng.
+- Tạo `data/question_sets/table_candidate_chunk_mapping.csv` để ghi ánh xạ vị trí cho TB001-TB005. Trạng thái là `draft_candidate_mapping`; chưa coi là gold vì câu hỏi và vị trí hàng/cột vẫn cần người học xác nhận.
+- Không chạy retrieval metric, không sửa pilot/corpus/default; chưa tích hợp T1/T2 vào pipeline mặc định. CSV được kiểm tra cấu trúc trước khi commit.
