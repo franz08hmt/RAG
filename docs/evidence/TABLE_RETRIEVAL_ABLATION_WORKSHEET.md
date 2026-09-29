@@ -38,6 +38,8 @@ Lệnh tạo một chunk T1 và năm chunk T2 tại `artifacts/results/table_var
 
 Nên bắt đầu với khoảng 5–10 câu hỏi có thể trả lời trực tiếp từ một hoặc một vài bảng đã kiểm tra. Chọn câu hỏi cần tra cứu giá trị, điều kiện, nhóm hàng hoặc đối chiếu cột; tránh chỉ hỏi nội dung đã có nguyên văn ở phần văn bản thường. Mỗi câu phải có vị trí bằng chứng đủ cụ thể để người khác mở PDF và xác minh.
 
+Đã chuẩn bị 5 câu **ứng viên nháp** cho Bảng 5 tại [`data/question_sets/table_question_candidates_for_student_review.csv`](../../data/question_sets/table_question_candidates_for_student_review.csv). Đây chỉ là gợi ý để người học đối chiếu và tự sửa/xác nhận, không phải câu hỏi đã duyệt; không đưa vào pilot hoặc chạy metric trước khi xác minh vị trí hàng/cột trên PDF.
+
 Sao chép khối dưới đây cho mỗi câu hỏi. Chưa đưa các câu đang để trống vào bộ đánh giá hoặc chạy script.
 
 ```text

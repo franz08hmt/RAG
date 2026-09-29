@@ -94,3 +94,9 @@
 - Chạy lại BM25 và Dense trên 7 câu/10 span. BM25: Evidence-span Recall@5 = 5/10, 4/10, 4/10; Complete-evidence Hit@5 = 3/7 ở cả ba cấu hình. Dense: 10/10, 9/10, 9/10; Complete-evidence Hit@5 = 7/7, 6/7, 6/7 tương ứng 250/40, 500/80, 750/120.
 - Số liệu bốn câu/năm span ở phiên bản annotation trước chỉ là bước trung gian, được ghi rõ là superseded trong báo cáo. Chưa đổi default 500/80 vì pilot nhỏ, Dense chunk lớn có truncation và chưa có số đo latency/chi phí.
 - Xác nhận `pytest`: 48 passed, smoke tests: 2/2 passed; raw output Git-ignored và metadata-only. Không thay snapshot G0/corpus, không gọi API ngoài, không sửa DOCX và không push.
+
+## 2026-09-29 — Quy ước bàn giao DOCX theo từng mốc
+
+- Theo chỉ đạo của sinh viên, khi hoàn tất mỗi đợt/mốc tiến độ sẽ cập nhật DOCX tương ứng ngay trong lượt hoàn tất, bảo đảm trả lời góp ý mới nhất của giảng viên và chỉ đưa vào kết quả đã kiểm chứng.
+- Giữ định dạng báo cáo đã thống nhất; phân biệt rõ việc đã làm, kết quả đo được, việc còn hạn chế và kế hoạch tiếp theo.
+- Mốc 1 chưa đóng: chưa chỉnh DOCX trong bước này. Khi nội dung/minh chứng mốc 1 đã được rà soát và chốt, cập nhật DOCX mốc 1 trước khi chuyển sang bàn giao mốc kế tiếp.
