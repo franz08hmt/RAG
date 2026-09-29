@@ -17,6 +17,10 @@ from rag_hcmute.evaluation.chunking_ablation import (  # noqa: E402
     evaluate_location_retrieval,
     serialize_location,
 )
+from rag_hcmute.evaluation.evidence_spans import (  # noqa: E402
+    evaluate_exact_evidence_retrieval,
+    load_exact_evidence_spans,
+)
 from rag_hcmute.evaluation.run_pilot import load_pilot_questions  # noqa: E402
 from rag_hcmute.ingestion.chunk import chunk_document  # noqa: E402
 from rag_hcmute.ingestion.clean import clean_document_pages  # noqa: E402
@@ -45,6 +49,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--questions",
         type=Path,
         default=PROJECT_ROOT / "data/question_sets/pilot_questions.csv",
+    )
+    parser.add_argument(
+        "--evidence-annotations",
+        type=Path,
+        default=PROJECT_ROOT / "data/question_sets/pilot_evidence_annotations.json",
     )
     parser.add_argument("--method", choices=("bm25", "dense"), default="bm25")
     parser.add_argument("--dense-model", default=None)
@@ -129,6 +138,17 @@ def main() -> int:
     if not locations:
         raise SystemExit("No answerable questions with verified baseline gold chunks were found.")
 
+    pages_by_document = {}
+    for document in snapshot["documents"]:
+        document_id = document["document_id"]
+        pages = read_pages_jsonl(source_root / "pages" / f"{document_id}.jsonl")
+        pages_by_document[document_id], _ = clean_document_pages(pages)
+    evidence_spans, evidence_annotation_metadata = load_exact_evidence_spans(
+        questions_path=args.questions,
+        annotations_path=args.evidence_annotations,
+        pages_by_document=pages_by_document,
+    )
+
     report = {
         "created_at": datetime.now(timezone.utc).isoformat(),
         "snapshot_id": snapshot["snapshot_id"],
@@ -143,6 +163,7 @@ def main() -> int:
                 for question_id, location in locations.items()
             },
         },
+        "exact_evidence_annotation": evidence_annotation_metadata,
         "configs": [],
     }
 
@@ -150,12 +171,9 @@ def main() -> int:
         config_chunks = []
         for document in snapshot["documents"]:
             document_id = document["document_id"]
-            page_path = source_root / "pages" / f"{document_id}.jsonl"
-            pages = read_pages_jsonl(page_path)
-            cleaned_pages, _ = clean_document_pages(pages)
             config_chunks.extend(
                 chunk_document(
-                    cleaned_pages,
+                    pages_by_document[document_id],
                     document_id,
                     document["document_title"],
                     chunk_tokens=chunk_tokens,
@@ -175,6 +193,14 @@ def main() -> int:
             retriever=retriever,
             top_k=args.top_k,
         )
+        exact_evidence_result = evaluate_exact_evidence_retrieval(
+            questions=questions,
+            spans_by_question=evidence_spans,
+            chunks=config_chunks,
+            retriever=retriever,
+            top_k=args.top_k,
+        )
+        result["exact_evidence"] = exact_evidence_result
         if args.method == "dense":
             result["encoder_input_profile"] = _dense_input_profile(retriever, config_chunks)
         report["configs"].append(
@@ -203,6 +229,15 @@ def main() -> int:
             f"chunks={item['chunk_count']} | section/page Hit@5="
             f"{metric['hits']}/{metric['denominator']} ({metric['value']:.3f}) | "
             f"section/page MRR@10={mrr['value']:.3f}"
+        )
+        exact = item["retrieval"]["exact_evidence"]
+        span_recall = exact["evidence_span_recall_at_k"]
+        complete_hit = exact["complete_evidence_hit_at_k"]
+        print(
+            f"  Exact evidence span Recall@5={span_recall['hits']}/"
+            f"{span_recall['denominator']} ({span_recall['value']:.3f}) | "
+            f"Complete evidence Hit@5={complete_hit['hits']}/"
+            f"{complete_hit['denominator']} ({complete_hit['value']:.3f})"
         )
         if args.method == "dense":
             profile = item["retrieval"]["encoder_input_profile"]

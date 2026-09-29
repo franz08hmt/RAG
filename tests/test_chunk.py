@@ -63,6 +63,22 @@ def test_chunk_ids_are_stable_across_reruns(cleaned_pages) -> None:
     assert [c.text_sha256 for c in first_run] == [c.text_sha256 for c in second_run]
 
 
+def test_chunks_expose_stable_document_token_intervals(cleaned_pages) -> None:
+    chunks = chunk_document(
+        cleaned_pages,
+        "TEST_DOC",
+        "Quy dinh mau kiem thu",
+        chunk_tokens=40,
+        overlap_tokens=8,
+    )
+
+    for chunk in chunks:
+        assert chunk.token_start is not None
+        assert chunk.token_end is not None
+        assert chunk.token_end - chunk.token_start == chunk.token_count
+        assert chunk.token_start >= 0
+
+
 def test_dieu_boundaries_are_preserved_as_single_chunks_when_short(chunks) -> None:
     section_paths = {c.section_path for c in chunks if c.section_path}
     assert "Chương I > Điều 1" in section_paths

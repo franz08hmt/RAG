@@ -76,3 +76,12 @@
 - BM25 section/page Hit@5 giữ ở 4/7 cho cả ba cấu hình; MRR@10 là 0,500 / 0,419 / 0,399. BGE-M3 lần lượt 7/7, MRR 0,929 / 0,762 / 0,833. Không diễn giải thành kết luận chọn 250/40 vì gold location proxy tạo nhiều ứng viên cùng Điều ở chunk nhỏ.
 - Ghi nhận giới hạn BGE-M3 `max_seq_length=1024`: 250/40 có 0/297 chunk quá dài; 500/80 có 4/156; 750/120 có 20/111 (max 1.626 subword). Dense results phản ánh cả truncation với cấu hình model hiện tại.
 - Raw metadata-only output nằm trong `artifacts/results/chunking_ablation/` (Git-ignored). Chi tiết tại `docs/evidence/CHUNK_SIZE_ABLATION_20260929.md`; `pytest`: 42 passed; smoke tests: 2/2 passed. Model chạy local trên CUDA, không có mạng/cloud API. Baseline/snapshot không bị ghi đè; chưa push.
+
+## 2026-09-29 — Định vị exact evidence span và chạy lại chunk-size ablation
+
+- Bổ sung `token_start`/`token_end` zero-based, khoảng nửa mở, vào chunk để ánh xạ nhãn đoạn nguồn độc lập với kích thước chunk. Không đổi nội dung chunk, chunk ID hay cấu hình mặc định.
+- Tạo sidecar `data/question_sets/pilot_evidence_annotations.json`; chọn các mảnh trích dẫn đã có trong pilot, xác thực khớp chuỗi từ trên đúng trang PDF rồi lưu offset và SHA-256 của anchor, không lưu nội dung nguồn vào sidecar/result.
+- Chỉ 4/7 câu answerable có vị trí exact tự động kiểm chứng được (P001/P002/P005/P007; 5 span). P003/P004/P008 để pending manual review. Phát hiện P007 có bằng chứng trên PDF page 23 và 24 dù trường `evidence_page` hiện chỉ ghi 23; không sửa CSV gốc, sidecar ghi rõ từng trang.
+- Cập nhật evaluator đo Evidence-span Recall@5, Complete-evidence Hit@5 và First-evidence MRR@10. BM25 theo 250/40, 500/80, 750/120: span recall 3/5, 4/5, 4/5; complete hit 2/4, 3/4, 3/4. Dense BGE-M3: lần lượt 5/5 và 4/4 ở cả ba cấu hình; đây là mẫu phát triển rất nhỏ, chưa dùng chọn default.
+- Giữ nguyên snapshot G0, nhãn pilot gốc, default 500/80, OCR/generation và corpus. Dense dùng model local/CUDA/offline; không gọi Gemini hay API trả phí.
+- `pytest`: 48 passed; smoke tests: 2/2 passed. Raw BM25/Dense metadata-only logs ở `artifacts/results/chunking_ablation/` (Git-ignored); chi tiết tại `docs/evidence/CHUNK_SIZE_EXACT_EVIDENCE_20260929.md`. Chưa push.

@@ -1,0 +1,37 @@
+{
+  "annotation_version": 1,
+  "source_field": "pilot_questions.csv:evidence_text",
+  "matching_rule": "exact normalized word sequence on the reviewed PDF page",
+  "questions": {
+    "P001": {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "spans": [
+        {"fragment_index": 1, "pdf_page": 22}
+      ]
+    },
+    "P002": {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "spans": [
+        {"fragment_index": 2, "pdf_page": 12}
+      ]
+    },
+    "P005": {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "spans": [
+        {"fragment_index": 1, "pdf_page": 1}
+      ]
+    },
+    "P007": {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "spans": [
+        {"fragment_index": 1, "pdf_page": 23},
+        {"fragment_index": 2, "pdf_page": 24}
+      ]
+    }
+  },
+  "pending_manual_review": {
+    "P003": "The current evidence note does not contain a uniquely locatable exact passage for every answer condition.",
+    "P004": "The current evidence note does not exactly match a source passage in the reviewed page.",
+    "P008": "The current evidence note summarizes multiple provisions; exact passages need to be selected from the source."
+  }
+}

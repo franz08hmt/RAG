@@ -32,6 +32,10 @@ class Chunk:
     chunk_method: str
     extraction_methods: list[str] = field(default_factory=lambda: ["native"])
     ocr_confidence_mean: float | None = None
+    # Zero-based, document-wide whitespace-token interval [start, end).
+    # These offsets make evidence spans stable across chunk-size variants.
+    token_start: int | None = None
+    token_end: int | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -108,6 +112,8 @@ def _slice_chunk(
         chunk_method=chunk_method,
         extraction_methods=extraction_methods or ["native"],
         ocr_confidence_mean=round(statistics.fmean(ocr_confidences), 2) if ocr_confidences else None,
+        token_start=start,
+        token_end=end,
     )
 
 
