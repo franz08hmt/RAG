@@ -106,3 +106,10 @@
 - Đối chiếu G0 `5da3bd4d5de54492` và sidecar Bảng 5 (PDF page 20). Toàn bộ nội dung bảng có trong B0 chunk `HCMUTE_QCDT_1727_2021__c0031`; T1 có một chunk toàn bảng; T2 có năm chunk theo hàng.
 - Tạo `data/question_sets/table_candidate_chunk_mapping.csv` để ghi ánh xạ vị trí cho TB001-TB005. Trạng thái là `draft_candidate_mapping`; chưa coi là gold vì câu hỏi và vị trí hàng/cột vẫn cần người học xác nhận.
 - Không chạy retrieval metric, không sửa pilot/corpus/default; chưa tích hợp T1/T2 vào pipeline mặc định. CSV được kiểm tra cấu trúc trước khi commit.
+
+## 2026-10-03 — Smoke test truy xuất câu hỏi bảng
+
+- Thêm `scripts/smoke_table_candidate_retrieval.py`: chạy thăm dò BM25/Dense trên B0/T1/T2 cho câu nháp, ghi thứ hạng từng câu và proposed chunk IDs; không tính metric, không nhập vào pilot. Đầu ra được giữ trong `artifacts/results/` (Git-ignored). Dense mặc định offline; chỉ truy cập mạng với cờ opt-in `--allow-model-download`.
+- BM25 chạy thành công với top-k=5; chunk đích đề xuất xuất hiện trong top-5 cho cả năm câu ở cả ba biến thể. Báo cáo giới hạn tại `docs/evidence/TABLE_RETRIEVAL_SMOKE_20261003.md`; do tập ứng viên có kích thước khác nhau, không dùng thứ hạng này để tuyên bố biến thể nào tốt hơn.
+- Dense được thử trong chế độ Hugging Face offline nhưng BGE-M3 không có trong cache của env `rag-hcmute`, nên đánh dấu chưa chạy; không tải model hay gọi API.
+- Chưa khóa câu hỏi/gold, chưa tính metric, chưa đổi pilot hoặc pipeline mặc định; DOCX mốc 1 vẫn chờ hoàn tất rà soát nội dung và minh chứng.
