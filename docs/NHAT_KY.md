@@ -113,3 +113,9 @@
 - BM25 chạy thành công với top-k=5; chunk đích đề xuất xuất hiện trong top-5 cho cả năm câu ở cả ba biến thể. Báo cáo giới hạn tại `docs/evidence/TABLE_RETRIEVAL_SMOKE_20261003.md`; do tập ứng viên có kích thước khác nhau, không dùng thứ hạng này để tuyên bố biến thể nào tốt hơn.
 - Dense được thử trong chế độ Hugging Face offline nhưng BGE-M3 không có trong cache của env `rag-hcmute`, nên đánh dấu chưa chạy; không tải model hay gọi API.
 - Chưa khóa câu hỏi/gold, chưa tính metric, chưa đổi pilot hoặc pipeline mặc định; DOCX mốc 1 vẫn chờ hoàn tất rà soát nội dung và minh chứng.
+
+## 2026-10-03 — Đối chiếu đề xuất câu hỏi với PDF nguồn
+
+- Xác minh SHA-256 của `data/raw/HCMUTE_QCDT_1727_2021.pdf` khớp manifest (`71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaa`); render và kiểm tra trực quan PDF trang 20 (số in 19), Bảng 5.
+- Tạo `data/question_sets/table_question_review_proposals_20261003.csv` với câu chữ gợi ý, đáp án đề xuất, hàng nguồn và lưu ý chấp nhận. Sửa đề xuất TB002 để hỏi khoảng đầy đủ; TB005 yêu cầu hai hàng liền nhau.
+- Tất cả giữ trạng thái `proposal_requires_student_review`; chưa sửa pilot/gold, không chạy metric và chưa cập nhật DOCX vì Mốc 1 chưa chốt.

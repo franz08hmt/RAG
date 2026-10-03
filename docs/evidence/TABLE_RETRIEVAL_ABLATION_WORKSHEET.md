@@ -42,6 +42,8 @@ Nên bắt đầu với khoảng 5–10 câu hỏi có thể trả lời trực 
 
 Ánh xạ chunk ứng viên B0/T1/T2 được chuẩn bị riêng tại [`data/question_sets/table_candidate_chunk_mapping.csv`](../../data/question_sets/table_candidate_chunk_mapping.csv). Đây là ánh xạ đề xuất theo snapshot G0 và sidecar table variants; chưa phải gold annotation cho tới khi người học xác nhận câu hỏi và hàng/cột nguồn.
 
+Phiếu đối chiếu câu hỏi, đáp án và trích đoạn hàng nguồn đã kiểm tra trực quan được lưu tại [`data/question_sets/table_question_review_proposals_20261003.csv`](../../data/question_sets/table_question_review_proposals_20261003.csv). PDF trang 20 (số trang in 19) xác nhận các dải `< 36`, `36 – 71`, `72 – 107`, `108 – 149`, `> 149`; đáp án suy ra từ khoảng (đặc biệt TB001 và TB005) vẫn cần người học duyệt. Trạng thái của cả năm câu còn là `proposal_requires_student_review`.
+
 Sao chép khối dưới đây cho mỗi câu hỏi. Chưa đưa các câu đang để trống vào bộ đánh giá hoặc chạy script.
 
 ```text

@@ -21,5 +21,6 @@ Các lượt thử OCR hiện có:
 - `QUESTION_CANDIDATE_REVIEW_20260929.md`: rà soát mức độ khớp nguồn, tham chiếu trang, độ trùng và khoảng trống về bảng/scan/hình; không thay đổi ứng viên hay pilot.
 - `TABLE_QUESTION_CANDIDATES_20260929.md`: 5 gợi ý câu hỏi cho ablation B0/T1/T2 trên một bảng đã kiểm tra; chỉ bản nháp, chưa dùng benchmark.
 - `table_candidate_chunk_mapping.csv`: ánh xạ chunk B0/T1/T2 ở mức ứng viên cho 5 câu hỏi bảng; chưa phải gold label và chưa được dùng tính metric.
+- [`data/question_sets/table_question_review_proposals_20261003.csv`](../../data/question_sets/table_question_review_proposals_20261003.csv): đáp án/bằng chứng và cách diễn đạt đề xuất cho TB001–TB005 sau khi đối chiếu trực quan Bảng 5; cần người học duyệt, chưa phải gold.
 - `TABLE_RETRIEVAL_SMOKE_20261003.md`: kết quả thăm dò BM25 top-5 cho TB001–TB005 trên B0/T1/T2; không phải benchmark, Dense chưa chạy vì thiếu model trong cache offline.
 
