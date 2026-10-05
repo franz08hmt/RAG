@@ -141,3 +141,10 @@
 - Thêm `scripts/evaluate_table_ablation.py`; chạy BM25 và BGE-M3/FAISS local trên CUDA, `top_k=5`, snapshot G0 `5da3bd4d5de54492`, không gọi API. Raw JSON Git-ignored: `artifacts/results/table_retrieval_ablation/table_ablation_both_20261005T114541Z.json`.
 - Kết quả đủ evidence Hit@5: BM25 B0/T1/T2 = 4/5, 1/5, 0/5; Dense = 5/5 ở cả ba. Dense MRR evidence đầu tiên @5 = 0,600/1,000/0,867. Đây chỉ là ablation trên năm câu; không đổi retrieval mặc định, không gộp thành benchmark chung.
 - `pytest`: 51 passed; smoke tests: 2/2 passed (temp directory được chuyển vào workspace theo giới hạn sandbox). Ghi chi tiết kết quả tại `docs/evidence/TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`. Chưa cập nhật DOCX mốc 1 do mốc chưa đóng.
+
+## 2026-10-05 — Chẩn đoán độ nhạy truy vấn của BM25 trên Bảng 5
+
+- Giữ nguyên 5 câu TB001–TB005 đã duyệt, gold evidence, corpus B0/T1/T2, tokenizer và BM25; chỉ thử thêm ba dạng truy vấn chẩn đoán: nối tên cột vào câu gốc, rút gọn cụm dẫn chiếu văn bản, và kết hợp hai cách này. Không ghi các biến thể vào pilot hoặc dùng làm benchmark chính.
+- Hạng evidence trong Top-5 đủ cho 4/5, 1/5, 0/5 câu ở canonical B0/T1/T2; với truy vấn rút gọn + tên cột là 5/5, 4/5, 3/5. T1/T2 vẫn có trường hợp evidence ngoài Top-5; TB001/TB004 của T2 ở hạng 7 và 9. Đây là kết quả mô tả trên năm câu, không chứng minh query expansion cải thiện tổng quát.
+- Ghi truy vấn, hạng đầy đủ và giới hạn tại `docs/evidence/BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`. Không đổi index, metric chính, pipeline mặc định hay câu hỏi đã duyệt; chưa cập nhật DOCX vì Mốc 1 chưa đóng.
+- Thêm `scripts/diagnose_bm25_query_sensitivity.py` để tái lập lượt chẩn đoán và lưu raw JSON Git-ignored với query, evidence rank, Top-5 IDs, hash bộ câu hỏi/evidence và revision code.

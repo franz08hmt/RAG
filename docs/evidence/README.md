@@ -26,4 +26,5 @@ Các lượt thử OCR hiện có:
 - `TABLE_RETRIEVAL_SMOKE_20261005.md`: kết quả thăm dò BM25/Dense top-5 cho câu hỏi nháp trên B0/T1/T2; không phải benchmark và không chứa metric tổng hợp.
 - `TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`: lượt thăm dò có cùng corpus nền, chỉ thay cách biểu diễn Bảng 5; đây là kết quả phù hợp hơn để đọc thứ hạng, nhưng vẫn chưa phải benchmark vì câu hỏi/nhãn đang ở trạng thái nháp.
 - `TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`: kết quả retrieval-only trên năm câu hỏi bảng đã duyệt cho ablation riêng; có metric đủ-evidence, coverage và MRR evidence đầu tiên, nhưng không phải benchmark toàn hệ thống.
+- `BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`: chẩn đoán thứ hạng BM25 với các biến thể cách hỏi và tên cột cho cùng năm câu; các truy vấn biến thể chỉ dùng phân tích, không thay câu hỏi/gold đã duyệt và không phải benchmark chính.
 

@@ -80,6 +80,21 @@ python tests/run_smoke_tests.py
 - Chưa đánh giá generation, citation correctness, refusal hoặc chất lượng toàn pipeline; chưa thay đổi pipeline mặc định. Báo cáo DOCX mốc 1 chưa cập nhật vì mốc này còn đang rà soát minh chứng.
 - Tiếp tục làm local trên `tim-hieu-rag-dot2`; không push, merge hoặc đụng PR #2.
 
+## Rà soát theo góp ý của giảng viên — cập nhật 05/10/2026
+
+Giảng viên yêu cầu tìm hiểu kỹ từng giai đoạn, nêu dữ liệu và cách tổ chức, phân tích phương án rồi so sánh bằng số liệu; không chỉ liệt kê tên công nghệ. Đối chiếu YC và câu hỏi cụ thể hiện tại:
+
+- **YC4 — tài liệu đầu vào (PDF scan, bảng, hình): đã khảo sát, chưa khép kín.** Có thử OCR trên một số trang scan (`OCR_PSM_SWEEP_20260928.md`, `OCR_PSM_PAGE116_20260928.md`) và có phép thử biểu diễn Bảng 5 thành khối Markdown/hàng có ngữ cảnh B0/T1/T2. Chưa có pipeline tổng quát cho ảnh/hình hoặc bảng nhiều tầng, ô gộp và các loại scan khác; kết quả một bảng không được khái quát hóa cho mọi tài liệu.
+- **Document Class và Document Chunk: có cấu trúc cơ sở, còn thiếu phân tích theo lớp.** Corpus manifest/snapshot định danh nguồn và có đánh giá chunk size/exact evidence (`CHUNK_SIZE_EXACT_EVIDENCE_20260929.md`). Bảng mới được phân tích riêng theo ba biểu diễn, nhưng chưa so sánh có hệ thống lớp tài liệu (văn xuôi, quy chế có cấu trúc, bảng, scan) với chiến lược chunk phù hợp cho từng lớp.
+- **Chunking và BM25/Dense retrieval: đã có phép đo, nhưng phạm vi nhỏ.** Đã đo retrieval trên pilot và ablation bảng; diagnostic mới cho thấy hạng BM25 nhạy với cách hỏi/tên cột. Dense đang dùng một embedding BGE-M3; chưa phải so sánh nhiều dense embedding hoặc benchmark riêng để kết luận model nào phù hợp tiếng Việt hơn.
+- **Vector store, hybrid và reranker: chưa có so sánh thực nghiệm.** Hiện tại Dense dùng FAISS; BM25 là baseline từ vựng riêng. Chưa có kết quả so sánh vector store, BM25+dense/RRF hay reranker. Bất kỳ benchmark tiếng Việt hoặc dữ liệu ngoài nào cũng phải đề xuất nguồn/giấy phép để người học duyệt trước.
+- **YC11 — đánh giá RAG: mới có đánh giá retrieval.** Chưa đo end-to-end generation, độ đúng trích dẫn, refusal, Faithfulness/Answer Relevance hoặc các lỗi nối giữa retrieval và generation; các phần này không được ghi như đã hoàn thành.
+- **YC12 — ứng dụng console: chưa hoàn thiện.** Mục tiêu là chương trình console có thể chạy và minh họa từng bước, không phải làm UI bóng bẩy.
+- **YC13 — tìm hiểu sâu: vẫn là yêu cầu xuyên suốt, chưa thể tuyên bố hoàn thành.** Báo cáo cần giải thích lý do chọn phương án, phương án thay thế, kết quả đo, ví dụ lỗi và giới hạn ở từng bước. Một ablation năm câu trên một bảng là minh chứng cụ thể cho việc đào sâu, nhưng chưa thay thế khảo sát toàn quy trình RAG.
+- **Trạng thái mốc:** vẫn đang làm sâu và bổ sung minh chứng cho Mốc 1, chưa chuyển sang Mốc 2 và chưa đóng mốc. Chưa sửa DOCX nộp giảng viên; khi Mốc 1 được chốt, cần cập nhật DOCX đúng font/màu/căn chỉnh đã thống nhất và chỉ đưa kết quả đã xác minh.
+
+Kết quả chẩn đoán BM25 mới nhất: `docs/evidence/BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`. Truy vấn biến thể chỉ dùng để phân tích, không thay câu hỏi đã duyệt hoặc pipeline mặc định.
+
 ## File deliverable chính
 
 - Code: `src/rag_hcmute/{ingestion,retrieval,evaluation}/`, `scripts/*.py`.
