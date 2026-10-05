@@ -29,6 +29,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--method", choices=("bm25", "dense", "both"), default="both")
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument(
+        "--dense-model",
+        default=None,
+        help="Optional local model directory or Hugging Face model ID for Dense Retrieval.",
+    )
+    parser.add_argument(
         "--allow-model-download",
         action="store_true",
         help="Allow Hugging Face to access the network if BGE-M3 is not cached.",
@@ -65,7 +70,7 @@ def _candidate_targets(mapping: dict[str, str], variant: str) -> list[str]:
     return [value for value in mapping["t2_candidate_chunk_ids"].split(";") if value]
 
 
-def _build_retriever(method: str, chunks: list[Chunk]):
+def _build_retriever(method: str, chunks: list[Chunk], dense_model: str | None):
     if method == "bm25":
         return BM25Retriever(chunks), {"name": "BM25Okapi"}
 
@@ -77,18 +82,19 @@ def _build_retriever(method: str, chunks: list[Chunk]):
         NORMALIZATION,
     )
 
+    model_name = dense_model or DEFAULT_MODEL_NAME
     try:
-        retriever = DenseRetriever(chunks, model_name=DEFAULT_MODEL_NAME)
+        retriever = DenseRetriever(chunks, model_name=model_name)
     except DenseRetrievalUnavailable as error:
         return None, {
             "name": "BGE-M3 + FAISS IndexFlatIP",
-            "model": DEFAULT_MODEL_NAME,
+            "model": model_name,
             "status": "unavailable",
             "reason": str(error),
         }
     return retriever, {
         "name": "BGE-M3 + FAISS IndexFlatIP",
-        "model": DEFAULT_MODEL_NAME,
+        "model": model_name,
         "normalization": NORMALIZATION,
         "max_seq_length": MAX_SEQ_LENGTH,
         "device": str(retriever._model.device),
@@ -142,7 +148,7 @@ def main() -> int:
     for method in methods:
         method_report = {"method": method, "status": "complete", "variants": []}
         for variant, chunks in corpora.items():
-            retriever, config = _build_retriever(method, chunks)
+            retriever, config = _build_retriever(method, chunks, args.dense_model)
             if retriever is None:
                 method_report["status"] = "unavailable"
                 method_report["unavailable_config"] = config

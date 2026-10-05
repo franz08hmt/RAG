@@ -1,8 +1,8 @@
 # Bàn giao mốc 1 (4 tuần đầu) — RAG HCMUTE PoC
 
 Ngày viết: 24/09/2026, cập nhật 25/09/2026 (kết quả Dense Retrieval thật + gộp báo cáo). Branch:
-`claude/nifty-dirac-h6u5b6`. Xem `git log` trên nhánh này cho commit cụ thể của đợt bàn giao (commit
-ngay sau file này).
+`claude/nifty-dirac-h6u5b6`. Nhánh tiếp tục triển khai hiện tại là `tim-hieu-rag-dot2`; xem `git log`
+để biết commit mới nhất.
 
 ## Corpus snapshot dùng cho mọi số liệu trong báo cáo
 
@@ -68,6 +68,14 @@ python tests/run_smoke_tests.py
 8. Hybrid retrieval (RRF), reranker, refusal guard đã hiệu chỉnh (cho cả điểm BM25 lẫn cosine Dense),
    generation (LLM), API và giao diện: **hoàn toàn chưa triển khai**, đúng phạm vi đã khai báo cho
    mốc 1.
+
+## Cập nhật tiếp nối — 05/10/2026
+
+- Bảng 5 ở `HCMUTE_QCDT_1727_2021` PDF page 20 (số in page 19) được kiểm tra trực quan và khớp SHA-256 trong manifest. Có 5 câu hỏi bảng nháp TB001–TB005 cùng mapping B0/T1/T2; phiếu cách diễn đạt/đáp án đề xuất ở `data/question_sets/table_question_review_proposals_20261003.csv` vẫn cần người học xác nhận, chưa phải gold.
+- Smoke test BM25 và Dense top-5 đã chạy trên B0 (156 chunks), T1 (1 chunk) và T2 (5 row chunks), chỉ báo thứ hạng từng câu, không tính metric. Tóm tắt: `docs/evidence/TABLE_RETRIEVAL_SMOKE_20261005.md`; đầu ra JSON đầy đủ trong `artifacts/results/table_retrieval_smoke/` (Git-ignored).
+- BGE-M3 nằm ngoài repo tại `D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181`; truyền đường dẫn local cho `scripts/smoke_table_candidate_retrieval.py --dense-model ...` để tránh tải lại. Đã xác nhận CUDA hoạt động; không gọi API.
+- **Chưa chạy benchmark bảng** cho tới khi người học xác nhận/sửa câu hỏi, đáp án chấp nhận và hàng/cột nguồn. Không đưa câu nháp vào pilot, chưa thay đổi pipeline mặc định.
+- Báo cáo DOCX mốc 1 chưa được cập nhật trong bước này vì mốc vẫn đang rà soát; cập nhật khi nội dung/minh chứng được chốt. Tiếp tục làm local trên `tim-hieu-rag-dot2`; không push, merge hoặc đụng PR #2.
 
 ## File deliverable chính
 

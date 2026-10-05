@@ -73,7 +73,7 @@ Không cần điền `chunk_id` trước khi snapshot T1/T2 tồn tại. Một c
 
 Sidecar T1/T2 của Bảng 5 đã được tạo riêng sau khi kiểm tra hash và đối chiếu bảng với trang PDF. Pilot hiện tại không có câu hỏi cần tra giá trị từ bảng này, vì vậy chưa đủ gold evidence để chạy ablation có ý nghĩa. Sau khi người học viết/duyệt câu hỏi và xác minh trang, hàng, ô cần thiết, chạy cùng retriever trên B0/T1/T2, lưu cấu hình và kết quả từng câu. Chỉ cân nhắc tích hợp một biểu diễn vào pipeline chính nếu bằng chứng đo được đủ rõ và không làm mất khả năng truy nguyên nguồn.
 
-Ngày 03/10/2026 đã chạy smoke test BM25 top-5 cho năm câu nháp trên B0/T1/T2 để kiểm tra luồng truy xuất và mapping. Đây chỉ là thứ hạng từng câu, không tính metric và không thay thế bước người học xác minh gold. Dense chưa chạy vì BGE-M3 không có trong cache local khi đặt Hugging Face offline; xem `TABLE_RETRIEVAL_SMOKE_20261003.md`.
+Ngày 03/10/2026 đã chạy smoke test BM25; ngày 05/10/2026 tiếp tục chạy cả BM25 và Dense top-5 cho năm câu nháp trên B0/T1/T2. BGE-M3 được nạp từ snapshot local bằng đường dẫn trực tiếp, chạy trên CUDA và không tải lại. Đây chỉ là thứ hạng từng câu, không tính metric và không thay thế bước người học xác minh gold; xem `TABLE_RETRIEVAL_SMOKE_20261003.md` và `TABLE_RETRIEVAL_SMOKE_20261005.md`.
 
 ## Giới hạn hiện tại
 

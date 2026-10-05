@@ -119,3 +119,10 @@
 - Xác minh SHA-256 của `data/raw/HCMUTE_QCDT_1727_2021.pdf` khớp manifest (`71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaa`); render và kiểm tra trực quan PDF trang 20 (số in 19), Bảng 5.
 - Tạo `data/question_sets/table_question_review_proposals_20261003.csv` với câu chữ gợi ý, đáp án đề xuất, hàng nguồn và lưu ý chấp nhận. Sửa đề xuất TB002 để hỏi khoảng đầy đủ; TB005 yêu cầu hai hàng liền nhau.
 - Tất cả giữ trạng thái `proposal_requires_student_review`; chưa sửa pilot/gold, không chạy metric và chưa cập nhật DOCX vì Mốc 1 chưa chốt.
+
+## 2026-10-05 — Chạy Dense smoke test từ BGE-M3 local
+
+- Tìm thấy snapshot BGE-M3 tại `D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181`. Lý do model ID không được nhận diện là cache local không được phân giải trong môi trường hiện tại; truyền đường dẫn snapshot trực tiếp đã hoạt động.
+- Xác nhận trong env `rag-hcmute`: `torch.cuda.is_available() == True`, model nạp trên `cuda:0`, embedding dimension 1024. Không tải model hoặc gọi API.
+- Thêm tham số `--dense-model` vào smoke-test script và chạy lại BM25/Dense trên B0/T1/T2. Kết quả từng câu ở `docs/evidence/TABLE_RETRIEVAL_SMOKE_20261005.md`; JSON đầy đủ trong `artifacts/results/` (Git-ignored).
+- Kết quả vẫn chỉ là thăm dò: câu hỏi và gold chưa được người học xác nhận, không tính metric, không sửa pilot/pipeline mặc định và chưa cập nhật DOCX mốc 1.

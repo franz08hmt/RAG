@@ -25,8 +25,12 @@
 
 Các vị trí là thứ hạng của chunk được đề xuất trong mapping nháp, không phải nhãn gold đã duyệt. Kết quả cho thấy BM25 có thể tìm thấy các chunk mục tiêu trong top-5 cho cả năm truy vấn ở ba biến thể trong lượt chạy này. Không thể kết luận T1 tốt hơn B0 hoặc T2: số lượng chunk giữa các biến thể rất khác nhau (156, 1 và 5), và câu hỏi/nhãn tham chiếu chưa được người học xác nhận. Riêng T1 chỉ có một chunk nên hạng #1 là hệ quả của kích thước tập ứng viên, không phải bằng chứng về chất lượng vượt trội.
 
-## Giới hạn và trạng thái Dense
+## Giới hạn và trạng thái Dense trong lượt chạy 03/10
 
 Dense BGE-M3 chưa chạy được trong lượt này. Để tránh phát sinh tải mạng ngoài dự kiến, smoke test được chạy với Hugging Face offline; môi trường Python `rag-hcmute` không tìm thấy model trong cache cục bộ. Vì vậy không có kết quả Dense để đối chiếu, không có phép so sánh BM25–Dense và không phát sinh API call.
 
 Kết quả hiện tại chỉ dùng để rà lệnh và phát hiện điểm cần xem lại (TB001 và TB004 có chunk T2 ở hạng thấp hơn). Bước tiếp theo là người học xác nhận câu hỏi, câu trả lời chấp nhận được và vị trí hàng/cột trên PDF; sau đó mới khóa gold annotation và chạy ablation có metric. Trước khi chạy Dense, cần xác định cache BGE-M3 hiện có hoặc chuẩn bị tải trọng số vào đúng môi trường.
+
+## Cập nhật sau đó — 05/10/2026
+
+Đã tìm thấy snapshot BGE-M3 local nhưng cache không được thư viện nhận diện qua model ID. Nạp trực tiếp từ thư mục snapshot thành công, xác nhận CUDA và chạy Dense cho B0/T1/T2 mà không truy cập mạng. Kết quả mới được ghi riêng tại [`TABLE_RETRIEVAL_SMOKE_20261005.md`](TABLE_RETRIEVAL_SMOKE_20261005.md); phần trên vẫn lưu trạng thái đúng của lượt chạy ngày 03/10.
