@@ -1,0 +1,16 @@
+question_id,variant,expected_chunk_ids,required_evidence_units,source_document_id,source_pdf_page,table_id,source_rows,source_columns,source_snapshot_id,mapping_status
+TB001,B0,HCMUTE_QCDT_1727_2021__c0031,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,3,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB001,T1,HCMUTE_QCDT_1727_2021__pdf020_table02__markdown,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,3,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB001,T2,HCMUTE_QCDT_1727_2021__pdf020_table02__row003,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,3,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB002,B0,HCMUTE_QCDT_1727_2021__c0031,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,2,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB002,T1,HCMUTE_QCDT_1727_2021__pdf020_table02__markdown,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,2,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB002,T2,HCMUTE_QCDT_1727_2021__pdf020_table02__row002,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,2,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB003,B0,HCMUTE_QCDT_1727_2021__c0031,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,4,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB003,T1,HCMUTE_QCDT_1727_2021__pdf020_table02__markdown,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,4,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB003,T2,HCMUTE_QCDT_1727_2021__pdf020_table02__row004,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,4,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB004,B0,HCMUTE_QCDT_1727_2021__c0031,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,5,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB004,T1,HCMUTE_QCDT_1727_2021__pdf020_table02__markdown,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,5,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB004,T2,HCMUTE_QCDT_1727_2021__pdf020_table02__row005,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,5,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB005,B0,HCMUTE_QCDT_1727_2021__c0031,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,2;3,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB005,T1,HCMUTE_QCDT_1727_2021__pdf020_table02__markdown,1,HCMUTE_QCDT_1727_2021,20,pdf020_table02,2;3,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
+TB005,T2,"HCMUTE_QCDT_1727_2021__pdf020_table02__row002;HCMUTE_QCDT_1727_2021__pdf020_table02__row003",2,HCMUTE_QCDT_1727_2021,20,pdf020_table02,2;3,"Năm đào tạo sinh viên; Tổng số tín chỉ đã tích lũy",5da3bd4d5de54492,approved_for_table_retrieval_ablation
