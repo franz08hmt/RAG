@@ -1,5 +1,7 @@
 # Thăm dò truy xuất câu hỏi bảng — 05/10/2026
 
+> Đây là lượt **table-only** ban đầu, trong đó T1 chỉ có 1 chunk và T2 chỉ có 5 chunk. Các thứ hạng không so sánh công bằng với B0 có 156 chunk. Lượt ghép corpus nền sau đó được ghi riêng tại [`TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`](TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md); dùng lượt mới đó cho phân tích so sánh.
+
 ## Phạm vi
 
 Đây là lượt chạy thăm dò tiếp nối smoke test ngày 03/10. Năm câu TB001–TB005 và mapping chunk vẫn đang là bản nháp; mục tiêu chỉ là xem thứ hạng các chunk được đề xuất ở B0/T1/T2, không đánh giá câu trả lời do LLM sinh và không tính metric tổng hợp.

@@ -73,7 +73,7 @@ Không cần điền `chunk_id` trước khi snapshot T1/T2 tồn tại. Một c
 
 Sidecar T1/T2 của Bảng 5 đã được tạo riêng sau khi kiểm tra hash và đối chiếu bảng với trang PDF. Pilot hiện tại không có câu hỏi cần tra giá trị từ bảng này, vì vậy chưa đủ gold evidence để chạy ablation có ý nghĩa. Sau khi người học viết/duyệt câu hỏi và xác minh trang, hàng, ô cần thiết, chạy cùng retriever trên B0/T1/T2, lưu cấu hình và kết quả từng câu. Chỉ cân nhắc tích hợp một biểu diễn vào pipeline chính nếu bằng chứng đo được đủ rõ và không làm mất khả năng truy nguyên nguồn.
 
-Ngày 03/10/2026 đã chạy smoke test BM25; ngày 05/10/2026 tiếp tục chạy cả BM25 và Dense top-5 cho năm câu nháp trên B0/T1/T2. BGE-M3 được nạp từ snapshot local bằng đường dẫn trực tiếp, chạy trên CUDA và không tải lại. Đây chỉ là thứ hạng từng câu, không tính metric và không thay thế bước người học xác minh gold; xem `TABLE_RETRIEVAL_SMOKE_20261003.md` và `TABLE_RETRIEVAL_SMOKE_20261005.md`.
+Ngày 03/10 và lượt đầu ngày 05/10 chạy table-only; do corpus T1/T2 nhỏ hơn nhiều B0, không dùng các hạng đó để so sánh. Lượt tiếp theo ngày 05/10 giữ lại 155 chunk nền không chứa phần dữ liệu Bảng 5, thay riêng phần bảng trong c0031 bằng phần dư chung + T1 hoặc T2. Corpus có 156/157/161 chunk tương ứng B0/T1/T2. BM25 và Dense top-5 chạy trên cả ba; BGE-M3 được nạp từ snapshot local bằng đường dẫn trực tiếp, chạy CUDA, không tải lại. Đây vẫn chỉ là thứ hạng từng câu, không tính metric và không thay thế bước người học xác minh gold; xem `TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`.
 
 ## Giới hạn hiện tại
 

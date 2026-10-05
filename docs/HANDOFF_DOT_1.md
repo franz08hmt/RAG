@@ -72,7 +72,7 @@ python tests/run_smoke_tests.py
 ## Cập nhật tiếp nối — 05/10/2026
 
 - Bảng 5 ở `HCMUTE_QCDT_1727_2021` PDF page 20 (số in page 19) được kiểm tra trực quan và khớp SHA-256 trong manifest. Có 5 câu hỏi bảng nháp TB001–TB005 cùng mapping B0/T1/T2; phiếu cách diễn đạt/đáp án đề xuất ở `data/question_sets/table_question_review_proposals_20261003.csv` vẫn cần người học xác nhận, chưa phải gold.
-- Smoke test BM25 và Dense top-5 đã chạy trên B0 (156 chunks), T1 (1 chunk) và T2 (5 row chunks), chỉ báo thứ hạng từng câu, không tính metric. Tóm tắt: `docs/evidence/TABLE_RETRIEVAL_SMOKE_20261005.md`; đầu ra JSON đầy đủ trong `artifacts/results/table_retrieval_smoke/` (Git-ignored).
+- Lượt table-only BM25/Dense top-5 ban đầu (T1=1, T2=5 chunk) chỉ là debug; không so trực tiếp với B0=156. Lượt sau giữ corpus nền và thay riêng nội dung Bảng 5, tạo B0/T1/T2 lần lượt 156/157/161 chunk; xem `docs/evidence/TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`. Cả hai chỉ báo thứ hạng từng câu, không tính metric.
 - BGE-M3 nằm ngoài repo tại `D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181`; truyền đường dẫn local cho `scripts/smoke_table_candidate_retrieval.py --dense-model ...` để tránh tải lại. Đã xác nhận CUDA hoạt động; không gọi API.
 - **Chưa chạy benchmark bảng** cho tới khi người học xác nhận/sửa câu hỏi, đáp án chấp nhận và hàng/cột nguồn. Không đưa câu nháp vào pilot, chưa thay đổi pipeline mặc định.
 - Báo cáo DOCX mốc 1 chưa được cập nhật trong bước này vì mốc vẫn đang rà soát; cập nhật khi nội dung/minh chứng được chốt. Tiếp tục làm local trên `tim-hieu-rag-dot2`; không push, merge hoặc đụng PR #2.

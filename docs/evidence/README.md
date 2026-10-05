@@ -24,4 +24,5 @@ Các lượt thử OCR hiện có:
 - [`data/question_sets/table_question_review_proposals_20261003.csv`](../../data/question_sets/table_question_review_proposals_20261003.csv): đáp án/bằng chứng và cách diễn đạt đề xuất cho TB001–TB005 sau khi đối chiếu trực quan Bảng 5; cần người học duyệt, chưa phải gold.
 - `TABLE_RETRIEVAL_SMOKE_20261003.md`: ghi nhận lượt thăm dò BM25 ngày 03/10 và diễn biến Dense được khôi phục sau đó.
 - `TABLE_RETRIEVAL_SMOKE_20261005.md`: kết quả thăm dò BM25/Dense top-5 cho câu hỏi nháp trên B0/T1/T2; không phải benchmark và không chứa metric tổng hợp.
+- `TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`: lượt thăm dò có cùng corpus nền, chỉ thay cách biểu diễn Bảng 5; đây là kết quả phù hợp hơn để đọc thứ hạng, nhưng vẫn chưa phải benchmark vì câu hỏi/nhãn đang ở trạng thái nháp.
 

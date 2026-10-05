@@ -126,3 +126,10 @@
 - Xác nhận trong env `rag-hcmute`: `torch.cuda.is_available() == True`, model nạp trên `cuda:0`, embedding dimension 1024. Không tải model hoặc gọi API.
 - Thêm tham số `--dense-model` vào smoke-test script và chạy lại BM25/Dense trên B0/T1/T2. Kết quả từng câu ở `docs/evidence/TABLE_RETRIEVAL_SMOKE_20261005.md`; JSON đầy đủ trong `artifacts/results/` (Git-ignored).
 - Kết quả vẫn chỉ là thăm dò: câu hỏi và gold chưa được người học xác nhận, không tính metric, không sửa pilot/pipeline mặc định và chưa cập nhật DOCX mốc 1.
+
+## 2026-10-05 — Sửa thiết kế so sánh table retrieval
+
+- Phát hiện lượt table-only so sánh corpus không cân đối (B0=156, T1=1, T2=5 chunks), nên hạng #1 của T1 không có ý nghĩa so sánh. Giữ lượt đó như smoke test ban đầu, không dùng làm kết luận.
+- Cập nhật smoke script để giữ 155 chunk nền và chỉ tách phần Bảng 5 khỏi B0 `c0031`, bảo toàn nội dung trước bảng trong một chunk phần dư, rồi thay phần bảng bằng T1 hoặc năm hàng T2. Corpus kết quả: B0=156, T1=157, T2=161.
+- Chạy lại BM25 và Dense BGE-M3 local top-5. Kết quả có thứ hạng từng câu tại `docs/evidence/TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`, JSON Git-ignored. Không tính metric vì câu hỏi/gold vẫn chưa được người học xác nhận.
+- Không đổi default pipeline, không đưa câu nháp vào pilot/gold; DOCX mốc 1 chưa cập nhật.
