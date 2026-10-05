@@ -1,6 +1,6 @@
 # Thăm dò truy xuất câu hỏi bảng — 05/10/2026
 
-> Đây là lượt **table-only** ban đầu, trong đó T1 chỉ có 1 chunk và T2 chỉ có 5 chunk. Các thứ hạng không so sánh công bằng với B0 có 156 chunk. Lượt ghép corpus nền sau đó được ghi riêng tại [`TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`](TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md); dùng lượt mới đó cho phân tích so sánh.
+> Đây là lượt **table-only** ban đầu, trong đó T1 chỉ có 1 chunk và T2 chỉ có 5 chunk. Các thứ hạng không so sánh công bằng với B0 có 156 chunk. Lượt ghép corpus nền dùng câu nháp được ghi tại [`TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`](TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md). Kết quả với bộ câu hỏi đã duyệt nằm ở [`TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`](TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md).
 
 ## Phạm vi
 

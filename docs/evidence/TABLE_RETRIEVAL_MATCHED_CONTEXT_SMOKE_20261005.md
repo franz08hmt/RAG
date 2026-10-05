@@ -1,5 +1,7 @@
 # Thăm dò truy xuất bảng với corpus nền tương đương — 05/10/2026
 
+> Lượt này dùng câu hỏi và mapping khi chúng còn ở trạng thái nháp. Kết quả thay thế với bộ câu hỏi/evidence đã được duyệt được ghi tại [`TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`](TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md).
+
 ## Vì sao cần lượt chạy này
 
 Lượt table-only ban đầu so B0 trên 156 chunk với T1 trên 1 chunk và T2 trên 5 chunk. Vì tập ứng viên khác kích thước, thứ hạng đó không phải so sánh retrieval công bằng. Lượt này giữ cùng phần nền corpus và chỉ thay cách biểu diễn Bảng 5 trong chunk B0 chứa bảng.

@@ -133,3 +133,11 @@
 - Cập nhật smoke script để giữ 155 chunk nền và chỉ tách phần Bảng 5 khỏi B0 `c0031`, bảo toàn nội dung trước bảng trong một chunk phần dư, rồi thay phần bảng bằng T1 hoặc năm hàng T2. Corpus kết quả: B0=156, T1=157, T2=161.
 - Chạy lại BM25 và Dense BGE-M3 local top-5. Kết quả có thứ hạng từng câu tại `docs/evidence/TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`, JSON Git-ignored. Không tính metric vì câu hỏi/gold vẫn chưa được người học xác nhận.
 - Không đổi default pipeline, không đưa câu nháp vào pilot/gold; DOCX mốc 1 chưa cập nhật.
+
+## 2026-10-05 — Ablation retrieval với câu hỏi Bảng 5 đã duyệt
+
+- Người học chấp thuận năm câu TB001–TB005 và đáp án/bằng chứng đề xuất để dùng trong ablation riêng trên QĐ 1727/2021. Đóng băng thành hai file versioned trong `data/question_sets/`; không sửa `pilot_questions.csv` và không khẳng định QĐ 1727 là quy định hiện hành.
+- Tạo `src/rag_hcmute/evaluation/table_ablation.py` để dựng corpus matched-background và tính đủ-evidence Hit@5, coverage đơn vị evidence, MRR evidence đầu tiên. TB005 yêu cầu đủ hai hàng T2.
+- Thêm `scripts/evaluate_table_ablation.py`; chạy BM25 và BGE-M3/FAISS local trên CUDA, `top_k=5`, snapshot G0 `5da3bd4d5de54492`, không gọi API. Raw JSON Git-ignored: `artifacts/results/table_retrieval_ablation/table_ablation_both_20261005T114541Z.json`.
+- Kết quả đủ evidence Hit@5: BM25 B0/T1/T2 = 4/5, 1/5, 0/5; Dense = 5/5 ở cả ba. Dense MRR evidence đầu tiên @5 = 0,600/1,000/0,867. Đây chỉ là ablation trên năm câu; không đổi retrieval mặc định, không gộp thành benchmark chung.
+- `pytest`: 51 passed; smoke tests: 2/2 passed (temp directory được chuyển vào workspace theo giới hạn sandbox). Ghi chi tiết kết quả tại `docs/evidence/TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`. Chưa cập nhật DOCX mốc 1 do mốc chưa đóng.

@@ -31,20 +31,20 @@ Lệnh tạo một chunk T1 và năm chunk T2 tại `artifacts/results/table_var
 2. Ghim cấu hình retrieval (BM25 hoặc dense), `top_k`, tokenizer/model embedding và các tham số còn lại trong từng lượt chạy; không thay nhiều yếu tố cùng lúc.
 3. Đối chiếu gold evidence theo vị trí ổn định trong tài liệu gốc — mã tài liệu, số trang PDF, mã bảng nếu có, hàng/nhóm hàng và ô liên quan. Sau khi tạo từng snapshot, ánh xạ vị trí này sang `chunk_id` riêng của B0, T1 và T2.
 4. Chạy retrieval trước, chưa đưa generation vào phép so sánh. Ghi lại thứ hạng và nội dung bằng chứng để có thể kiểm tra thủ công.
-5. Báo cáo Hit@5 và MRR@10 theo cách bộ đánh giá hiện tại tính; kèm số câu có gold evidence và nêu rõ câu nào chưa thể gán gold. Không dùng kết quả của mẫu nhỏ để kết luận cách biểu diễn tốt hơn trong mọi loại bảng.
+5. Chọn metric theo cấu trúc nhãn và ghi đúng tên. Với câu cần nhiều bằng chứng, tách `Complete Evidence Hit@k` khỏi `Evidence Coverage@k`; MRR của chunk bằng chứng đầu tiên không có nghĩa mọi bằng chứng đã được tìm thấy. Không gọi tỷ lệ câu có ít nhất một chunk liên quan là `Recall@k` chuẩn.
 6. Nếu một bảng không thể xác định chắc cấu trúc hàng/cột bằng trích xuất tự động, đánh dấu cần kiểm tra thủ công hoặc loại khỏi lượt đo; không biến đầu ra heuristic thành ground truth.
 
-## Phiếu câu hỏi cần người học tự điền
+## Bộ câu hỏi đã duyệt cho ablation Bảng 5
 
-Nên bắt đầu với khoảng 5–10 câu hỏi có thể trả lời trực tiếp từ một hoặc một vài bảng đã kiểm tra. Chọn câu hỏi cần tra cứu giá trị, điều kiện, nhóm hàng hoặc đối chiếu cột; tránh chỉ hỏi nội dung đã có nguyên văn ở phần văn bản thường. Mỗi câu phải có vị trí bằng chứng đủ cụ thể để người khác mở PDF và xác minh.
+Ngày 05/10/2026, năm câu TB001–TB005 được duyệt cho phép ablation retrieval riêng trên Bảng 5 của QĐ 1727/2021. Câu hỏi, đáp án chấp nhận và phạm vi nguồn được đóng băng tại [`table_questions_reviewed_ablation_20261005.csv`](../../data/question_sets/table_questions_reviewed_ablation_20261005.csv). Trạng thái này chỉ cho phép dùng trong ablation bảng; không đồng nghĩa với việc nhập câu hỏi vào pilot hay xác nhận QĐ 1727 là quy định hiện hành.
 
-Đã chuẩn bị 5 câu **ứng viên nháp** cho Bảng 5 tại [`data/question_sets/table_question_candidates_for_student_review.csv`](../../data/question_sets/table_question_candidates_for_student_review.csv). Đây chỉ là gợi ý để người học đối chiếu và tự sửa/xác nhận, không phải câu hỏi đã duyệt; không đưa vào pilot hoặc chạy metric trước khi xác minh vị trí hàng/cột trên PDF.
+Ánh xạ evidence theo biến thể nằm trong [`table_question_variant_evidence_20261005.csv`](../../data/question_sets/table_question_variant_evidence_20261005.csv). TB001 cần hàng 3; TB002 hàng 2; TB003 hàng 4; TB004 hàng 5; TB005 cần đồng thời hàng 2 và 3 ở T2. Tất cả vị trí đều được đối chiếu với PDF page 20 (số in 19), Bảng 5.
 
-Ánh xạ chunk ứng viên B0/T1/T2 được chuẩn bị riêng tại [`data/question_sets/table_candidate_chunk_mapping.csv`](../../data/question_sets/table_candidate_chunk_mapping.csv). Đây là ánh xạ đề xuất theo snapshot G0 và sidecar table variants; chưa phải gold annotation cho tới khi người học xác nhận câu hỏi và hàng/cột nguồn.
+Các file [`table_question_candidates_for_student_review.csv`](../../data/question_sets/table_question_candidates_for_student_review.csv), [`table_candidate_chunk_mapping.csv`](../../data/question_sets/table_candidate_chunk_mapping.csv) và [`table_question_review_proposals_20261003.csv`](../../data/question_sets/table_question_review_proposals_20261003.csv) được giữ nguyên làm lịch sử nháp. Chúng không phải input của ablation đã duyệt.
 
-Phiếu đối chiếu câu hỏi, đáp án và trích đoạn hàng nguồn đã kiểm tra trực quan được lưu tại [`data/question_sets/table_question_review_proposals_20261003.csv`](../../data/question_sets/table_question_review_proposals_20261003.csv). PDF trang 20 (số trang in 19) xác nhận các dải `< 36`, `36 – 71`, `72 – 107`, `108 – 149`, `> 149`; đáp án suy ra từ khoảng (đặc biệt TB001 và TB005) vẫn cần người học duyệt. Trạng thái của cả năm câu còn là `proposal_requires_student_review`.
+Kết quả ablation retrieval đã chạy được ghi tại [`TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`](TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md). BM25 và Dense được so trên corpus nền tương đương, không đưa generation vào và không thay đổi retrieval mặc định.
 
-Sao chép khối dưới đây cho mỗi câu hỏi. Chưa đưa các câu đang để trống vào bộ đánh giá hoặc chạy script.
+Mẫu dưới đây chỉ dành cho câu hỏi mới ở các lượt mở rộng; năm câu TB001–TB005 hiện tại đã được lưu riêng và đã chạy ablation.
 
 ```text
 question_id:
@@ -61,23 +61,17 @@ review_status:                    draft | verified
 notes:
 ```
 
-### Ánh xạ bằng chứng sau khi tạo từng biểu diễn
+Với một câu hỏi mới, nếu đáp án cần nhiều hàng hoặc nhiều bảng thì ghi đủ các đơn vị bằng chứng. Ánh xạ cho phép thử hiện tại đã được ghi theo từng biến thể trong [`table_question_variant_evidence_20261005.csv`](../../data/question_sets/table_question_variant_evidence_20261005.csv); không dùng mẫu trống phía trên để thay nhãn đã duyệt.
 
-| Câu hỏi | Vị trí gold trong PDF (trang/bảng/hàng) | B0 chunk ID | T1 chunk ID | T2 chunk ID | Đã đối chiếu PDF? |
-|---|---|---|---|---|---|
-|  |  |  |  |  |  |
+## Kết quả ablation retrieval hiện tại
 
-Không cần điền `chunk_id` trước khi snapshot T1/T2 tồn tại. Một câu có thể cần nhiều gold chunk nếu đáp án phụ thuộc vào nhiều hàng hoặc nhiều bảng; ghi đầy đủ các bằng chứng đó thay vì chọn một chunk gần đúng.
+Ngày 05/10, phép thử B0/T1/T2 chạy với BM25 và Dense top-5 trên năm câu đã duyệt. Kết quả đầy đủ, định nghĩa metric và giới hạn diễn giải nằm trong [`TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`](TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md). Đây là ablation giới hạn theo một bảng, không phải lựa chọn cấu hình mặc định.
 
-## Khi nào mới chuyển sang ablation retrieval
-
-Sidecar T1/T2 của Bảng 5 đã được tạo riêng sau khi kiểm tra hash và đối chiếu bảng với trang PDF. Pilot hiện tại không có câu hỏi cần tra giá trị từ bảng này, vì vậy chưa đủ gold evidence để chạy ablation có ý nghĩa. Sau khi người học viết/duyệt câu hỏi và xác minh trang, hàng, ô cần thiết, chạy cùng retriever trên B0/T1/T2, lưu cấu hình và kết quả từng câu. Chỉ cân nhắc tích hợp một biểu diễn vào pipeline chính nếu bằng chứng đo được đủ rõ và không làm mất khả năng truy nguyên nguồn.
-
-Ngày 03/10 và lượt đầu ngày 05/10 chạy table-only; do corpus T1/T2 nhỏ hơn nhiều B0, không dùng các hạng đó để so sánh. Lượt tiếp theo ngày 05/10 giữ lại 155 chunk nền không chứa phần dữ liệu Bảng 5, thay riêng phần bảng trong c0031 bằng phần dư chung + T1 hoặc T2. Corpus có 156/157/161 chunk tương ứng B0/T1/T2. BM25 và Dense top-5 chạy trên cả ba; BGE-M3 được nạp từ snapshot local bằng đường dẫn trực tiếp, chạy CUDA, không tải lại. Đây vẫn chỉ là thứ hạng từng câu, không tính metric và không thay thế bước người học xác minh gold; xem `TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`.
+Hai lượt table-only ngày 03/10 và 05/10 không cân đối kích thước corpus nên chỉ giữ làm đầu mối lịch sử. Lượt matched-background ngày 05/10 có 156/157/161 chunk tương ứng B0/T1/T2. Kết quả đầu tiên trên câu nháp vẫn lưu riêng tại [`TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md`](TABLE_RETRIEVAL_MATCHED_CONTEXT_SMOKE_20261005.md).
 
 ## Giới hạn hiện tại
 
-- Chưa có bộ câu hỏi bảng được người học xác nhận; phiếu này không chứa câu hỏi hay gold answer dựng sẵn.
-- Sidecar T1/T2 hiện chỉ được dùng trong smoke test truy xuất; table chunks chưa tham gia retrieval mặc định và chưa có metric benchmark.
+- Bộ câu hỏi Bảng 5 đã được duyệt cho ablation riêng, nhưng chưa được nhập vào pilot chung; chưa đánh giá generation, citation correctness hoặc refusal.
+- Sidecar T1/T2 hiện chỉ dùng trong ablation retrieval; chưa tham gia retrieval mặc định.
 - Một bảng phân cấp khác ở Quy chế 1727 (PDF page 3, 14×5 theo PyMuPDF) còn ô nhóm/ô gộp chưa giải quyết; không dùng bảng đó cho phép thử hiện tại.
 - Chỉ dùng tài liệu thuộc corpus HCMUTE đã cho phép. Bỏ qua vùng chứa dữ liệu cá nhân; không gửi PDF, trích đoạn nhạy cảm hoặc câu hỏi có PII lên dịch vụ cloud.
