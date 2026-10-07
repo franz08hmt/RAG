@@ -177,3 +177,11 @@
 - Audit độc lập YC4/YC13 trên tài liệu Markdown: bằng chứng đủ để nói đã khảo sát và thử cục bộ một phần đầu vào, chưa đủ đóng YC4/YC13. Các giới hạn còn lại là tổng quát hóa theo lớp/layout, xử lý bảng nhiều cấu trúc, diễn giải hình/sơ đồ và khảo sát sâu các giai đoạn còn lại của RAG.
 - Đồng bộ G1: làm rõ OCR chỉ được bật tùy chọn qua CLI trên snapshot riêng, G0 vẫn native-only; ghi rõ 3 trang là ground truth ban đầu trước khi thêm trang thứ tư; phân biệt 28 detector candidates ban đầu với 20 sau khi bỏ vùng trang danh bạ (không đồng nghĩa xác nhận thủ công). Cập nhật handoff, không cập nhật DOCX vì Mốc 1 chưa chốt.
 - Giữ nguyên OCR default, snapshot G0 và câu hỏi/gold; không gọi API, không push. Test vẫn 53 passed; `compileall` đạt.
+
+## 2026-10-07 — So sánh policy chunk theo cấu trúc với cửa sổ cố định
+
+- Thêm cờ tùy chọn `force_sliding_window` vào `chunk_document()`; mặc định `False` giữ nguyên hành vi cũ. Tạo runner `scripts/run_chunk_strategy_ablation.py`, ghim G0 native-only `5da3bd4d5de54492`, xác minh hash corpus và so sánh policy theo Điều với cửa sổ 500/80 trên tài liệu có cấu trúc. Đơn vị chunk là whitespace token.
+- Đánh giá lại đúng 7 câu answerable/10 span hiện có (6 câu/9 span ở Quy chế 1727; 1 câu/1 span ở Hướng dẫn thực tập; không có câu Sổ tay). Span không nằm trọn trong chunk vẫn ở mẫu số và tính là miss; đồng thời báo page-location proxy riêng, không coi proxy trang là exact evidence.
+- BM25: policy theo Điều bao phủ 10/10 span, exact Recall@5 4/10, complete Hit@5 3/7, page proxy Hit@5 3/7; fixed windows bao phủ 9/10, lần lượt 6/10, 4/7 và 6/7. Dense BGE-M3 local/CUDA: policy theo Điều 10/10, 9/10, 6/7, 7/7; fixed windows 9/10, 8/10, 5/7, 7/7.
+- BM25 và Dense cho thứ hạng khác nhau; fixed windows mất độ phủ một span. Không đổi default hoặc G0; kết quả trên pilot phát triển nhỏ, không phải holdout và chỉ có một tài liệu có cấu trúc cùng sáu câu answerable. Không đánh giá generation hay kết luận tổng quát theo document class.
+- Ghi phương pháp/kết quả/giới hạn ở `docs/evidence/CHUNK_STRATEGY_ABLATION_20261007.md`; JSON metrics-only Git-ignored. Thêm hai kiểm thử cho cờ chunker và một kiểm thử bảo đảm span không được bao phủ tính là miss. `pytest`: 56 passed; `compileall` và `git diff --check` đạt. Không gọi API, không cập nhật DOCX, không push; Mốc 1 vẫn mở.

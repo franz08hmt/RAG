@@ -144,24 +144,31 @@ def chunk_document(
     document_title: str,
     chunk_tokens: int = DEFAULT_CHUNK_TOKENS,
     overlap_tokens: int = DEFAULT_OVERLAP_TOKENS,
+    force_sliding_window: bool = False,
 ) -> list[Chunk]:
+    """Chunk pages with the default section-aware policy or a forced-window baseline.
+
+    ``force_sliding_window`` is intended for controlled experiments. Its default
+    remains false so existing corpus builds keep their current behavior.
+    """
     stream = _build_token_stream(pages)
     if not stream.tokens:
         return []
 
     markers = find_section_markers(pages, tokenize)
-    structured = is_document_structured(markers)
+    structured = is_document_structured(markers) and not force_sliding_window
 
     chunks: list[Chunk] = []
     index = 0
 
     if not structured:
         windows = _sliding_windows(len(stream.tokens), chunk_tokens, overlap_tokens)
+        method = "sliding_window_forced" if force_sliding_window else "sliding_window_fallback"
         for start, end in windows:
             chunks.append(
                 _slice_chunk(
                     document_id, document_title, stream, start, end, index,
-                    section_path=None, chunk_method="sliding_window_fallback",
+                    section_path=None, chunk_method=method,
                 )
             )
             index += 1

@@ -17,6 +17,7 @@ Các lượt thử OCR hiện có:
 - `OCR_PSM_PAGE116_20260928.md`: mở rộng thêm page 116 và tính lại số gộp trên cùng bốn trang. Reference đầy đủ vẫn lưu cục bộ trong thư mục Git-ignored `artifacts/results/`.
 - `CHUNK_SIZE_ABLATION_20260929.md`: so sánh kích thước chunk trên snapshot G0 với nhãn vị trí section/page; có lưu ý proxy labels và truncation của Dense BGE-M3.
 - `CHUNK_SIZE_EXACT_EVIDENCE_20260929.md`: đánh giá chunk size theo exact evidence span; annotation version 2 đã phủ đủ 7 câu answerable/10 span và hash-verified theo snapshot G0.
+- `CHUNK_STRATEGY_ABLATION_20261007.md`: so sánh policy chunk theo Điều với cửa sổ cố định 500/80 bằng BM25 và BGE-M3 trên cùng G0; tính span bị cắt qua ranh giới là miss và tách metric exact evidence khỏi page-location proxy.
 - `QUESTION_CANDIDATE_EXPANSION_20260929.md`: 12 câu hỏi ứng viên để người học tự đối chiếu và duyệt; không thuộc pilot và chưa được dùng tính metric.
 - `QUESTION_CANDIDATE_REVIEW_20260929.md`: rà soát mức độ khớp nguồn, tham chiếu trang, độ trùng và khoảng trống về bảng/scan/hình; không thay đổi ứng viên hay pilot.
 - `TABLE_QUESTION_CANDIDATES_20260929.md`: 5 gợi ý câu hỏi cho ablation B0/T1/T2 trên một bảng đã kiểm tra; chỉ bản nháp, chưa dùng benchmark.

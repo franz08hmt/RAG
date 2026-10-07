@@ -79,6 +79,38 @@ def test_chunks_expose_stable_document_token_intervals(cleaned_pages) -> None:
         assert chunk.token_start >= 0
 
 
+def test_forced_sliding_window_baseline_preserves_full_token_coverage(cleaned_pages) -> None:
+    chunk_tokens = 40
+    chunks = chunk_document(
+        cleaned_pages,
+        "TEST_DOC",
+        "Quy dinh mau kiem thu",
+        chunk_tokens=chunk_tokens,
+        overlap_tokens=8,
+        force_sliding_window=True,
+    )
+    total_tokens = sum(len(tokenize(page.text)) for page in cleaned_pages)
+
+    assert chunks[0].token_start == 0
+    assert chunks[-1].token_end == total_tokens
+    assert all(chunk.section_path is None for chunk in chunks)
+    assert all(chunk.chunk_method == "sliding_window_forced" for chunk in chunks)
+
+
+def test_explicit_default_chunking_policy_matches_existing_behavior(cleaned_pages) -> None:
+    default_chunks = chunk_document(cleaned_pages, "TEST_DOC", "Quy dinh mau kiem thu")
+    explicit_chunks = chunk_document(
+        cleaned_pages,
+        "TEST_DOC",
+        "Quy dinh mau kiem thu",
+        force_sliding_window=False,
+    )
+
+    assert [(chunk.chunk_id, chunk.text_sha256) for chunk in default_chunks] == [
+        (chunk.chunk_id, chunk.text_sha256) for chunk in explicit_chunks
+    ]
+
+
 def test_dieu_boundaries_are_preserved_as_single_chunks_when_short(chunks) -> None:
     section_paths = {c.section_path for c in chunks if c.section_path}
     assert "Chương I > Điều 1" in section_paths
