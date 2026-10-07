@@ -215,3 +215,10 @@
 - Top-20 BM25 chứa 7/10 span và đủ toàn bộ evidence ở 5/7 câu; Dense BGE-M3 và RRF đều chứa 10/10 span, đủ ở 7/7 câu. Kết quả này chỉ cho thấy evidence có mặt trong candidate pool; chưa đo reranker và không chứng minh thứ hạng sau reranking.
 - Pilot nhỏ vẫn là dữ liệu phát triển, không phải holdout độc lập; không đổi mặc định hay chọn reranker. Báo cáo chi tiết tại `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`; raw JSON chỉ chứa metric và mã định danh, Git-ignored.
 - Thêm hai test cho cutoff candidate; toàn bộ pytest 76 passed, `compileall` và `git diff --check` đạt. Mốc 1 vẫn mở, chưa cập nhật DOCX/chuyển Mốc 2; không tải/cài thêm model/gói, không push/merge/PR.
+
+## 2026-10-07 — Chuẩn bị phương án reranker
+
+- Kiểm tra read-only môi trường: ổ D còn khoảng 22,33 GiB; env project dùng Torch 2.14.0+cu126, CUDA khả dụng trên RTX 3060 Laptop GPU 6 GiB; `transformers` và `sentence-transformers` đã có.
+- Đối chiếu model card và tài liệu inference chính thức. Đề xuất đánh giá duy nhất `BAAI/bge-reranker-v2-m3` trước: repo 2,29 GB, trọng số 2,27 GB, license Apache-2.0, model type multilingual cross-encoder. Không suy ra chất lượng tiếng Việt cho HCMUTE nếu chưa đo trên tập câu hỏi có gold.
+- Soạn thiết kế benchmark cặp trước/sau rerank trên cùng Dense Top-20 và RRF Top-20, giữ G0/chunk/query/gold cố định; dự kiến đo exact-evidence Recall@5, Complete-evidence Hit@5, MRR@10, latency và VRAM. Cần thống kê truncation query–chunk vì ví dụ model dùng max length 512.
+- Chưa tải model, không cài package, không gọi API; đề xuất và giới hạn ghi tại `docs/evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`. Cần duyệt riêng trước khi tải; Mốc 1 vẫn mở, chưa cập nhật DOCX/chuyển Mốc 2.
