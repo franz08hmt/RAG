@@ -31,5 +31,5 @@ Các lượt thử OCR hiện có:
 - `INPUT_CLASS_PROCESSING_MATRIX_20261007.md`: ánh xạ từng dạng nội dung sang cách xử lý đang có, minh chứng, giới hạn và phép thử kế tiếp; phân biệt kết quả đo được với đề xuất.
 - `OCR_LAYOUT_LABEL_RECHECK_20261007.md`: rà soát metadata bố cục của page 107 bằng số liệu OCR không chứa nội dung; nhãn làm việc được sửa thành infographic/nội dung thị giác hỗn hợp với độ tin cậy vừa phải.
 - `INPUT_CLASS_SAMPLE_PLAN_20261007.md`: danh sách trang mẫu đề xuất theo input class/layout, căn cứ chọn, trạng thái nhãn, tiêu chí dùng và các kiểm tra quyền riêng tư cần thiết.
-- `OCR_DPI_SENSITIVITY_20261007.md`: so sánh OCR tại 200/300 DPI với PSM 4/11 trên bốn trang có reference; kèm script tái lập và chỉ ghi metrics/configuration.
+- `OCR_DPI_SENSITIVITY_20261007.md`: so sánh OCR tại 200/300 DPI với PSM 4/6/11 trên bốn trang có reference, gồm CER/WER và phép đo token số/cue điều kiện chỉ lưu số liệu tổng hợp; kèm script tái lập.
 
