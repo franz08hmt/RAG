@@ -103,13 +103,14 @@ Recall@5 / MRR@10 kèm mẫu số ra màn hình. Xem `docs/evidence/runs/metrics
 
 Có thể chạy phép so sánh BM25, Dense và Hybrid RRF trên snapshot G0 đã ghim bằng
 `scripts/run_hybrid_retrieval_ablation.py`. Runner dùng câu hỏi và evidence span hiện có, BGE-M3 local,
-không gọi API; kết quả metrics-only được ghi dưới `artifacts/results/` (Git-ignored). Đây là benchmark
-retrieval nhỏ, không phải luồng ứng dụng console hoặc đánh giá generation.
+không gọi API; kết quả được ghi dưới `artifacts/results/` (Git-ignored), chỉ gồm metric, mã câu/span,
+loại tài liệu và thứ hạng để chẩn đoán; không ghi câu hỏi hoặc văn bản nguồn. Đây là benchmark retrieval
+nhỏ, không phải luồng ứng dụng console hoặc đánh giá generation.
 
 ## Kiểm thử
 
 ```bash
-pytest                          # 61 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF và evaluation
+pytest                          # 67 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF và evaluation
 python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được trong môi trường tối giản
 ```
 

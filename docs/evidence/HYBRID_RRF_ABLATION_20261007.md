@@ -30,6 +30,29 @@ Với chunk không nằm trong danh sách ứng viên của một nhánh, nhánh
 
 Trong sáu câu về Quy chế 1727 (9 span), BM25 tìm được 4/9 span, Dense 8/9 và RRF 6/9. Với câu duy nhất về Hướng dẫn thực tập, Dense tìm được 1/1 span; BM25 và RRF đều 0/1. Bộ pilot không có câu answerable về Sổ tay Sinh viên.
 
+Để xem điểm tổng hợp che khuất trường hợp nào, mỗi câu được phân loại theo vị trí các span bắt buộc; bảng dưới chỉ dùng mã câu/span và hạng, không chép câu hỏi hoặc nguồn:
+
+| Lớp kết quả | BM25 | Dense | RRF |
+|---|---:|---:|---:|
+| Đủ tất cả span trong Top-5 | 3/7 | 6/7 | 4/7 |
+| Có một phần span trong Top-5 | 0/7 | 1/7 | 1/7 |
+| Không có span ở Top-5, nhưng có span hạng 6–10 | 1/7 | 0/7 | 1/7 |
+| Không có span chính xác trong Top-10 | 3/7 | 0/7 | 1/7 |
+
+Hạng evidence theo câu (danh sách hạng lần lượt ứng với các span S1, S2; `—` là không tìm thấy trong Top-10):
+
+| Mã câu | BM25 | Dense | RRF | Phân loại RRF |
+|---|---|---|---|---|
+| P001 | [2] | [1] | [1] | Đủ trong Top-5 |
+| P002 | [1] | [3] | [1] | Đủ trong Top-5 |
+| P003 | [—, —] | [2, 3] | [4, 6] | Một phần trong Top-5 |
+| P004 | [—] | [1] | [4] | Đủ trong Top-5 |
+| P005 | [—] | [1] | [—] | Không có trong Top-10 |
+| P007 | [1, 1] | [1, 1] | [1, 1] | Đủ trong Top-5 |
+| P008 | [—, 10] | [2, 7] | [6, 8] | Chỉ có ở hạng 6–10 |
+
+Ở các ca cụ thể, RRF đưa P004 từ ngoài Top-10 của BM25 vào hạng 4, nhưng làm evidence của P003 kém đầy đủ hơn Dense (một span ở hạng 6) và không giữ được evidence P005 mà Dense xếp hạng 1. Với P008, Dense có một span ở hạng 2 còn RRF đẩy cả hai xuống hạng 6 và 8. P007 không phân biệt được ba phương pháp trong danh sách hạng quan sát được. Các ca này giải thích vì sao điểm RRF nằm giữa BM25 và Dense, nhưng không cho phép kết luận phương pháp nào tốt hơn nói chung.
+
 ## Diễn giải
 
 Trong mẫu này, RRF cải thiện so với BM25 nhưng không vượt Dense BGE-M3: Recall@5 tăng từ 4/10 lên 6/10 khi hợp nhất, trong khi Dense riêng đạt 9/10. RRF cũng giảm Complete-evidence Hit@5 so với Dense (4/7 so với 6/7). Kết quả nhắc rằng việc kết hợp lexical và dense không tự động tốt hơn nhánh mạnh nhất; thứ hạng có thể đổi theo câu hỏi và lớp tài liệu.
@@ -38,7 +61,7 @@ Chưa chọn RRF làm mặc định. Kết quả chỉ hỗ trợ kết luận c
 
 ## Tái lập và bảo vệ dữ liệu
 
-Runner: [`run_hybrid_retrieval_ablation.py`](../../scripts/run_hybrid_retrieval_ablation.py); triển khai RRF: [`hybrid.py`](../../src/rag_hcmute/retrieval/hybrid.py). Raw JSON metrics-only được Git-ignore tại `artifacts/results/hybrid_retrieval_ablation/hybrid_5da3bd4d5de54492_20261007T081750Z.json`; file này ghi cấu hình/hash và metric gộp, không ghi câu hỏi, trích đoạn nguồn, preview hay vector.
+Runner: [`run_hybrid_retrieval_ablation.py`](../../scripts/run_hybrid_retrieval_ablation.py); triển khai RRF: [`hybrid.py`](../../src/rag_hcmute/retrieval/hybrid.py). JSON kết quả Git-ignore tại `artifacts/results/hybrid_retrieval_ablation/hybrid_5da3bd4d5de54492_20261007T083332Z.json` ghi cấu hình/hash, metric gộp và chẩn đoán bằng mã câu/span, loại tài liệu, thứ hạng; không ghi câu hỏi, đáp án, trích đoạn nguồn, preview hay vector.
 
 ```powershell
 & 'C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe' scripts/run_hybrid_retrieval_ablation.py --dense-model 'D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181'

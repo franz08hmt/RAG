@@ -194,3 +194,10 @@
 - Ghi kết quả/giới hạn tại `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`; JSON metrics-only Git-ignored. Bài gốc RRF được dẫn theo DOI, không suy rộng hiệu quả từ benchmark tổng quát sang dữ liệu HCMUTE.
 - Toàn bộ test suite: 61 passed; `compileall` và `git diff --check` đạt. Không cập nhật DOCX, không push; Mốc 1 vẫn mở.
 - Kiểm tra cục bộ không tải/cài mới: Hugging Face cache chỉ có BGE-M3; env có sentence-transformers/FAISS nhưng chưa có ChromaDB, Qdrant client hoặc Milvus client. Ghi nhận để không tự ý tải thêm model hay dependency.
+
+## 2026-10-07 — Chẩn đoán các trường hợp lỗi của Hybrid Retrieval
+
+- Bổ sung phân loại retrieval theo từng câu answerable: đủ mọi span ở Top-5, một phần span ở Top-5, chỉ có span ở hạng 6–10, hoặc không có exact evidence trong Top-10. Kết quả lưu mã câu/span, loại tài liệu và hạng; không lưu câu hỏi, đáp án, văn bản nguồn, preview hay vector.
+- Chạy lại BM25/Dense/RRF trên cùng G0 và 7 câu/10 span. Tổng metric không đổi: exact Recall@5 4/10, 9/10, 6/10; Complete-evidence Hit@5 3/7, 6/7, 4/7. RRF có đủ evidence Top-5 ở 4/7 câu; Dense ở 6/7. P004 được RRF đưa lên hạng 4 từ ngoài Top-10 của BM25; P003 chỉ còn một trong hai span ở Top-5, P005 không có span trong Top-10, P008 có các span ở hạng 6 và 8.
+- Diễn giải chỉ ở mức mô tả pilot: có trường hợp Hybrid giúp BM25 và cũng có trường hợp kém Dense; không đổi RRF k/cutoff hoặc retrieval mặc định, không coi đây là holdout.
+- Cập nhật báo cáo evidence, G1, README và handoff. Kiểm thử phân loại 6/6; toàn bộ pytest 67 passed; compileall đạt. Chưa cập nhật DOCX, chưa đóng Mốc 1/chuyển Mốc 2; không gọi API, không tải/cài model, không push/merge/PR.

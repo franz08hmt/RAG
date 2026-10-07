@@ -95,6 +95,67 @@ def _metric_summary(result: dict) -> dict:
     }
 
 
+def _classify_question_evidence(
+    span_ranks: dict[str, int | None], *, hit_k: int, top_k: int
+) -> str:
+    """Classify exact-evidence retrieval without retaining query or source text."""
+    if hit_k < 1 or top_k < hit_k:
+        raise ValueError("Require 1 <= hit_k <= top_k for evidence classification.")
+    if not span_ranks:
+        raise ValueError("At least one required evidence span is needed for classification.")
+    ranks = list(span_ranks.values())
+    if any(rank is not None and (rank < 1 or rank > top_k) for rank in ranks):
+        raise ValueError("Evidence ranks must be within the evaluated Top-K or None.")
+
+    hit_count = sum(rank is not None and rank <= hit_k for rank in ranks)
+    if hit_count == len(ranks):
+        return f"all_required_spans_in_top_{hit_k}"
+    if hit_count > 0:
+        return f"partial_evidence_in_top_{hit_k}"
+    if any(rank is not None and rank <= top_k for rank in ranks):
+        return f"evidence_only_at_ranks_{hit_k + 1}_to_{top_k}"
+    return f"no_exact_evidence_in_top_{top_k}"
+
+
+def _question_diagnostics(
+    *,
+    result: dict,
+    questions: list[PilotQuestion],
+    document_types: dict[str, str],
+) -> tuple[list[dict], dict[str, int]]:
+    question_by_id = {question.question_id: question for question in questions}
+    diagnostics = []
+    counts = {
+        f"all_required_spans_in_top_{result['hit_k']}": 0,
+        f"partial_evidence_in_top_{result['hit_k']}": 0,
+        f"evidence_only_at_ranks_{result['hit_k'] + 1}_to_{result['top_k']}": 0,
+        f"no_exact_evidence_in_top_{result['top_k']}": 0,
+    }
+    for row in result["per_question"]:
+        question_id = row["question_id"]
+        span_ranks = row["span_ranks"]
+        error_class = _classify_question_evidence(
+            span_ranks,
+            hit_k=result["hit_k"],
+            top_k=result["top_k"],
+        )
+        counts[error_class] += 1
+        question = question_by_id[question_id]
+        diagnostics.append(
+            {
+                "question_id": question_id,
+                "document_type": document_types[question.expected_document],
+                "required_span_count": row["required_span_count"],
+                "span_ranks": [
+                    {"span_id": span_id, "rank": span_ranks[span_id]}
+                    for span_id in sorted(span_ranks)
+                ],
+                "evidence_class": error_class,
+            }
+        )
+    return diagnostics, counts
+
+
 def _metrics_by_document_type(
     *,
     result: dict,
@@ -250,9 +311,16 @@ def run_ablation(*, source_root: Path, dense_model: str) -> dict:
             top_k=TOP_K,
             hit_k=HIT_K,
         )
+        question_diagnostics, evidence_class_counts = _question_diagnostics(
+            result=exact,
+            questions=questions,
+            document_types=document_types,
+        )
         results[name] = {
             "config": config,
             "metrics": _metric_summary(exact),
+            "question_diagnostics": question_diagnostics,
+            "evidence_class_counts": evidence_class_counts,
             "metrics_by_document_type": _metrics_by_document_type(
                 result=exact,
                 spans_by_question=spans_by_question,
@@ -285,10 +353,10 @@ def run_ablation(*, source_root: Path, dense_model: str) -> dict:
             "hit_k": HIT_K,
             "corpus_chunk_count": len(chunks),
             "baseline_content_signature_matches": True,
-            "note": "Pilot is development data, not an independent holdout; no question or source text is serialized.",
+            "note": "Pilot is development data, not an independent holdout; diagnostics retain synthetic question/span IDs and ranks only, not question or source text.",
         },
         "methods": results,
-        "privacy_note": "Aggregate metrics/configuration/hashes only; no query, source text, preview, or vector is written.",
+        "privacy_note": "Configuration, hashes, aggregate metrics, synthetic question/span IDs, document types, evidence ranks, and rank-based classes only; no query, source text, preview, or vector is written.",
     }
 
 
@@ -336,7 +404,7 @@ def main() -> int:
             f"complete Hit@5={complete['hits']}/{complete['denominator']} ({complete['value']:.3f}) | "
             f"first-evidence MRR@10={mrr['value']:.3f}"
         )
-    print(f"Metrics-only output (Git-ignored): {output_path}")
+    print(f"Content-free result output (Git-ignored): {output_path}")
     return 0
 
 
