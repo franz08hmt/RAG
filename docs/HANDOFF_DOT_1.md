@@ -118,3 +118,10 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Giữ nguyên định dạng, font, cỡ chữ, màu đơn sắc, căn chỉnh và cấu trúc đã thống nhất của báo cáo. Không biến kế hoạch thành kết quả đã làm; nêu rõ cấu hình thử nghiệm, phạm vi dữ liệu và giới hạn.
 - Mốc 1 hiện vẫn đang được bổ sung/đối chiếu theo phản hồi của giảng viên. Chưa cập nhật DOCX cho đến khi phần nội dung và minh chứng của mốc này được rà soát xong; sau đó chỉnh DOCX mốc 1 trước khi bàn giao/nộp lại.
 - Việc cập nhật DOCX không đồng nghĩa với push, merge hay tạo PR; các thao tác Git bên ngoài local chỉ thực hiện khi được cho phép riêng.
+
+## Cập nhật tiếp nối — 07/10/2026
+
+- Sau audit document class, lập ma trận `docs/evidence/INPUT_CLASS_PROCESSING_MATRIX_20261007.md`: phân biệt lớp nguồn với layout/modality theo trang; nối từng loại nội dung với cách xử lý hiện tại, minh chứng, giới hạn và phép thử tiếp theo.
+- Điểm đã có minh chứng: chunk theo Điều cho QĐ 1727; fallback cho Hướng dẫn FIT và Sổ tay; thí nghiệm OCR bốn trang; ablation retrieval cho Bảng 5. Chưa có OCR tích hợp trong G0, parser bảng tổng quát hoặc xử lý ngữ nghĩa hình/sơ đồ.
+- Page 107 còn nhãn mâu thuẫn giữa hai ghi chú OCR. Người học cần xác minh tại máy trước khi dùng trang này làm mẫu theo layout; không đưa nội dung Sổ tay vào hội thoại/Git.
+- Bước này chỉ lập kế hoạch kiểm chứng, không chạy benchmark mới, không đổi code/default và không cập nhật DOCX. Mốc 1 vẫn mở, chưa chuyển Mốc 2.

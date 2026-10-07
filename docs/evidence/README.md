@@ -28,4 +28,5 @@ Các lượt thử OCR hiện có:
 - `TABLE_RETRIEVAL_APPROVED_ABLATION_20261005.md`: kết quả retrieval-only trên năm câu hỏi bảng đã duyệt cho ablation riêng; có metric đủ-evidence, coverage và MRR evidence đầu tiên, nhưng không phải benchmark toàn hệ thống.
 - `BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`: chẩn đoán thứ hạng BM25 với các biến thể cách hỏi và tên cột cho cùng năm câu; các truy vấn biến thể chỉ dùng phân tích, không thay câu hỏi/gold đã duyệt và không phải benchmark chính.
 - `INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`: kiểm kê ba lớp tài liệu, page/chunk/raster metadata, cách xử lý scan/bảng/hình hiện tại và các giới hạn của snapshot G0; báo cáo chỉ chứa metadata/tổng hợp, không chứa text nguồn.
+- `INPUT_CLASS_PROCESSING_MATRIX_20261007.md`: ánh xạ từng dạng nội dung sang cách xử lý đang có, minh chứng, giới hạn và phép thử kế tiếp; phân biệt kết quả đo được với đề xuất.
 
