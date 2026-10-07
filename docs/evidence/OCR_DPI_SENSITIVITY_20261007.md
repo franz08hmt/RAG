@@ -10,7 +10,8 @@ Kiểm tra liệu tăng DPI từ 200 lên 300 có cải thiện OCR tiếng Vi�
 - Tesseract 5.5.3, ngôn ngữ `vie`, traineddata SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
 - Bốn trang có reference cục bộ: PDF pages 107, 109, 116, 136. Thử hai mức DPI (200, 300) và hai PSM (4, 11), tổng cộng 16 lượt.
 - Cùng hàm CER/WER và cách chuẩn hóa như các lượt OCR trước; giữ dấu tiếng Việt. Không lưu ảnh, reference text hay OCR hypothesis vào output.
-- Script tái lập: [`run_ocr_dpi_sensitivity.py`](../../scripts/run_ocr_dpi_sensitivity.py). Kết quả JSON chỉ gồm cấu hình, hash, confidence và metric, nằm trong Git-ignored `artifacts/results/ocr_dpi_sensitivity/ocr_dpi_sensitivity_20261007T073237Z.json`.
+- Script tái lập: [`run_ocr_dpi_sensitivity.py`](../../scripts/run_ocr_dpi_sensitivity.py). Kết quả JSON chỉ gồm cấu hình, hash, confidence và metric, nằm trong Git-ignored `artifacts/results/ocr_dpi_sensitivity/ocr_dpi_sensitivity_20261007T073503Z.json`.
+- Revision chạy thí nghiệm: `a5554f2a7f00534e21aa47c08d29901ecbfe04c7`; SHA-256 của script: `7eee40a4132fff07e6e4a4826e1b281f58404dacc251187e986c96bbe8a2587a`.
 
 Chạy bằng Python 3.11 của env dự án:
 
