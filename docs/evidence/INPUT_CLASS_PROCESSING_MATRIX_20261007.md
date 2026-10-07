@@ -53,7 +53,7 @@ Nguồn PDF
 
 ## Trạng thái
 
-Đây là bước lập kế hoạch thực nghiệm dựa trên audit, chưa chạy thêm benchmark và chưa thay đổi code/pipeline mặc định. Mốc 1 vẫn đang được làm sâu theo YC4/YC13; chưa chuyển sang Mốc 2 và chưa cập nhật DOCX nộp giảng viên. Nếu cần nhãn layout chắc chắn bằng mắt, người học có thể xác nhận page 107 trên máy cá nhân; không cần gửi ảnh hoặc chữ trang ra ngoài máy.
+Ma trận được lập ban đầu như kế hoạch thực nghiệm. Sau đó đã chạy ablation policy chunk theo Điều/cửa sổ cố định và thử Hybrid RRF trên cùng snapshot G0; kết quả được tách riêng ở [`CHUNK_STRATEGY_ABLATION_20261007.md`](CHUNK_STRATEGY_ABLATION_20261007.md) và [`HYBRID_RRF_ABLATION_20261007.md`](HYBRID_RRF_ABLATION_20261007.md). Các thử nghiệm chưa thay đổi pipeline mặc định và chưa đủ đại diện cho nhiều document class. Những hàng về OCR, bảng, hình và scan vẫn là giới hạn/định hướng tiếp tục; Mốc 1 chưa khép theo YC4/YC13, chưa chuyển sang Mốc 2 và chưa cập nhật DOCX. Nếu cần nhãn layout chắc chắn bằng mắt, người học có thể xác nhận page 107 trên máy cá nhân; không cần gửi ảnh hoặc chữ trang ra ngoài máy.
 
 ## Tài liệu liên quan
 

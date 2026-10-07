@@ -18,6 +18,7 @@ Các lượt thử OCR hiện có:
 - `CHUNK_SIZE_ABLATION_20260929.md`: so sánh kích thước chunk trên snapshot G0 với nhãn vị trí section/page; có lưu ý proxy labels và truncation của Dense BGE-M3.
 - `CHUNK_SIZE_EXACT_EVIDENCE_20260929.md`: đánh giá chunk size theo exact evidence span; annotation version 2 đã phủ đủ 7 câu answerable/10 span và hash-verified theo snapshot G0.
 - `CHUNK_STRATEGY_ABLATION_20261007.md`: so sánh policy chunk theo Điều với cửa sổ cố định 500/80 bằng BM25 và BGE-M3 trên cùng G0; tính span bị cắt qua ranh giới là miss và tách metric exact evidence khỏi page-location proxy.
+- `HYBRID_RRF_ABLATION_20261007.md`: đối chiếu BM25, Dense BGE-M3 và Hybrid RRF trên cùng G0 với exact evidence-span metrics; chưa đổi default vì RRF chưa vượt Dense trên pilot nhỏ.
 - `QUESTION_CANDIDATE_EXPANSION_20260929.md`: 12 câu hỏi ứng viên để người học tự đối chiếu và duyệt; không thuộc pilot và chưa được dùng tính metric.
 - `QUESTION_CANDIDATE_REVIEW_20260929.md`: rà soát mức độ khớp nguồn, tham chiếu trang, độ trùng và khoảng trống về bảng/scan/hình; không thay đổi ứng viên hay pilot.
 - `TABLE_QUESTION_CANDIDATES_20260929.md`: 5 gợi ý câu hỏi cho ablation B0/T1/T2 trên một bảng đã kiểm tra; chỉ bản nháp, chưa dùng benchmark.

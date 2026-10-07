@@ -28,13 +28,13 @@ rag-hcmute-poc/
 │   └── question_sets/       Bộ câu hỏi pilot có gold evidence
 ├── docs/
 │   ├── decisions/           Nhật ký quyết định kỹ thuật (ADR)
-│   └── evidence/            Kết quả retrieval thô + phân tích case study đã chọn để đối chiếu
+│   └── evidence/            Báo cáo thực nghiệm và các minh chứng đã chọn
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py
-│   ├── retrieval/             bm25_index.py, dense_index.py, common.py
-│   └── evaluation/            metrics.py, run_pilot.py
-├── scripts/                  CLI mỏng gọi vào src/rag_hcmute (build_corpus, query_bm25, query_dense, run_pilot_eval, audit_corpus)
-├── tests/                    pytest thực chất (extract/chunk/BM25/manifest) + run_smoke_tests.py
+│   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, common.py
+│   └── evaluation/            metrics.py, run_pilot.py, evidence_spans.py
+├── scripts/                  CLI ingestion/retrieval/evaluation và runner thí nghiệm
+├── tests/                    pytest cho ingestion, retrieval, evaluation và manifest
 └── artifacts/                Log và index tạm (gitignored)
 ```
 
@@ -101,24 +101,31 @@ Ghi kết quả thô (top-k từng câu, thời gian, cấu hình) vào `docs/ev
 Recall@5 / MRR@10 kèm mẫu số ra màn hình. Xem `docs/evidence/runs/metrics_summary.md` và
 `docs/evidence/case_studies.md` cho bản tóm tắt và phân tích đã chọn của lần chạy gần nhất.
 
+Có thể chạy phép so sánh BM25, Dense và Hybrid RRF trên snapshot G0 đã ghim bằng
+`scripts/run_hybrid_retrieval_ablation.py`. Runner dùng câu hỏi và evidence span hiện có, BGE-M3 local,
+không gọi API; kết quả metrics-only được ghi dưới `artifacts/results/` (Git-ignored). Đây là benchmark
+retrieval nhỏ, không phải luồng ứng dụng console hoặc đánh giá generation.
+
 ## Kiểm thử
 
 ```bash
-pytest                          # 20 test: manifest, extract, chunk (bao gồm test truy ngược chunk → trang gốc), BM25
+pytest                          # 61 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF và evaluation
 python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được trong môi trường tối giản
 ```
 
 ## Trạng thái hiện tại (mốc báo cáo tiến độ đợt 1)
 
-- Đã hoàn thành: corpus manifest có 3 tài liệu thật đã xác minh nguồn/hash, pipeline trích xuất →
-  làm sạch → chunk có metadata → snapshot tái lập được, retrieval baseline BM25 chạy được qua CLI, bộ
-  10 câu hỏi pilot đã rà soát với gold evidence (7/10 có bằng chứng xác nhận được trong corpus hiện
-  tại), Recall@5/MRR đã tính trên tập đó, 20 test tự động.
-- Đã hoàn thành (mới): Dense Retrieval (BGE-M3 + FAISS) chạy thành công với kết quả thật trên cùng
-  corpus và bộ câu hỏi - Recall@5 = 6/7 (0,857), MRR@10 = 0,643, cải thiện rõ so với BM25 (0,429/0,371)
-  nhưng không thắng tuyệt đối ở mọi câu (xem `docs/evidence/case_studies.md` và
-  `docs/evidence/runs/metrics_summary.md`).
-- Dự kiến mốc sau: xác nhận hiệu lực đầy đủ của `HCMUTE_QCDT_1727_2021` (có dấu hiệu văn bản 2025 mới
-  hơn), bổ sung nguồn cho câu hỏi về khóa luận/đồ án tốt nghiệp (P006), mở rộng bộ câu hỏi pilot, và
-  triển khai hybrid (RRF) + reranker + refusal guard đã hiệu chỉnh (cho cả điểm BM25 lẫn cosine Dense).
+- Đã có: corpus manifest 3 tài liệu đã xác minh nguồn/hash; pipeline trích xuất → làm sạch → chunk có
+  metadata → snapshot tái lập được; BM25 và Dense BGE-M3/FAISS đã chạy trên cùng corpus. Pilot lịch sử
+  dùng **question-level Hit@5** (được ghi là Recall@5 trong log cũ): BM25 3/7 (0,429), Dense 6/7
+  (0,857), MRR@10 lần lượt 0,371 và 0,643. Đây là metric tính câu có ít nhất một gold chunk trong
+  Top-5, không phải tỷ lệ evidence span được tìm thấy.
+- Đã bổ sung đánh giá theo exact evidence span (7 câu answerable/10 span), ablation chunking và phép
+  thử Hybrid RRF. Trên G0, RRF đạt Evidence Recall@5 6/10, so với BM25 4/10 và Dense 9/10;
+  Complete-evidence Hit@5 lần lượt 4/7, 3/7 và 6/7 theo thứ tự Hybrid/BM25/Dense. Kết quả và giới
+  hạn được tách riêng tại `docs/evidence/CHUNK_STRATEGY_ABLATION_20261007.md` và
+  `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`. Chưa đổi mặc định.
+- Phần còn mở của Mốc 1: mở rộng câu hỏi độc lập; đánh giá thêm embedding/vector-store/reranker khi
+  phương án tài nguyên được duyệt; hoàn thiện xử lý tổng quát cho scan, bảng, hình; và tiếp tục phần
+  generation, citation/refusal, console app. RRF hiện mới là runner nghiên cứu, chưa tích hợp vào app.
 

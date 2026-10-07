@@ -185,3 +185,12 @@
 - BM25: policy theo Điều bao phủ 10/10 span, exact Recall@5 4/10, complete Hit@5 3/7, page proxy Hit@5 3/7; fixed windows bao phủ 9/10, lần lượt 6/10, 4/7 và 6/7. Dense BGE-M3 local/CUDA: policy theo Điều 10/10, 9/10, 6/7, 7/7; fixed windows 9/10, 8/10, 5/7, 7/7.
 - BM25 và Dense cho thứ hạng khác nhau; fixed windows mất độ phủ một span. Không đổi default hoặc G0; kết quả trên pilot phát triển nhỏ, không phải holdout và chỉ có một tài liệu có cấu trúc cùng sáu câu answerable. Không đánh giá generation hay kết luận tổng quát theo document class.
 - Ghi phương pháp/kết quả/giới hạn ở `docs/evidence/CHUNK_STRATEGY_ABLATION_20261007.md`; JSON metrics-only Git-ignored. Thêm hai kiểm thử cho cờ chunker và một kiểm thử bảo đảm span không được bao phủ tính là miss. `pytest`: 56 passed; `compileall` và `git diff --check` đạt. Không gọi API, không cập nhật DOCX, không push; Mốc 1 vẫn mở.
+
+## 2026-10-07 — Hybrid Retrieval bằng RRF
+
+- Bổ sung `ReciprocalRankFusionRetriever` để hợp nhất hạng BM25Okapi và Dense BGE-M3; raw BM25/cosine scores không cộng trực tiếp. Dùng công thức RRF với `k=60`, Top-20 mỗi nhánh, Top-10 đầu ra; kiểm tra hai index có cùng chunk ID set và tie-break theo chunk ID để kết quả lặp lại được.
+- Tạo runner so sánh BM25, Dense và Hybrid trên G0 native-only. Vì snapshot G0 lưu trước token offsets, runner tái tạo chunk trong bộ nhớ và chỉ tiếp tục khi chữ ký nội dung khớp snapshot; không sửa G0. Dense dùng BGE-M3 local/CUDA/offline; không tải model hay gọi API.
+- Trên 7 câu answerable/10 span, Evidence Recall@5: BM25 4/10, Dense 9/10, Hybrid 6/10; Complete-evidence Hit@5: 3/7, 6/7, 4/7; First-evidence MRR@10: 0,371, 0,762, 0,524. RRF cải thiện BM25 nhưng không vượt Dense trong mẫu này; không đổi default.
+- Ghi kết quả/giới hạn tại `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`; JSON metrics-only Git-ignored. Bài gốc RRF được dẫn theo DOI, không suy rộng hiệu quả từ benchmark tổng quát sang dữ liệu HCMUTE.
+- Toàn bộ test suite: 61 passed; `compileall` và `git diff --check` đạt. Không cập nhật DOCX, không push; Mốc 1 vẫn mở.
+- Kiểm tra cục bộ không tải/cài mới: Hugging Face cache chỉ có BGE-M3; env có sentence-transformers/FAISS nhưng chưa có ChromaDB, Qdrant client hoặc Milvus client. Ghi nhận để không tự ý tải thêm model hay dependency.
