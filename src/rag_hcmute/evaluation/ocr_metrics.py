@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import re
 import unicodedata
+from collections import Counter
 from dataclasses import asdict, dataclass
 
 
@@ -72,3 +74,73 @@ def calculate_ocr_error_rates(reference: str, hypothesis: str) -> OCRErrorRates:
         word_edits=_edit_distance(reference_words, hypothesis_words),
         reference_words=len(reference_words),
     )
+
+
+_NUMBERISH_TOKEN = re.compile(r"(?u)(?<!\w)[\w]+(?:[./,:%+\-][\w]+)*%?(?!\w)")
+_CRITICAL_CUE_TERMS = (
+    "không được",
+    "tối thiểu",
+    "ít nhất",
+    "tối đa",
+    "không",
+    "chưa",
+    "chỉ",
+    "trừ",
+    "nếu",
+    "phải",
+)
+_CRITICAL_CUE = re.compile(
+    r"(?u)(?<!\w)(?:"
+    + "|".join(re.escape(term) for term in sorted(_CRITICAL_CUE_TERMS, key=len, reverse=True))
+    + r")(?!\w)"
+)
+
+
+def _normalized_occurrences(
+    pattern: re.Pattern[str], text: str, *, numeric_only: bool = False
+) -> Counter[str]:
+    normalized = unicodedata.normalize("NFC", text).casefold()
+    occurrences = Counter(match.group(0) for match in pattern.finditer(normalized))
+    if numeric_only:
+        return Counter(
+            {
+                token: count
+                for token, count in occurrences.items()
+                if any(char.isdigit() for char in token)
+            }
+        )
+    return occurrences
+
+
+def _occurrence_rates(
+    reference: Counter[str], hypothesis: Counter[str]
+) -> dict[str, int | float | None]:
+    reference_count = sum(reference.values())
+    hypothesis_count = sum(hypothesis.values())
+    exact_match_count = sum((reference & hypothesis).values())
+    return {
+        "reference_count": reference_count,
+        "hypothesis_count": hypothesis_count,
+        "exact_match_count": exact_match_count,
+        "precision": exact_match_count / hypothesis_count if hypothesis_count else None,
+        "recall": exact_match_count / reference_count if reference_count else None,
+    }
+
+
+def calculate_ocr_critical_token_metrics(
+    reference: str, hypothesis: str
+) -> dict[str, dict[str, int | float | None]]:
+    """Measure exact occurrence precision/recall for numeric tokens and critical cues.
+
+    The returned data contains aggregate counts and rates only; token/cue strings
+    are intentionally not included. This is a targeted OCR diagnostic, not a
+    substitute for reviewing the underlying page against its source.
+    """
+    reference_numbers = _normalized_occurrences(_NUMBERISH_TOKEN, reference, numeric_only=True)
+    hypothesis_numbers = _normalized_occurrences(_NUMBERISH_TOKEN, hypothesis, numeric_only=True)
+    reference_cues = _normalized_occurrences(_CRITICAL_CUE, reference)
+    hypothesis_cues = _normalized_occurrences(_CRITICAL_CUE, hypothesis)
+    return {
+        "numeric_tokens": _occurrence_rates(reference_numbers, hypothesis_numbers),
+        "critical_cues": _occurrence_rates(reference_cues, hypothesis_cues),
+    }

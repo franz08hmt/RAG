@@ -18,7 +18,10 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pymupdf  # noqa: E402
 
-from rag_hcmute.evaluation.ocr_metrics import calculate_ocr_error_rates  # noqa: E402
+from rag_hcmute.evaluation.ocr_metrics import (  # noqa: E402
+    calculate_ocr_critical_token_metrics,
+    calculate_ocr_error_rates,
+)
 from rag_hcmute.ingestion.extract import (  # noqa: E402
     OCRSettings,
     _resolve_tesseract_cmd,
@@ -58,6 +61,16 @@ def _git_revision() -> str:
         ).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return "unavailable"
+
+
+def _rates_from_counts(reference_count: int, hypothesis_count: int, exact_match_count: int) -> dict:
+    return {
+        "reference_count": reference_count,
+        "hypothesis_count": hypothesis_count,
+        "exact_match_count": exact_match_count,
+        "precision": exact_match_count / hypothesis_count if hypothesis_count else None,
+        "recall": exact_match_count / reference_count if reference_count else None,
+    }
 
 
 def run_sweep(
@@ -120,12 +133,17 @@ def run_sweep(
                     )
                     metrics = calculate_ocr_error_rates(reference_text, hypothesis)
                     metric_data = metrics.to_dict()
+                    critical_metrics = calculate_ocr_critical_token_metrics(
+                        reference_text, hypothesis
+                    )
                     page_results.append(
                         {
                             "pdf_page": page_number,
                             "dpi": dpi,
                             "psm": psm,
                             **metric_data,
+                            "numeric_tokens": critical_metrics["numeric_tokens"],
+                            "critical_cues": critical_metrics["critical_cues"],
                             "ocr_confidence_mean": confidence,
                         }
                     )
@@ -136,6 +154,12 @@ def run_sweep(
             "reference_characters": 0,
             "word_edits": 0,
             "reference_words": 0,
+            "number_reference_count": 0,
+            "number_hypothesis_count": 0,
+            "number_exact_match_count": 0,
+            "cue_reference_count": 0,
+            "cue_hypothesis_count": 0,
+            "cue_exact_match_count": 0,
             "page_count": 0,
         }
     )
@@ -143,10 +167,28 @@ def run_sweep(
         group = totals[(row["dpi"], row["psm"])]
         for key in ("character_edits", "reference_characters", "word_edits", "reference_words"):
             group[key] += int(row[key])
+        for metric_name, prefix in (("numeric_tokens", "number"), ("critical_cues", "cue")):
+            metric = row[metric_name]
+            for metric_key, total_key in (
+                ("reference_count", f"{prefix}_reference_count"),
+                ("hypothesis_count", f"{prefix}_hypothesis_count"),
+                ("exact_match_count", f"{prefix}_exact_match_count"),
+            ):
+                group[total_key] += int(metric[metric_key])
         group["page_count"] += 1
 
     aggregate_results = []
     for (dpi, psm), counts in sorted(totals.items()):
+        numbers = _rates_from_counts(
+            counts["number_reference_count"],
+            counts["number_hypothesis_count"],
+            counts["number_exact_match_count"],
+        )
+        cues = _rates_from_counts(
+            counts["cue_reference_count"],
+            counts["cue_hypothesis_count"],
+            counts["cue_exact_match_count"],
+        )
         aggregate_results.append(
             {
                 "dpi": dpi,
@@ -154,6 +196,8 @@ def run_sweep(
                 **counts,
                 "cer": counts["character_edits"] / counts["reference_characters"],
                 "wer": counts["word_edits"] / counts["reference_words"],
+                "numeric_tokens": numbers,
+                "critical_cues": cues,
             }
         )
 
@@ -170,7 +214,8 @@ def run_sweep(
         "psm_values": list(PSMS),
         "sample_pages": list(PAGES),
         "metric_method": "NFC/case-fold; CER preserves punctuation and whitespace; WER separates punctuation",
-        "privacy_note": "Metrics and configuration only; reference and OCR text are not written.",
+        "critical_metric_method": "Exact occurrence precision/recall for numeric tokens and a fixed condition/negation cue inventory; identities are not written",
+        "privacy_note": "Metrics and configuration only; reference and OCR text or extracted token identities are not written.",
         "page_results": page_results,
         "weighted_aggregates": aggregate_results,
     }
@@ -214,9 +259,14 @@ def main() -> int:
         stream.write("\n")
 
     for row in report["weighted_aggregates"]:
+        number_recall = row["numeric_tokens"]["recall"]
+        cue_recall = row["critical_cues"]["recall"]
+        number_text = f"{number_recall:.4f}" if number_recall is not None else "n/a"
+        cue_text = f"{cue_recall:.4f}" if cue_recall is not None else "n/a"
         print(
             f"dpi={row['dpi']} psm={row['psm']} pages={row['page_count']} "
-            f"CER={row['cer']:.4f} WER={row['wer']:.4f}"
+            f"CER={row['cer']:.4f} WER={row['wer']:.4f} "
+            f"number_recall={number_text} cue_recall={cue_text}"
         )
     print(f"Metrics-only output (Git-ignored): {output_path}")
     print(f"Tesseract: {report['tesseract_version']} | source SHA-256: {report['source_pdf_sha256']}")
