@@ -201,3 +201,10 @@
 - Chạy lại BM25/Dense/RRF trên cùng G0 và 7 câu/10 span. Tổng metric không đổi: exact Recall@5 4/10, 9/10, 6/10; Complete-evidence Hit@5 3/7, 6/7, 4/7. RRF có đủ evidence Top-5 ở 4/7 câu; Dense ở 6/7. P004 được RRF đưa lên hạng 4 từ ngoài Top-10 của BM25; P003 chỉ còn một trong hai span ở Top-5, P005 không có span trong Top-10, P008 có các span ở hạng 6 và 8.
 - Diễn giải chỉ ở mức mô tả pilot: có trường hợp Hybrid giúp BM25 và cũng có trường hợp kém Dense; không đổi RRF k/cutoff hoặc retrieval mặc định, không coi đây là holdout.
 - Cập nhật báo cáo evidence, G1, README và handoff. Kiểm thử phân loại 6/6; toàn bộ pytest 67 passed; compileall đạt. Chưa cập nhật DOCX, chưa đóng Mốc 1/chuyển Mốc 2; không gọi API, không tải/cài model, không push/merge/PR.
+
+## 2026-10-07 — Console PoC cho retrieval
+
+- Bổ sung `src/rag_hcmute/console_app.py` với chế độ one-shot và tương tác; mặc định BM25 trên G0, có tùy chọn Dense và Hybrid RRF. Dense/Hybrid bắt buộc đường dẫn model local và bật chế độ offline; không cho tải tự động.
+- Console hiển thị phương thức, thời gian, hạng, điểm, tên tài liệu, PDF page, section và excerpt ngắn; thông báo rõ phần hiện tại chỉ retrieval, không generation/refusal. Smoke test BM25 và Hybrid trên G0 156 chunks đều qua; kết quả capture trong bộ nhớ, không lưu câu hỏi hay trích đoạn nguồn.
+- Smoke Hybrid phát hiện wrapper RRF không cung cấp `chunks` trực tiếp; sửa phần xác định kích thước corpus để đọc từ lexical retriever và thêm test hồi quy.
+- Bằng chứng và giới hạn tại `docs/evidence/RETRIEVAL_CONSOLE_20261007.md`. Lệnh `python -m` Hybrid và `--help` UTF-8 trên PowerShell đã chạy thành công. Toàn bộ pytest hiện 74 passed; `compileall` và `git diff --check` đạt. Mốc 1 vẫn mở; chưa chỉnh DOCX, không gọi API, không tải model/gói, không push/merge/PR.

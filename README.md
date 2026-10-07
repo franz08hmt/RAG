@@ -2,12 +2,12 @@
 
 Đây là mã nguồn thực nghiệm cho đề tài **Nghiên cứu, thiết kế và hiện thực hóa hệ thống Retrieval-Augmented Generation (RAG)**. PoC được giới hạn ở bài toán hỏi đáp trên tài liệu học vụ chính thức của HCMUTE.
 
-## Phạm vi phiên bản đầu
+## Phạm vi mục tiêu của PoC
 
 - Đầu vào: câu hỏi tiếng Việt về quy chế đào tạo và thủ tục học vụ.
-- Đầu ra: câu trả lời ngắn, đoạn bằng chứng, tên văn bản và vị trí trang/điều khoản.
+- Đầu ra mục tiêu khi hoàn thiện: câu trả lời ngắn, đoạn bằng chứng, tên văn bản và vị trí trang/điều khoản.
 - Ngoài phạm vi: chatbot hội thoại mở, dữ liệu cá nhân, lịch học hoặc lịch thi thay đổi theo thời gian nếu corpus không chứa dữ liệu đó.
-- Quy tắc an toàn: khi không có bằng chứng phù hợp, hệ thống trả về trạng thái chưa đủ căn cứ.
+- Quy tắc an toàn mục tiêu: khi không có bằng chứng phù hợp, hệ thống cần trả về trạng thái chưa đủ căn cứ; guard này chưa được triển khai/đánh giá ở hiện trạng.
 
 ## Nguyên tắc triển khai
 
@@ -32,7 +32,8 @@ rag-hcmute-poc/
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py
 │   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, common.py
-│   └── evaluation/            metrics.py, run_pilot.py, evidence_spans.py
+│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py
+│   └── console_app.py         Console explorer cho retrieval; chưa generation
 ├── scripts/                  CLI ingestion/retrieval/evaluation và runner thí nghiệm
 ├── tests/                    pytest cho ingestion, retrieval, evaluation và manifest
 └── artifacts/                Log và index tạm (gitignored)
@@ -90,6 +91,26 @@ cần mở trong môi trường của bạn) - nếu chỉ mở `huggingface.co`
 thiếu thư viện hoặc không tải được model, lệnh in `DENSE_RETRIEVAL_UNAVAILABLE` kèm lý do cụ thể thay
 vì lỗi khó hiểu.
 
+## Console PoC (retrieval stage)
+
+Sau khi G0 đã được dựng, chạy lệnh dưới từ thư mục repository để mở chế độ tương tác BM25:
+
+```bash
+python -m rag_hcmute.console_app
+```
+
+Có thể chạy một câu hỏi trực tiếp bằng `--query "..."`, tăng `--top-k`, hoặc chọn `--method dense`
+hay `--method hybrid`. Dense/Hybrid yêu cầu `--dense-model` trỏ tới thư mục BGE-M3 có sẵn trên máy;
+CLI bật chế độ offline và không tải model. Ví dụ trên máy đã chuẩn bị model:
+
+```powershell
+python -m rag_hcmute.console_app --method hybrid --dense-model 'D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181' --top-k 5
+```
+
+CLI hiện hiển thị hạng, điểm retriever, tên tài liệu, PDF page, section và đoạn trích ngắn để truy ngược
+bằng chứng. Đây là **console cho retrieval**, chưa sinh câu trả lời, chưa có ngưỡng từ chối đã hiệu chỉnh,
+và chưa đánh giá citation đầu ra; không trình bày nó như hệ thống RAG end-to-end.
+
 ## Bước 4 - Đánh giá trên bộ câu hỏi pilot
 
 ```bash
@@ -110,7 +131,7 @@ nhỏ, không phải luồng ứng dụng console hoặc đánh giá generation.
 ## Kiểm thử
 
 ```bash
-pytest                          # 67 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF và evaluation
+pytest                          # 74 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF, console và evaluation
 python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được trong môi trường tối giản
 ```
 
@@ -128,5 +149,6 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
   `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`. Chưa đổi mặc định.
 - Phần còn mở của Mốc 1: mở rộng câu hỏi độc lập; đánh giá thêm embedding/vector-store/reranker khi
   phương án tài nguyên được duyệt; hoàn thiện xử lý tổng quát cho scan, bảng, hình; và tiếp tục phần
-  generation, citation/refusal, console app. RRF hiện mới là runner nghiên cứu, chưa tích hợp vào app.
+  generation, citation/refusal. Đã có retrieval console cho BM25/Dense/Hybrid; RRF hiện vẫn là thử nghiệm,
+  chưa được chọn làm mặc định và console chưa phải ứng dụng RAG end-to-end.
 
