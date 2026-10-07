@@ -10,8 +10,8 @@ Kiểm tra liệu tăng DPI từ 200 lên 300 có cải thiện OCR tiếng Vi�
 - Tesseract 5.5.3, ngôn ngữ `vie`, traineddata SHA-256 `b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45`.
 - Bốn trang có reference cục bộ: PDF pages 107, 109, 116, 136. Thử hai mức DPI (200, 300) và hai PSM (4, 11), tổng cộng 16 lượt.
 - Cùng hàm CER/WER và cách chuẩn hóa như các lượt OCR trước; giữ dấu tiếng Việt. Không lưu ảnh, reference text hay OCR hypothesis vào output.
-- Script tái lập: [`run_ocr_dpi_sensitivity.py`](../../scripts/run_ocr_dpi_sensitivity.py). Kết quả JSON chỉ gồm cấu hình, hash, confidence và metric, nằm trong Git-ignored `artifacts/results/ocr_dpi_sensitivity/ocr_dpi_sensitivity_20261007T073503Z.json`.
-- Revision chạy thí nghiệm: `a5554f2a7f00534e21aa47c08d29901ecbfe04c7`; SHA-256 của script: `7eee40a4132fff07e6e4a4826e1b281f58404dacc251187e986c96bbe8a2587a`.
+- Script tái lập: [`run_ocr_dpi_sensitivity.py`](../../scripts/run_ocr_dpi_sensitivity.py). Kết quả JSON chỉ gồm cấu hình, hash, confidence và metric, nằm trong Git-ignored `artifacts/results/ocr_dpi_sensitivity/ocr_dpi_sensitivity_20261007T074033Z.json`.
+- Revision chạy thí nghiệm: `409d168ee42cbebbc650fb8630d475b09b5fd770`; SHA-256 của script: `88174ef756f04fa70ece57741e68c0f3e9e01b8c277bc05ffba453d3f5be9b45`.
 
 Chạy bằng Python 3.11 của env dự án:
 
@@ -44,11 +44,24 @@ Các ô ghi CER / WER theo phần trăm.
 | 200 | 4 | 24,89% | 32,21% | 668 / 2.684 | 192 / 596 |
 | 200 | 11 | 32,19% | 37,75% | 864 / 2.684 | 225 / 596 |
 | 300 | 4 | 28,73% | 39,09% | 771 / 2.684 | 233 / 596 |
-| 300 | 11 | 43,62% | 53,36% | 1.171 / 2.684 | 318 / 596 |
+| 300 | 11 | 43,63% | 53,36% | 1.171 / 2.684 | 318 / 596 |
+
+## Phép đo bổ sung: nhận dạng token số và dấu hiệu điều kiện
+
+CER/WER gộp có thể che khuất lỗi ở các phần tử mà chỉ sai một ký tự cũng có thể đổi nghĩa, chẳng hạn mã số, mốc thời gian, tỷ lệ hoặc dấu hiệu phủ định/điều kiện. Vì vậy, cùng 16 output OCR được đo thêm bằng exact occurrence precision/recall sau chuẩn hóa NFC và không phân biệt hoa thường. Token số được tính nếu token có ít nhất một chữ số; nhóm dấu hiệu điều kiện/phủ định dùng một danh sách cố định trong mã. Kết quả chỉ lưu tổng số lần xuất hiện và số lần khớp, không lưu từ, token, giá trị hay đoạn văn được trích ra.
+
+| DPI | PSM | Token số khớp / reference | Precision | Recall | Cue khớp / reference |
+|---:|---:|---:|---:|---:|---:|
+| 200 | 4 | 10 / 32 | 71,43% | 31,25% | 4 / 4 |
+| 200 | 11 | 15 / 32 | 62,50% | 46,88% | 4 / 4 |
+| 300 | 4 | 13 / 32 | 72,22% | 40,63% | 4 / 4 |
+| 300 | 11 | 15 / 32 | 60,00% | 46,88% | 4 / 4 |
+
+> **Giới hạn diễn giải:** 32 token số và 4 cue là tổng của đúng bốn trang mẫu, không phải tập kiểm thử đại diện. Mức cue 4/4 không chứng minh OCR xử lý tốt phủ định/điều kiện nói chung; recall token số 31,25–46,88% cho thấy không nên dùng bản OCR này làm căn cứ duy nhất để trả lời các câu hỏi có mã, số liệu hoặc điều kiện. Các trường hợp trọng yếu vẫn cần đối chiếu trực tiếp với trang nguồn.
 
 ## Diễn giải
 
-- Trên mẫu này, tăng lên 300 DPI không cải thiện kết quả tổng: với PSM 4, CER/WER tăng 3,84/6,88 điểm phần trăm; với PSM 11 tăng 11,43/15,61 điểm phần trăm.
+- Trên mẫu này, tăng lên 300 DPI không cải thiện kết quả tổng: với PSM 4, CER/WER tăng 3,84/6,88 điểm phần trăm; với PSM 11 tăng 11,44/15,61 điểm phần trăm.
 - Ở ba trang 107, 109 và 116, cả hai PSM đều có CER/WER cao hơn tại 300 DPI. Trên page 136, PSM 4 giảm nhẹ CER từ 77,91% xuống 77,30% và WER từ 90,70% xuống 89,53%, nhưng mức lỗi vẫn quá cao để coi OCR là bản chép đáng tin; PSM 11 còn xấu hơn ở 300 DPI.
 - Kết quả không chứng minh 200 DPI luôn tốt hơn. Mẫu chỉ có bốn trang; page 116 chiếm tỷ trọng lớn trong số ký tự tham chiếu, còn page 107 là nhãn layout có độ tin cậy vừa phải. Kết quả gộp vì vậy chỉ mô tả đúng mẫu này.
 - Không có cơ sở để đổi PSM mặc định 6: PSM 6 không nằm trong phép so sánh độ phân giải lần này. Giữ nguyên cấu hình pipeline; có thể dùng 200 DPI làm điểm xuất phát cho lần kiểm chứng mở rộng, không gọi đây là tham số tối ưu tổng quát.
