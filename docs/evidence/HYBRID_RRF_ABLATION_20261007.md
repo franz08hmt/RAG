@@ -53,15 +53,27 @@ Hạng evidence theo câu (danh sách hạng lần lượt ứng với các span
 
 Ở các ca cụ thể, RRF đưa P004 từ ngoài Top-10 của BM25 vào hạng 4, nhưng làm evidence của P003 kém đầy đủ hơn Dense (một span ở hạng 6) và không giữ được evidence P005 mà Dense xếp hạng 1. Với P008, Dense có một span ở hạng 2 còn RRF đẩy cả hai xuống hạng 6 và 8. P007 không phân biệt được ba phương pháp trong danh sách hạng quan sát được. Các ca này giải thích vì sao điểm RRF nằm giữa BM25 và Dense, nhưng không cho phép kết luận phương pháp nào tốt hơn nói chung.
 
+## Độ phủ candidate trước khi áp dụng reranker
+
+Reranker chỉ sắp xếp lại các chunk được đưa vào candidate pool; nó không thể thêm lại evidence đã bị bước retrieval loại khỏi pool. Vì vậy, ngoài điểm Top-5, runner đo xem exact evidence có xuất hiện trong Top-20 đầu vào của từng phương pháp hay không. Với Hybrid, candidate list là Top-20 sau RRF từ hai nhánh BM25/Dense, mỗi nhánh lấy tối đa 20 ứng viên.
+
+| Candidate list | Exact span có mặt trong Top-20 | Câu có đủ mọi span trong Top-20 |
+|---|---:|---:|
+| BM25 | 7/10 (0,700) | 5/7 (0,714) |
+| Dense BGE-M3 | 10/10 (1,000) | 7/7 (1,000) |
+| Hybrid RRF | 10/10 (1,000) | 7/7 (1,000) |
+
+Trong pilot này, cả Dense và Hybrid đều đưa toàn bộ evidence đã gán nhãn vào Top-20; do đó candidate pool của chúng có đủ dữ liệu để một reranker thử đưa evidence lên cao hơn. Đây chỉ là **độ phủ đầu vào**: không chứng minh reranker sẽ xếp đúng, và không thay cho việc so sánh reranker bằng metric sau xếp hạng. RRF hiện còn khoảng cách giữa Recall@5 (6/10) và candidate coverage@20 (10/10), nhưng bộ pilot phát triển nhỏ, chưa độc lập; không dùng kết quả này để chốt hiệu quả hoặc chọn model reranker.
+
 ## Diễn giải
 
 Trong mẫu này, RRF cải thiện so với BM25 nhưng không vượt Dense BGE-M3: Recall@5 tăng từ 4/10 lên 6/10 khi hợp nhất, trong khi Dense riêng đạt 9/10. RRF cũng giảm Complete-evidence Hit@5 so với Dense (4/7 so với 6/7). Kết quả nhắc rằng việc kết hợp lexical và dense không tự động tốt hơn nhánh mạnh nhất; thứ hạng có thể đổi theo câu hỏi và lớp tài liệu.
 
-Chưa chọn RRF làm mặc định. Kết quả chỉ hỗ trợ kết luận cục bộ trên bộ pilot nhỏ; chưa có holdout độc lập, chưa đo tác động của các cutoff khác, chưa so sánh vector store, chưa có reranker và chưa đánh giá answer generation/citation/refusal. Nếu tiếp tục, cần mở rộng câu hỏi đã được kiểm tra và tách dev/test trước khi điều chỉnh `candidate_k` hoặc `k`; không dùng lại cùng bộ để vừa chọn tham số vừa tuyên bố hiệu quả.
+Chưa chọn RRF làm mặc định. Kết quả chỉ hỗ trợ kết luận cục bộ trên bộ pilot nhỏ; chưa có holdout độc lập, chưa đo tác động của các cutoff khác, chưa so sánh vector store, chưa chạy reranker và chưa đánh giá answer generation/citation/refusal. Nếu tiếp tục, cần mở rộng câu hỏi đã được kiểm tra và tách dev/test trước khi điều chỉnh `candidate_k` hoặc `k`; không dùng lại cùng bộ để vừa chọn tham số vừa tuyên bố hiệu quả.
 
 ## Tái lập và bảo vệ dữ liệu
 
-Runner: [`run_hybrid_retrieval_ablation.py`](../../scripts/run_hybrid_retrieval_ablation.py); triển khai RRF: [`hybrid.py`](../../src/rag_hcmute/retrieval/hybrid.py). JSON kết quả Git-ignore tại `artifacts/results/hybrid_retrieval_ablation/hybrid_5da3bd4d5de54492_20261007T083332Z.json` ghi cấu hình/hash, metric gộp và chẩn đoán bằng mã câu/span, loại tài liệu, thứ hạng; không ghi câu hỏi, đáp án, trích đoạn nguồn, preview hay vector.
+Runner: [`run_hybrid_retrieval_ablation.py`](../../scripts/run_hybrid_retrieval_ablation.py); triển khai RRF: [`hybrid.py`](../../src/rag_hcmute/retrieval/hybrid.py). JSON kết quả Git-ignore tại `artifacts/results/hybrid_retrieval_ablation/hybrid_5da3bd4d5de54492_20261007T091540Z.json` ghi cấu hình/hash, metric gộp, coverage@20 và chẩn đoán bằng mã câu/span, loại tài liệu, thứ hạng; không ghi câu hỏi, đáp án, trích đoạn nguồn, preview hay vector.
 
 ```powershell
 & 'C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe' scripts/run_hybrid_retrieval_ablation.py --dense-model 'D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181'

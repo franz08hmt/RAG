@@ -126,12 +126,13 @@ Có thể chạy phép so sánh BM25, Dense và Hybrid RRF trên snapshot G0 đ�
 `scripts/run_hybrid_retrieval_ablation.py`. Runner dùng câu hỏi và evidence span hiện có, BGE-M3 local,
 không gọi API; kết quả được ghi dưới `artifacts/results/` (Git-ignored), chỉ gồm metric, mã câu/span,
 loại tài liệu và thứ hạng để chẩn đoán; không ghi câu hỏi hoặc văn bản nguồn. Đây là benchmark retrieval
-nhỏ, không phải luồng ứng dụng console hoặc đánh giá generation.
+nhỏ, tách với console demo và không đánh giá generation. Runner cũng ghi độ phủ exact evidence ở candidate
+Top-20 để ước lượng giới hạn đầu vào của reranker; chưa chạy reranker.
 
 ## Kiểm thử
 
 ```bash
-pytest                          # 74 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF, console và evaluation
+pytest                          # 76 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF, console và evaluation
 python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được trong môi trường tối giản
 ```
 
@@ -146,7 +147,8 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
   thử Hybrid RRF. Trên G0, RRF đạt Evidence Recall@5 6/10, so với BM25 4/10 và Dense 9/10;
   Complete-evidence Hit@5 lần lượt 4/7, 3/7 và 6/7 theo thứ tự Hybrid/BM25/Dense. Kết quả và giới
   hạn được tách riêng tại `docs/evidence/CHUNK_STRATEGY_ABLATION_20261007.md` và
-  `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`. Chưa đổi mặc định.
+  `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`. Candidate Top-20 chứa đủ 10/10 span và 7/7 câu
+  với Dense/RRF trong pilot; đây là độ phủ ứng viên, chưa phải phép đo hiệu quả reranker. Chưa đổi mặc định.
 - Phần còn mở của Mốc 1: mở rộng câu hỏi độc lập; đánh giá thêm embedding/vector-store/reranker khi
   phương án tài nguyên được duyệt; hoàn thiện xử lý tổng quát cho scan, bảng, hình; và tiếp tục phần
   generation, citation/refusal. Đã có retrieval console cho BM25/Dense/Hybrid; RRF hiện vẫn là thử nghiệm,

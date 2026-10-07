@@ -2,6 +2,7 @@ import pytest
 
 from rag_hcmute.evaluation.run_pilot import PilotQuestion
 from scripts.run_hybrid_retrieval_ablation import (
+    _candidate_coverage_summary,
     _classify_question_evidence,
     _question_diagnostics,
 )
@@ -25,6 +26,39 @@ def test_classification_rejects_empty_or_out_of_range_span_ranks() -> None:
         _classify_question_evidence({}, hit_k=5, top_k=10)
     with pytest.raises(ValueError, match="within the evaluated"):
         _classify_question_evidence({"S1": 11}, hit_k=5, top_k=10)
+
+
+def test_candidate_coverage_summary_uses_candidate_depth_as_recall_cutoff() -> None:
+    summary = _candidate_coverage_summary(
+        {
+            "top_k": 20,
+            "hit_k": 20,
+            "evidence_span_recall_at_k": {"value": 0.8, "hits": 8, "denominator": 10},
+            "complete_evidence_hit_at_k": {"value": 5 / 7, "hits": 5, "denominator": 7},
+        }
+    )
+
+    assert summary == {
+        "candidate_depth": 20,
+        "evidence_span_candidate_recall": {"value": 0.8, "hits": 8, "denominator": 10},
+        "complete_evidence_candidate_coverage": {
+            "value": 5 / 7,
+            "hits": 5,
+            "denominator": 7,
+        },
+    }
+
+
+def test_candidate_coverage_rejects_mismatched_evaluation_cutoff() -> None:
+    with pytest.raises(ValueError, match="hit_k to equal"):
+        _candidate_coverage_summary(
+            {
+                "top_k": 20,
+                "hit_k": 5,
+                "evidence_span_recall_at_k": {},
+                "complete_evidence_hit_at_k": {},
+            }
+        )
 
 
 def test_question_diagnostics_only_include_content_free_identifiers_and_ranks() -> None:

@@ -35,6 +35,7 @@ TOP_K = 10
 HIT_K = 5
 RRF_RANK_CONSTANT = 60
 RRF_CANDIDATE_K = 20
+RERANKER_CANDIDATE_K = 20
 
 
 def _sha256(path: Path) -> str:
@@ -92,6 +93,17 @@ def _metric_summary(result: dict) -> dict:
         "evidence_span_recall_at_5": result["evidence_span_recall_at_k"],
         "complete_evidence_hit_at_5": result["complete_evidence_hit_at_k"],
         "first_evidence_mrr_at_10": result["first_evidence_mrr_at_top_k"],
+    }
+
+
+def _candidate_coverage_summary(result: dict) -> dict:
+    """Summarize whether exact evidence enters the candidate list for a reranker."""
+    if result["top_k"] != result["hit_k"]:
+        raise ValueError("Candidate coverage requires hit_k to equal the candidate depth.")
+    return {
+        "candidate_depth": result["top_k"],
+        "evidence_span_candidate_recall": result["evidence_span_recall_at_k"],
+        "complete_evidence_candidate_coverage": result["complete_evidence_hit_at_k"],
     }
 
 
@@ -316,9 +328,18 @@ def run_ablation(*, source_root: Path, dense_model: str) -> dict:
             questions=questions,
             document_types=document_types,
         )
+        candidate_coverage = evaluate_exact_evidence_retrieval(
+            questions=questions,
+            spans_by_question=spans_by_question,
+            chunks=chunks,
+            retriever=retriever,
+            top_k=RERANKER_CANDIDATE_K,
+            hit_k=RERANKER_CANDIDATE_K,
+        )
         results[name] = {
             "config": config,
             "metrics": _metric_summary(exact),
+            "reranker_candidate_coverage": _candidate_coverage_summary(candidate_coverage),
             "question_diagnostics": question_diagnostics,
             "evidence_class_counts": evidence_class_counts,
             "metrics_by_document_type": _metrics_by_document_type(
@@ -351,6 +372,7 @@ def run_ablation(*, source_root: Path, dense_model: str) -> dict:
             "metric_scope": "exact source-token evidence span; retrieval only, not generation",
             "top_k": TOP_K,
             "hit_k": HIT_K,
+            "reranker_candidate_depth": RERANKER_CANDIDATE_K,
             "corpus_chunk_count": len(chunks),
             "baseline_content_signature_matches": True,
             "note": "Pilot is development data, not an independent holdout; diagnostics retain synthetic question/span IDs and ranks only, not question or source text.",

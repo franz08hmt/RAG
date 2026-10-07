@@ -208,3 +208,10 @@
 - Console hiển thị phương thức, thời gian, hạng, điểm, tên tài liệu, PDF page, section và excerpt ngắn; thông báo rõ phần hiện tại chỉ retrieval, không generation/refusal. Smoke test BM25 và Hybrid trên G0 156 chunks đều qua; kết quả capture trong bộ nhớ, không lưu câu hỏi hay trích đoạn nguồn.
 - Smoke Hybrid phát hiện wrapper RRF không cung cấp `chunks` trực tiếp; sửa phần xác định kích thước corpus để đọc từ lexical retriever và thêm test hồi quy.
 - Bằng chứng và giới hạn tại `docs/evidence/RETRIEVAL_CONSOLE_20261007.md`. Lệnh `python -m` Hybrid và `--help` UTF-8 trên PowerShell đã chạy thành công. Toàn bộ pytest hiện 74 passed; `compileall` và `git diff --check` đạt. Mốc 1 vẫn mở; chưa chỉnh DOCX, không gọi API, không tải model/gói, không push/merge/PR.
+
+## 2026-10-07 — Độ phủ candidate trước reranker
+
+- Mở rộng runner Hybrid để đo exact-evidence coverage ở độ sâu Top-20, tương ứng với candidate pool có thể đưa sang reranker. Lượt chạy dùng cùng G0 native-only, pilot 7 câu/10 span và BGE-M3 cục bộ; không gọi API hoặc tải model.
+- Top-20 BM25 chứa 7/10 span và đủ toàn bộ evidence ở 5/7 câu; Dense BGE-M3 và RRF đều chứa 10/10 span, đủ ở 7/7 câu. Kết quả này chỉ cho thấy evidence có mặt trong candidate pool; chưa đo reranker và không chứng minh thứ hạng sau reranking.
+- Pilot nhỏ vẫn là dữ liệu phát triển, không phải holdout độc lập; không đổi mặc định hay chọn reranker. Báo cáo chi tiết tại `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`; raw JSON chỉ chứa metric và mã định danh, Git-ignored.
+- Thêm hai test cho cutoff candidate; toàn bộ pytest 76 passed, `compileall` và `git diff --check` đạt. Mốc 1 vẫn mở, chưa cập nhật DOCX/chuyển Mốc 2; không tải/cài thêm model/gói, không push/merge/PR.
