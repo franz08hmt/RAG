@@ -148,3 +148,11 @@
 - Hạng evidence trong Top-5 đủ cho 4/5, 1/5, 0/5 câu ở canonical B0/T1/T2; với truy vấn rút gọn + tên cột là 5/5, 4/5, 3/5. T1/T2 vẫn có trường hợp evidence ngoài Top-5; TB001/TB004 của T2 ở hạng 7 và 9. Đây là kết quả mô tả trên năm câu, không chứng minh query expansion cải thiện tổng quát.
 - Ghi truy vấn, hạng đầy đủ và giới hạn tại `docs/evidence/BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`. Không đổi index, metric chính, pipeline mặc định hay câu hỏi đã duyệt; chưa cập nhật DOCX vì Mốc 1 chưa đóng.
 - Thêm `scripts/diagnose_bm25_query_sensitivity.py` để tái lập lượt chẩn đoán và lưu raw JSON Git-ignored với query, evidence rank, Top-5 IDs, hash bộ câu hỏi/evidence và revision code.
+
+## 2026-10-07 — Kiểm kê document class và xử lý đầu vào
+
+- Đối chiếu `corpus_manifest.csv`, snapshot/build log G0, page/chunk JSONL metadata và tham chiếu ảnh raster trong PDF. Ba source hash khớp manifest; snapshot G0 `5da3bd4d5de54492` có 3 tài liệu, 182 trang, 156 chunk.
+- G0 gồm 1 quy chế có 31 dấu Điều/52 chunk, 1 hướng dẫn không cấu trúc/1 chunk và 1 sổ tay không đạt ngưỡng cấu trúc Điều/103 chunk. 26 trang Sổ tay bị heuristic gắn cờ nghi scan; đây không phải xác minh trực quan toàn bộ. Trong PDF có raster refs ở 2/32, 0/1, 149/149 trang tương ứng; đây không phải phân loại ngữ nghĩa ảnh.
+- Build log G0 chỉ ghi PyMuPDF, không có cấu hình OCR; thí nghiệm OCR 4 trang đã ghi riêng trong evidence và chưa tích hợp vào snapshot. G0 JSONL thiếu extraction method, OCR confidence và token offsets. Table Bảng 5 đã thử riêng bằng dữ liệu rà soát thủ công; chưa có parser tự động tổng quát.
+- Phát hiện mô tả PDF page 107 không nhất quán giữa hai báo cáo OCR (scan text so với infographic); đã đánh dấu cần xác nhận cục bộ, không đưa ảnh Sổ tay vào hội thoại vì ràng buộc riêng tư.
+- Tạo `scripts/audit_document_input_profile.py` để tái lập audit metadata-only; JSON raw Git-ignored ở `artifacts/results/input_document_profile/`. Ghi nhận phương pháp và khoảng trống theo YC4/YC13 tại `docs/evidence/INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`. Mốc 1 chưa đóng, chưa cập nhật DOCX.

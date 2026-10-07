@@ -95,6 +95,8 @@ Giảng viên yêu cầu tìm hiểu kỹ từng giai đoạn, nêu dữ liệu 
 
 Kết quả chẩn đoán BM25 mới nhất: `docs/evidence/BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`. Truy vấn biến thể chỉ dùng để phân tích, không thay câu hỏi đã duyệt hoặc pipeline mặc định.
 
+Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`; audit được tái lập bằng `scripts/audit_document_input_profile.py`. G0 có 3 loại nguồn nhưng chỉ một quy chế đạt cấu trúc Điều; 26 trang Sổ tay là cảnh báo scan theo heuristic, OCR bốn trang đang là phép thử riêng, chưa tích hợp vào G0. Mô tả OCR PDF page 107 còn bất nhất giữa hai ghi chú, cần xác minh cục bộ. Báo cáo này không chứa nội dung PDF hoặc thông tin cá nhân.
+
 ## File deliverable chính
 
 - Code: `src/rag_hcmute/{ingestion,retrieval,evaluation}/`, `scripts/*.py`.
