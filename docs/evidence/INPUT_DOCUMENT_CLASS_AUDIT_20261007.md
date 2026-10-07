@@ -33,7 +33,7 @@ Các trang sổ tay bị gắn cờ nghi scan trong snapshot là PDF pages 1, 10
 ## Điểm cần sửa trước khi mô tả đây là pipeline hoàn chỉnh
 
 - **Phân loại trang scan:** 26 trang hiện là candidate theo heuristic. Cần kiểm tra mẫu theo loại layout và đưa nhãn đã xác minh vào manifest/annotation; không nên ghi “OCR xử lý 26 trang” khi lượt OCR chỉ đánh giá bốn trang.
-- **Mô tả PDF page 107 chưa thống nhất:** `OCR_PSM_SWEEP_20260928.md` mô tả page 107 là trang scan văn bản, trong khi `OCR_PSM_PAGE116_20260928.md` gọi page 107 là infographic. Cần đối chiếu lại tại máy với PDF gốc trước khi dùng mô tả này trong DOCX. Để tránh đưa nội dung Sổ tay có thể chứa thông tin cá nhân vào hội thoại, trang này chưa được mở trực quan ở đây.
+- **Nhãn PDF page 107 đã được rà soát ở mức metadata:** hai ghi chú OCR trước đây không thống nhất. Thống kê hộp OCR PSM 4 (86 đơn vị/15 dòng/8 khối) gần page 136 (79/13/7) hơn các trang chữ nhiều hơn trong mẫu; đây là tín hiệu ủng hộ nhãn infographic/nội dung thị giác hỗn hợp. Độ tin cậy vừa phải vì không phải xác nhận trực quan. Ghi chú cũ “hai trang scan văn bản (107, 109)” đã được sửa; CER/WER giữ nguyên. Chi tiết tại [`OCR_LAYOUT_LABEL_RECHECK_20261007.md`](OCR_LAYOUT_LABEL_RECHECK_20261007.md).
 - **Document Class chưa gắn với policy xử lý:** manifest hiện có loại văn bản ở mức nguồn (`quyet_dinh`, `huong_dan`, `so_tay`), nhưng chưa phân loại nội dung theo modality/layout như văn xuôi, bảng, scan, biểu đồ. Chunker cũng chưa dùng lớp đó để chọn chiến lược.
 - **Metadata của G0 còn thiếu để truy nguyên OCR:** page/chunk JSONL lịch sử không lưu extraction method, confidence OCR hoặc token offsets. Mã hiện tại đã có hỗ trợ một số trường này, nhưng muốn dùng trong kết quả chính thức cần tạo snapshot mới, ghi cấu hình và hash, rồi đánh giá lại trên cùng bộ câu hỏi; không sửa ngược số liệu G0.
 - **Độ phủ thí nghiệm còn nhỏ:** OCR có bốn trang mẫu; table ablation có một bảng và năm câu hỏi. Chưa đủ để kết luận về mọi dạng scan, sơ đồ, bảng nhiều tầng/ô gộp hoặc lớp tài liệu khác.
@@ -42,7 +42,7 @@ Các trang sổ tay bị gắn cờ nghi scan trong snapshot là PDF pages 1, 10
 
 Hiện có thể trình bày chắc chắn rằng corpus gồm ba lớp nguồn khác nhau; bộ nạp đang trích xuất text theo trang, nhận diện cấu trúc Điều cho một tài liệu, và dùng sliding window cho các nguồn còn lại. Đã có một số đo về chunk size, OCR cấp trang và biểu diễn một bảng cụ thể. Chưa thể mô tả hệ thống là đã xử lý đầy đủ PDF scan, hình và bảng tổng quát: OCR chưa được xác nhận trong G0, hình chưa được diễn giải ngữ nghĩa, và table parser còn phụ thuộc dữ liệu đã rà soát thủ công.
 
-Theo góp ý giảng viên, bước hợp lý tiếp theo là tạo một ma trận input class/layout → phương thức trích xuất → loại chunk → tiêu chí kiểm tra, rồi chọn một mẫu đại diện cho từng loại cần khảo sát. Trước khi dùng lại kết quả OCR, cần sửa bất nhất mô tả page 107 dựa trên kiểm tra cục bộ. Những việc này vẫn thuộc phần tìm hiểu sâu Mốc 1; chưa cập nhật DOCX nộp thầy cho đến khi nội dung và minh chứng mốc được chốt.
+Theo góp ý giảng viên, bước tiếp theo là chọn mẫu đại diện theo ma trận input class/layout → phương thức trích xuất → loại chunk → tiêu chí kiểm tra tại [`INPUT_CLASS_PROCESSING_MATRIX_20261007.md`](INPUT_CLASS_PROCESSING_MATRIX_20261007.md). Bất nhất mô tả page 107 đã được rà soát và sửa ở mức metadata OCR; nhãn infographic/nội dung thị giác hỗn hợp có độ tin cậy vừa phải, không phải xác nhận bằng mắt. Các việc này vẫn thuộc Mốc 1; chưa cập nhật DOCX cho đến khi nội dung và minh chứng mốc được chốt.
 
 ## Tài liệu và mã liên quan
 

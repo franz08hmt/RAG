@@ -2,7 +2,7 @@
 
 ## Mục tiêu và phạm vi
 
-Khảo sát độ nhạy của OCR theo Page Segmentation Mode (PSM), giữ nguyên các yếu tố khác. Mẫu gồm hai trang scan văn bản (PDF page 107, 109) và một trang có sơ đồ (PDF page 136) trong Sổ tay Sinh viên 2024. Ba trang đều có reference chép thủ công ở local artifacts; reference chưa được đưa vào Git. Đây là pilot nhỏ, không đại diện cho toàn bộ corpus.
+Khảo sát độ nhạy của OCR theo Page Segmentation Mode (PSM), giữ nguyên các yếu tố khác. Mẫu gồm PDF page 107, 109 và 136 trong Sổ tay Sinh viên 2024. Ghi chú ban đầu xếp page 107 và 109 vào nhóm scan văn bản; rà soát bố cục sau đó cho thấy page 107 phù hợp hơn với infographic/nội dung thị giác hỗn hợp, page 109 là trang chữ có minh họa và page 136 là sơ đồ (xem [`OCR_LAYOUT_LABEL_RECHECK_20261007.md`](OCR_LAYOUT_LABEL_RECHECK_20261007.md)). Ba trang đều có reference chép thủ công ở local artifacts; reference chưa được đưa vào Git. Đây là pilot nhỏ, không đại diện cho toàn bộ corpus.
 
 ## Cấu hình và cách tính
 
@@ -22,11 +22,11 @@ Khảo sát độ nhạy của OCR theo Page Segmentation Mode (PSM), giữ nguy
 | 11 | **0,0987 / 0,1667** | 0,1757 / 0,2933 | **0,7362 / 0,8023** | 0,2855 / 0,3926 |
 | 13 | 1,0000 / 1,0000 | 0,9970 / 1,0000 | 1,0000 / 1,0000 | 0,9986 / 1,0000 |
 
-Trên hai trang văn bản, PSM 3 đạt CER/WER tốt nhất ở page 109 và gần page 107; trên page 136 có sơ đồ, PSM 11 tốt nhất nhưng vẫn còn CER 73,62% và WER 80,23%, quá cao để dùng kết quả OCR làm văn bản đáng tin cậy. PSM 13 gần như không nhận dạng được nội dung ở cả ba trang. PSM 3 và 4 gần như ngang nhau về metric gộp; chênh lệch này không đủ căn cứ để khẳng định một chế độ tốt hơn trên dữ liệu tổng quát.
+Trên page 109 (trang chữ có minh họa), PSM 3 đạt CER/WER thấp nhất trong lượt này. Với page 107 (infographic/nội dung thị giác hỗn hợp), PSM 11 thấp nhất theo bảng; với page 136 (sơ đồ), PSM 11 cũng thấp nhất nhưng còn CER 73,62% và WER 80,23%, quá cao để dùng OCR làm văn bản đáng tin cậy. PSM 13 gần như không nhận dạng được nội dung ở cả ba trang. Metric gộp chỉ mô tả ba trang có layout khác nhau; không dùng nó để kết luận một PSM tốt hơn cho riêng loại trang nào.
 
 ## Diễn giải và quyết định tạm thời
 
-PSM 3 có metric gộp thấp nhất ở mẫu này, nhưng kết quả tổng bị chi phối bởi hai trang văn bản dài hơn; riêng trang sơ đồ lại phù hợp hơn với PSM 11. Vì chỉ có ba trang và một trang sơ đồ, **giữ PSM 6 làm mặc định hiện tại**, không chọn PSM theo kết quả của mẫu nhỏ. Có thể đưa PSM 3 vào lượt kiểm chứng kế tiếp trên tập trang scan văn bản lớn hơn; sơ đồ cần một nhánh xử lý layout/ảnh riêng thay vì dựa vào OCR thuần.
+PSM 3 có metric gộp thấp nhất ở mẫu này, nhưng kết quả gộp không đại diện riêng cho một layout. Page 107 và page 136 có bố cục thị giác, trong đó PSM 11 có CER/WER thấp nhất nhưng vẫn kém đáng tin cậy ở sơ đồ. Vì mẫu nhỏ, **giữ PSM 6 làm mặc định hiện tại**, không chọn PSM theo kết quả này. Có thể kiểm chứng PSM 3 trên nhiều trang chữ có minh họa hơn; sơ đồ cần một nhánh xử lý layout/ảnh riêng thay vì dựa vào OCR thuần.
 
 Đây là đánh giá độ giống ký tự/từ trên reference thủ công, không phải đánh giá chất lượng retrieval hay câu trả lời RAG. CER/WER thấp hơn cũng chưa bảo đảm các con số/điều kiện quan trọng được nhận dạng chính xác; nội dung dùng làm bằng chứng vẫn cần kiểm tra ngược trang nguồn.
 

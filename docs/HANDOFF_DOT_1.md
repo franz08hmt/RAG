@@ -95,7 +95,7 @@ Giảng viên yêu cầu tìm hiểu kỹ từng giai đoạn, nêu dữ liệu 
 
 Kết quả chẩn đoán BM25 mới nhất: `docs/evidence/BM25_QUERY_SENSITIVITY_DIAGNOSTIC_20261005.md`. Truy vấn biến thể chỉ dùng để phân tích, không thay câu hỏi đã duyệt hoặc pipeline mặc định.
 
-Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`; audit được tái lập bằng `scripts/audit_document_input_profile.py`. G0 có 3 loại nguồn nhưng chỉ một quy chế đạt cấu trúc Điều; 26 trang Sổ tay là cảnh báo scan theo heuristic, OCR bốn trang đang là phép thử riêng, chưa tích hợp vào G0. Mô tả OCR PDF page 107 còn bất nhất giữa hai ghi chú, cần xác minh cục bộ. Báo cáo này không chứa nội dung PDF hoặc thông tin cá nhân.
+Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`; audit được tái lập bằng `scripts/audit_document_input_profile.py`. G0 có 3 loại nguồn nhưng chỉ một quy chế đạt cấu trúc Điều; 26 trang Sổ tay là cảnh báo scan theo heuristic, OCR bốn trang đang là phép thử riêng, chưa tích hợp vào G0. Page 107 đã được rà soát ở mức metadata OCR và có nhãn làm việc infographic/nội dung thị giác hỗn hợp với độ tin cậy vừa phải. Báo cáo này không chứa nội dung PDF hoặc thông tin cá nhân.
 
 ## File deliverable chính
 
@@ -123,5 +123,5 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 
 - Sau audit document class, lập ma trận `docs/evidence/INPUT_CLASS_PROCESSING_MATRIX_20261007.md`: phân biệt lớp nguồn với layout/modality theo trang; nối từng loại nội dung với cách xử lý hiện tại, minh chứng, giới hạn và phép thử tiếp theo.
 - Điểm đã có minh chứng: chunk theo Điều cho QĐ 1727; fallback cho Hướng dẫn FIT và Sổ tay; thí nghiệm OCR bốn trang; ablation retrieval cho Bảng 5. Chưa có OCR tích hợp trong G0, parser bảng tổng quát hoặc xử lý ngữ nghĩa hình/sơ đồ.
-- Page 107 còn nhãn mâu thuẫn giữa hai ghi chú OCR. Người học cần xác minh tại máy trước khi dùng trang này làm mẫu theo layout; không đưa nội dung Sổ tay vào hội thoại/Git.
+- Rà soát cục bộ metadata OCR page 107: 86 đơn vị/15 dòng/8 khối ở PSM 4, gần page 136 (79/13/7) hơn các trang chữ nhiều hơn. Nhãn làm việc chuyển sang infographic/nội dung thị giác hỗn hợp với độ tin cậy vừa phải; đã sửa phần mô tả ban đầu ở sweep nhưng không đổi CER/WER. Không đưa ảnh hoặc chữ Sổ tay vào hội thoại/Git; xác nhận bằng mắt trên máy vẫn là bước tùy chọn nếu cần nhãn vàng chắc chắn.
 - Bước này chỉ lập kế hoạch kiểm chứng, không chạy benchmark mới, không đổi code/default và không cập nhật DOCX. Mốc 1 vẫn mở, chưa chuyển Mốc 2.
