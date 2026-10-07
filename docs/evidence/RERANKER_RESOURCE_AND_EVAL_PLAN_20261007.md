@@ -12,7 +12,7 @@ Trên pilot G0 hiện tại (7 câu answerable, 10 exact-evidence span), candida
 
 Ứng viên đầu tiên được đề xuất là `BAAI/bge-reranker-v2-m3`. Tài liệu của nhà phát triển mô tả đây là cross-encoder đa ngôn ngữ: query và passage được đưa vào cùng lượt chấm điểm, sau đó các passage được xếp theo độ liên quan; đây là cách chấm khác với embedding rồi tìm kiếm vector. Model card hiện ghi giấy phép Apache-2.0, tổng repo khoảng 2,29 GB và file trọng số `model.safetensors` khoảng 2,27 GB. Tài liệu công bố nhãn “multilingual”, nhưng không cung cấp trong trang model card một kết luận đủ để đảm bảo chất lượng riêng cho tiếng Việt hoặc corpus học vụ HCMUTE; điều đó phải được đo trên bộ câu hỏi đã kiểm tra của project.
 
-Phương án nạp dự kiến dùng `AutoTokenizer` và `AutoModelForSequenceClassification` từ `transformers`, là cách được hướng dẫn trong model card. Không cần cài `FlagEmbedding` chỉ để thử đường này; môi trường hiện có `transformers 5.17.0`, `sentence-transformers 6.1.0` và CUDA PyTorch `2.14.0+cu126`. Khi chạy thật, phải khóa revision model, lưu hash/config, bật chế độ offline sau khi tải và không cho phép tự tải ngầm trong app.
+Phương án nạp dự kiến dùng `AutoTokenizer` và `AutoModelForSequenceClassification` từ `transformers`, là cách được hướng dẫn trong model card. Import-only smoke test cho hai lớp này và `sentence_transformers.CrossEncoder` đã thành công trong env project; không nạp trọng số và đã bật chế độ offline. Không cần cài `FlagEmbedding` chỉ để thử đường này; môi trường hiện có `transformers 5.17.0`, `sentence-transformers 6.1.0` và CUDA PyTorch `2.14.0+cu126`. Khi chạy thật, phải khóa revision model, lưu hash/config, bật chế độ offline sau khi tải và không cho phép tự tải ngầm trong app.
 
 ## Tài nguyên máy và tính khả thi
 
