@@ -30,4 +30,5 @@ Các lượt thử OCR hiện có:
 - `INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`: kiểm kê ba lớp tài liệu, page/chunk/raster metadata, cách xử lý scan/bảng/hình hiện tại và các giới hạn của snapshot G0; báo cáo chỉ chứa metadata/tổng hợp, không chứa text nguồn.
 - `INPUT_CLASS_PROCESSING_MATRIX_20261007.md`: ánh xạ từng dạng nội dung sang cách xử lý đang có, minh chứng, giới hạn và phép thử kế tiếp; phân biệt kết quả đo được với đề xuất.
 - `OCR_LAYOUT_LABEL_RECHECK_20261007.md`: rà soát metadata bố cục của page 107 bằng số liệu OCR không chứa nội dung; nhãn làm việc được sửa thành infographic/nội dung thị giác hỗn hợp với độ tin cậy vừa phải.
+- `INPUT_CLASS_SAMPLE_PLAN_20261007.md`: danh sách trang mẫu đề xuất theo input class/layout, căn cứ chọn, trạng thái nhãn, tiêu chí dùng và các kiểm tra quyền riêng tư cần thiết.
 
