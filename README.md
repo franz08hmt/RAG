@@ -31,8 +31,8 @@ rag-hcmute-poc/
 │   └── evidence/            Báo cáo thực nghiệm và các minh chứng đã chọn
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py
-│   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, common.py
-│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py
+│   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, reranked.py, common.py
+│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py
 │   └── console_app.py         Console explorer cho retrieval; chưa generation
 ├── scripts/                  CLI ingestion/retrieval/evaluation và runner thí nghiệm
 ├── tests/                    pytest cho ingestion, retrieval, evaluation và manifest
@@ -101,15 +101,26 @@ python -m rag_hcmute.console_app
 
 Có thể chạy một câu hỏi trực tiếp bằng `--query "..."`, tăng `--top-k`, hoặc chọn `--method dense`
 hay `--method hybrid`. Dense/Hybrid yêu cầu `--dense-model` trỏ tới thư mục BGE-M3 có sẵn trên máy;
-CLI bật chế độ offline và không tải model. Ví dụ trên máy đã chuẩn bị model:
+CLI bật chế độ offline và không tải model. Hai chế độ `dense-rerank` và `hybrid-rerank` là lựa chọn
+thử nghiệm riêng: lấy tối đa 20 ứng viên từ Dense hoặc Hybrid RRF rồi xếp hạng lại bằng snapshot local
+đã ghim của BGE-Reranker-v2-m3. Cần truyền thêm `--reranker-model`; mặc định `max_length=512`, batch
+size 4. Console báo số cặp bị cắt để người chạy không nhầm kết quả rerank với đầu vào đầy đủ. Mô hình
+reranker phải nằm sẵn trên máy và được nạp offline; không có tải tự động. Ví dụ trên máy đã chuẩn bị model:
 
 ```powershell
 python -m rag_hcmute.console_app --method hybrid --dense-model 'D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181' --top-k 5
 ```
 
+Ví dụ Hybrid + reranker (chỉ để quan sát, chưa chọn làm mặc định):
+
+```powershell
+python -m rag_hcmute.console_app --method hybrid-rerank --dense-model '<duong-dan-snapshot-BGE-M3>' --reranker-model 'D:\RAG\models\huggingface\hub\models--BAAI--bge-reranker-v2-m3\snapshots\953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e' --query "Điều kiện để sinh viên được xét công nhận tốt nghiệp gồm những gì?" --top-k 5
+```
+
 CLI hiện hiển thị hạng, điểm retriever, tên tài liệu, PDF page, section và đoạn trích ngắn để truy ngược
-bằng chứng. Đây là **console cho retrieval**, chưa sinh câu trả lời, chưa có ngưỡng từ chối đã hiệu chỉnh,
-và chưa đánh giá citation đầu ra; không trình bày nó như hệ thống RAG end-to-end.
+bằng chứng. Với hai biến thể rerank, CLI còn hiển thị kích thước candidate pool, thời gian reranker và
+số cặp đầu vào bị cắt. Đây vẫn là **console cho retrieval**, chưa sinh câu trả lời, chưa có ngưỡng từ
+chối đã hiệu chỉnh, và chưa đánh giá citation đầu ra; không trình bày nó như hệ thống RAG end-to-end.
 
 ## Bước 4 - Đánh giá trên bộ câu hỏi pilot
 
@@ -127,12 +138,13 @@ Có thể chạy phép so sánh BM25, Dense và Hybrid RRF trên snapshot G0 đ�
 không gọi API; kết quả được ghi dưới `artifacts/results/` (Git-ignored), chỉ gồm metric, mã câu/span,
 loại tài liệu và thứ hạng để chẩn đoán; không ghi câu hỏi hoặc văn bản nguồn. Đây là benchmark retrieval
 nhỏ, tách với console demo và không đánh giá generation. Runner cũng ghi độ phủ exact evidence ở candidate
-Top-20 để ước lượng giới hạn đầu vào của reranker; chưa chạy reranker.
+Top-20 để ước lượng giới hạn đầu vào của reranker. Pilot reranker development nhỏ được ghi riêng tại
+`docs/evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`; chưa dùng kết quả này làm kết luận cuối.
 
 ## Kiểm thử
 
 ```bash
-pytest                          # 76 test hiện tại: manifest, extraction/OCR, chunking, BM25/Dense/RRF, console và evaluation
+pytest                          # kiểm thử manifest, ingestion/OCR, chunking, BM25/Dense/RRF/reranker, console và evaluation
 python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được trong môi trường tối giản
 ```
 
@@ -148,9 +160,11 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
   Complete-evidence Hit@5 lần lượt 4/7, 3/7 và 6/7 theo thứ tự Hybrid/BM25/Dense. Kết quả và giới
   hạn được tách riêng tại `docs/evidence/CHUNK_STRATEGY_ABLATION_20261007.md` và
   `docs/evidence/HYBRID_RRF_ABLATION_20261007.md`. Candidate Top-20 chứa đủ 10/10 span và 7/7 câu
-  với Dense/RRF trong pilot; đây là độ phủ ứng viên, chưa phải phép đo hiệu quả reranker. Chưa đổi mặc định.
-- Phần còn mở của Mốc 1: mở rộng câu hỏi độc lập; đánh giá thêm embedding/vector-store/reranker khi
-  phương án tài nguyên được duyệt; hoàn thiện xử lý tổng quát cho scan, bảng, hình; và tiếp tục phần
-  generation, citation/refusal. Đã có retrieval console cho BM25/Dense/Hybrid; RRF hiện vẫn là thử nghiệm,
-  chưa được chọn làm mặc định và console chưa phải ứng dụng RAG end-to-end.
+  với Dense/RRF trong pilot. Đã chạy thêm reranker trên cùng development pilot: Recall@5 sau rerank
+  đạt 10/10 với cả Dense và RRF; kết quả nhỏ, chưa phải holdout và chưa đủ căn cứ đổi mặc định. Xem
+  `docs/evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`.
+- Phần còn mở của Mốc 1: mở rộng bộ câu hỏi độc lập/holdout; hoàn thiện khảo sát xử lý tổng quát cho
+  scan, bảng, hình; xem xét embedding/vector store khác khi có phương án tài nguyên được duyệt; tiếp tục
+  generation, citation/refusal và đánh giá end-to-end. Console hiện hỗ trợ BM25/Dense/Hybrid và hai
+  biến thể rerank dạng opt-in; chưa phải ứng dụng RAG end-to-end.
 

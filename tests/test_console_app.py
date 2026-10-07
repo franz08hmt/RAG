@@ -5,6 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from rag_hcmute.console_app import (
+    APPROVED_RERANKER_REVISION,
     _corpus_chunk_count,
     _configure_console_encoding,
     build_parser,
@@ -97,6 +98,53 @@ def test_console_defaults_to_bm25_and_the_approved_g0_snapshot() -> None:
     assert args.chunks.name == "chunks.jsonl"
     assert "g0_reproduction" in str(args.chunks)
     assert args.top_k == 5
+    assert args.reranker_max_length == 512
+    assert args.reranker_batch_size == 4
+
+
+def test_console_accepts_rerank_method_but_requires_explicit_models(tmp_path: Path) -> None:
+    chunks_file = tmp_path / "chunks.jsonl"
+    chunks_file.write_text(json.dumps(_chunk().to_dict()) + "\n", encoding="utf-8")
+    args = build_parser().parse_args(["--method", "hybrid-rerank"])
+
+    assert args.method == "hybrid-rerank"
+    assert APPROVED_RERANKER_REVISION == "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+    with pytest.raises(ValueError, match="--dense-model"):
+        create_retriever(method="hybrid-rerank", chunks_path=chunks_file)
+
+
+def test_reranked_console_output_exposes_candidate_and_truncation_counts() -> None:
+    hit = SimpleNamespace(
+        rank=1,
+        document_title="Synthetic policy",
+        pdf_page_start=4,
+        pdf_page_end=4,
+        section_path="Điều 1",
+        document_id="DOC",
+        chunk_id="DOC__c0001",
+        score=0.91,
+        text_preview="synthetic evidence excerpt",
+    )
+    result = SimpleNamespace(
+        hits=[hit],
+        latency_ms=12.5,
+        retrieval_latency_ms=3.25,
+        candidate_count=20,
+        candidate_depth=20,
+        reranker_latency_ms=9.25,
+        truncated_pair_count=7,
+        pair_count=20,
+    )
+
+    output = format_retrieval_result(method="hybrid-rerank", result=result, top_k=5)
+
+    assert "BGE-Reranker-v2-m3" in output
+    assert "thời gian retrieval + rerank" in output
+    assert "Candidate pool: 20/20" in output
+    assert "retrieval: 3.25 ms" in output
+    assert "9.25 ms" in output
+    assert "7/20" in output
+    assert "chưa phải câu trả lời do LLM sinh" in output
 
 
 def test_hybrid_console_can_report_shared_corpus_size() -> None:
