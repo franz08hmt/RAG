@@ -136,6 +136,17 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Thêm retrieval console tương tác/one-shot ở `src/rag_hcmute/console_app.py`, mặc định BM25 trên G0; Dense/Hybrid chỉ dùng model local truyền rõ qua `--dense-model` và bật offline. Hiển thị metadata truy vết cùng excerpt ngắn; thông báo rõ đây chưa phải generation hay refusal. Chưa dùng Gemini/Ollama, không tải model/gói.
 - Smoke test console trên G0 native-only đạt với BM25 và Hybrid BGE-M3/RRF, 156 chunks; output được capture để xác nhận metadata/excerpt, không echo hoặc lưu câu hỏi/văn bản nguồn. Chi tiết phạm vi và cách chạy tại `docs/evidence/RETRIEVAL_CONSOLE_20261007.md`. YC12 mới đạt phần retrieval console; generation, citation correctness và refusal vẫn chưa có.
 
+## Cập nhật tiếp nối — 07/10/2026 (reranker local)
+
+- Sau khi người học duyệt tải model, tải `BAAI/bge-reranker-v2-m3` từ Hugging Face tại revision cố định `953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e`, lưu ngoài Git ở `D:\RAG\models\huggingface\hub\models--BAAI--bge-reranker-v2-m3\snapshots\953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e`.
+- Trọng số `model.safetensors` có kích thước 2,271,071,852 bytes; SHA-256 `d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286` khớp metadata Hugging Face. Không cài thêm package, không gọi API.
+- Nạp model FP16 bằng env `rag-hcmute` và chạy smoke scoring offline trên hai cặp văn bản tổng hợp: cặp liên quan được xếp trên cặp không liên quan; peak CUDA allocation 1.067 GiB trên RTX 3060 Laptop GPU. Đây chỉ là kiểm tra kỹ thuật, không phải benchmark chất lượng trên dữ liệu HCMUTE.
+- Thêm `src/rag_hcmute/evaluation/reranker.py` và `scripts/run_reranker_ablation.py`; runner xác minh corpus/gold annotations và model revision/hash, rồi so sánh Dense Top-20 và RRF Top-20 trước/sau rerank. Kiểm thử cuối toàn repo: 80 passed; compileall và `git diff --check` đạt.
+- Trên development pilot 7 câu answerable/10 exact spans, Dense tăng từ Recall@5 9/10, Complete Hit@5 6/7, MRR@10 0,762 lên 10/10, 7/7, 0,857. RRF tăng từ 6/10, 4/7, 0,524 lên 10/10, 7/7, 0,857. Candidate coverage@20 của cả hai là 10/10 span, 7/7 câu đủ evidence. Đây là pilot nhỏ, không phải holdout; không đổi retriever mặc định.
+- Với `max_length=512`, truncation chỉ ở cuối passage: 99/140 cặp Dense và 110/140 cặp RRF bị cắt token; 0/10 candidate occurrence của gold evidence bị cắt ở mỗi phương pháp. Rerank median/query là 446,1 ms (Dense) và 445,2 ms (RRF); peak CUDA allocated 1,110 GiB trong lượt chạy này. Giới hạn và raw metrics-only result Git-ignored được ghi tại `docs/evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`.
+- Chưa có đánh giá generation, citation correctness, refusal, holdout hoặc độ ổn định hiệu năng; reranking chưa được đặt làm mặc định.
+- Mốc 1 vẫn mở, chưa cập nhật DOCX, chưa chuyển Mốc 2. Làm local trên `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR.
+
 ## Cập nhật tiếp nối — 07/10/2026
 
 - Mở rộng runner Hybrid để đo độ phủ exact evidence ở candidate depth 20, nhằm kiểm tra giới hạn dữ liệu đầu vào trước một thử nghiệm reranker. Trên cùng pilot 7 câu/10 span: BM25 có 7/10 span và đủ toàn bộ span ở 5/7 câu; Dense BGE-M3 và RRF đều có 10/10 span, đủ ở 7/7 câu.
