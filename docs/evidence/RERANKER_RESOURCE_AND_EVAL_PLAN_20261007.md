@@ -66,3 +66,14 @@ Trong pilot nhỏ này, reranker xếp đủ evidence vào Top-5 ở cả hai ng
 - Chi phí API: 0 USD; model, retrieval và reranking đều chạy local/offline. Không cài thêm package.
 
 Raw result metrics-only, Git-ignored: `artifacts/results/reranker_ablation/reranker_5da3bd4d5de54492_20261007T094759Z.json`. File chỉ ghi hash, metric tổng hợp, mã câu/span, thứ hạng, độ dài/cắt token và thời gian; không ghi câu hỏi, câu trả lời, excerpt nguồn hay vector. Kiểm thử cuối toàn repo: 80 passed; compileall và `git diff --check` đạt. Mốc 1 vẫn mở; chưa cập nhật DOCX, chưa đánh giá generation/citation/refusal và chưa chuyển Mốc 2.
+
+### Kiểm tra độ nhạy ở 1.024 token — 07/10/2026
+
+Để xem ngưỡng 512 có làm mất ngữ cảnh ứng viên hay đổi thứ hạng, chạy lại cùng runner với `--max-length 1024 --batch-size 4`. Câu hỏi, corpus G0, candidate Top-20, chunking, gold spans, model revision và các phương pháp còn lại giữ nguyên.
+
+- Độ dài cặp lớn nhất quan sát được là 723 token ở candidate Dense và 812 token ở candidate RRF; ở ngưỡng 1.024, truncation giảm từ 99/140 và 110/140 xuống 0/140 cặp.
+- Metric trước/sau reranking và bản đồ thứ hạng evidence theo từng câu không đổi so với lượt 512. Trong cả hai lượt, gold evidence candidate không bị cắt.
+- Median rerank mỗi câu ở lượt 1.024 là 560,8 ms (Dense) và 571,4 ms (RRF), cao hơn lượt 512 trong lần đo này. Peak CUDA allocated là 1,137 GiB, peak reserved 2,135 GiB.
+- Đây là kiểm tra độ nhạy trên cùng development pilot, không phải cách chọn ngưỡng tối ưu. Kết quả không chứng minh rằng ngưỡng 1.024 sẽ tốt hơn trên corpus hoặc câu hỏi khác; chưa đổi cấu hình mặc định. Cần đánh giá lại sau khi có câu hỏi đã duyệt đa dạng hơn và holdout tách biệt.
+
+Raw result metrics-only, Git-ignored: `artifacts/results/reranker_ablation/reranker_5da3bd4d5de54492_20261007T095831Z.json`.
