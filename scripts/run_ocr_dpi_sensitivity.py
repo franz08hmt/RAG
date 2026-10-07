@@ -30,7 +30,7 @@ from rag_hcmute.ingestion.extract import (  # noqa: E402
 
 PAGES = (107, 109, 116, 136)
 DPIS = (200, 300)
-PSMS = (4, 11)
+PSMS = (4, 6, 11)
 DOCUMENT_ID = "HCMUTE_SOTAYSV_2024"
 
 
