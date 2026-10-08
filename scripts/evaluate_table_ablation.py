@@ -21,6 +21,7 @@ from rag_hcmute.evaluation.table_ablation import (  # noqa: E402
     evaluate_required_evidence,
     summarize_evidence_metrics,
 )
+from rag_hcmute.evaluation.question_partitions import question_ids_for_partition  # noqa: E402
 from rag_hcmute.retrieval.bm25_index import BM25Retriever  # noqa: E402
 from rag_hcmute.retrieval.common import RetrievalHit  # noqa: E402
 
@@ -86,9 +87,15 @@ def _git_revision() -> str:
 def _load_reviewed_inputs() -> tuple[list[dict[str, str]], dict[tuple[str, str], dict]]:
     questions = _read_csv(QUESTION_PATH)
     evidence_rows = _read_csv(EVIDENCE_PATH)
+    try:
+        registered_ids = question_ids_for_partition(QUESTION_PATH, "ablation_only")
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"Question partition validation failed: {exc}") from exc
     if not questions or len(questions) != 5:
         raise SystemExit("Expected the five approved Table 5 questions TB001-TB005.")
     question_ids = [row["question_id"] for row in questions]
+    if set(question_ids) != registered_ids:
+        raise SystemExit("Table question IDs do not match the approved ablation partition.")
     if len(set(question_ids)) != len(question_ids):
         raise SystemExit("Question IDs must be unique.")
     if any(

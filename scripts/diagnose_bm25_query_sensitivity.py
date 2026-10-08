@@ -16,6 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from rag_hcmute.evaluation.table_ablation import build_matched_table_variants  # noqa: E402
+from rag_hcmute.evaluation.question_partitions import question_ids_for_partition  # noqa: E402
 from rag_hcmute.retrieval.bm25_index import BM25Retriever  # noqa: E402
 
 TOP_K = 5
@@ -65,10 +66,16 @@ def _git_revision() -> str:
 def _load_inputs() -> tuple[list[dict[str, str]], dict[tuple[str, str], list[str]]]:
     questions = _read_csv(QUESTION_PATH)
     evidence_rows = _read_csv(EVIDENCE_PATH)
+    try:
+        registered_ids = question_ids_for_partition(QUESTION_PATH, "ablation_only")
+    except (OSError, ValueError) as exc:
+        raise SystemExit(f"Question partition validation failed: {exc}") from exc
     if len(questions) != 5 or {row["question_id"] for row in questions} != set(
         SHORT_QUERIES
     ):
         raise SystemExit("Expected the five approved questions TB001-TB005.")
+    if {row["question_id"] for row in questions} != registered_ids:
+        raise SystemExit("Table question IDs do not match the approved ablation partition.")
     if any(
         row["review_status"] != "approved_for_table_retrieval_ablation"
         or row["answerability"] != "answerable"

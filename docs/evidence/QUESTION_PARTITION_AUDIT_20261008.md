@@ -28,6 +28,9 @@ Exact-evidence loader nhận chính các ID đã chọn, kiểm tra gold span tr
 annotation của partition khác vào kết quả. Nếu CSV, manifest, trạng thái duyệt hoặc snapshot không khớp,
 quy trình dừng thay vì tự suy đoán cách phân nhóm.
 
+Hai script đọc trực tiếp bộ câu hỏi Bảng 5 (`evaluate_table_ablation.py` và
+`diagnose_bm25_query_sensitivity.py`) cũng đối chiếu ID với partition `ablation_only` trước khi chạy.
+
 Tái lập kiểm tra manifest:
 
 ```powershell
