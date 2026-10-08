@@ -20,6 +20,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--chunks", type=Path, default=PROJECT_ROOT / "data/processed/chunks/chunks.jsonl")
     parser.add_argument("--snapshot-manifest", type=Path, default=PROJECT_ROOT / "data/manifests/corpus_snapshot.json")
     parser.add_argument("--method", choices=["bm25", "dense"], default="bm25")
+    parser.add_argument(
+        "--partition",
+        choices=["development", "holdout"],
+        default="development",
+        help="Evaluate only the reviewed question IDs assigned to this partition.",
+    )
     parser.add_argument("--dense-model", type=str, default=None)
     parser.add_argument("--output-dir", type=Path, default=PROJECT_ROOT / "docs/evidence/runs")
     return parser
@@ -32,9 +38,10 @@ def main() -> int:
         print(f"Khong tim thay {args.chunks}. Hay chay scripts/build_corpus.py truoc.")
         return 1
 
-    snapshot_id = "unknown"
-    if args.snapshot_manifest.is_file():
-        snapshot_id = json.loads(args.snapshot_manifest.read_text(encoding="utf-8"))["snapshot_id"]
+    if not args.snapshot_manifest.is_file():
+        print(f"Khong tim thay corpus snapshot manifest: {args.snapshot_manifest}")
+        return 1
+    snapshot_id = json.loads(args.snapshot_manifest.read_text(encoding="utf-8"))["snapshot_id"]
 
     config: dict = {}
     if args.method == "bm25":
@@ -76,14 +83,20 @@ def main() -> int:
             "query_instruction_prefix": "khong_can (theo model card BAAI/bge-m3, khac cac ban BGE truoc)",
         }
 
-    report = run_pilot_evaluation(
-        questions_path=args.questions,
-        chunks_path=args.chunks,
-        snapshot_id=snapshot_id,
-        method_name=method_name,
-        retriever=retriever,
-        config=config,
-    )
+    try:
+        report = run_pilot_evaluation(
+            questions_path=args.questions,
+            chunks_path=args.chunks,
+            snapshot_id=snapshot_id,
+            method_name=method_name,
+            retriever=retriever,
+            config=config,
+            question_partition=args.partition,
+            question_snapshot_path=args.snapshot_manifest,
+        )
+    except (OSError, ValueError) as exc:
+        print(f"Evaluation stopped: {exc}", file=sys.stderr)
+        return 1
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     raw_path = args.output_dir / f"{report['run_id']}.json"

@@ -145,6 +145,12 @@ Top-20 để ước lượng giới hạn đầu vào của reranker. Pilot rera
 `docs/evidence/QUESTION_SET_COVERAGE_AUDIT_20261008.md`. Audit không đưa nội dung câu hỏi hoặc đoạn nguồn
 vào output và xác nhận hiện chưa có holdout được ghi trong metadata.
 
+Phân hoạch câu hỏi được xác thực trước khi nạp vào các lượt pilot: `development` là mặc định, câu hỏi
+Bảng 5 ở partition `ablation_only`, còn `holdout` hiện chưa có. Chạy `python scripts/audit_question_partitions.py`
+để kiểm tra sidecar manifest, trạng thái duyệt và mã snapshot mà không in nội dung câu hỏi.
+Runner pilot chọn rõ partition bằng `python scripts/run_pilot_eval.py --partition development`; chỉ dùng
+`--partition holdout` sau khi có bộ câu hỏi độc lập đã được người học duyệt và đăng ký.
+
 ## Kiểm thử
 
 ```bash

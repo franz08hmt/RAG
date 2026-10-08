@@ -148,6 +148,7 @@ def main() -> int:
         annotations_path=args.evidence_annotations,
         pages_by_document=pages_by_document,
         snapshot_id=snapshot["snapshot_id"],
+        question_ids={question.question_id for question in questions},
     )
 
     report = {

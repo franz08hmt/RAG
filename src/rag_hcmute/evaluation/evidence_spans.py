@@ -86,6 +86,7 @@ def load_exact_evidence_spans(
     annotations_path: Path,
     pages_by_document: dict[str, list[PageText]],
     snapshot_id: str,
+    question_ids: set[str] | frozenset[str] | None = None,
 ) -> tuple[dict[str, list[EvidenceSpan]], dict]:
     """Load reviewed page-local offsets and verify them against the local snapshot.
 
@@ -93,7 +94,15 @@ def load_exact_evidence_spans(
     """
     annotation = json.loads(annotations_path.read_text(encoding="utf-8"))
     with questions_path.open("r", encoding="utf-8-sig", newline="") as stream:
-        rows = {row["question_id"]: row for row in csv.DictReader(stream)}
+        all_rows = {row["question_id"]: row for row in csv.DictReader(stream)}
+    if question_ids is None:
+        selected_ids = set(all_rows)
+    else:
+        selected_ids = set(question_ids)
+        unknown_selected = selected_ids - set(all_rows)
+        if unknown_selected:
+            raise ValueError("Selected evaluation IDs are missing from the question set.")
+    rows = {question_id: all_rows[question_id] for question_id in selected_ids}
     if annotation.get("snapshot_id") != snapshot_id:
         raise ValueError(
             "Evidence-span annotations target a different corpus snapshot; "
@@ -105,7 +114,18 @@ def load_exact_evidence_spans(
         if row.get("answerability") == "answerable"
         and row.get("expected_chunk_id", "").strip()
     }
-    annotated_ids = set(annotation.get("questions", {}))
+    annotation_questions = annotation.get("questions", {})
+    if not isinstance(annotation_questions, dict):
+        raise ValueError("Evidence annotations must contain a questions object.")
+    unknown_annotation_ids = set(annotation_questions) - set(all_rows)
+    if unknown_annotation_ids:
+        raise ValueError("Evidence annotations reference IDs outside the question set.")
+    scoped_annotations = {
+        question_id: value
+        for question_id, value in annotation_questions.items()
+        if question_id in selected_ids
+    }
+    annotated_ids = set(scoped_annotations)
     if answerable_ids != annotated_ids:
         missing = sorted(answerable_ids - annotated_ids)
         extra = sorted(annotated_ids - answerable_ids)
@@ -116,7 +136,7 @@ def load_exact_evidence_spans(
     resolved: dict[str, list[EvidenceSpan]] = {}
     serialized_spans: list[dict] = []
     all_span_ids: set[str] = set()
-    for question_id, question_annotation in annotation["questions"].items():
+    for question_id, question_annotation in scoped_annotations.items():
         row = rows.get(question_id)
         if row is None:
             raise ValueError(f"Evidence annotation references unknown question {question_id}.")
@@ -179,6 +199,7 @@ def load_exact_evidence_spans(
         "annotation_version": annotation["annotation_version"],
         "snapshot_id": snapshot_id,
         "offset_unit": annotation["offset_unit"],
+        "selected_question_count": len(selected_ids),
         "annotated_question_count": len(resolved),
         "evidence_span_count": len(serialized_spans),
         "spans": serialized_spans,

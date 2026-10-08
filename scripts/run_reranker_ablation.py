@@ -266,6 +266,7 @@ def run_ablation(*, source_root: Path, dense_model: Path, reranker_model: Path,
         annotations_path=annotations_path,
         pages_by_document=pages_by_document,
         snapshot_id=snapshot["snapshot_id"],
+        question_ids={question.question_id for question in questions},
     )
     question_ids = list(spans_by_question)
     question_by_id = {question.question_id: question for question in questions}

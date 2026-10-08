@@ -257,6 +257,7 @@ def run_ablation(*, source_root: Path, dense_model: str) -> dict:
         annotations_path=annotations_path,
         pages_by_document=pages_by_document,
         snapshot_id=snapshot["snapshot_id"],
+        question_ids={question.question_id for question in questions},
     )
 
     os.environ["HF_HUB_OFFLINE"] = "1"

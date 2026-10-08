@@ -168,4 +168,12 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Audit trên snapshot G0 cho thấy pilot chung có 10 câu đã duyệt (7 answerable, 3 unanswerable), 7 câu answerable có đủ exact-evidence annotation với 10 span. Câu answerable phân bố ở Quy chế (6) và Hướng dẫn thực tập (1), không có câu nào từ Sổ tay. Năm câu Bảng 5 vẫn là ablation riêng trên một tham chiếu nguồn.
 - CSV pilot chưa có trường split; hiện không ghi nhận holdout độc lập. Không tạo hay thay đổi câu hỏi; phần mở rộng và duyệt gold evidence cần người học đối chiếu tài liệu. Vì thế các kết quả reranker/pilot hiện có vẫn chỉ là development evidence.
 - Sau khi thêm audit: toàn bộ test suite 84 passed, compileall `src/scripts/tests` đạt và `git diff --check` đạt.
+
+## Cập nhật tiếp nối — 08/10/2026 (phân hoạch tập câu hỏi)
+
+- Tạo sidecar `data/question_sets/question_partition_manifest.csv`: 10 câu P001–P010 được ghi là `development`; năm câu TB001–TB005 tiếp tục tách thành `ablation_only`. Tất cả trỏ tới snapshot G0 `5da3bd4d5de54492`; chưa có holdout và không sửa nội dung câu hỏi/nhãn gold.
+- Thêm validator `scripts/audit_question_partitions.py` và `src/rag_hcmute/evaluation/question_partitions.py`. Validator đối chiếu ID đã duyệt trong CSV, partition, trạng thái duyệt và snapshot, đồng thời chỉ in số lượng metadata.
+- Bộ nạp pilot hiện chỉ lấy ID thuộc partition được yêu cầu (mặc định `development`); CLI `run_pilot_eval.py` có lựa chọn partition. Exact-evidence loader và các ablation BM25/Dense/Hybrid/reranker được giới hạn theo cùng ID để tránh trộn annotation của partition khác.
+- Chưa có holdout để đo; registry không tự tạo câu hỏi hoặc gold evidence. Khi có tập holdout, cần do người học đối chiếu nguồn và duyệt, rồi chỉ dùng cho đánh giá độc lập; không đưa vào tune/ablation development.
+- Kiểm thử mục tiêu: 11 passed; toàn bộ suite: 90 passed; `compileall` trên `src/scripts/tests` đạt; `git diff --check` đạt (chỉ có thông báo chuẩn hóa line ending của Git). Mốc 1 vẫn mở; chưa cập nhật DOCX, chưa chuyển Mốc 2, không gọi API và không push/merge/PR.
 - Mốc 1 tiếp tục mở, chưa cập nhật DOCX. Không cài thêm package, không dùng API, không push/merge/PR.

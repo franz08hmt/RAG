@@ -151,6 +151,98 @@ def test_annotation_loader_resolves_offsets_without_emitting_excerpt(tmp_path) -
     assert "Evidence phrase exactly" not in json.dumps(metadata)
 
 
+def test_annotation_loader_scopes_gold_spans_to_selected_partition(tmp_path) -> None:
+    questions_path = tmp_path / "questions.csv"
+    annotations_path = tmp_path / "annotations.json"
+    question_rows = [
+        {
+            "question_id": "Q1",
+            "answerability": "answerable",
+            "expected_document": "DOC",
+            "expected_chunk_id": "GOLD1",
+            "evidence_text": "One evidence phrase exactly.",
+        },
+        {
+            "question_id": "Q2",
+            "answerability": "answerable",
+            "expected_document": "DOC",
+            "expected_chunk_id": "GOLD2",
+            "evidence_text": "Two evidence phrase exactly.",
+        },
+    ]
+    with questions_path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(question_rows[0]))
+        writer.writeheader()
+        writer.writerows(question_rows)
+    annotations_path.write_text(
+        json.dumps(
+            {
+                "annotation_version": 2,
+                "snapshot_id": "SNAP",
+                "offset_unit": "page-local whitespace tokens",
+                "questions": {
+                    "Q1": {
+                        "document_id": "DOC",
+                        "spans": [
+                            {
+                                "span_id": "Q1-S1",
+                                "pdf_page": 1,
+                                "page_token_start": 0,
+                                "page_token_end": 4,
+                                "normalized_anchor_sha256": hashlib.sha256(
+                                    b"one evidence phrase exactly"
+                                ).hexdigest(),
+                            }
+                        ],
+                    },
+                    "Q2": {
+                        "document_id": "DOC",
+                        "spans": [
+                            {
+                                "span_id": "Q2-S1",
+                                "pdf_page": 1,
+                                "page_token_start": 4,
+                                "page_token_end": 8,
+                                "normalized_anchor_sha256": hashlib.sha256(
+                                    b"two evidence phrase exactly"
+                                ).hexdigest(),
+                            }
+                        ],
+                    },
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    page_text = "One evidence phrase exactly. Two evidence phrase exactly."
+    pages = {
+        "DOC": [
+            PageText(
+                document_id="DOC",
+                pdf_page=1,
+                text=page_text,
+                char_count=len(page_text),
+                is_probable_scan=False,
+                printed_page=None,
+                printed_page_confidence="unknown",
+            )
+        ]
+    }
+
+    spans, metadata = load_exact_evidence_spans(
+        questions_path=questions_path,
+        annotations_path=annotations_path,
+        pages_by_document=pages,
+        snapshot_id="SNAP",
+        question_ids={"Q1"},
+    )
+
+    assert set(spans) == {"Q1"}
+    assert metadata["annotated_question_count"] == 1
+    assert metadata["evidence_span_count"] == 1
+    assert "Q2-S1" not in json.dumps(metadata)
+
+
 def test_span_maps_only_to_chunks_that_fully_contain_its_offsets() -> None:
     span = _span("Q1", "Q1-S1", "DOC", 12, 18)
     chunks = [

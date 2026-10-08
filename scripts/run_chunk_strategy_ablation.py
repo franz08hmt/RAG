@@ -336,6 +336,7 @@ def run_ablation(*, source_root: Path, method: str, dense_model: str | None) -> 
         annotations_path=annotations_path,
         pages_by_document=pages_by_document,
         snapshot_id=snapshot["snapshot_id"],
+        question_ids={question.question_id for question in questions},
     )
     document_types = {document_id: row["document_type"] for document_id, row in manifest_by_id.items()}
     page_gold_locations = _page_locations(questions, baseline_chunks)
