@@ -179,3 +179,12 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Chưa có holdout để đo; registry không tự tạo câu hỏi hoặc gold evidence. Khi có tập holdout, cần do người học đối chiếu nguồn và duyệt, rồi chỉ dùng cho đánh giá độc lập; không đưa vào tune/ablation development.
 - Kiểm thử mục tiêu: 12 passed; toàn bộ suite: 91 passed; `compileall` trên `src/scripts/tests` đạt; `git diff --check` đạt (chỉ có thông báo chuẩn hóa line ending của Git). Mốc 1 vẫn mở; chưa cập nhật DOCX, chưa chuyển Mốc 2, không gọi API và không push/merge/PR.
 - Mốc 1 tiếp tục mở, chưa cập nhật DOCX. Không cài thêm package, không dùng API, không push/merge/PR.
+
+## Cập nhật tiếp nối — 08/10/2026 (rà soát lựa chọn công nghệ)
+
+- Tạo `docs/TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md` từ model cards, tài liệu chính thức và VN-MTEB. Tài liệu phân biệt thông số công bố, kết quả đã đo trên G0 và việc chưa đo; đề xuất tiêu chí so sánh thêm embedding/vector store nhưng không tải model, cài package hay dùng corpus ngoài.
+- Kết luận hiện tại không đổi: giữ BM25 + Dense BGE-M3/FAISS làm baseline; RRF và reranker vẫn là biến thể đã đo trên development, không phải mặc định. FAISS/Chroma/Qdrant/Milvus/Pinecone được so sánh về capability và phù hợp triển khai, không gán số hiệu năng chưa đo.
+- Kiểm tra lại nguồn corpus: manifest 3 tài liệu qua, 0 lỗi; partition registry ghi nhận 10 câu `development`, 5 câu `ablation_only`, 0 holdout; coverage vẫn là 7 câu answerable/10 span và 3 unanswerable. Thư mục `D:\RAG\nguon_bo_sung` chưa có QĐ 3116/2025.
+- Chạy lại toàn bộ suite trong env `rag-hcmute`: `91 passed`. Lần chạy đầu dùng thư mục temp mặc định bị Windows từ chối quyền; lượt xác nhận với `--basetemp` riêng và tắt cache plugin chạy thành công. Không sửa code.
+- Các việc còn chặn chốt Mốc 1: người học cần tự kiểm tra/bổ sung câu hỏi và gold evidence để phủ thêm Sổ tay cùng các loại scan/bảng/hình; cần phê duyệt riêng trước khi tải model embedding khác hoặc cài Chroma/Qdrant; tình trạng QĐ 3116 chưa rõ; generation, citation và refusal chưa được triển khai. YC10/YC11 không được ghi là hoàn tất.
+- DOCX mốc 1 chưa cập nhật vì các bằng chứng và lựa chọn nêu trên chưa đủ để tuyên bố đóng mốc; không ghi thông số/model chưa chạy thành kết quả thực nghiệm. Nhánh `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR.

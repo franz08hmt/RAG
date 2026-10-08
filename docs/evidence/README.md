@@ -2,6 +2,8 @@
 
 Thư mục này lưu các kết quả đã được chọn để đối chiếu khi viết report. Không chỉnh sửa trực tiếp kết quả thô trong `artifacts/`.
 
+Khảo sát tính năng và tiêu chí lựa chọn embedding/vector store (không phải benchmark mới) nằm tại [`TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md`](../TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md). Tài liệu này tách thông số do nhà phát triển công bố khỏi số đo trên G0; không có package/model mới được cài hoặc tải.
+
 Mỗi vòng thực nghiệm cần giữ lại:
 
 - phiên bản corpus manifest và mã băm của các PDF;
