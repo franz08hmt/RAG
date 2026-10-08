@@ -32,7 +32,7 @@ rag-hcmute-poc/
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py
 │   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, reranked.py, common.py
-│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py
+│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py, question_coverage.py
 │   └── console_app.py         Console explorer cho retrieval; chưa generation
 ├── scripts/                  CLI ingestion/retrieval/evaluation và runner thí nghiệm
 ├── tests/                    pytest cho ingestion, retrieval, evaluation và manifest
@@ -140,6 +140,10 @@ loại tài liệu và thứ hạng để chẩn đoán; không ghi câu hỏi h
 nhỏ, tách với console demo và không đánh giá generation. Runner cũng ghi độ phủ exact evidence ở candidate
 Top-20 để ước lượng giới hạn đầu vào của reranker. Pilot reranker development nhỏ được ghi riêng tại
 `docs/evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`; chưa dùng kết quả này làm kết luận cuối.
+
+Độ bao phủ bộ câu hỏi đã duyệt được thống kê riêng bằng `scripts/audit_question_coverage.py`; kết quả tại
+`docs/evidence/QUESTION_SET_COVERAGE_AUDIT_20261008.md`. Audit không đưa nội dung câu hỏi hoặc đoạn nguồn
+vào output và xác nhận hiện chưa có holdout được ghi trong metadata.
 
 ## Kiểm thử
 

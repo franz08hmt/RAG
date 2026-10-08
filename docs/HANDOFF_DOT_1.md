@@ -161,3 +161,11 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - One-shot integration trên G0 native-only, BGE-M3 và reranker local trả exit code 0; 156 chunks, candidate 20, top-5 được hiển thị, reranker latency 909,14 ms; 14/20 cặp bị truncate ở cấu hình 512. Output chỉ được capture trong bộ nhớ; không lưu câu hỏi hoặc văn bản nguồn. Đây là xác nhận luồng phần mềm, không thay benchmark pilot trước đó.
 - Unit tests sau cập nhật: 83 passed; smoke test fixture 2/2 passed. Kết quả pilot reranker trước/sau vẫn chỉ là development set 7 câu/10 span, không phải holdout. Chưa chọn reranker làm mặc định, chưa có generation/citation/refusal, chưa đóng Mốc 1.
 - Chưa sửa DOCX vì Mốc 1 vẫn mở. Không cài thêm package, không gọi Gemini/Ollama/API, không push/merge/PR; thay đổi được lưu local trên `tim-hieu-rag-dot2` sau khi kiểm tra.
+
+## Cập nhật — 08/10/2026 (audit độ bao phủ câu hỏi)
+
+- Tạo `scripts/audit_question_coverage.py` và `src/rag_hcmute/evaluation/question_coverage.py` để thống kê metadata, không in câu hỏi, đáp án hay text nguồn. Kết quả ở `docs/evidence/QUESTION_SET_COVERAGE_AUDIT_20261008.md`.
+- Audit trên snapshot G0 cho thấy pilot chung có 10 câu đã duyệt (7 answerable, 3 unanswerable), 7 câu answerable có đủ exact-evidence annotation với 10 span. Câu answerable phân bố ở Quy chế (6) và Hướng dẫn thực tập (1), không có câu nào từ Sổ tay. Năm câu Bảng 5 vẫn là ablation riêng trên một tham chiếu nguồn.
+- CSV pilot chưa có trường split; hiện không ghi nhận holdout độc lập. Không tạo hay thay đổi câu hỏi; phần mở rộng và duyệt gold evidence cần người học đối chiếu tài liệu. Vì thế các kết quả reranker/pilot hiện có vẫn chỉ là development evidence.
+- Sau khi thêm audit: toàn bộ test suite 84 passed, compileall `src/scripts/tests` đạt và `git diff --check` đạt.
+- Mốc 1 tiếp tục mở, chưa cập nhật DOCX. Không cài thêm package, không dùng API, không push/merge/PR.
