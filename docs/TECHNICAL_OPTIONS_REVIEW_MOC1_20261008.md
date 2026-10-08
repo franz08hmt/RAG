@@ -1,78 +1,61 @@
-# Khảo sát lựa chọn công nghệ cho Mốc 1
+# Rà soát phương án kỹ thuật — Mốc 1
 
-Ngày rà soát: 08/10/2026
-Phạm vi: mô hình embedding, vector store, retrieval và reranker cho PoC hỏi đáp tài liệu học vụ HCMUTE.
+Cập nhật: 08/10/2026. Mục đích là phân biệt năng lực do tài liệu công bố, phép đo đã chạy trên HCMUTE và khoảng trống cần tiếp tục nghiên cứu. Kết quả dưới đây dùng snapshot G0 `5da3bd4d5de54492`, 3 tài liệu/182 trang/156 chunks, câu hỏi development; không đại diện cho hệ thống vận hành hoặc quy định hiện hành.
 
-## Kết luận dùng cho đồ án
+## Kết luận hiện tại
 
-Ở snapshot hiện tại, chưa có cơ sở để kết luận một embedding model hay vector store là tốt nhất cho bài toán. Corpus G0 có 3 tài liệu và 156 chunk; phép đo đang có chủ yếu dùng BGE-M3 cùng FAISS trên 7 câu answerable và 10 exact-evidence span thuộc development. Các kết quả này hữu ích để giải thích pipeline và nhận diện lỗi, nhưng chưa đại diện cho truy vấn thực tế rộng hơn.
+Baseline có thể tái lập cho retrieval là BM25 và dense BGE-M3 + FAISS; RRF và BGE-Reranker-v2-m3 đã được đo như các biến thể. Hai model embedding (BGE-M3, multilingual-E5-small) và hai store (FAISS, Qdrant local) đã có phép thử nội bộ. Đây là một bước tiến từ khảo sát tính năng, nhưng chưa đủ số ứng viên hay dữ liệu độc lập để kết luận model/store tốt nhất. Mốc 1 vẫn mở theo YC1–YC13.
 
-Vì vậy, cấu hình hiện tại được giữ làm baseline: BM25 cho tìm kiếm từ khóa, Dense BGE-M3 với FAISS cho tìm kiếm ngữ nghĩa, RRF để khảo sát kết hợp, và BGE-Reranker-v2-m3 để xếp lại candidate. Không cài thêm vector store, không tải thêm embedding model, không gửi corpus lên dịch vụ cloud trong lần rà soát này. Đây là quyết định bảo toàn baseline, không phải khẳng định FAISS hay BGE-M3 luôn tốt hơn lựa chọn khác.
+## Embedding
 
-Các ghi chú bên dưới tách ba loại bằng chứng: thông số/capability do nhà phát triển công bố, số đo trên corpus HCMUTE của project, và phép thử còn cần thực hiện. Không so sánh trực tiếp latency hay độ chính xác công bố từ benchmark khác với số đo nội bộ vì corpus, phần cứng, split và metric khác nhau.
-
-## Embedding model
-
-| Model | Thông tin từ nguồn của nhà phát triển | Vai trò hợp lý trong nghiên cứu này | Trạng thái trên corpus HCMUTE |
+| Model | Thông số cần lưu ý | Bằng chứng HCMUTE hiện có | Giới hạn |
 |---|---|---|---|
-| BAAI/bge-m3 | Đầu ra dense 1024 chiều, context tối đa 8192 token; model hỗ trợ dense, sparse và multi-vector, trên 100 ngôn ngữ. Model card nói cách dùng dense không cần thêm query instruction. | Baseline phù hợp để khảo sát tài liệu tiếng Việt dài và nhiều kiểu truy xuất. Tuy nhiên, project hiện chỉ dùng dense vector; chưa dùng các đầu ra sparse/ColBERT của model. | Đã chạy local với FAISS. Trên development pilot, dense đạt exact-evidence Recall@5 9/10 span, Complete-evidence Hit@5 6/7 câu, First-evidence MRR@10 0,762. Đây không phải holdout. |
-| intfloat/multilingual-e5-large | Model card nêu embedding 1024 chiều, context tối đa 512 token và hỗ trợ multilingual; phải thêm tiền tố `query:` và `passage:` tương ứng. Card cũng cảnh báo chất lượng có thể giảm với ngôn ngữ ít tài nguyên. | Ứng viên so sánh với BGE-M3 để xem model có tiền tố truy vấn/văn bản và giới hạn context ngắn hơn ảnh hưởng ra sao. Các chunk dài cần được kiểm tra truncation. | Chưa tải, chưa đo trên G0. Chưa thể khẳng định model này tốt hơn hay kém hơn cho tiếng Việt học vụ. |
-| sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 | Model card công bố vector 384 chiều, `max_seq_length` 128 và quy mô khoảng 0,1 tỷ tham số; dùng được cho semantic search. | Ứng viên nhỏ hơn để làm đối chứng tài nguyên thấp. Giới hạn 128 token có thể cắt mất phần quan trọng nếu áp dụng trực tiếp lên chunk hiện tại, vì vậy phải log độ dài/truncation và giữ nguyên chunking trong phép so sánh. | Chưa tải, chưa đo trên G0. Không có kết luận hiệu năng tiếng Việt từ thông số kích thước đơn thuần. |
+| BAAI/bge-m3 | 1.024 chiều; model card mô tả multi-functionality/multi-lingual; project dùng dense output và giới hạn encode 1.024 token | Evidence Recall@5 9/10; complete Hit@5 6/7; MRR@10 0,762 | Development pilot; 4/156 chunks vượt cấu hình 1.024; không dùng sparse/ColBERT outputs |
+| intfloat/multilingual-e5-small | 384 chiều; 512 token; query/passage prefix theo model card | Evidence Recall@5 6/10; complete Hit@5 5/7; MRR@10 0,651 | 125/156 chunks vượt 512 token; chênh lệch chịu ảnh hưởng của truncation và chunk hiện tại |
+| multilingual MiniLM-L12-v2 | Model nhỏ hơn, chiều thấp hơn; giới hạn đầu vào ngắn theo model card | Chưa đo trên corpus này | Chưa được coi là đối chứng thực nghiệm |
+| multilingual-e5-large | Đối chứng model lớn hơn; cần kiểm tra đúng giới hạn/prefix theo revision | Chưa tải/chưa đo | Không có kết luận nội bộ |
+| Vietnamese-specific candidates | Ứng viên từ VN-MTEB/model cards, sau khi xem nguồn và license | Chưa tải/chưa đo | Benchmark ngoài không thay corpus học vụ; license từng data/model cần xét riêng |
 
-VN-MTEB là benchmark embedding tiếng Việt được công bố trong Findings of EACL 2026. Bài báo mô tả 41 bộ dữ liệu thuộc 6 nhóm tác vụ, trong đó có retrieval và reranking; phần lớn dữ liệu được tạo bằng cách dịch các mẫu từ MTEB tiếng Anh. Bài báo hữu ích để biết những model và tác vụ nào đã được khảo sát, nhưng điểm benchmark không thay thế phép đo trên quy chế và hướng dẫn học vụ HCMUTE. Trước khi lấy bất kỳ tập con nào về, cần rà giấy phép và nguồn gốc riêng của chính tập con đó; một giấy phép chung ở trang benchmark không tự động giải quyết quyền của mọi dữ liệu thành phần.
+Raw run: `artifacts/results/embedding_model_ablation/embedding_5da3bd4d5de54492_20261008T125238Z.json` (Git-ignored); diễn giải tại `docs/evidence/EMBEDDING_MODEL_ABLATION_20261008.md`. Hai model hiện có không đáp ứng mục tiêu so sánh tối thiểu sáu model. Muốn so sánh công bằng hơn cần xử lý khác biệt input length, cố định policy, thêm model candidates, rồi đánh giá trên holdout do người học duyệt.
 
-### Cách so sánh embedding nếu được duyệt tải model
+VN-MTEB (Findings EACL 2026) là benchmark tiếng Việt hữu ích khi chọn candidate, nhưng không khẳng định hiệu năng trên quy chế HCMUTE. Nhiều tập con được xây dựng từ việc dịch benchmark tiếng Anh; phải xem riêng tác vụ, nguồn và license trước khi tải. Không có dữ liệu benchmark ngoài trong corpus PoC hiện tại.
 
-Giữ nguyên snapshot G0, chunks, câu hỏi, gold evidence, top-k và chính sách chuẩn hóa vector. Mỗi model phải embed lại toàn bộ corpus và câu hỏi theo hướng dẫn model card; không trộn vector từ hai model trong cùng index. Trước khi chạy, ghi revision, SHA-256, kích thước tải, chiều vector, độ dài đầu vào và trường hợp bị cắt.
+## Vector store và index
 
-Đánh giá retrieval bằng exact-evidence Recall@5, Complete-evidence Hit@5 và First-evidence MRR@10; ghi thêm thời gian mã hóa câu hỏi, thời gian dựng index, VRAM đỉnh và độ trễ truy vấn. Chỉ dùng development để phân tích lỗi. Kết quả không được gọi là đánh giá độc lập cho tới khi có holdout do người học tự viết hoặc kiểm tra, rồi đăng ký vào manifest mà không dùng để tune.
+| Lựa chọn | Bản chất / ưu thế | Trạng thái project |
+|---|---|---|
+| FAISS IndexFlatIP | Thư viện index; exact search đơn giản, gọn, phù hợp baseline cục bộ | Đã benchmark trên 156 vector |
+| Qdrant local | Vector store có persistence/payload metadata và local mode | Đã benchmark exact search; không bật ANN |
+| Chroma | Local persistence và API tiện cho prototype; cần đo lifecycle/metadata workload | Chưa benchmark |
+| Milvus | DB vector có triển khai nhiều mức quy mô; vận hành nặng hơn PoC nhỏ | Chưa cài/benchmark |
+| Pinecone | Dịch vụ managed cloud; dễ triển khai dịch vụ nhưng có giới hạn dữ liệu/chi phí/region | Không dùng trong project, không gửi corpus cloud |
 
-## Vector store
+Thử nghiệm dùng cùng BGE-M3 normalized FP32 vectors, exact dot product, Top-10, 50 lần cho mỗi trong 7 câu development. Top-10 của Qdrant khớp FAISS 100%; cả hai có evidence Recall@5 9/10, complete Hit@5 6/7, MRR@10 0,762. Query p50 là 0,041 ms với FAISS và 3,088 ms với Qdrant; đây chỉ là microbenchmark store trên CPU, không gồm embedding. Kích thước artifact không so sánh ngang vì FAISS in-memory còn Qdrant lưu payload/index. Raw run: `artifacts/results/vector_store_ablation/vector_store_5da3bd4d5de54492_20261008T125329Z.json`; diễn giải `docs/evidence/VECTOR_STORE_ABLATION_20261008.md`.
 
-| Công nghệ | Cách triển khai và năng lực được tài liệu mô tả | Nhận xét trong phạm vi PoC | Trạng thái |
-|---|---|---|---|
-| FAISS | Thư viện C++/Python cho similarity search; có các index chính xác và approximate, hỗ trợ nhiều metric, một số index GPU và lưu index ra đĩa. FAISS không tự đóng vai trò một dịch vụ database quản lý toàn bộ metadata, API và vòng đời tài liệu. | Hợp với PoC một máy, corpus nhỏ, chạy offline. Ứng dụng hiện quản lý chunk/provenance ngoài index và dùng `IndexFlatIP`, nên phép tìm kiếm dense hiện tại là baseline exact. | Đã dùng; không cần thêm dịch vụ. |
-| Chroma | Có thể chạy local, lưu persistence trên đĩa hoặc nối tới server; tài liệu hiện hành mô tả dense, sparse, hybrid, full-text/regex search và metadata filter. | Dễ thử cho ứng dụng local cần giữ document/metadata cùng vector. Cần kiểm tra rõ persistence và cấu hình khi đóng/mở ứng dụng; tính năng công bố không chứng minh hiệu năng trên G0. | Chưa cài/chưa benchmark. Cần duyệt package trước khi thêm. |
-| Qdrant | Có local mode trong bộ client (memory hoặc disk), server tự host và dịch vụ cloud; hỗ trợ dense/sparse/hybrid retrieval, payload và filter. | Ứng viên hợp lý nếu muốn chứng minh cùng một collection lưu vector và metadata, hoặc khảo sát hybrid trong một store. Local mode có thể đủ cho PoC nhưng cần đo phần lưu trữ và khởi tạo thực tế. | Chưa cài/chưa benchmark. Cần duyệt package trước khi thêm. |
-| Milvus | Hỗ trợ các trường vector dense và sparse cùng hybrid search với ranker; có các kiểu triển khai phục vụ quy mô lớn hơn. | Có thể dùng khi bài toán cần triển khai nhiều collection hoặc quy mô lớn, nhưng vận hành phức tạp hơn nhu cầu 156 chunk hiện tại. Chưa có số đo nội bộ để kết luận về tốc độ. | Chưa cài/chưa benchmark. Không phải lựa chọn đầu tiên cho PoC hiện tại. |
-| Pinecone | Dịch vụ managed/serverless nhận dense, sparse và trường full-text, triển khai theo cloud/region; tài liệu nêu lưu trữ và truy vấn thuộc cách tính sử dụng dịch vụ. | Không phù hợp với ràng buộc hiện tại: không phát sinh chi phí, không gửi corpus học vụ lên cloud và ưu tiên chạy local. Chỉ xem xét nếu có duyệt riêng về chi phí, quyền dữ liệu và cấu hình triển khai. | Không sử dụng trong project hiện tại. |
-
-So sánh giữa FAISS và một vector database cần nói rõ mục tiêu. Nếu mục tiêu chỉ là chất lượng dense ranking, so với cùng embeddings và metric sẽ là phép đo retrieval/index; nếu mục tiêu là năng lực hệ thống, cần đo thêm metadata filter, persistence, cập nhật/xóa, khởi động lại, kích thước lưu trữ và độ trễ. Một con số QPS từ benchmark của nhà cung cấp không thể thay cho phép thử này.
-
-### Cách so sánh vector store nếu được duyệt cài package
-
-Ứng viên thực tế là FAISS baseline, Chroma local persistence và Qdrant local. Dùng cùng 156 chunk, cùng một bộ vector BGE-M3, cùng chunk IDs, cùng cosine/inner-product semantics, cùng top-k và cùng query list. Lưu build time, query p50/p95, memory/disk, độ chính xác so với exact reference, filter/provenance, persistence sau restart và thao tác cập nhật. Cấu hình ANN phải được ghi lại; không so tốc độ của index approximate với exact search mà bỏ qua chênh lệch chất lượng.
-
-Corpus này nhỏ nên latency có thể quá thấp để phân biệt các hệ thống. Không nhân bản cùng tài liệu để tạo cảm giác benchmark quy mô lớn. Nếu cần đánh giá ở quy mô lớn hơn, trước hết phải đề xuất nguồn dữ liệu, giấy phép, dung lượng và cách tránh đưa dữ liệu không được phép lên repo; chỉ tải sau khi người học duyệt.
+Nếu PoC ưu tiên số thành phần ít và dữ liệu nhỏ, FAISS là baseline hợp lý. Nếu cần persistence, payload và metadata filter, Qdrant local là ứng viên hệ thống đáng khảo sát. Không có cơ sở nói store nào có chất lượng retrieval tốt hơn trong exact test vì cả hai trả cùng kết quả. Chưa benchmark FAISS IVF/HNSW, Chroma, Milvus hoặc workload tải đồng thời.
 
 ## Retrieval và reranking
 
-Trong project, BM25 và Dense là hai tín hiệu khác nhau chứ không phải hai database. BM25 xếp hạng dựa trên khớp từ/ngữ; vì vậy mã quyết định, số điều và từ khóa chính xác có thể hữu ích, nhưng cách hỏi hoặc cách gọi cột có thể làm thứ hạng đổi. Dense dùng embedding để so khớp gần nghĩa; nó có thể tìm được cách diễn đạt khác, nhưng không đảm bảo lấy đúng mã/số hiệu hoặc đủ mọi đoạn bằng chứng. Hybrid RRF cộng đóng góp theo thứ hạng, không cộng trực tiếp BM25 score với cosine score; hợp nhất cũng không đảm bảo vượt nhánh mạnh nhất.
+BM25 là lexical IR; dense embedding là semantic similarity; cả hai đều là retrieval, tín hiệu khác nhau. RRF hợp nhất thứ hạng thay vì cộng điểm thô. Cross-encoder reranker đọc query và từng passage để đổi thứ tự trong candidate pool nhưng không thể bổ sung evidence bị bỏ khỏi pool.
 
-Trên G0 và development pilot 7 câu/10 evidence span, exact-evidence Recall@5 lần lượt là BM25 4/10, Dense BGE-M3 9/10 và Hybrid RRF 6/10. Complete-evidence Hit@5 tương ứng 3/7, 6/7 và 4/7; First-evidence MRR@10 là 0,371, 0,762 và 0,524. Đây là số đo trong cùng corpus/split của project, không phải kết luận mọi truy vấn học vụ đều nên dùng Dense.
+Trên 7 câu answerable/10 spans của development, exact evidence Recall@5 là BM25 4/10, dense 9/10, RRF 6/10; complete-evidence Hit@5 lần lượt 3/7, 6/7, 4/7; MRR@10 lần lượt 0,371, 0,762, 0,524. Top-20 Dense và RRF mỗi nhánh chứa 10/10 spans. RRF giúp một số truy vấn so với BM25, nhưng tổng thể pilot không vượt dense.
 
-Reranker nhận query cùng từng passage để chấm độ liên quan, rồi sắp xếp lại một candidate pool đã truy xuất. Nó không thể bổ sung evidence nếu bước retrieval không đưa evidence đó vào pool. Với Top-20 Dense và RRF trong pilot này, cả hai candidate list có đủ 10/10 exact spans; sau rerank, Recall@5 đạt 10/10 và Complete-evidence Hit@5 đạt 7/7 cho mỗi nhánh. Chỉ có 7 câu và một lần chạy trên development, nên kết quả được giữ ở mức pilot; không đặt reranker làm mặc định. Độ trễ, truncation và chi phí GPU được ghi riêng trong [`RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`](evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md).
+Với BGE reranker duy nhất được thử, Dense Recall@5 đổi 9/10 → 10/10; RRF 6/10 → 10/10. Complete-evidence Hit đổi 6/7 → 7/7 và 4/7 → 7/7 tương ứng. Mẫu nhỏ, một reranker, development-only; không tuyên bố hiệu năng chung và chưa chọn làm mặc định. `max_length=512` cắt một phần nhiều query–passage pairs; sensitivity 1.024 giảm truncation nhưng chậm hơn, không đổi thứ hạng trên pilot.
 
-## Hướng chốt Mốc 1
+## Các quyết định còn mở
 
-1. Giữ nguyên corpus HCMUTE G0 và baseline đã chạy; không dùng benchmark ngoài để thay thế câu hỏi học vụ của project.
-2. Nếu cần so sánh embedding, xin duyệt trước model weights; ưu tiên một model nhỏ làm đối chứng tài nguyên, sau đó mới quyết định có cần thêm model lớn hay không.
-3. Nếu cần so sánh vector store, xin duyệt cài Chroma và Qdrant; chỉ chạy local, dùng chung BGE vectors và giữ tài liệu nguồn ngoài Git.
-4. Người học tiếp tục tự viết/đối chiếu câu hỏi, gold answer và evidence. Audit hiện tại xác nhận 10 câu development (7 answerable, 3 unanswerable), 5 câu bảng thuộc ablation riêng và **0 holdout**. Không tạo holdout thay người học.
-5. Quyết định 3116/QĐ-ĐHSPKT năm 2025 chưa có trong `D:\RAG\nguon_bo_sung`; nếu tải được thì giữ ngoài repo, đối chiếu hash/nguồn và cập nhật manifest theo quy trình. Nếu chưa lấy được, báo cáo giới hạn nội dung/hiệu lực của QĐ 1727/2021.
-6. YC10 (sinh câu trả lời, citation và refusal) và YC11 (đánh giá RAG end-to-end) chưa được hoàn thành chỉ bằng retrieval console; cần giữ đúng phạm vi ở báo cáo này và đưa phần generation/evaluation sang mốc phát triển tương ứng. Không dùng Gemini nếu chưa có khóa đã xoay mới và chưa duyệt chi phí; không gọi API tính phí.
+1. Tiếp tục dùng G0 làm snapshot tái lập được, nhưng gắn rõ nhãn dữ liệu lịch sử.
+2. Không đưa QĐ 3116/2025 vào corpus trả lời: file scan ngoài repo, OCR chưa có transcript vàng và kiểm tra đầy đủ.
+3. Giữ FAISS/BGE-M3 làm baseline kỹ thuật hiện tại, không gọi là lựa chọn tối ưu.
+4. Không đặt refusal threshold từ development scores; nhóm answerable/unanswerable đang chồng lấn và pilot chỉ có 3 câu unanswerable.
+5. Chưa thêm model/store/data bên ngoài nếu chưa kiểm dung lượng, license, quyền dữ liệu và có duyệt riêng.
+6. Thực hiện holdout và câu hỏi/gold do người học kiểm tra trước khi đưa ra tuyên bố chất lượng.
 
-## Nguồn đã đối chiếu
+## Tài liệu nguồn
 
-- [BGE-M3 model card](https://huggingface.co/BAAI/bge-m3) và [bài báo BGE-M3](https://arxiv.org/abs/2402.03216).
-- [Multilingual E5 large model card](https://huggingface.co/intfloat/multilingual-e5-large).
-- [Multilingual MiniLM model card](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2).
-- [VN-MTEB, Findings of EACL 2026](https://aclanthology.org/2026.findings-eacl.86/).
-- [FAISS project wiki](https://github.com/facebookresearch/faiss/wiki) — index, metric, trade-off exact/approximate search.
-- [Chroma introduction](https://docs.trychroma.com/docs/overview/introduction) and [Chroma source repository](https://github.com/chroma-core/chroma) — capability and license.
-- [Qdrant local framework guide](https://qdrant.tech/documentation/frameworks/langchain/) and [hybrid search documentation](https://qdrant.tech/documentation/search/hybrid-search/).
-- [Milvus hybrid search documentation](https://milvus.io/docs/v2.5.x/hybrid_search_with_milvus.md).
-- [Pinecone serverless indexes](https://sdk.pinecone.io/python/how-to/indexes/serverless.html).
-- [BGE reranker v2 M3 model card](https://huggingface.co/BAAI/bge-reranker-v2-m3).
-
-Đây là khảo sát tính năng/tài liệu công bố và kết quả đã có trong repository; không phải benchmark mới giữa các model hoặc database. Trạng thái tải/cài đặt chưa được thay đổi bởi tài liệu này.
+- [BGE-M3 model card](https://huggingface.co/BAAI/bge-m3), [paper](https://arxiv.org/abs/2402.03216).
+- [Multilingual E5-small model card](https://huggingface.co/intfloat/multilingual-e5-small), [technical report](https://arxiv.org/abs/2402.05672).
+- [VN-MTEB, Findings EACL 2026](https://aclanthology.org/2026.findings-eacl.86/).
+- [FAISS wiki](https://github.com/facebookresearch/faiss/wiki); [Qdrant documentation](https://qdrant.tech/documentation/); [Chroma documentation](https://docs.trychroma.com/docs/overview/introduction); [Milvus hybrid search](https://milvus.io/docs/v2.5.x/hybrid_search_with_milvus.md); [Pinecone serverless index documentation](https://sdk.pinecone.io/python/how-to/indexes/serverless.html).
+- Robertson & Zaragoza (2009), [BM25 and Beyond](https://doi.org/10.1561/1500000019); Cormack et al. (2009), [Reciprocal Rank Fusion](https://doi.org/10.1145/1571941.1572114).
+- [BGE reranker v2 m3 model card](https://huggingface.co/BAAI/bge-reranker-v2-m3).

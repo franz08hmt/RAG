@@ -1,13 +1,13 @@
-# HCMUTE Academic Documents RAG PoC
+# Tìm hiểu Retrieval Augmented Generation (RAG)
 
-Đây là mã nguồn thực nghiệm cho đề tài **Nghiên cứu, thiết kế và hiện thực hóa hệ thống Retrieval-Augmented Generation (RAG)**. PoC được giới hạn ở bài toán hỏi đáp trên tài liệu học vụ chính thức của HCMUTE.
+Đây là mã nguồn thực nghiệm cho đề tài **Tìm hiểu Retrieval Augmented Generation (RAG)**. PoC khảo sát hỏi đáp trên tài liệu học vụ HCMUTE; các kết quả benchmark dùng snapshot G0 cố định để có thể so sánh và tái lập.
 
 ## Phạm vi mục tiêu của PoC
 
 - Đầu vào: câu hỏi tiếng Việt về quy chế đào tạo và thủ tục học vụ.
 - Đầu ra mục tiêu khi hoàn thiện: câu trả lời ngắn, đoạn bằng chứng, tên văn bản và vị trí trang/điều khoản.
 - Ngoài phạm vi: chatbot hội thoại mở, dữ liệu cá nhân, lịch học hoặc lịch thi thay đổi theo thời gian nếu corpus không chứa dữ liệu đó.
-- Quy tắc an toàn mục tiêu: khi không có bằng chứng phù hợp, hệ thống cần trả về trạng thái chưa đủ căn cứ; guard này chưa được triển khai/đánh giá ở hiện trạng.
+- Quy tắc an toàn mục tiêu: khi không có bằng chứng phù hợp, hệ thống cần trả về trạng thái chưa đủ căn cứ. Generation local đã được nối thử, nhưng pilot chỉ ghi nhận non-answer ở 1/3 câu unanswerable; đây chưa phải refusal guard đáng tin.
 
 ## Nguyên tắc triển khai
 
@@ -32,8 +32,9 @@ rag-hcmute-poc/
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py
 │   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, reranked.py, common.py
-│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py, question_coverage.py
-│   └── console_app.py         Console explorer cho retrieval; chưa generation
+│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py, generation_pilot.py
+│   ├── generation/            Ollama local, grounded prompt, citation-ID validation
+│   └── console_app.py         Console cho retrieval và thử generation cục bộ
 ├── scripts/                  CLI ingestion/retrieval/evaluation và runner thí nghiệm
 ├── tests/                    pytest cho ingestion, retrieval, evaluation và manifest
 └── artifacts/                Log và index tạm (gitignored)
@@ -42,9 +43,13 @@ rag-hcmute-poc/
 ## Cài đặt
 
 ```bash
-pip install -e ".[dev]"          # pymupdf, rank-bm25, pytest
-pip install -e ".[dense]"        # thêm sentence-transformers, faiss-cpu (tuỳ chọn, cho Dense Retrieval)
+# Tạo env Python 3.11 riêng trước; cài PyTorch CUDA từ lệnh chính thức phù hợp GPU/Python.
+pip install -e ".[dev,dense]"   # cài sau Torch CUDA; tránh để pip thay bằng Torch CPU
+pip install python-dotenv
 ```
+
+Trên Windows, xem `docs/ENV.md` để dùng đúng executable `rag-hcmute`, xác nhận
+`torch.cuda.is_available() == True` và tránh env base. Trước mỗi lệnh Python, in `sys.executable`.
 
 ## Bước 1 - Chuẩn bị corpus
 
@@ -91,7 +96,7 @@ cần mở trong môi trường của bạn) - nếu chỉ mở `huggingface.co`
 thiếu thư viện hoặc không tải được model, lệnh in `DENSE_RETRIEVAL_UNAVAILABLE` kèm lý do cụ thể thay
 vì lỗi khó hiểu.
 
-## Console PoC (retrieval stage)
+## Console PoC (retrieval và generation local)
 
 Sau khi G0 đã được dựng, chạy lệnh dưới từ thư mục repository để mở chế độ tương tác BM25:
 
@@ -117,10 +122,28 @@ Ví dụ Hybrid + reranker (chỉ để quan sát, chưa chọn làm mặc đị
 python -m rag_hcmute.console_app --method hybrid-rerank --dense-model '<duong-dan-snapshot-BGE-M3>' --reranker-model 'D:\RAG\models\huggingface\hub\models--BAAI--bge-reranker-v2-m3\snapshots\953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e' --query "Điều kiện để sinh viên được xét công nhận tốt nghiệp gồm những gì?" --top-k 5
 ```
 
-CLI hiện hiển thị hạng, điểm retriever, tên tài liệu, PDF page, section và đoạn trích ngắn để truy ngược
-bằng chứng. Với hai biến thể rerank, CLI còn hiển thị kích thước candidate pool, thời gian reranker và
-số cặp đầu vào bị cắt. Đây vẫn là **console cho retrieval**, chưa sinh câu trả lời, chưa có ngưỡng từ
-chối đã hiệu chỉnh, và chưa đánh giá citation đầu ra; không trình bày nó như hệ thống RAG end-to-end.
+Ở chế độ mặc định, CLI hiển thị hạng, điểm retriever, tên tài liệu, PDF page, section và đoạn trích ngắn
+để truy ngược bằng chứng. Với hai biến thể rerank, CLI còn hiển thị kích thước candidate pool, thời gian
+reranker và số cặp đầu vào bị cắt.
+
+Có thể bật generation local bằng `--answer`. App chỉ gửi prompt tới Ollama trên `127.0.0.1`/`localhost`;
+remote endpoint bị từ chối. Cần Ollama đang chạy và model đã có sẵn, mặc định `qwen3:4b`; không tự tải
+model và không gọi cloud API. Ví dụ chạy Hybrid + reranker + Qwen:
+
+```powershell
+python -m rag_hcmute.console_app `
+  --method hybrid-rerank `
+  --dense-model '<duong-dan-snapshot-BGE-M3>' `
+  --reranker-model '<duong-dan-snapshot-BGE-Reranker-v2-m3>' `
+  --answer --generator-model qwen3:4b `
+  --query "Điều kiện để sinh viên được xét công nhận tốt nghiệp gồm những gì?" --top-k 5
+```
+
+Generation dùng toàn văn các chunk đã truy xuất; citation ID phải thuộc danh sách nguồn đó. Điều này chỉ
+xác nhận cấu trúc và truy nguyên về chunk, không chứng minh nguồn thực sự hỗ trợ từng khẳng định. Model
+có thể trả lời sai hoặc không từ chối khi thiếu căn cứ. Pilot development hiện ghi nhận refusal 1/3
+trên nhóm unanswerable; vì vậy chưa đặt ngưỡng refusal, chưa dùng app để tư vấn quy định hiện hành và
+chưa gọi đây là sản phẩm RAG đã được đánh giá end-to-end.
 
 ## Bước 4 - Đánh giá trên bộ câu hỏi pilot
 
@@ -174,8 +197,28 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
   với Dense/RRF trong pilot. Đã chạy thêm reranker trên cùng development pilot: Recall@5 sau rerank
   đạt 10/10 với cả Dense và RRF; kết quả nhỏ, chưa phải holdout và chưa đủ căn cứ đổi mặc định. Xem
   `docs/evidence/RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`.
-- Phần còn mở của Mốc 1: mở rộng bộ câu hỏi độc lập/holdout; hoàn thiện khảo sát xử lý tổng quát cho
-  scan, bảng, hình; xem xét embedding/vector store khác khi có phương án tài nguyên được duyệt; tiếp tục
-  generation, citation/refusal và đánh giá end-to-end. Console hiện hỗ trợ BM25/Dense/Hybrid và hai
-  biến thể rerank dạng opt-in; chưa phải ứng dụng RAG end-to-end.
+- Đã có generation local và đánh giá process metrics trên 10 câu development bằng
+  `scripts/run_generation_pilot.py`; kết quả chi tiết và giới hạn ở
+  `docs/evidence/GENERATION_PILOT_20261008.md`. Chưa chấm correctness, faithfulness hoặc mức entailment
+  của citations; refusal 1/3 trên nhóm unanswerable nên YC10/YC11 chưa thể coi là đạt.
+- Đã chạy thêm phép đo BGE-M3 vs multilingual-E5-small và FAISS IndexFlatIP vs Qdrant local exact;
+  hai kết quả chỉ là pilot trên cùng snapshot/development. Chưa đạt mục tiêu so sánh sáu embedding
+  model, nhiều index ANN/store và chưa có holdout; xem hai báo cáo ablation ngày 08/10/2026 cùng
+  `docs/TRUY_VET_YC.md`.
+- PDF QĐ 3116/2025 đã tải từ trang Phòng Đào tạo, giữ ngoài repo. Audit cho thấy ảnh scan có lớp text
+  OCR lỗi; nhánh nhận diện full-page scan và OCR opt-in được thêm, nhưng tài liệu chưa được đưa vào G0
+  hoặc dùng trả lời do chưa có kiểm tra OCR/gold evidence đầy đủ. Xem
+  `docs/evidence/QD3116_SCAN_TEXT_LAYER_AUDIT_20261008.md`.
+- Còn mở ở Mốc 1: xây dựng tập câu hỏi đa dạng hơn và holdout do người học duyệt; kiểm tra answer/
+  citation ngữ nghĩa; cải thiện refusal bằng dữ liệu đánh giá độc lập; xác minh OCR hiện hành và mở rộng
+  input classes; khảo sát nhiều embedding/vector store theo đúng chi phí, giấy phép và tài nguyên. G0
+  hiện tại là snapshot lịch sử phục vụ benchmark, không phải nguồn hiện hành để tư vấn sinh viên.
+
+## Tài liệu học tập và truy vết
+
+- `docs/tim_hieu/`: quy trình RAG, dữ liệu/chunk, retrieval, generation và evaluation.
+- `docs/hoc_tap/`: thực hành local và cách đọc kết quả.
+- `docs/TRUY_VET_YC.md`: YC1–YC13 đúng số thứ tự của giảng viên, trạng thái và phần còn thiếu.
+- `CAU_HOI_BAO_VE.md`: câu hỏi tự kiểm tra trước khi trình bày.
+- `data/eval/README.md`: tiêu chuẩn ghi nhận/duyệt câu hỏi và gold evidence; hiện chưa có holdout.
 

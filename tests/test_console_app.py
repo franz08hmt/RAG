@@ -8,6 +8,7 @@ from rag_hcmute.console_app import (
     APPROVED_RERANKER_REVISION,
     _corpus_chunk_count,
     _configure_console_encoding,
+    _run_one,
     build_parser,
     create_retriever,
     format_retrieval_result,
@@ -111,6 +112,47 @@ def test_console_accepts_rerank_method_but_requires_explicit_models(tmp_path: Pa
     assert APPROVED_RERANKER_REVISION == "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
     with pytest.raises(ValueError, match="--dense-model"):
         create_retriever(method="hybrid-rerank", chunks_path=chunks_file)
+
+
+def test_console_can_pass_full_retrieved_chunks_to_local_generation(monkeypatch, capsys) -> None:
+    chunk = _chunk()
+    hit = SimpleNamespace(
+        rank=1,
+        chunk_id=chunk.chunk_id,
+        document_title=chunk.document_title,
+        pdf_page_start=chunk.pdf_page_start,
+        pdf_page_end=chunk.pdf_page_end,
+        section_path=chunk.section_path,
+        document_id=chunk.document_id,
+        score=1.0,
+        text_preview="preview only",
+    )
+    retriever = SimpleNamespace(
+        chunks=[chunk],
+        query=lambda _query, top_k: SimpleNamespace(hits=[hit], latency_ms=1.0),
+    )
+    captured = {}
+
+    def fake_generate(question, sources, **kwargs):
+        captured["question"] = question
+        captured["sources"] = sources
+        return SimpleNamespace(
+            model="qwen3:4b",
+            latency_ms=10.0,
+            answer="Trả lời thử.",
+            citations=sources[:1],
+            abstained=False,
+            status="generated_citations_unverified",
+        )
+
+    monkeypatch.setattr("rag_hcmute.console_app.generate_grounded_answer", fake_generate)
+    _run_one(retriever, method="bm25", query="Câu hỏi", top_k=1, answer=True)
+
+    output = capsys.readouterr().out
+    assert captured["question"] == "Câu hỏi"
+    assert captured["sources"][0].text == chunk.text
+    assert "preview only" not in captured["sources"][0].text
+    assert "Trả lời thử." in output
 
 
 def test_reranked_console_output_exposes_candidate_and_truncation_counts() -> None:

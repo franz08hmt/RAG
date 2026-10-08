@@ -26,7 +26,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--build-log", type=Path, default=PROJECT_ROOT / "artifacts/logs/build_corpus.log")
     parser.add_argument("--chunk-tokens", type=int, default=DEFAULT_CHUNK_TOKENS)
     parser.add_argument("--overlap-tokens", type=int, default=DEFAULT_OVERLAP_TOKENS)
-    parser.add_argument("--ocr", action="store_true", help="Bat OCR fallback cho trang co it text native va co anh.")
+    parser.add_argument(
+        "--ocr",
+        action="store_true",
+        help="Bật OCR cục bộ cho trang có ít text native và có ảnh.",
+    )
+    parser.add_argument(
+        "--ocr-full-page-images",
+        action="store_true",
+        help="Khi đã bật --ocr, chạy OCR trên cả trang có ảnh phủ gần toàn trang, kể cả PDF có lớp text OCR nhiễu.",
+    )
     parser.add_argument("--ocr-language", default="vie")
     parser.add_argument("--ocr-dpi", type=int, default=200)
     parser.add_argument("--ocr-min-native-chars", type=int, default=15)
@@ -53,7 +62,10 @@ def main() -> int:
             tesseract_cmd=args.tesseract_cmd.resolve() if args.tesseract_cmd else None,
             dpi=args.ocr_dpi,
             minimum_native_chars=args.ocr_min_native_chars,
+            ocr_full_page_images=args.ocr_full_page_images,
         )
+    elif args.ocr_full_page_images:
+        parser.error("--ocr-full-page-images yêu cầu bật --ocr.")
 
     snapshot = build_snapshot(
         manifest_path=args.manifest,

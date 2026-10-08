@@ -45,6 +45,7 @@ class OCRSettings:
     dpi: int = 200
     page_segmentation_mode: int = 6
     minimum_native_chars: int = MIN_TEXT_CHARS_FOR_NON_SCAN
+    ocr_full_page_images: bool = False
 
     def __post_init__(self) -> None:
         if not self.language.strip():
@@ -106,6 +107,7 @@ def ocr_settings_metadata(settings: OCRSettings) -> dict[str, object]:
         "dpi": settings.dpi,
         "page_segmentation_mode": settings.page_segmentation_mode,
         "minimum_native_chars": settings.minimum_native_chars,
+        "ocr_full_page_images": settings.ocr_full_page_images,
         "traineddata_sha256": digest,
     }
 
@@ -115,6 +117,21 @@ def _page_has_images(page: pymupdf.Page) -> bool:
         return bool(page.get_images(full=True))
     except Exception:
         return False
+
+
+def _page_has_full_page_image(page: pymupdf.Page, minimum_area_ratio: float = 0.70) -> bool:
+    """Detect a page-sized raster, including scans that already carry noisy OCR text."""
+    try:
+        page_area = page.rect.get_area()
+        if page_area <= 0:
+            return False
+        for image_info in page.get_image_info(xrefs=True):
+            image_rect = pymupdf.Rect(image_info["bbox"]) & page.rect
+            if image_rect.get_area() / page_area >= minimum_area_ratio:
+                return True
+    except Exception:
+        return False
+    return False
 
 
 def _run_page_ocr(page: pymupdf.Page, settings: OCRSettings) -> tuple[str, float | None]:
@@ -177,6 +194,8 @@ def _detect_printed_page(text: str) -> tuple[int | None, str]:
 
 def _is_probable_scan(page: pymupdf.Page, text: str) -> bool:
     stripped_len = len(text.strip())
+    if _page_has_full_page_image(page):
+        return True
     if stripped_len >= MIN_TEXT_CHARS_FOR_NON_SCAN:
         return False
     has_images = _page_has_images(page)
@@ -200,23 +219,32 @@ def extract_pdf_pages(
             notes: list[str] = []
 
             has_images = _page_has_images(page)
+            has_full_page_image = _page_has_full_page_image(page)
             probable_scan = _is_probable_scan(page, native_text)
             ocr_candidate = (
                 ocr_settings is not None
-                and len(native_text.strip()) < ocr_settings.minimum_native_chars
                 and has_images
+                and (
+                    len(native_text.strip()) < ocr_settings.minimum_native_chars
+                    or (ocr_settings.ocr_full_page_images and has_full_page_image)
+                )
             )
             if ocr_candidate and ocr_settings is not None:
                 ocr_text, ocr_confidence_mean = _run_page_ocr(page, ocr_settings)
                 if ocr_text:
                     selected_text = ocr_text
                     extraction_method = "ocr"
-                    notes.append("OCR local aplicat do trang co it text native va co anh raster.")
+                    if has_full_page_image and ocr_settings.ocr_full_page_images:
+                        notes.append("OCR local được bật cho trang có ảnh phủ gần toàn trang.")
+                    else:
+                        notes.append("OCR local áp dụng do trang có ít text native và có ảnh raster.")
                 else:
-                    notes.append("OCR local khong tao duoc text; giu ket qua native.")
+                    notes.append("OCR cục bộ không tạo được văn bản; giữ kết quả trích xuất native.")
 
             printed_page, confidence = _detect_printed_page(selected_text)
-            if probable_scan and len(native_text.strip()) == 0:
+            if has_full_page_image:
+                notes.append("Ảnh raster phủ gần toàn trang; có thể là bản scan hoặc trang có lớp OCR, cần kiểm tra.")
+            elif probable_scan and len(native_text.strip()) == 0:
                 notes.append("Trang không trích xuất được text (nghi PDF scan hoặc trang trống).")
             elif probable_scan:
                 notes.append("Text trích xuất rất ít so với hình ảnh trên trang (nghi PDF scan một phần).")

@@ -2,7 +2,9 @@
 
 Thư mục này lưu các kết quả đã được chọn để đối chiếu khi viết report. Không chỉnh sửa trực tiếp kết quả thô trong `artifacts/`.
 
-Khảo sát tính năng và tiêu chí lựa chọn embedding/vector store (không phải benchmark mới) nằm tại [`TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md`](../TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md). Tài liệu này tách thông số do nhà phát triển công bố khỏi số đo trên G0; không có package/model mới được cài hoặc tải.
+Khảo sát tính năng và tiêu chí lựa chọn embedding/vector store (không phải benchmark mới) nằm tại [`TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md`](../TECHNICAL_OPTIONS_REVIEW_MOC1_20261008.md). Tài liệu này tách thông số do nhà phát triển công bố khỏi số đo trên G0.
+
+Các cập nhật ngày 08/10/2026 bổ sung bằng chứng cho YC4, YC6, YC7, YC10 và YC11: [`QD3116_SCAN_TEXT_LAYER_AUDIT_20261008.md`](QD3116_SCAN_TEXT_LAYER_AUDIT_20261008.md) ghi lại lỗi phát hiện PDF scan có text layer và nhánh OCR opt-in; [`EMBEDDING_MODEL_ABLATION_20261008.md`](EMBEDDING_MODEL_ABLATION_20261008.md) so BGE-M3 với E5-small; [`VECTOR_STORE_ABLATION_20261008.md`](VECTOR_STORE_ABLATION_20261008.md) so FAISS exact với Qdrant local exact; [`GENERATION_PILOT_20261008.md`](GENERATION_PILOT_20261008.md) ghi kết quả tích hợp Ollama local, refusal thấp và giới hạn đánh giá. Cả bốn đều phân biệt kết quả đo được với phần chưa xác minh.
 
 Mỗi vòng thực nghiệm cần giữ lại:
 
@@ -24,7 +26,7 @@ Các lượt thử OCR hiện có:
 - `RERANKER_RESOURCE_AND_EVAL_PLAN_20261007.md`: ghi nhận model local đã được duyệt tải, ghim revision và xác minh SHA-256; smoke test offline, pilot reranking Dense/RRF và sensitivity run 512/1.024 token đã chạy. Kết quả còn giới hạn ở 7 câu/10 span development, chưa phải holdout và chưa dùng để đổi mặc định.
 - `QUESTION_SET_COVERAGE_AUDIT_20261008.md`: đếm câu hỏi đã duyệt, answerability, document-class coverage, exact evidence và phép thử bảng riêng; ghi rõ pilot hiện là development và chưa có holdout. Không chứa văn bản câu hỏi hoặc nguồn; tái lập bằng `scripts/audit_question_coverage.py`.
 - `QUESTION_PARTITION_AUDIT_20261008.md`: kiểm tra sidecar partition manifest, trạng thái duyệt và snapshot; không chứa câu hỏi hoặc nguồn. Tái lập bằng `scripts/audit_question_partitions.py`.
-- `RETRIEVAL_CONSOLE_20261007.md`: ghi nhận smoke test console BM25/Hybrid và Hybrid + reranker, các trường metadata/latency/truncation hiển thị, cùng giới hạn hiện tại (retrieval-only, chưa generation/citation/refusal).
+- `RETRIEVAL_CONSOLE_20261007.md`: ghi nhận smoke test console BM25/Hybrid và Hybrid + reranker, metadata/latency/truncation trước khi tích hợp generation.
 - `QUESTION_CANDIDATE_EXPANSION_20260929.md`: 12 câu hỏi ứng viên để người học tự đối chiếu và duyệt; không thuộc pilot và chưa được dùng tính metric.
 - `QUESTION_CANDIDATE_REVIEW_20260929.md`: rà soát mức độ khớp nguồn, tham chiếu trang, độ trùng và khoảng trống về bảng/scan/hình; không thay đổi ứng viên hay pilot.
 - `TABLE_QUESTION_CANDIDATES_20260929.md`: 5 gợi ý câu hỏi cho ablation B0/T1/T2 trên một bảng đã kiểm tra; chỉ bản nháp, chưa dùng benchmark.

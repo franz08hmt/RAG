@@ -9,6 +9,12 @@ from typing import Sequence
 from rag_hcmute.retrieval.bm25_index import BM25Retriever
 from rag_hcmute.retrieval.common import RetrievalHit, load_chunks
 from rag_hcmute.retrieval.reranked import RerankedRetriever
+from rag_hcmute.generation.ollama import (
+    DEFAULT_BASE_URL,
+    DEFAULT_MODEL,
+    generate_grounded_answer,
+    sources_from_hits,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CHUNKS_PATH = PROJECT_ROOT / "data/processed/g0_reproduction/chunks/chunks.jsonl"
@@ -18,7 +24,10 @@ RERANKER_CANDIDATE_DEPTH = 20
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Console PoC để quan sát retrieval trên corpus học vụ HCMUTE; chưa sinh câu trả lời."
+        description=(
+            "Console PoC để quan sát retrieval và thử generation local trên corpus học vụ HCMUTE; "
+            "chất lượng câu trả lời, citation ngữ nghĩa và refusal chưa được xác nhận."
+        )
     )
     parser.add_argument("--chunks", type=Path, default=DEFAULT_CHUNKS_PATH)
     parser.add_argument(
@@ -35,6 +44,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--reranker-max-length", type=int, default=512)
     parser.add_argument("--reranker-batch-size", type=int, default=4)
     parser.add_argument("--top-k", type=int, default=5)
+    parser.add_argument(
+        "--answer",
+        action="store_true",
+        help="Sinh câu trả lời bám nguồn bằng Ollama chạy cục bộ (không gọi cloud API).",
+    )
+    parser.add_argument("--generator-model", default=DEFAULT_MODEL)
+    parser.add_argument("--ollama-url", default=DEFAULT_BASE_URL)
     parser.add_argument("--query", help="Chạy một truy vấn rồi thoát; nếu bỏ trống thì mở chế độ tương tác.")
     return parser
 
@@ -116,7 +132,9 @@ def create_retriever(
     )
 
 
-def format_retrieval_result(*, method: str, result, top_k: int) -> str:
+def format_retrieval_result(
+    *, method: str, result, top_k: int, include_generation_note: bool = True
+) -> str:
     method_label = {
         "bm25": "BM25Okapi (lexical retrieval)",
         "dense": "BGE-M3 + FAISS (dense retrieval)",
@@ -144,7 +162,8 @@ def format_retrieval_result(*, method: str, result, top_k: int) -> str:
         lines.append("Retriever không trả về ứng viên trong lần chạy này.")
     for hit in result.hits:
         lines.extend(_format_hit(hit))
-    lines.append("Lưu ý: đây là kết quả retrieval, chưa phải câu trả lời do LLM sinh.")
+    if include_generation_note:
+        lines.append("Lưu ý: đây là kết quả retrieval, chưa phải câu trả lời do LLM sinh.")
     return "\n".join(lines)
 
 
@@ -173,9 +192,60 @@ def _format_hit(hit: RetrievalHit) -> list[str]:
     ]
 
 
-def _run_one(retriever, *, method: str, query: str, top_k: int) -> None:
+def _chunks_by_id(retriever) -> dict:
+    chunks = getattr(retriever, "chunks", None)
+    if chunks is None:
+        lexical_retriever = getattr(retriever, "lexical_retriever", None)
+        chunks = getattr(lexical_retriever, "chunks", None)
+    if chunks is None:
+        raise TypeError("Retriever does not expose chunks needed for source-grounded generation.")
+    return {chunk.chunk_id: chunk for chunk in chunks}
+
+
+def _run_one(
+    retriever,
+    *,
+    method: str,
+    query: str,
+    top_k: int,
+    answer: bool = False,
+    generator_model: str = DEFAULT_MODEL,
+    ollama_url: str = DEFAULT_BASE_URL,
+) -> None:
     result = retriever.query(query, top_k=top_k)
-    print(format_retrieval_result(method=method, result=result, top_k=top_k))
+    print(
+        format_retrieval_result(
+            method=method,
+            result=result,
+            top_k=top_k,
+            include_generation_note=not answer,
+        )
+    )
+    if not answer:
+        return
+
+    sources = sources_from_hits(result.hits, _chunks_by_id(retriever))
+    try:
+        generated = generate_grounded_answer(
+            query,
+            sources,
+            model=generator_model,
+            base_url=ollama_url,
+        )
+    except (RuntimeError, ValueError) as exc:
+        print(f"\nKhông tạo được câu trả lời: {exc}")
+        return
+
+    print(f"\nCâu trả lời ({generated.model}, {generated.latency_ms:.0f} ms):")
+    print(generated.answer)
+    if generated.citations:
+        print("Nguồn được trích dẫn:")
+        for source in generated.citations:
+            print(f"  [{source.source_id}] {source.location_label}")
+    if generated.abstained:
+        print(f"Trạng thái: lượt chạy từ chối ({generated.status}); quyết định chưa được hiệu chỉnh.")
+    else:
+        print("Lưu ý: cú pháp và phạm vi citation đã được kiểm tra; mức độ hỗ trợ ngữ nghĩa chưa được xác nhận.")
 
 
 def _configure_console_encoding() -> None:
@@ -198,6 +268,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("--reranker-max-length phải tối thiểu 8 token.")
     if args.reranker_batch_size < 1:
         parser.error("--reranker-batch-size phải lớn hơn 0.")
+    if not args.generator_model.strip():
+        parser.error("--generator-model không được để trống.")
 
     try:
         retriever = create_retriever(
@@ -214,9 +286,23 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     print("HCMUTE RAG PoC — Retrieval Console")
     print(f"Corpus chunks: {_corpus_chunk_count(retriever)} | method: {args.method}")
-    print("Phạm vi bản hiện tại: truy xuất và hiển thị nguồn, chưa có generation/refusal guard.")
+    if args.answer:
+        print(
+            f"Generation: Ollama cục bộ ({args.generator_model}); refusal chưa được hiệu chỉnh, "
+            "citation chỉ được kiểm tra cấu trúc."
+        )
+    else:
+        print("Chế độ hiện tại: retrieval và hiển thị nguồn; bật --answer để thử generation cục bộ.")
     if args.query is not None:
-        _run_one(retriever, method=args.method, query=args.query.strip(), top_k=args.top_k)
+        _run_one(
+            retriever,
+            method=args.method,
+            query=args.query.strip(),
+            top_k=args.top_k,
+            answer=args.answer,
+            generator_model=args.generator_model,
+            ollama_url=args.ollama_url,
+        )
         return 0
 
     print("Nhập câu hỏi tiếng Việt; gõ :q để thoát.")
@@ -231,7 +317,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             break
         if not query:
             continue
-        _run_one(retriever, method=args.method, query=query, top_k=args.top_k)
+        _run_one(
+            retriever,
+            method=args.method,
+            query=query,
+            top_k=args.top_k,
+            answer=args.answer,
+            generator_model=args.generator_model,
+            ollama_url=args.ollama_url,
+        )
     return 0
 
 

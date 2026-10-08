@@ -162,6 +162,22 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Unit tests sau cập nhật: 83 passed; smoke test fixture 2/2 passed. Kết quả pilot reranker trước/sau vẫn chỉ là development set 7 câu/10 span, không phải holdout. Chưa chọn reranker làm mặc định, chưa có generation/citation/refusal, chưa đóng Mốc 1.
 - Chưa sửa DOCX vì Mốc 1 vẫn mở. Không cài thêm package, không gọi Gemini/Ollama/API, không push/merge/PR; thay đổi được lưu local trên `tim-hieu-rag-dot2` sau khi kiểm tra.
 
+## Trạng thái bàn giao hiện tại — 08/10/2026
+
+- Bản report Mốc 1 mới: `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx`; tạo từ template v2, giữ nguyên mẫu bìa/logo/khung, nội dung thân bài được thay mới theo năm chương. Bản v2 không bị ghi đè.
+- Đã chạy thêm phép thử embedding BGE-M3 vs multilingual-E5-small; vector store FAISS IndexFlatIP vs Qdrant local exact; nối Ollama/Qwen3:4B cho generation pilot. Raw output nằm trong `artifacts/results/` Git-ignored; report builder dựng bảng từ raw JSON và ghi run ID.
+- Tài liệu học tập/đọc tiếp: `docs/tim_hieu/`, `docs/hoc_tap/`, `CAU_HOI_BAO_VE.md`, `docs/TRUY_VET_YC.md`, `data/eval/README.md`.
+- YC1–YC13 được truy vết nguyên số thứ tự; nhiều YC vẫn một phần. Chưa có holdout độc lập; câu hỏi mới/gold chưa được người học duyệt; mới đo hai embedding, một reranker, hai store exact; OCR/table/image chưa tổng quát; semantic correctness, faithfulness, citation support và refusal policy chưa đạt.
+- Ràng buộc giữ nguyên: branch `tim-hieu-rag-dot2`, không push/merge/PR; `main` và PR #2 không đổi; không dùng Gemini/API trả phí; corpus/PII/model weights/raw text ở ngoài Git. QĐ 3116/2025 không đưa vào G0 do scan/OCR chưa được kiểm chứng đủ.
+- Sau khi report được kiểm tra: chạy pytest/compileall/style audit; nếu có lỗi, sửa trên chính working copy mới này, không đụng report đã nộp trước.
+
+## Bàn giao sau kiểm tra DOCX — 08/10/2026
+
+- Bản DOCX hiện hành là `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx`, dựng từ template v2 không ghi đè. Word xuất PDF thành công; kiểm tra trực quan cả 13 trang. Khung chỉ nằm ở bìa, thân bài Times New Roman, đen trắng, không số trang; sửa được đoạn chunking bị tách giữa trang và căn trái phụ lục có đường dẫn dài. Phụ lục ghi rõ 104 test và compileall đạt.
+- Report chứa retrieval/embedding/vector-store/reranker/OCR/generation pilot và truy vết YC1–YC13. Đây là báo cáo tiến độ có bằng chứng, không phải tuyên bố đã hoàn tất Mốc 1: chưa có holdout, mở rộng benchmark embedding/reranker, parser tổng quát cho bảng/hình, đánh giá semantic correctness/faithfulness/citation entailment/refusal.
+- V3–v5 là bản dựng trung gian; dùng v6 nếu cần tiếp tục chỉnh. Nguồn mẫu v2 vẫn nguyên hash đã ghi trong artifact metadata.
+- Trạng thái repo vẫn local trên `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR. Giữ nguyên `main` và PR #2.
+
 ## Cập nhật — 08/10/2026 (audit độ bao phủ câu hỏi)
 
 - Tạo `scripts/audit_question_coverage.py` và `src/rag_hcmute/evaluation/question_coverage.py` để thống kê metadata, không in câu hỏi, đáp án hay text nguồn. Kết quả ở `docs/evidence/QUESTION_SET_COVERAGE_AUDIT_20261008.md`.
@@ -188,3 +204,14 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Chạy lại toàn bộ suite trong env `rag-hcmute`: `91 passed`. Lần chạy đầu dùng thư mục temp mặc định bị Windows từ chối quyền; lượt xác nhận với `--basetemp` riêng và tắt cache plugin chạy thành công. Không sửa code.
 - Các việc còn chặn chốt Mốc 1: người học cần tự kiểm tra/bổ sung câu hỏi và gold evidence để phủ thêm Sổ tay cùng các loại scan/bảng/hình; cần phê duyệt riêng trước khi tải model embedding khác hoặc cài Chroma/Qdrant; tình trạng QĐ 3116 chưa rõ; generation, citation và refusal chưa được triển khai. YC10/YC11 không được ghi là hoàn tất.
 - DOCX mốc 1 chưa cập nhật vì các bằng chứng và lựa chọn nêu trên chưa đủ để tuyên bố đóng mốc; không ghi thông số/model chưa chạy thành kết quả thực nghiệm. Nhánh `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR.
+
+## Cập nhật mới nhất — 08/10/2026 (OCR scan, generation local và bản báo cáo Mốc 1)
+
+- Đã tải QĐ 3116/QĐ-ĐHSPKT từ trang Phòng Đào tạo HCMUTE, lưu ngoài Git ở `D:\RAG\nguon_bo_sung\3116_QD_Dao_Tao_2025.pdf`; SHA-256 khớp manifest làm việc riêng. Trang chính thức ghi văn bản áp dụng từ khóa tuyển sinh 2021, Điều 3 thay QĐ 3811; danh mục chính thức nối QĐ 3811 với QĐ 1727. Không suy rộng phạm vi áp dụng cho mọi khóa.
+- Audit phát hiện PDF 3116 là scan có text layer OCR nhiễu: native-only không nhận diện scan trên 32/32 trang. `extract.py` nay gắn cờ ảnh phủ ≥70% trang; OCR toàn trang chỉ bật bằng `--ocr --ocr-full-page-images`, không đổi mặc định G0. Snapshot thử riêng `444e283ee11b64e6`: 32 trang OCR, 52 chunk, 28 dấu Điều; chưa có ground-truth transcript toàn tài liệu, không dùng QĐ3116 làm corpus/gold đầu ra.
+- Console hỗ trợ generation local qua Ollama loopback bằng Qwen3:4B; không gọi cloud API. `scripts/run_generation_pilot.py` chạy 10 câu development G0, Hybrid RRF + reranker, Top-5: 7/7 answerable được trả lời; 1/3 unanswerable bị từ chối; 7/7 câu answerable có citation tới đúng loại tài liệu; 9/9 câu đã sinh có citation ID hợp lệ. Đây không phải correctness, faithfulness hay semantic citation evaluation. Median retrieval+rerank 2,255 ms, generation 8,720 ms/câu trong một lượt.
+- Reranker score answerable (1,84–6,41) chồng lấn với unanswerable (-3,92–2,41; hai trường hợp sát nhau khoảng 0,03), nên không đặt threshold refusal trên development set. Kết quả, cấu hình và giới hạn ghi tại `docs/evidence/GENERATION_PILOT_20261008.md`; kết quả scan tại `docs/evidence/QD3116_SCAN_TEXT_LAYER_AUDIT_20261008.md`.
+- Thay đổi unit mới kiểm tra scan có lớp OCR text; console generation fail-closed với nguồn/citation ID không hợp lệ; đánh giá chỉ lưu metrics, không lưu query/answer/source text. Toàn repo: **104 passed**; code không gọi API có phí.
+- Bản DOCX mới sẽ được tạo từ v2, không ghi đè bản nộp trước; giữ Times New Roman, màu đen/trắng, khung bìa riêng, không đánh số trang. Báo cáo cập nhật phần kiến thức và tiến độ bằng số liệu mới, ghi rõ G0 là snapshot lịch sử, QĐ3116 chưa được xác thực OCR đầy đủ, refusal 1/3 và chưa có holdout.
+- Trạng thái: Mốc 1 đã hoàn thiện phần kỹ thuật và biên tập được phép, nhưng chưa thể ghi là đã đánh giá RAG đáng tin cậy/đã khép YC10–YC11 vì refusal chưa đạt, answer/citation chưa được kiểm tra ngữ nghĩa, chưa có holdout và QĐ3116 OCR chưa được kiểm chứng đủ. DOCX sẽ trình bày các giới hạn này thay vì che đi.
+- Tiếp tục trên `tim-hieu-rag-dot2`; main và PR #2 không đổi; không push, merge hoặc tạo PR.

@@ -1,0 +1,31 @@
+# Truy vết yêu cầu của giảng viên YC1–YC13
+
+Cập nhật: 08/10/2026. “Có minh chứng” nghĩa là có nội dung/code/kết quả cụ thể trong repository; không đồng nghĩa yêu cầu đã được đáp ứng đầy đủ nếu mẫu còn nhỏ hoặc phần kiểm chứng chưa chạy. Các YC dùng nguyên số hiệu do giảng viên cung cấp.
+
+| YC | Nội dung yêu cầu | Bằng chứng hiện có | Trạng thái trung thực | Phần còn thiếu / tiêu chí để khép |
+|---|---|---|---|---|
+| YC1 | Đúng tên “Tìm hiểu Retrieval Augmented Generation (RAG)” | Report v6 dùng đúng tên; README cập nhật theo tên này | Đạt về tên | — |
+| YC2 | Tìm hiểu kỹ quy trình RAG hiện đại | `docs/tim_hieu/00_quy_trinh_rag.md`, `03_generation_va_danh_gia.md` | Một phần | Bổ sung ví dụ/lỗi theo từng giai đoạn và đối chiếu thêm các hướng nâng cao; không chỉ mô tả kiến trúc |
+| YC3 | Input/output, Document Class, Chunk và citation | `docs/tim_hieu/01_du_lieu_document_chunk.md`, manifest, snapshot, chunk metadata | Một phần | Xây dựng và rà soát nhiều lớp tài liệu, version/validity, truy ngược citation đến nguồn thật |
+| YC4 | PDF có text, scan, bảng, hình; cách xử lý | OCR audit, input-class audit, table ablation, optional OCR branch | Một phần | OCR scan chưa được vàng hóa đầy đủ; chưa có parser bảng tổng quát hoặc xử lý ngữ nghĩa hình; QĐ 3116 chưa vào corpus |
+| YC5 | Chunking: vấn đề, thuật toán, ưu/nhược, thời điểm dùng và so sánh | Size ablation 250/40, 500/80, 750/120; section-aware vs fixed-window; bảng riêng | Một phần | Mẫu nhỏ; cần thử trên nhiều lớp tài liệu và câu hỏi độc lập; xác định trade-off theo context/citation/latency |
+| YC6 | Nhiều embedding, đánh giá và phù hợp tiếng Việt bằng số liệu | BGE-M3 và multilingual-E5-small đo trên cùng G0/development | Một phần | Hai model thay vì ít nhất sáu mục tiêu; E5 bị truncation nhiều; chưa có holdout/benchmark Việt độc lập đã duyệt |
+| YC7 | Vector store và so sánh thực nghiệm | FAISS IndexFlatIP vs Qdrant local exact, 156 vectors | Một phần | Chỉ hai lựa chọn; cần phân biệt Flat/IVF/HNSW và ít nhất một DB ở quy mô/metadata workload phù hợp |
+| YC8 | Retrieval và đánh giá định lượng | BM25, dense BGE-M3, RRF; candidate coverage; exact-span recall, complete Hit, MRR | Một phần | Development pilot 7 câu answerable; chưa có holdout và phân tích độ bất định |
+| YC9 | Reranker và đánh giá | BGE-Reranker-v2-m3 trước/sau trên Dense và RRF | Một phần | Chỉ một reranker, bảy câu; cần so sánh thêm, audit truncation và kiểm lại độc lập |
+| YC10 | Xử lý query, sinh câu trả lời, citation và từ chối | Console nối Ollama/Qwen3:4B; citation ID structure; refusal pilot | Một phần; có lỗi an toàn | Từ chối 1/3 câu unanswerable, gồm output abstain/không hợp lệ; hai câu thiếu căn cứ vẫn được trả lời; chưa kiểm chứng citation semantics |
+| YC11 | Đánh giá hệ thống RAG | Retrieval metrics; generation process metrics và log cục bộ | Một phần; chưa đánh giá end-to-end | Chưa chấm answer correctness, faithfulness, answer relevance, context precision/recall hay entailment citation; chưa chạy Ragas/TruLens/judge |
+| YC12 | Ứng dụng console | `src/rag_hcmute/console_app.py`, các chế độ BM25/Dense/Hybrid/rerank và local `--answer` | Một phần | Bổ sung giải thích được lựa chọn theo yêu cầu, kiểm tra lỗi/nguồn ở mức end-to-end và test an toàn; không cần UI bóng bẩy |
+| YC13 | Tìm hiểu sâu, không lướt qua | Các audit, ablation, mã nguồn, raw metrics-only artifacts, giới hạn được ghi nhận | Đang thực hiện | Nhiều điểm vẫn chỉ là pilot; cần thêm số liệu/đọc nguồn và giải thích lỗi ở từng lớp trước khi đánh dấu hoàn tất |
+
+## Giới hạn chung
+
+- G0 là snapshot lịch sử gồm 3 tài liệu, 182 trang, 156 chunks; không dùng để khẳng định hiệu lực hiện tại của mọi quy định.
+- Tập chính hiện có 10 câu development: 7 answerable, 3 unanswerable; 10 exact evidence span. Năm câu bảng thuộc `ablation_only`; chưa có holdout.
+- Không có corpus ngoài HCMUTE. Benchmark tiếng Việt chỉ được đề xuất sau khi kiểm giấy phép và duyệt nguồn; chưa tải dữ liệu ngoài.
+- Gemini chưa được gọi. Các tác vụ có thể phát sinh chi phí bị dừng ở mức 0 USD cho đến khi có ước tính và phê duyệt.
+- QĐ 3116/2025 lưu ngoài repo; scan/OCR chưa đủ kiểm chứng để dùng trong retrieval/generation.
+
+## Quy tắc cập nhật
+
+Không chuyển trạng thái “một phần” thành “đạt” chỉ vì đã viết phần mô tả. Cập nhật YC cùng đường dẫn evidence, run ID, split và giới hạn. Khi một phép đo cần câu hỏi/gold mới, người học phải tự rà soát nguồn trước khi dữ liệu vào benchmark.

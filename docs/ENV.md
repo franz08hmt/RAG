@@ -69,3 +69,11 @@ $py = 'C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe'
 ```
 
 Không kích hoạt/đổi sang Python base khi chạy script. Không dùng `KMP_DUPLICATE_LIB_OK` để che lỗi thư viện.
+
+## Cập nhật kiểm kê Mốc 1 — 08/10/2026
+
+- Tesseract 5.5.3 hiện đã được cài trong env dự án; OCR được gọi opt-in, G0 vẫn native-only.
+- Ollama 0.40.0 và `qwen3:4b` đã được dùng cho một generation pilot cục bộ. Không gọi Gemini/cloud API; từ chối và citation semantics chưa đạt.
+- Snapshot cache hiện có BGE-M3, multilingual-E5-small và BGE-Reranker-v2-m3 local; model weights giữ ngoài repo. Các lần benchmark ghi revision và giới hạn token.
+- Qdrant client 1.19.1 được dùng local persistent trong một phép thử exact; chưa benchmark ANN/HNSW/IVF hoặc tải đồng thời.
+- Trước mọi lần chạy project, vẫn phải gọi executable tuyệt đối của env `rag-hcmute` và in `sys.executable`; không dùng Python base.

@@ -114,6 +114,58 @@ def test_ocr_is_not_run_on_text_rich_pages_even_if_they_contain_images(
     assert "This page has enough native text" in pages[0].text
 
 
+def test_full_page_scan_with_ocr_text_layer_is_flagged_and_can_be_forced_through_ocr(
+    tmp_path: Path, monkeypatch
+) -> None:
+    import io
+
+    import pymupdf
+    from PIL import Image
+
+    from rag_hcmute.ingestion import extract
+    from rag_hcmute.ingestion.extract import OCRSettings
+
+    image_buffer = io.BytesIO()
+    Image.new("RGB", (120, 120), color="white").save(image_buffer, format="PNG")
+    pdf_path = tmp_path / "scan_with_ocr_layer.pdf"
+    doc = pymupdf.open()
+    page = doc.new_page(width=595, height=842)
+    page.insert_image(page.rect, stream=image_buffer.getvalue())
+    page.insert_text((72, 72), "This OCR text layer is readable but may be inaccurate.")
+    doc.save(pdf_path)
+    doc.close()
+
+    calls = []
+
+    def fake_ocr(page, settings):
+        calls.append(page.number)
+        return "Forced OCR output", 91.0
+
+    monkeypatch.setattr(extract, "_run_page_ocr", fake_ocr)
+
+    native_pages = extract_pdf_pages(pdf_path, "SCAN_WITH_OCR_LAYER")
+    assert native_pages[0].is_probable_scan is True
+    assert native_pages[0].extraction_method == "native"
+
+    settings = OCRSettings(
+        language="vie",
+        tessdata_dir=tmp_path,
+        ocr_full_page_images=True,
+    )
+    ocr_pages = extract_pdf_pages(
+        pdf_path,
+        "SCAN_WITH_OCR_LAYER",
+        ocr_settings=settings,
+    )
+
+    assert calls == [0]
+    assert ocr_pages[0].is_probable_scan is True
+    assert ocr_pages[0].extraction_method == "ocr"
+    assert ocr_pages[0].text == "Forced OCR output"
+    assert ocr_pages[0].ocr_confidence_mean == 91.0
+    assert any("phủ gần toàn trang" in note for note in ocr_pages[0].notes)
+
+
 def test_blank_page_without_image_does_not_attempt_ocr(tmp_path: Path, monkeypatch) -> None:
     import pymupdf
 
