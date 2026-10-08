@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from rag_hcmute.evaluation.question_partitions import (
+    question_row_sha256,
     question_ids_for_partition,
     validate_question_partition_manifest,
 )
@@ -57,6 +58,7 @@ def _fixture(root: Path) -> tuple[Path, Path, Path]:
             "corpus_snapshot_id",
             "review_status_field",
             "reviewed_status",
+            "reviewed_row_sha256",
         ],
         [
             {
@@ -66,6 +68,7 @@ def _fixture(root: Path) -> tuple[Path, Path, Path]:
                 "corpus_snapshot_id": "snap-1",
                 "review_status_field": "status",
                 "reviewed_status": "reviewed",
+                "reviewed_row_sha256": question_row_sha256(question_rows[0]),
             },
             {
                 "source_set": "data/question_sets/pilot.csv",
@@ -74,6 +77,7 @@ def _fixture(root: Path) -> tuple[Path, Path, Path]:
                 "corpus_snapshot_id": "snap-1",
                 "review_status_field": "status",
                 "reviewed_status": "reviewed",
+                "reviewed_row_sha256": question_row_sha256(question_rows[1]),
             },
         ],
     )
@@ -141,6 +145,24 @@ def test_partition_registry_rejects_snapshot_mismatch(tmp_path: Path) -> None:
     snapshot_path.write_text(json.dumps({"snapshot_id": "new-snapshot"}), encoding="utf-8")
 
     with pytest.raises(ValueError, match="different corpus snapshot"):
+        validate_question_partition_manifest(
+            registry_path=registry_path,
+            snapshot_path=snapshot_path,
+            project_root=tmp_path,
+        )
+
+
+def test_partition_registry_rejects_edited_reviewed_question_or_gold(tmp_path: Path) -> None:
+    questions_path, registry_path, snapshot_path = _fixture(tmp_path)
+    fields, rows = [], []
+    with questions_path.open("r", encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream)
+        fields = reader.fieldnames or []
+        rows = list(reader)
+    rows[0]["expected_chunk_id"] = "changed-gold-without-review"
+    _write_csv(questions_path, fields, rows)
+
+    with pytest.raises(ValueError, match="content fingerprint mismatch"):
         validate_question_partition_manifest(
             registry_path=registry_path,
             snapshot_path=snapshot_path,

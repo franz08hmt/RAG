@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -15,6 +17,7 @@ REQUIRED_FIELDS = {
     "corpus_snapshot_id",
     "review_status_field",
     "reviewed_status",
+    "reviewed_row_sha256",
 }
 GENERAL_PARTITIONS = {"development", "holdout"}
 
@@ -42,6 +45,22 @@ def _partition_allowed(review_status_field: str, partition: str) -> bool:
     if review_status_field == "review_status":
         return partition == "ablation_only"
     return False
+
+
+def question_row_sha256(row: dict[str, str]) -> str:
+    """Fingerprint a parsed CSV row without exposing its text fields."""
+    canonical_row: dict[str, object] = {
+        str(key): value for key, value in row.items() if key is not None
+    }
+    if None in row:
+        canonical_row["__extra_columns__"] = row[None]
+    canonical = json.dumps(
+        canonical_row,
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def validate_question_partition_manifest(
@@ -76,7 +95,8 @@ def validate_question_partition_manifest(
         registered_snapshot = row["corpus_snapshot_id"].strip()
         status_field = row["review_status_field"].strip()
         reviewed_status = row["reviewed_status"].strip()
-        if not all((source_set, question_id, partition, registered_snapshot, status_field, reviewed_status)):
+        row_digest = row["reviewed_row_sha256"].strip().lower()
+        if not all((source_set, question_id, partition, registered_snapshot, status_field, reviewed_status, row_digest)):
             raise ValueError("Question partition manifest contains a blank required value.")
         source_path = Path(source_set)
         if source_path.is_absolute() or ".." in source_path.parts:
@@ -85,6 +105,8 @@ def validate_question_partition_manifest(
             raise ValueError("A question assignment targets a different corpus snapshot.")
         if not _partition_allowed(status_field, partition):
             raise ValueError("A question partition is not allowed for its review-status field.")
+        if not re.fullmatch(r"[0-9a-f]{64}", row_digest):
+            raise ValueError("A reviewed question row fingerprint is malformed.")
         key = (source_set, question_id)
         if key in assignments:
             raise ValueError("Question partition manifest contains a duplicate assignment.")
@@ -127,6 +149,15 @@ def validate_question_partition_manifest(
         registered_ids = {row["question_id"].strip() for row in source_assignments}
         if registered_ids != reviewed_ids:
             raise ValueError(f"Reviewed question assignments do not match the source set: {source_set}")
+        source_rows_by_id = {row["question_id"].strip(): row for row in source_rows}
+        for assignment in source_assignments:
+            question_id = assignment["question_id"].strip()
+            if question_row_sha256(source_rows_by_id[question_id]) != assignment[
+                "reviewed_row_sha256"
+            ].strip().lower():
+                raise ValueError(
+                    f"Reviewed question content fingerprint mismatch: {source_set}/{question_id}"
+                )
         for row in source_assignments:
             counts[(source_set, row["partition"].strip().lower())] += 1
 

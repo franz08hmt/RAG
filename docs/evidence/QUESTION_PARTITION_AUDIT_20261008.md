@@ -15,6 +15,10 @@ trạng thái duyệt và mã snapshot; không in câu hỏi, đáp án hoặc v
 - Snapshot tham chiếu: `5da3bd4d5de54492`.
 - Câu hỏi holdout độc lập: hiện chưa có.
 
+Mỗi dòng đã duyệt còn có fingerprint SHA-256 của bản ghi CSV đã parse (JSON chuẩn hóa theo key, UTF-8).
+Validator sẽ dừng nếu câu chữ, nhãn, evidence/gold hay metadata của dòng thay đổi mà chưa cập nhật lại
+quy trình duyệt. Fingerprint không chứa văn bản gốc; manifest chỉ lưu hash.
+
 Đây là ghi nhận mục đích của các bộ hiện có, không phải kết quả benchmark mới và không chứng minh chất
 lượng tổng quát hóa. Các metric đã có vẫn là development evidence.
 
@@ -26,7 +30,8 @@ yêu cầu; mặc định là `development`. CLI `scripts/run_pilot_eval.py` cho
 
 Exact-evidence loader nhận chính các ID đã chọn, kiểm tra gold span trong phạm vi đó và không đưa
 annotation của partition khác vào kết quả. Nếu CSV, manifest, trạng thái duyệt hoặc snapshot không khớp,
-quy trình dừng thay vì tự suy đoán cách phân nhóm.
+hoặc fingerprint của một dòng đã duyệt lệch, quy trình dừng thay vì tự suy đoán cách phân nhóm hay dùng
+gold đã bị sửa.
 
 Hai script đọc trực tiếp bộ câu hỏi Bảng 5 (`evaluate_table_ablation.py` và
 `diagnose_bm25_query_sensitivity.py`) cũng đối chiếu ID với partition `ablation_only` trước khi chạy.
