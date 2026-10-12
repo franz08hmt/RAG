@@ -27,7 +27,7 @@ rag-hcmute-poc/
 │   ├── processed/           Text theo trang và chunks đã xử lý (gitignored, tự sinh lại)
 │   └── question_sets/       Bộ câu hỏi pilot có gold evidence
 ├── docs/
-│   ├── decisions/           Nhật ký quyết định kỹ thuật (ADR)
+│   ├── decisions/           Nhật ký quyết định kỹ thuật (ADR), gồm cấu hình làm việc Mốc 2
 │   └── evidence/            Báo cáo thực nghiệm và các minh chứng đã chọn
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py

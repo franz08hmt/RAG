@@ -7,12 +7,14 @@ trước đây ghi lại trạng thái tại thời điểm đó; phần cập n
 ## Checkpoint hiện tại — 12/10/2026 (cập nhật sau checkpoint kiến trúc)
 
 - DEMO ban đầu đã duyệt được giữ riêng, không ghi đè; báo cáo tiến độ Mốc 1 hiện hành là `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx`.
-- Đã bắt đầu thiết kế Mốc 2 trong `docs/ARCHITECTURE_M2_DRAFT.md`, bám vào module/code đang có; đây là bản làm việc, chưa phải tuyên bố đã hoàn tất thiết kế hoặc triển khai Mốc 2.
+- Đang triển khai bước đầu Mốc 2 song song với các phần Mốc 1 còn thiếu xác minh; chưa tuyên bố Mốc 1 đã đóng. Bản thiết kế làm việc `docs/ARCHITECTURE_M2_DRAFT.md` và quyết định kiến trúc dựa trên các ablation hiện có tại `docs/decisions/ADR-004-current-poc-architecture.md` bám vào code thật, không gọi cấu hình nào là tối ưu.
 - Xác minh trong env `rag-hcmute`: `pytest` **113 passed**, `compileall src scripts tests` và `git diff --check` đạt, `torch.cuda.is_available() == True`. Có test tích hợp metadata từ PDF fixture đến citation; đây không phải kiểm tra citation entailment hay benchmark.
+- Chạy smoke test trực tiếp console bằng BM25 trên corpus 156 chunks. Với truy vấn P007, nguồn Quy chế 1727/2021, Điều 17, PDF trang 23–24 lên hạng 1 và console hiển thị metadata provenance. Với một truy vấn thử về điều kiện tốt nghiệp, nguồn Điều 16 chỉ lên hạng 3; hai lần chạy chỉ xác nhận console và nguồn có thể quan sát, không phải benchmark mới hay chứng nhận chất lượng trả lời.
 - Thêm rubric chấm thủ công cấp câu trả lời và claim, private bundle cục bộ có opt-in, biểu mẫu và bộ tổng hợp chỉ xuất số liệu. Schema chống nhãn mâu thuẫn, ID trùng, trộn run/snapshot/partition; hiện chưa có nhãn semantic nào được điền.
 - Chạy lại generation pilot cùng cấu hình cũ trên G0 development 10 câu bằng Qwen3:4B local: 7/7 answerable có phản hồi, 1/3 unanswerable bị từ chối; 9 câu sinh có citation ID hợp lệ, chưa đánh giá citation support. Đây là lần tái lập cùng tập, không phải benchmark mới.
 - Bundle nội dung và phiếu chấm `pending` được lưu ngoài repo tại `D:\RAG\private_eval\`; không đưa câu hỏi, câu trả lời, excerpt nguồn hay nhãn chưa duyệt vào Git.
 - Mốc 1 có báo cáo v6 nhưng các phần holdout và gold cần người học duyệt, đánh giá correctness/faithfulness/citation entailment, refusal đáng tin cậy và độ bao phủ input class vẫn còn mở.
+- Bước phụ thuộc người học tiếp theo: rà 10 dòng answer review và lập claim review từ bundle cục bộ theo `docs/evaluation/manual_review_protocol.md`. Không có nhãn này thì chưa thể kết luận generation semantic hoặc cập nhật phần kết quả tương ứng trong DOCX.
 - Nhánh `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR. Các thư mục/file untracked có từ trước được giữ nguyên.
 
 ## Checkpoint nối tiếp — 12/10/2026 (khung đánh giá thủ công Mốc 2)

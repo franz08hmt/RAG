@@ -253,3 +253,10 @@
 - Chạy lại cùng generation pilot trên G0 development: Hybrid + reranker Top-5, Qwen3:4B qua Ollama local. Kết quả lặp lại 7/7 answerable có output, 1/3 unanswerable abstain, 7/7 expected-document ID, 9/9 citation ID hợp lệ; có 1 output JSON lỗi trong tổng 10 câu. Đây là tái lập trên cùng bộ, không phải benchmark độc lập hay semantic evaluation.
 - Bundle kiểm tra metadata có đủ 10 record/10 question ID và 10/10 có nguồn truy xuất. File chứa văn bản nằm ngoài repo tại `D:\RAG\private_eval\m2_generation_reviews\`; answer sheet 10 dòng pending và claim sheet header-only ở `D:\RAG\private_eval\manual_review\`. Không đưa nội dung vào Git, không tự gán nhãn thay người học.
 - Cập nhật `docs/ARCHITECTURE_M2_DRAFT.md`, YC11, README và handoff để phản ánh đúng trạng thái; Mốc 1/DOCX chưa đóng hay sửa vì còn thiếu nhãn semantic đã xác minh. Toàn repo: **113 passed**, `compileall` và `git diff --check` đạt. Không dùng 8B, Gemini/cloud API, dependency mới, push/merge/PR.
+
+## 2026-10-12 — Chốt cấu hình kiến trúc làm việc và smoke test console
+
+- Tổng hợp các ablation đã có thành `docs/decisions/ADR-004-current-poc-architecture.md`: cấu hình được giữ làm baseline/ứng viên, số liệu nguồn và giới hạn được nêu cạnh nhau. ADR không đổi default/code, không gọi cấu hình tối ưu và không dùng development pilot để tuyên bố tổng quát.
+- Chạy trực tiếp `rag_hcmute.console_app` với BM25 trên snapshot G0 (156 chunks), không gọi LLM/API. Câu P007 đưa Quy chế 1727/2021, Điều 17, PDF trang 23–24 lên hạng 1; một truy vấn thử về điều kiện tốt nghiệp chỉ đưa Điều 16 lên hạng 3. Đây là kiểm tra luồng/metadata và một quan sát lỗi xếp hạng, không phải phép đo benchmark mới.
+- Cập nhật ma trận YC12 và handoff để làm rõ đang bắt đầu Mốc 2, trong khi các yêu cầu Mốc 1 chưa có semantic review/holdout vẫn mở. Không sửa DOCX và không thay dữ liệu/gold.
+- Chưa đụng tới phiếu chấm riêng ở `D:\RAG\private_eval\`; nhãn answer/claim vẫn do người học rà và điền. Không gọi Gemini/cloud API, không dùng model 8B, không push/merge/tạo PR.

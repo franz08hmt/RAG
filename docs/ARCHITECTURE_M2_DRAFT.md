@@ -128,10 +128,10 @@ Lựa chọn chưa đủ căn cứ để ghi “tối ưu” gồm chunk size, l
 
 ## 8. Kế hoạch tiếp nối
 
-1. Dùng kiến trúc trong tài liệu này làm bản thiết kế làm việc, không coi thông số pilot là cấu hình tối ưu.
+1. Các lựa chọn có bằng chứng hiện tại được tổng hợp ở `docs/decisions/ADR-004-current-poc-architecture.md`; đây là cấu hình làm việc, không phải kết luận tối ưu.
 2. Hoàn thiện ma trận yêu cầu YC1–YC13 ↔ module ↔ test/evidence; giữ nguyên số thứ tự yêu cầu của giảng viên.
-3. Chọn đúng một câu hỏi kiến trúc cho mỗi thử nghiệm tiếp theo để tránh thay đồng thời chunker, retrieval, reranker và prompt.
-4. Chờ người học duyệt câu hỏi/gold và nguồn bổ sung; khi chưa có, chỉ chạy test kỹ thuật hoặc phép đo development được phân loại rõ.
+3. Chọn một câu hỏi kiến trúc cho mỗi thử nghiệm tiếp theo để tránh thay đồng thời chunker, retrieval, reranker và prompt.
+4. Chờ người học duyệt answer/claim, câu hỏi/gold bổ sung và nguồn mới; khi chưa có, chỉ chạy test kỹ thuật hoặc phép đo development được phân loại rõ.
 5. Khi nội dung một mốc đã có bằng chứng, tạo bản DOCX mới theo format đã thống nhất. Không ghi đè demo gốc hay DOCX Mốc 1; chỉ đưa kết quả đã chạy và đã kiểm tra.
 
 ## 9. Tổ chức tài liệu nộp
