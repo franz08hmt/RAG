@@ -4,6 +4,14 @@ Ngày viết ban đầu: 24/09/2026; tài liệu được nối tiếp qua các 
 hiện tại: `tim-hieu-rag-dot2` (không push/merge; xem `git log` để biết commit mới nhất). Các mục có ngày
 trước đây ghi lại trạng thái tại thời điểm đó; phần cập nhật cuối file là trạng thái mới nhất.
 
+## Checkpoint hiện tại — 12/10/2026
+
+- DEMO ban đầu đã duyệt được giữ riêng, không ghi đè; báo cáo tiến độ Mốc 1 hiện hành là `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx`.
+- Đã bắt đầu thiết kế Mốc 2 trong `docs/ARCHITECTURE_M2_DRAFT.md`, bám vào module/code đang có; đây là bản làm việc, chưa phải tuyên bố đã hoàn tất thiết kế hoặc triển khai Mốc 2.
+- Xác minh trong env `rag-hcmute`: `pytest` **104 passed**, `compileall src scripts tests` đạt, `torch.cuda.is_available() == True`. Lượt xác minh không thay đổi code hoặc chạy benchmark.
+- Mốc 1 có báo cáo v6 nhưng các phần holdout và gold cần người học duyệt, đánh giá correctness/faithfulness/citation entailment, refusal đáng tin cậy và độ bao phủ input class vẫn còn mở.
+- Nhánh `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR. Các thư mục/file untracked có từ trước được giữ nguyên.
+
 ## Corpus snapshot dùng cho mọi số liệu trong báo cáo
 
 - `snapshot_id = 5da3bd4d5de54492` (`data/manifests/corpus_snapshot.json`)

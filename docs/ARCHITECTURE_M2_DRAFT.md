@@ -138,3 +138,9 @@ Lựa chọn chưa đủ căn cứ để ghi “tối ưu” gồm chunk size, l
 - `D:\RAG\22110068_RAG_IT_Project_DEMO.docx` là bản demo ban đầu đã được giảng viên chốt; giữ nguyên như một mốc tham chiếu.
 - `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx` là báo cáo tiến độ Mốc 1 riêng; không thay thế file demo và không tuyên bố mọi YC1–YC13 đã hoàn thành.
 - Các báo cáo tiếp theo được phát triển từ kết quả và phản hồi của mốc trước. Mỗi lần tạo bản DOCX mới cần giữ font Times New Roman, cỡ chữ và màu đen/trắng đã thống nhất, bố cục cân đối, đồng thời không sửa đè bản đã nộp.
+
+## 10. Kiểm tra checkpoint
+
+**Kiểm tra ngày 12/10/2026:** dùng Python `C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe` (Python 3.11, Torch `2.14.0+cu126`, CUDA khả dụng). Toàn bộ `pytest` đạt **104 passed**; `compileall` cho `src`, `scripts`, `tests` và `git diff --check` đều đạt.
+
+Đây là kiểm tra hồi quy cho code hiện tại sau khi lập bản thiết kế; không phải benchmark mới, không chứng minh chất lượng câu trả lời hoặc citation về ngữ nghĩa, và không đóng các yêu cầu Mốc 1 còn thiếu. Bước này không sửa code, không chạy Gemini/cloud API, không tải model hay dependency.
