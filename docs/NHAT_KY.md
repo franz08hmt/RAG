@@ -231,3 +231,10 @@
 - Tạo report mới `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v4.docx` từ mẫu v2. Bảng số liệu được dựng từ raw JSON; bản render Word/PDF kiểm tra tại `artifacts/results/docx_m1_v3_template/` (Git-ignored). Không sửa bản nộp v2, không gọi API, không push/merge/PR.
 - Rà render Word phát hiện hai điểm bố cục ở v4: đoạn chunking bị ngắt giữa trang và phụ lục căn đều làm giãn các đường dẫn. Tạo v5 để giữ nguyên đoạn chunking cùng trang và căn trái phụ lục; xác nhận lại PDF 13 trang. Bản hiện hành: `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v5.docx`; v3/v4 giữ làm bản trung gian.
 - Chạy pytest lại với `--basetemp` riêng do Temp/cache dùng chung bị từ chối quyền: 104 passed; `compileall` và `git diff --check` đạt. Ghi đúng kết quả kiểm tra vào phụ lục và tạo v6; v3–v5 là bản trung gian.
+
+## 2026-10-12 — Bắt đầu thiết kế kiến trúc Mốc 2
+
+- Giữ nguyên `D:\RAG\22110068_RAG_IT_Project_DEMO.docx` làm bản demo ban đầu đã được giảng viên chốt. Báo cáo Mốc 1 v6 tiếp tục là tài liệu riêng; không gộp tự động, không ghi đè demo hoặc DOCX đã nộp. Báo cáo ở các mốc sau sẽ được tạo nối tiếp từ kết quả có minh chứng.
+- Đối chiếu code hiện tại ở ingestion, chunking, BM25/Dense/RRF, reranking, generation Ollama và console; tạo `docs/ARCHITECTURE_M2_DRAFT.md` để phân biệt luồng đang có với lựa chọn/kiểm chứng còn mở. Tài liệu bao gồm hợp đồng `PageText`/`Chunk`/`RetrievalHit`/`GroundingSource`, lớp đầu vào, giới hạn citation/refusal và các cổng đánh giá.
+- Cập nhật `README.md` và `docs/HANDOFF_DOT_1.md` để trỏ đến bản thiết kế mới và sửa trạng thái bàn giao về cấu trúc tài liệu hiện hành.
+- Không sửa code hoặc DOCX, không chạy benchmark mới, không dùng API, không tải/cài model hay dependency; chưa push/merge/tạo PR. Mốc 1 có báo cáo v6 nhưng các phần holdout, câu hỏi/gold do người học duyệt, đánh giá ngữ nghĩa và tính tổng quát theo input class vẫn chưa được coi là hoàn tất.

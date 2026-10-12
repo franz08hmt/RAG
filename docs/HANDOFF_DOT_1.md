@@ -97,7 +97,7 @@ Kết quả chẩn đoán BM25 mới nhất: `docs/evidence/BM25_QUERY_SENSITIVI
 
 Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMENT_CLASS_AUDIT_20261007.md`; audit được tái lập bằng `scripts/audit_document_input_profile.py`. G0 có 3 loại nguồn nhưng chỉ một quy chế đạt cấu trúc Điều; 26 trang Sổ tay là cảnh báo scan theo heuristic, OCR bốn trang đang là phép thử riêng, chưa tích hợp vào G0. Page 107 đã được rà soát ở mức metadata OCR và có nhãn làm việc infographic/nội dung thị giác hỗn hợp với độ tin cậy vừa phải. Báo cáo này không chứa nội dung PDF hoặc thông tin cá nhân.
 
-## File deliverable chính
+## File và deliverable hiện hành
 
 - Code: `src/rag_hcmute/{ingestion,retrieval,evaluation}/`, `scripts/*.py`.
 - Corpus manifest + snapshot: `data/manifests/`.
@@ -105,18 +105,17 @@ Kiểm kê Document Class/đầu vào mới nhất: `docs/evidence/INPUT_DOCUMEN
 - Bằng chứng thực nghiệm: `docs/evidence/` (case studies BM25 vs Dense, metrics summary, raw run logs
   của cả 2 phương pháp, figures).
 - Quyết định kỹ thuật: `docs/decisions/ADR-001-*.md`, `ADR-002-*.md`.
-- Báo cáo nộp giảng viên: `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1.docx` — theo yêu cầu mới nhất,
-  file này đã gộp **Phần A** (định hướng và kế hoạch tổng thể, điều chỉnh từ bản trình bày ban đầu của
-  đề tài — sửa lỗi đánh số, cập nhật tên trường, thay toàn bộ hình lấy từ Internet bằng hình tự vẽ) và
-  **Phần B** (báo cáo tiến độ thật của Đợt 1, 7 mục như mô tả trong đề bài). Từ Đợt 2, mỗi đợt báo cáo
-  tiến độ dự kiến sẽ được bổ sung làm Phần C, D, … tiếp theo trong cùng file này.
+- Bản DEMO ban đầu đã được giảng viên chốt: `D:\RAG\22110068_RAG_IT_Project_DEMO.docx`. Giữ nguyên làm mốc tham chiếu; không ghi đè khi phát triển báo cáo tiến độ.
+- Báo cáo tiến độ Mốc 1 hiện hành: `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx`. Đây là tài liệu riêng, phản ánh kết quả và giới hạn đã kiểm chứng; không thay thế DEMO và không tuyên bố mọi YC1–YC13 đã hoàn thành.
+- Các mốc sau được phát triển nối tiếp từ kết quả/thay đổi thực tế của mốc trước, nhưng phải tạo bản DOCX mới, giữ nguyên các bản đã nộp và không tự động gộp DEMO với báo cáo tiến độ. Nếu cần một bản tổng hợp cuối cùng, tạo bản mới từ các nguồn đã duyệt.
+- Bản thiết kế kiến trúc làm việc cho Mốc 2: `docs/ARCHITECTURE_M2_DRAFT.md`; đây là tài liệu Markdown nội bộ, chưa thay thế báo cáo DOCX.
 - Hướng dẫn chạy đầy đủ: `README.md`.
 
 ## Quy ước cập nhật báo cáo theo từng đợt
 
 - Khi hoàn tất một mốc tiến độ, cập nhật DOCX của đúng mốc đó ngay trong cùng lượt bàn giao; nội dung phải phản ánh góp ý mới nhất của giảng viên và chỉ đưa vào các kết quả đã có minh chứng.
 - Giữ nguyên định dạng, font, cỡ chữ, màu đơn sắc, căn chỉnh và cấu trúc đã thống nhất của báo cáo. Không biến kế hoạch thành kết quả đã làm; nêu rõ cấu hình thử nghiệm, phạm vi dữ liệu và giới hạn.
-- Mốc 1 hiện vẫn đang được bổ sung/đối chiếu theo phản hồi của giảng viên. Chưa cập nhật DOCX cho đến khi phần nội dung và minh chứng của mốc này được rà soát xong; sau đó chỉnh DOCX mốc 1 trước khi bàn giao/nộp lại.
+- Báo cáo Mốc 1 v6 đã được tạo và kiểm tra trình bày; các câu hỏi/gold, đánh giá ngữ nghĩa, input-class tổng quát và một số so sánh công nghệ vẫn là giới hạn nghiên cứu. Không ghi các mục này như đã hoàn thành nếu chưa có minh chứng.
 - Việc cập nhật DOCX không đồng nghĩa với push, merge hay tạo PR; các thao tác Git bên ngoài local chỉ thực hiện khi được cho phép riêng.
 
 ## Cập nhật tiếp nối — 07/10/2026

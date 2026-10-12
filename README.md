@@ -217,6 +217,7 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
 ## Tài liệu học tập và truy vết
 
 - `docs/tim_hieu/`: quy trình RAG, dữ liệu/chunk, retrieval, generation và evaluation.
+- `docs/ARCHITECTURE_M2_DRAFT.md`: kiến trúc PoC theo code hiện có và các điểm cần xác nhận ở Mốc 2.
 - `docs/hoc_tap/`: thực hành local và cách đọc kết quả.
 - `docs/TRUY_VET_YC.md`: YC1–YC13 đúng số thứ tự của giảng viên, trạng thái và phần còn thiếu.
 - `CAU_HOI_BAO_VE.md`: câu hỏi tự kiểm tra trước khi trình bày.
