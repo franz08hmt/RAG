@@ -239,3 +239,9 @@
 - Cập nhật `README.md` và `docs/HANDOFF_DOT_1.md` để trỏ đến bản thiết kế mới và sửa trạng thái bàn giao về cấu trúc tài liệu hiện hành.
 - Chạy lại toàn bộ `pytest` bằng `C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe`: **104 passed**; `compileall src scripts tests` và `git diff --check` đạt. Torch `2.14.0+cu126`, CUDA khả dụng.
 - Không sửa code hoặc DOCX, không chạy benchmark mới, không dùng API, không tải/cài model hay dependency; chưa push/merge/tạo PR. Mốc 1 có báo cáo v6 nhưng các phần holdout, câu hỏi/gold do người học duyệt, đánh giá ngữ nghĩa và tính tổng quát theo input class vẫn chưa được coi là hoàn tất.
+
+## 2026-10-12 — Kiểm chứng chuỗi provenance đến citation
+
+- Thêm `tests/test_rag_provenance_integration.py`: dùng PDF fixture tổng hợp để kiểm tra metadata `Chunk` → `RetrievalHit` → `GroundingSource` → citation sau generation mock. Các trường document/chunk ID, tiêu đề, trang PDF và section được so khớp xuyên suốt.
+- Test tích hợp mục tiêu đạt 1/1; toàn bộ suite đạt **105 passed**; `compileall src scripts tests` và `git diff --check` đạt trong env `rag-hcmute`.
+- Đây chỉ là kiểm chứng cấu trúc/truy vết, không đánh giá nguồn có entail câu trả lời hay không. Không chạy benchmark, không gọi model/API, không sửa DOCX; Mốc 1 vẫn còn các khoảng trống cần câu hỏi/gold do người học duyệt và đánh giá ngữ nghĩa.

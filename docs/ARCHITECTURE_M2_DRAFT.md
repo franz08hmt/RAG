@@ -141,6 +141,6 @@ Lựa chọn chưa đủ căn cứ để ghi “tối ưu” gồm chunk size, l
 
 ## 10. Kiểm tra checkpoint
 
-**Kiểm tra ngày 12/10/2026:** dùng Python `C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe` (Python 3.11, Torch `2.14.0+cu126`, CUDA khả dụng). Toàn bộ `pytest` đạt **104 passed**; `compileall` cho `src`, `scripts`, `tests` và `git diff --check` đều đạt.
+**Kiểm tra ngày 12/10/2026:** dùng Python `C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe` (Python 3.11, Torch `2.14.0+cu126`, CUDA khả dụng). Toàn bộ `pytest` đạt **105 passed**; `compileall` cho `src`, `scripts`, `tests` và `git diff --check` đều đạt. Test tích hợp `tests/test_rag_provenance_integration.py` chạy PDF fixture qua extraction → cleaning → chunking → BM25 → `GroundingSource` → generation mock; citation cuối giữ đúng chunk ID, document ID/title, trang PDF và section path.
 
-Đây là kiểm tra hồi quy cho code hiện tại sau khi lập bản thiết kế; không phải benchmark mới, không chứng minh chất lượng câu trả lời hoặc citation về ngữ nghĩa, và không đóng các yêu cầu Mốc 1 còn thiếu. Bước này không sửa code, không chạy Gemini/cloud API, không tải model hay dependency.
+Test trên chỉ xác nhận metadata được truyền xuyên pipeline và citation ID thuộc nguồn đã cấp; không chứng minh câu trả lời đúng hoặc nguồn hỗ trợ về ngữ nghĩa. Đây là kiểm tra hồi quy với PDF tổng hợp, không phải benchmark mới và không đóng các yêu cầu Mốc 1 còn thiếu. Test dùng response Ollama giả lập; không gọi Gemini/Ollama/cloud API, không tải model hay dependency.
