@@ -32,10 +32,10 @@ rag-hcmute-poc/
 ├── src/rag_hcmute/
 │   ├── ingestion/            extract.py, clean.py, sectioning.py, chunk.py, pipeline.py, manifest.py
 │   ├── retrieval/             bm25_index.py, dense_index.py, hybrid.py, reranked.py, common.py
-│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py, generation_pilot.py
+│   ├── evaluation/            metrics.py, run_pilot.py, evidence_spans.py, reranker.py, generation_pilot.py, manual_review.py
 │   ├── generation/            Ollama local, grounded prompt, citation-ID validation
 │   └── console_app.py         Console cho retrieval và thử generation cục bộ
-├── scripts/                  CLI ingestion/retrieval/evaluation và runner thí nghiệm
+├── scripts/                  CLI ingestion/retrieval/evaluation, chuẩn bị phiếu chấm và runner thí nghiệm
 ├── tests/                    pytest cho ingestion, retrieval, evaluation và manifest
 └── artifacts/                Log và index tạm (gitignored)
 ```

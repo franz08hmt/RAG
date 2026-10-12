@@ -245,3 +245,11 @@
 - Thêm `tests/test_rag_provenance_integration.py`: dùng PDF fixture tổng hợp để kiểm tra metadata `Chunk` → `RetrievalHit` → `GroundingSource` → citation sau generation mock. Các trường document/chunk ID, tiêu đề, trang PDF và section được so khớp xuyên suốt.
 - Test tích hợp mục tiêu đạt 1/1; toàn bộ suite đạt **105 passed**; `compileall src scripts tests` và `git diff --check` đạt trong env `rag-hcmute`.
 - Đây chỉ là kiểm chứng cấu trúc/truy vết, không đánh giá nguồn có entail câu trả lời hay không. Không chạy benchmark, không gọi model/API, không sửa DOCX; Mốc 1 vẫn còn các khoảng trống cần câu hỏi/gold do người học duyệt và đánh giá ngữ nghĩa.
+
+## 2026-10-12 — Khung chấm thủ công generation cho bước đầu Mốc 2
+
+- Bổ sung `docs/evaluation/manual_review_protocol.md` với rubric riêng cho correctness, faithfulness, relevance, citation location và mức hỗ trợ từng claim; hai template CSV không có câu trả lời/source text. Tạo `manual_review.py` để kiểm schema, ID, nhãn, quan hệ claim–answer và denominator; thêm CLI tạo phiếu `pending` và tổng hợp nhãn mà không ghi điểm RAG tổng hợp.
+- Thêm tùy chọn rõ ràng `--review-bundle-dir` cho generation pilot. Nội dung câu hỏi/đáp án/các nguồn chỉ được lưu khi bật tùy chọn này và bắt buộc nằm ngoài repository; mặc định metrics-only không đổi.
+- Chạy lại cùng generation pilot trên G0 development: Hybrid + reranker Top-5, Qwen3:4B qua Ollama local. Kết quả lặp lại 7/7 answerable có output, 1/3 unanswerable abstain, 7/7 expected-document ID, 9/9 citation ID hợp lệ; có 1 output JSON lỗi trong tổng 10 câu. Đây là tái lập trên cùng bộ, không phải benchmark độc lập hay semantic evaluation.
+- Bundle kiểm tra metadata có đủ 10 record/10 question ID và 10/10 có nguồn truy xuất. File chứa văn bản nằm ngoài repo tại `D:\RAG\private_eval\m2_generation_reviews\`; answer sheet 10 dòng pending và claim sheet header-only ở `D:\RAG\private_eval\manual_review\`. Không đưa nội dung vào Git, không tự gán nhãn thay người học.
+- Cập nhật `docs/ARCHITECTURE_M2_DRAFT.md`, YC11, README và handoff để phản ánh đúng trạng thái; Mốc 1/DOCX chưa đóng hay sửa vì còn thiếu nhãn semantic đã xác minh. Toàn repo: **113 passed**, `compileall` và `git diff --check` đạt. Không dùng 8B, Gemini/cloud API, dependency mới, push/merge/PR.

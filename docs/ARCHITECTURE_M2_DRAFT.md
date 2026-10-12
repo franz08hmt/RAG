@@ -62,7 +62,7 @@ Sơ đồ thể hiện hai luồng khác nhau: dựng corpus/index là tác vụ
 | Reranking | `retrieval/reranked.py`, `evaluation/reranker.py` | Candidate pool → danh sách được xếp hạng lại | Reranker chỉ sắp xếp lại ứng viên đã tìm thấy; không cứu evidence vắng khỏi candidate pool; cần theo dõi truncation và latency |
 | Generation | `generation/ollama.py` | Câu hỏi + `GroundingSource` → `GroundedAnswer` | Chỉ gọi Ollama loopback; kiểm schema/citation ID; hiện chưa có bộ kiểm tra entailment hoặc ngưỡng từ chối đã hiệu chỉnh |
 | Điều phối console | `console_app.py` | Tham số CLI/câu hỏi → output cho người dùng | In executable Python, model local phải được chỉ định, không tự tải model; console hiện là PoC, chưa phải dịch vụ nhiều người dùng |
-| Đánh giá | `evaluation/`, `scripts/run_*` | Snapshot + câu hỏi đã duyệt + gold → metrics/evidence | Tách retrieval khỏi generation; khóa partition, fingerprint câu hỏi và snapshot; không gọi metric pilot là holdout |
+| Đánh giá | `evaluation/`, `scripts/run_*`, `scripts/prepare_manual_review.py`, `scripts/summarize_manual_reviews.py` | Snapshot + câu hỏi đã duyệt + gold → retrieval metrics và phiếu chấm generation thủ công | Tách retrieval khỏi generation; khóa một run/snapshot/partition mỗi lần tổng hợp; semantic labels vẫn cần người học duyệt |
 
 ### 3.1 Hợp đồng dữ liệu chính
 
@@ -122,6 +122,7 @@ Lựa chọn chưa đủ căn cứ để ghi “tối ưu” gồm chunk size, l
 - **Kiểm chứng retrieval:** BM25, Dense, Hybrid và reranker phải nhận cùng snapshot; lưu candidate depth, `top_k`, model revision, thời gian và truncation.
 - **Kiểm chứng generation:** test nguồn rỗng, citation ID sai/thiếu, JSON lỗi, endpoint không loopback và Ollama không sẵn sàng. Các test cấu trúc không được diễn giải thành đo đúng/sai ngữ nghĩa.
 - **Kiểm chứng câu trả lời:** cần bộ câu hỏi và gold evidence được người học duyệt; tách development với holdout, không dùng test để chọn prompt/ngưỡng.
+- **Chấm ngữ nghĩa:** đã có rubric answer/claim, private bundle cục bộ và bộ tổng hợp nhãn; hiện chưa có answer nào được chấm semantic. Lượt generation pilot lặp lại không thay cho phần chấm này.
 - **Kiểm chứng input class:** bổ sung mẫu theo PDF text, scan, bảng, nội dung hình và cấu trúc điều khoản; chỉ dùng nguồn người học đã xác nhận quyền truy cập và tính phù hợp.
 - **Kiểm chứng vận hành:** console đủ cho PoC; không thêm UI/API nhiều người dùng nếu không phục vụ yêu cầu môn học. Ghi rõ thời gian khởi tạo model và thời gian từng tầng.
 
@@ -144,3 +145,11 @@ Lựa chọn chưa đủ căn cứ để ghi “tối ưu” gồm chunk size, l
 **Kiểm tra ngày 12/10/2026:** dùng Python `C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe` (Python 3.11, Torch `2.14.0+cu126`, CUDA khả dụng). Toàn bộ `pytest` đạt **105 passed**; `compileall` cho `src`, `scripts`, `tests` và `git diff --check` đều đạt. Test tích hợp `tests/test_rag_provenance_integration.py` chạy PDF fixture qua extraction → cleaning → chunking → BM25 → `GroundingSource` → generation mock; citation cuối giữ đúng chunk ID, document ID/title, trang PDF và section path.
 
 Test trên chỉ xác nhận metadata được truyền xuyên pipeline và citation ID thuộc nguồn đã cấp; không chứng minh câu trả lời đúng hoặc nguồn hỗ trợ về ngữ nghĩa. Đây là kiểm tra hồi quy với PDF tổng hợp, không phải benchmark mới và không đóng các yêu cầu Mốc 1 còn thiếu. Test dùng response Ollama giả lập; không gọi Gemini/Ollama/cloud API, không tải model hay dependency.
+
+## 11. Đánh giá thủ công generation — công cụ đã có, kết quả còn chờ chấm
+
+- Rubric và quy trình cấp answer/claim: `docs/evaluation/manual_review_protocol.md`.
+- Bundle có nội dung chỉ được tạo khi bật `--review-bundle-dir`; runner từ chối đường dẫn nằm trong repository. Mặc định cũ vẫn metrics-only.
+- Script tạo phiếu `pending` chỉ gồm ID/metadata: `scripts/prepare_manual_review.py`; script tổng hợp nhãn đã chấm: `scripts/summarize_manual_reviews.py`. Một lần tổng hợp chỉ nhận một run, snapshot và partition; không sinh điểm tổng hợp.
+- Bản chạy local 12/10 dùng lại G0 development 10 câu, Hybrid + reranker Top-5, Qwen3:4B qua Ollama. Kết quả vận hành lặp lại 7/7 answerable có phản hồi, 1/3 unanswerable bị từ chối. Đây là lần tái lập trên cùng bộ câu hỏi, không phải benchmark mới.
+- Bundle nội dung và phiếu chấm nằm ở `D:\RAG\private_eval\`; không có câu hỏi, output hay source text nào trong repo. Answer/citation semantic chưa được chấm, do đó YC11 tiếp tục một phần và bước này không tự đóng Mốc 1.

@@ -4,13 +4,25 @@ Ngày viết ban đầu: 24/09/2026; tài liệu được nối tiếp qua các 
 hiện tại: `tim-hieu-rag-dot2` (không push/merge; xem `git log` để biết commit mới nhất). Các mục có ngày
 trước đây ghi lại trạng thái tại thời điểm đó; phần cập nhật cuối file là trạng thái mới nhất.
 
-## Checkpoint hiện tại — 12/10/2026
+## Checkpoint hiện tại — 12/10/2026 (cập nhật sau checkpoint kiến trúc)
 
 - DEMO ban đầu đã duyệt được giữ riêng, không ghi đè; báo cáo tiến độ Mốc 1 hiện hành là `reports/22110068_RAG_Bao_Cao_Tien_Do_Dot_1_v6.docx`.
 - Đã bắt đầu thiết kế Mốc 2 trong `docs/ARCHITECTURE_M2_DRAFT.md`, bám vào module/code đang có; đây là bản làm việc, chưa phải tuyên bố đã hoàn tất thiết kế hoặc triển khai Mốc 2.
-- Xác minh trong env `rag-hcmute`: `pytest` **105 passed**, `compileall src scripts tests` đạt, `torch.cuda.is_available() == True`. Có test tích hợp metadata từ PDF fixture đến citation; đây không phải kiểm tra citation entailment hay benchmark.
+- Xác minh trong env `rag-hcmute`: `pytest` **113 passed**, `compileall src scripts tests` và `git diff --check` đạt, `torch.cuda.is_available() == True`. Có test tích hợp metadata từ PDF fixture đến citation; đây không phải kiểm tra citation entailment hay benchmark.
+- Thêm rubric chấm thủ công cấp câu trả lời và claim, private bundle cục bộ có opt-in, biểu mẫu và bộ tổng hợp chỉ xuất số liệu. Schema chống nhãn mâu thuẫn, ID trùng, trộn run/snapshot/partition; hiện chưa có nhãn semantic nào được điền.
+- Chạy lại generation pilot cùng cấu hình cũ trên G0 development 10 câu bằng Qwen3:4B local: 7/7 answerable có phản hồi, 1/3 unanswerable bị từ chối; 9 câu sinh có citation ID hợp lệ, chưa đánh giá citation support. Đây là lần tái lập cùng tập, không phải benchmark mới.
+- Bundle nội dung và phiếu chấm `pending` được lưu ngoài repo tại `D:\RAG\private_eval\`; không đưa câu hỏi, câu trả lời, excerpt nguồn hay nhãn chưa duyệt vào Git.
 - Mốc 1 có báo cáo v6 nhưng các phần holdout và gold cần người học duyệt, đánh giá correctness/faithfulness/citation entailment, refusal đáng tin cậy và độ bao phủ input class vẫn còn mở.
 - Nhánh `tim-hieu-rag-dot2`; không push, merge hoặc tạo PR. Các thư mục/file untracked có từ trước được giữ nguyên.
+
+## Checkpoint nối tiếp — 12/10/2026 (khung đánh giá thủ công Mốc 2)
+
+- Hướng dẫn: `docs/evaluation/manual_review_protocol.md`; code: `src/rag_hcmute/evaluation/manual_review.py`; CLI: `scripts/prepare_manual_review.py`, `scripts/summarize_manual_reviews.py`.
+- Bundle generation nằm ngoài repository tại `D:\RAG\private_eval\m2_generation_reviews\generation_hybrid-rerank_5da3bd4d5de54492_20261012T030902Z.jsonl`. Kiểm tra metadata: 10 record/10 question ID, snapshot `5da3bd4d5de54492`, gồm 7 answerable + 3 unanswerable, retrieved sources có ở 10/10; không in nội dung câu hỏi hay nguồn.
+- Phiếu answer/claim cũng ở ngoài repo. Answer sheet có 10 dòng `pending`; claim sheet chỉ có header chờ người chấm tách claim. Chưa có đánh giá thủ công nào được thực hiện hoặc đưa vào metric.
+- Lượt chạy là tái lập local trên cùng corpus/query/config; kết quả vận hành khớp lượt 08/10: 7/7 answerable có phản hồi, 1/3 unanswerable bị từ chối; 9 output sinh, 1 output JSON không hợp lệ. Không gọi Gemini/cloud API, không dùng model 8B.
+- Test khung đánh giá và tạo phiếu; toàn repo đạt **113 passed**. Compileall và `git diff --check` đạt.
+- Đây là hạ tầng đánh giá cho Mốc 2, chưa phải kết quả semantic hay đóng Mốc 1/YC11. Chưa cập nhật DOCX mốc vì chưa có nhãn review được sinh viên xác minh; giữ nguyên demo và báo cáo Mốc 1.
 
 ## Corpus snapshot dùng cho mọi số liệu trong báo cáo
 
