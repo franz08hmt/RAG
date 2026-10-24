@@ -160,3 +160,17 @@ def test_valid_response_level_citation_ids_are_returned_for_source_list(monkeypa
 
     assert result.abstained is False
     assert [source.source_id for source in result.citations] == ["S1"]
+
+
+def test_scope_prompt_is_generic_and_invalid_variant_is_rejected(monkeypatch):
+    payloads = []
+    def fake(request, timeout):
+        payloads.append(json.loads(request.data))
+        return _mock_response(json.dumps({'abstain': True, 'answer': '', 'citation_ids': []}))
+    monkeypatch.setattr('rag_hcmute.generation.ollama.urlopen', fake)
+    result = generate_grounded_answer('Một câu hỏi', [_source()], prompt_variant='scope_check', keep_alive=0)
+    assert result.status == 'model_abstained'
+    assert 'đối chiếu từng yêu cầu' in payloads[0]['messages'][0]['content']
+    assert payloads[0]['keep_alive'] == 0
+    with pytest.raises(ValueError):
+        generate_grounded_answer('Câu hỏi', [_source()], prompt_variant='invented')

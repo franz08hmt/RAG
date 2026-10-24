@@ -1,5 +1,8 @@
 # Bàn giao mốc 1 (4 tuần đầu) — RAG HCMUTE PoC
 
+**Trạng thái mới nhất ngày 25/10/2026:** đọc `docs/HANDOFF_MOC2_20261025.md`.
+Các checkpoint dưới đây được giữ làm lịch sử, không phải trạng thái hiện tại.
+
 Ngày viết ban đầu: 24/09/2026; tài liệu được nối tiếp qua các lần cập nhật. Nhánh tiếp tục triển khai
 hiện tại: `tim-hieu-rag-dot2` (không push/merge; xem `git log` để biết commit mới nhất). Các mục có ngày
 trước đây ghi lại trạng thái tại thời điểm đó; phần cập nhật cuối file là trạng thái mới nhất.

@@ -1,6 +1,6 @@
 # Truy vết yêu cầu của giảng viên YC1–YC13
 
-Cập nhật: 08/10/2026. “Có minh chứng” nghĩa là có nội dung/code/kết quả cụ thể trong repository; không đồng nghĩa yêu cầu đã được đáp ứng đầy đủ nếu mẫu còn nhỏ hoặc phần kiểm chứng chưa chạy. Các YC dùng nguyên số hiệu do giảng viên cung cấp.
+Cập nhật: 25/10/2026. “Có minh chứng” nghĩa là có nội dung/code/kết quả cụ thể trong repository; không đồng nghĩa yêu cầu đã được đáp ứng đầy đủ nếu mẫu còn nhỏ hoặc phần kiểm chứng chưa chạy. Các YC dùng nguyên số hiệu do giảng viên cung cấp. Phần Mốc 2 bên dưới bổ sung và thay các số liệu vận hành cũ; hàng Mốc 1 giữ để truy vết lịch sử, không dùng làm trạng thái mới nhất.
 
 | YC | Nội dung yêu cầu | Bằng chứng hiện có | Trạng thái trung thực | Phần còn thiếu / tiêu chí để khép |
 |---|---|---|---|---|
@@ -18,7 +18,27 @@ Cập nhật: 08/10/2026. “Có minh chứng” nghĩa là có nội dung/code/
 | YC12 | Ứng dụng console | `src/rag_hcmute/console_app.py`; smoke test BM25 ngày 12/10 trên 156 chunks: P007 trả Điều 17, trang PDF 23–24 ở hạng 1 và hiển thị provenance; query thử về tốt nghiệp chỉ đưa Điều 16 lên hạng 3 | Một phần | Đã xác nhận luồng console và metadata nguồn; chất lượng xếp hạng vẫn cần đánh giá trên bộ câu hỏi/gold được duyệt. Generation, refusal và citation semantics không được suy ra từ smoke test này; không cần UI bóng bẩy |
 | YC13 | Tìm hiểu sâu, không lướt qua | Các audit, ablation, mã nguồn, raw metrics-only artifacts, giới hạn được ghi nhận | Đang thực hiện | Nhiều điểm vẫn chỉ là pilot; cần thêm số liệu/đọc nguồn và giải thích lỗi ở từng lớp trước khi đánh dấu hoàn tất |
 
-## Giới hạn chung
+## Minh chứng bổ sung Mốc 2 ngày 25/10/2026
+
+| YC | Bổ sung và giới hạn hiện tại |
+|---|---|
+| YC1 | DOCX Mốc 2 dùng đúng tên đề tài, không sửa bản đã nộp. |
+| YC2 | Báo cáo trình bày từng khâu, nguyên lý, quyết định, phép thử và giới hạn; không chỉ kiến trúc. |
+| YC3 | Phân biệt manifest tài liệu, PageText, Chunk, RetrievalHit, GroundingSource; thêm PageArtifacts có bbox/hash. Chưa có class riêng tên Document. |
+| YC4 | Audit 4 PDF (3 G0 và QĐ3116 riêng); kiểm ảnh/bảng thực. Bảng ứng viên không phải bảng đã xác minh; hiểu hình và CER/WER toàn văn chưa xong. |
+| YC5 | 289 cửa sổ chung không đọc gold; 0 truncation cả hai model; phân biệt span chứa trọn với hợp khoảng ký tự. Chưa đủ mọi kiểu chunking trong kế hoạch. |
+| YC6 | BGE/E5 đúng prefix, cùng đầu vào ≤512; Recall ký tự 0,894/0,890 trên 7 câu dev. Cải thiện tính công bằng, không đủ để kết luận model tốt nhất tiếng Việt. |
+| YC7 | Flat/HNSW/IVF trên cùng 289 vector; recall hàng xóm, p50/p95 và kích thước; Qdrant giữ kết quả Mốc 1. Corpus quá nhỏ để kết luận khả năng mở rộng. |
+| YC8 | BM25/dense/RRF, union character coverage, per-query; BM25 tham chiếu khớp công thức thư viện trong unit test. Chưa có holdout. |
+| YC9 | Rerank 1024 Top20 tăng recall nhưng có thể giảm MRR; chỉ một cross-encoder. |
+| YC10 | 2 prompt × 10 câu chạy đủ. Mỗi prompt 0/3 model_abstained; P006 vẫn sinh, P009 lỗi citation, P010 lỗi JSON. Không gộp lỗi định dạng vào từ chối đúng. |
+| YC11 | Bootstrap cặp và chỉ số retrieval định nghĩa rõ; 20 lượt sinh chỉ kiểm vận hành. Nhãn người vẫn pending; không có điểm correctness/faithfulness đã xác minh. |
+| YC12 | Cold console và cache-hit console chạy đầu–cuối; lượt kiểm lại 25/10 P007 tổng 45,03 s, S1 hợp lệ về ID. Chưa bảo đảm mọi câu đúng hoặc mọi trạng thái RAM chạy ổn định. |
+| YC13 | Có phân tích lỗi P006, ranh giới chunk, truncation, ANN, trade-off reranker. Phải tiếp tục tự đọc nguồn và giải thích; không đánh dấu toàn bộ nghiên cứu hoàn tất. |
+
+Số liệu: `docs/evidence/m2/runs/manifest.json`. Chi tiết: `docs/HANDOFF_MOC2_20261025.md`.
+
+## Giới hạn vẫn giữ
 
 - G0 là snapshot lịch sử gồm 3 tài liệu, 182 trang, 156 chunks; không dùng để khẳng định hiệu lực hiện tại của mọi quy định.
 - Tập chính hiện có 10 câu development: 7 answerable, 3 unanswerable; 10 exact evidence span. Năm câu bảng thuộc `ablation_only`; chưa có holdout.

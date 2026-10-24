@@ -215,3 +215,22 @@ def test_console_configures_utf8_for_terminal_streams(monkeypatch) -> None:
 
     assert stdout.configuration == {"encoding": "utf-8", "errors": "replace"}
     assert stderr.configuration == {"encoding": "utf-8", "errors": "replace"}
+
+
+def test_console_reports_generation_error_as_failure(monkeypatch, capsys):
+    retriever = SimpleNamespace(chunks=[], query=lambda _q, top_k: SimpleNamespace(hits=[], latency_ms=1))
+    def fail(*args, **kwargs):
+        raise RuntimeError("local service unavailable")
+    monkeypatch.setattr("rag_hcmute.console_app.generate_grounded_answer", fail)
+    metrics = {}
+    assert _run_one(retriever, method="bm25", query="test", top_k=1, answer=True, metrics=metrics) is False
+    assert metrics["status"] == "generation_error"
+    assert "Không tạo được câu trả lời" in capsys.readouterr().out
+
+
+def test_console_does_not_count_malformed_output_as_semantic_refusal(monkeypatch, capsys):
+    retriever = SimpleNamespace(chunks=[], query=lambda _q, top_k: SimpleNamespace(hits=[], latency_ms=1))
+    monkeypatch.setattr("rag_hcmute.console_app.generate_grounded_answer", lambda *args, **kwargs:
+        SimpleNamespace(model="qwen3:4b", latency_ms=1, answer="", citations=[], abstained=True, status="invalid_model_json"))
+    assert _run_one(retriever, method="bm25", query="test", top_k=1, answer=True) is False
+    assert "lỗi kỹ thuật" in capsys.readouterr().out

@@ -1,0 +1,78 @@
+{
+  "created_at_utc": "2026-10-24T06:57:31.840081+00:00",
+  "pymupdf_version": "1.28.2",
+  "snapshot_id": "5da3bd4d5de54492",
+  "status": "metadata_audit_not_accuracy_benchmark",
+  "git_revision": "8c949988442a49ffe6de8f6c7a998eb4530b4429",
+  "script_sha256": "26aa213e9acd87e5d33d008bd9237e31ce629f2338eb15991e93f3a7c82d29ed",
+  "module_sha256": "c205bafd0dd196096a0b43880956f746b9899060b14b5e3fda25417db5aef733",
+  "privacy": "Metadata only. Page renders are local review evidence and must be visually checked before report inclusion.",
+  "documents": [
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "source_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa",
+      "source_url": "https://hcmute.edu.vn/Resources/Docs/SubDomain/fme/1727-qd-ban-hanh-quy-che-dao-tao-trinh-do-DH.pdf",
+      "in_g0": true,
+      "page_count": 32,
+      "routing_counts": {
+        "native_text_and_images": 2,
+        "native_text": 30
+      },
+      "pages_with_raster": 2,
+      "raster_occurrences": 6,
+      "pages_with_table_candidates": 8,
+      "table_candidates": 11,
+      "table_detection_errors": 0,
+      "inspection_seconds": 3.965
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "source_sha256": "80c932a92dee7f92228f8cb6e8ffaf45d342559b6b1491939be103c946f003ab",
+      "source_url": "https://hcmute.edu.vn/Resources/Docs/SubDomain/fit/2022/Huong-dan-thuc-hien-Thuc-tap-tot-nghiep-new.pdf",
+      "in_g0": true,
+      "page_count": 1,
+      "routing_counts": {
+        "native_text": 1
+      },
+      "pages_with_raster": 0,
+      "raster_occurrences": 0,
+      "pages_with_table_candidates": 0,
+      "table_candidates": 0,
+      "table_detection_errors": 0,
+      "inspection_seconds": 0.099
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "source_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47",
+      "source_url": "https://hcmute.edu.vn/Resources/Docs/SubDomain/sao/Quy%20định%20hiện%20hành/_SO%20TAY%20SV%202024%20-%2006-11%20-%20final.pdf",
+      "in_g0": true,
+      "page_count": 149,
+      "routing_counts": {
+        "raster_dominant_sparse_text_review": 26,
+        "raster_dominant_with_text_layer_review": 123
+      },
+      "pages_with_raster": 149,
+      "raster_occurrences": 242,
+      "pages_with_table_candidates": 25,
+      "table_candidates": 28,
+      "table_detection_errors": 0,
+      "inspection_seconds": 27.448
+    },
+    {
+      "document_id": "HCMUTE_QCDT_3116_2025",
+      "source_sha256": "604ca10460ab92f3b329e3cc3572cff6c148fad4a40b243ff50e095eee34d8a9",
+      "source_url": "https://aao.hcmute.edu.vn/?ArticleId=fb49599f-d6e6-402e-806f-94cbc153e9e1",
+      "in_g0": false,
+      "page_count": 32,
+      "routing_counts": {
+        "raster_dominant_with_text_layer_review": 32
+      },
+      "pages_with_raster": 32,
+      "raster_occurrences": 32,
+      "pages_with_table_candidates": 0,
+      "table_candidates": 0,
+      "table_detection_errors": 0,
+      "inspection_seconds": 11.535
+    }
+  ]
+}

@@ -1,0 +1,505 @@
+{
+  "run_id": "m2_console_20261024T130313Z",
+  "snapshot_id": "5da3bd4d5de54492",
+  "partition": "development",
+  "model": "qwen3:4b",
+  "temperature": 0,
+  "think": false,
+  "review_status": "human_semantic_review_pending",
+  "api_cost_usd": 0,
+  "git_revision_before_run": "8c949988442a49ffe6de8f6c7a998eb4530b4429",
+  "source_sha256": {
+    "scripts\\run_m2_console_demo.py": "f8c7e6db80320fc04e8683ff3e4556d458b8a920d019ce779aca89089d0e8123",
+    "src\\rag_hcmute\\generation\\ollama.py": "3304c4fdfcaf53250dfb56f73f9e41a130121016778f3d42acfe2fbdb2e17c7c",
+    "src\\rag_hcmute\\console_app.py": "ca8e8f50a55047f0e71ff36c0f0337ae846d4226feb3aadf25a7e36b7dd47387",
+    "src\\rag_hcmute\\retrieval\\dense_index.py": "bf7eaf74810f7b94e2c9f7d90c53e4288370cf71a48a2ae74e5581a2f309843f"
+  },
+  "cases": [
+    {
+      "qid": "P001",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 19608.894899996812,
+      "citation_count": 1,
+      "citation_ids": [
+        "S1"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 2270.0523999956204,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0036",
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_QCDT_1727_2021__c0051"
+      ]
+    },
+    {
+      "qid": "P002",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 8021.099900004629,
+      "citation_count": 2,
+      "citation_ids": [
+        "S1",
+        "S2"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 982.4599999992643,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0021",
+        "HCMUTE_SOTAYSV_2024__c0017",
+        "HCMUTE_SOTAYSV_2024__c0015",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0037"
+      ]
+    },
+    {
+      "qid": "P003",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 9580.230800005666,
+      "citation_count": 1,
+      "citation_ids": [
+        "S2"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 1054.1874999980791,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0020",
+        "HCMUTE_QCDT_1727_2021__c0032",
+        "HCMUTE_QCDT_1727_2021__c0033",
+        "HCMUTE_QCDT_1727_2021__c0030",
+        "HCMUTE_SOTAYSV_2024__c0019"
+      ]
+    },
+    {
+      "qid": "P004",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 6899.826799999573,
+      "citation_count": 2,
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 915.8278999966569,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0022",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0021",
+        "HCMUTE_QCDT_1727_2021__c0026",
+        "HCMUTE_QCDT_1727_2021__c0011"
+      ]
+    },
+    {
+      "qid": "P005",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 6962.984999998298,
+      "citation_count": 1,
+      "citation_ids": [
+        "S1"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 972.9530999975395,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_FIT_TTTN_2022__c0000",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0008",
+        "HCMUTE_SOTAYSV_2024__c0013",
+        "HCMUTE_QCDT_1727_2021__c0021"
+      ]
+    },
+    {
+      "qid": "P006",
+      "answerability": "unanswerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 5373.767500001122,
+      "citation_count": 2,
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 953.250599995954,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0051",
+        "HCMUTE_QCDT_1727_2021__c0036",
+        "HCMUTE_QCDT_1727_2021__c0050",
+        "HCMUTE_QCDT_1727_2021__c0025",
+        "HCMUTE_QCDT_1727_2021__c0010"
+      ]
+    },
+    {
+      "qid": "P007",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 8296.549600003345,
+      "citation_count": 1,
+      "citation_ids": [
+        "S1"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 892.2756999963894,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_QCDT_1727_2021__c0022",
+        "HCMUTE_SOTAYSV_2024__c0010"
+      ]
+    },
+    {
+      "qid": "P008",
+      "answerability": "answerable",
+      "prompt_variant": "standard",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 12027.543099997274,
+      "citation_count": 5,
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 923.9212999964366,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_QCDT_1727_2021__c0032",
+        "HCMUTE_QCDT_1727_2021__c0033",
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0023"
+      ]
+    },
+    {
+      "qid": "P009",
+      "answerability": "unanswerable",
+      "prompt_variant": "standard",
+      "status": "invalid_or_missing_citation",
+      "abstained": true,
+      "generation_ms": 4618.742400001793,
+      "citation_count": 0,
+      "citation_ids": [],
+      "inline_citation_present": false,
+      "retrieval_ms": 1015.5890999958501,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0017",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0018",
+        "HCMUTE_QCDT_1727_2021__c0021",
+        "HCMUTE_QCDT_1727_2021__c0027"
+      ]
+    },
+    {
+      "qid": "P010",
+      "answerability": "unanswerable",
+      "prompt_variant": "standard",
+      "status": "invalid_model_json",
+      "abstained": true,
+      "generation_ms": 20629.822100003366,
+      "citation_count": 0,
+      "citation_ids": [],
+      "inline_citation_present": false,
+      "retrieval_ms": 895.3553000028478,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0034",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0038",
+        "HCMUTE_SOTAYSV_2024__c0030",
+        "HCMUTE_SOTAYSV_2024__c0029"
+      ]
+    },
+    {
+      "qid": "P001",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 14600.93169999891,
+      "citation_count": 1,
+      "citation_ids": [
+        "S1"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 2270.0523999956204,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0036",
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_QCDT_1727_2021__c0051"
+      ]
+    },
+    {
+      "qid": "P002",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 9487.735200003954,
+      "citation_count": 3,
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 982.4599999992643,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0021",
+        "HCMUTE_SOTAYSV_2024__c0017",
+        "HCMUTE_SOTAYSV_2024__c0015",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0037"
+      ]
+    },
+    {
+      "qid": "P003",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 11567.429200003971,
+      "citation_count": 2,
+      "citation_ids": [
+        "S1",
+        "S2"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 1054.1874999980791,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0020",
+        "HCMUTE_QCDT_1727_2021__c0032",
+        "HCMUTE_QCDT_1727_2021__c0033",
+        "HCMUTE_QCDT_1727_2021__c0030",
+        "HCMUTE_SOTAYSV_2024__c0019"
+      ]
+    },
+    {
+      "qid": "P004",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 7741.907900002843,
+      "citation_count": 2,
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 915.8278999966569,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0022",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0021",
+        "HCMUTE_QCDT_1727_2021__c0026",
+        "HCMUTE_QCDT_1727_2021__c0011"
+      ]
+    },
+    {
+      "qid": "P005",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 7414.62849999516,
+      "citation_count": 1,
+      "citation_ids": [
+        "S1"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 972.9530999975395,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_FIT_TTTN_2022__c0000",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0008",
+        "HCMUTE_SOTAYSV_2024__c0013",
+        "HCMUTE_QCDT_1727_2021__c0021"
+      ]
+    },
+    {
+      "qid": "P006",
+      "answerability": "unanswerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 5896.322799999325,
+      "citation_count": 2,
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 953.250599995954,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0051",
+        "HCMUTE_QCDT_1727_2021__c0036",
+        "HCMUTE_QCDT_1727_2021__c0050",
+        "HCMUTE_QCDT_1727_2021__c0025",
+        "HCMUTE_QCDT_1727_2021__c0010"
+      ]
+    },
+    {
+      "qid": "P007",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 9485.679099998379,
+      "citation_count": 1,
+      "citation_ids": [
+        "S1"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 892.2756999963894,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_QCDT_1727_2021__c0022",
+        "HCMUTE_SOTAYSV_2024__c0010"
+      ]
+    },
+    {
+      "qid": "P008",
+      "answerability": "answerable",
+      "prompt_variant": "scope_check",
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "generation_ms": 12700.25610000448,
+      "citation_count": 5,
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "inline_citation_present": false,
+      "retrieval_ms": 923.9212999964366,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_QCDT_1727_2021__c0032",
+        "HCMUTE_QCDT_1727_2021__c0033",
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0023"
+      ]
+    },
+    {
+      "qid": "P009",
+      "answerability": "unanswerable",
+      "prompt_variant": "scope_check",
+      "status": "invalid_or_missing_citation",
+      "abstained": true,
+      "generation_ms": 4883.827500001644,
+      "citation_count": 0,
+      "citation_ids": [],
+      "inline_citation_present": false,
+      "retrieval_ms": 1015.5890999958501,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0017",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0018",
+        "HCMUTE_QCDT_1727_2021__c0021",
+        "HCMUTE_QCDT_1727_2021__c0027"
+      ]
+    },
+    {
+      "qid": "P010",
+      "answerability": "unanswerable",
+      "prompt_variant": "scope_check",
+      "status": "invalid_model_json",
+      "abstained": true,
+      "generation_ms": 20056.50649999734,
+      "citation_count": 0,
+      "citation_ids": [],
+      "inline_citation_present": false,
+      "retrieval_ms": 895.3553000028478,
+      "candidate_count": 20,
+      "truncated_pairs": 0,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0034",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0038",
+        "HCMUTE_SOTAYSV_2024__c0030",
+        "HCMUTE_SOTAYSV_2024__c0029"
+      ]
+    }
+  ],
+  "startup": {
+    "dense": {
+      "cache_hit": true,
+      "batch_size": 4,
+      "library_import_seconds": 23.51995259999967,
+      "model_load_seconds": 8.49454450000485,
+      "device": "cuda:0",
+      "cache_key": "35ebeed6b3b3a4b22f8c225affdf73478d0f6af928a4109e3861b5402442e025",
+      "cache_check_seconds": 3.163762999996834,
+      "corpus_encode_and_cache_write_seconds": 4.5000000682193786e-05,
+      "index_build_seconds": 0.001955100000486709
+    },
+    "total_seconds": 44.55206450000696,
+    "reranker_load_seconds": 9.290139600001567,
+    "loading_policy": "sequential embedding then reranker; distinct from interactive cold run"
+  },
+  "release_gpu_ms": 1208.5115000008955,
+  "completed": true
+}

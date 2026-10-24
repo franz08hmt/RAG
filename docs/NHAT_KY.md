@@ -1,5 +1,23 @@
 # Nhật ký Giai đoạn 0
 
+## 2026-10-24 đến 2026-10-25 — Gói thực nghiệm và báo cáo Mốc 2
+
+- Audit PageArtifacts trên nguồn G0 và QĐ3116 riêng, ảnh nguồn có kiểm tra trước khi đưa
+  vào report. Chưa có hiểu hình tự động hoặc bản chép chuẩn OCR đầy đủ.
+- Chạy 289 cửa sổ chung, không truncation, so BGE-M3/E5-small, BM25/RRF, Flat/HNSW/IVF,
+  reranker 1024. Có metrics ký tự hợp khoảng, per-question và bootstrap. Artifact cuối:
+  `controlled_run_20261024T125011Z`; 7 answerable dev, không holdout.
+- Bổ sung BM25 tham chiếu và cache embedding có hash nội dung. Console in các bước tải
+  và thời gian; lỗi generation/JSON không được tính như từ chối đúng.
+- Batch hai prompt × 10 câu chạy đủ sau khi chuyển sang tải model tuần tự vì có lần
+  thiếu bộ nhớ ảo Windows. Không đổi pagefile hoặc đóng app người dùng.
+- Lượt console P007 kiểm lại ngày 25/10: 45,032 s, cache hit, nguồn Điều17 PDF23–24
+  đứng đầu, S1 hợp lệ về ID; chưa chấm đúng nội dung. Hai prompt chưa khắc phục P006.
+- Biên tập DOCX riêng, giữ DEMO/Mốc1; bảng từ số liệu thật, hình từ PDF, định dạng
+  Times New Roman 12/13/14, kiểm render bằng Word/PDF vì renderer bundled không có LO.
+- Không dùng Gemini/cloud/8B, không thêm dữ liệu ngoài, không push/merge/tạo PR.
+  Xem bàn giao `docs/HANDOFF_MOC2_20261025.md` để biết phần tự động và phần cần người duyệt.
+
 ## 2026-09-28 — Khởi tạo, thiết lập môi trường và tái lập baseline
 
 - Clone repository từ nhánh `moc1-progress-report` (commit gốc `4d60860e7a5c27571f5b8e4612e191e653978c4b`) vào `D:\RAG\rag-hcmute-dot2`; tạo nhánh làm việc `tim-hieu-rag-dot2`.

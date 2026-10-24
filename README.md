@@ -1,5 +1,13 @@
 # Tìm hiểu Retrieval Augmented Generation (RAG)
 
+## Gói tiến độ Mốc 2 ngày 25/10/2026
+
+Xem [bàn giao Mốc 2](docs/HANDOFF_MOC2_20261025.md) và [hướng dẫn console](docs/MOC2_HUONG_DAN.md).
+Có thí nghiệm embedding không cắt đầu vào, Flat/HNSW/IVF, kiểm tra PDF bảng/hình,
+hai prompt Qwen3:4B và số liệu console thực chạy. Kết quả vẫn là development pilot;
+chưa có holdout hoặc điểm đúng ngữ nghĩa đã được người chấm xác nhận.
+DEMO/Mốc 1 được giữ nguyên, không gộp đè; các thay đổi mới chưa push lên GitHub.
+
 Đây là mã nguồn thực nghiệm cho đề tài **Tìm hiểu Retrieval Augmented Generation (RAG)**. PoC khảo sát hỏi đáp trên tài liệu học vụ HCMUTE; các kết quả benchmark dùng snapshot G0 cố định để có thể so sánh và tái lập.
 
 ## Phạm vi mục tiêu của PoC

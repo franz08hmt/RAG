@@ -116,6 +116,8 @@ def generate_grounded_answer(
     base_url: str = DEFAULT_BASE_URL,
     timeout_seconds: float = 120.0,
     max_output_tokens: int = 512,
+    keep_alive: str | int = "5m",
+    prompt_variant: str = "standard",
 ) -> GroundedAnswer:
     """Generate a locally hosted answer and reject invalid or untraceable citations.
 
@@ -129,6 +131,8 @@ def generate_grounded_answer(
         raise ValueError("Tên model Ollama không được để trống.")
     if timeout_seconds <= 0 or max_output_tokens < 32:
         raise ValueError("Timeout phải dương và max_output_tokens tối thiểu là 32.")
+    if prompt_variant not in {"standard", "scope_check"}:
+        raise ValueError("Unknown prompt variant.")
     endpoint = _validate_local_endpoint(base_url)
     valid_sources = [source for source in sources if source.text.strip()]
     if not valid_sources:
@@ -144,6 +148,14 @@ def generate_grounded_answer(
         '{"abstain": boolean, "answer": string, "citation_ids": [string]}. '
         "Khi từ chối, đặt abstain=true, citation_ids=[] và answer là một câu ngắn nêu chưa đủ căn cứ."
     )
+    if prompt_variant == "scope_check":
+        system_prompt += (
+            " Trước khi trả lời, đối chiếu từng yêu cầu trong câu hỏi với nguồn: đối tượng, thời điểm, "
+            "điều kiện và số liệu. Quy định chung không chứng minh một lịch cụ thể, một mức tiền cụ thể "
+            "hoặc trạng thái cá nhân. Đoạn chỉ nhắc tên chủ đề không phải là bằng chứng cho tiêu chí hay "
+            "thủ tục được hỏi. Nếu thiếu nội dung cốt lõi, đặt abstain=true. Không trả lời câu hỏi khác "
+            "dễ hơn thay cho câu hỏi được giao. Khi đủ nguồn, trả lời trực tiếp và gắn [Sx] ngay sau ý đó."
+        )
     user_prompt = (
         f"Câu hỏi:\n{question.strip()}\n\n"
         f"Các nguồn đã truy xuất:\n{_build_context(valid_sources)}\n\n"
@@ -158,6 +170,7 @@ def generate_grounded_answer(
         "stream": False,
         "think": False,
         "format": "json",
+        "keep_alive": keep_alive,
         "options": {"temperature": 0, "num_predict": max_output_tokens},
     }
     request = Request(

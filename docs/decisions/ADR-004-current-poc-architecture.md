@@ -2,6 +2,11 @@
 
 ## Trạng thái
 
+Cập nhật 25/10/2026: cấu hình G0 vẫn là baseline console; 289 cửa sổ trong thí nghiệm
+Mốc 2 chưa thay corpus console. Chỉ thêm cache vector, báo thời gian, chuyển GPU/CPU
+và tách lỗi định dạng khỏi refusal. `scope_check` là biến thể thí nghiệm, chưa chọn
+làm mặc định vì không cải thiện refusal trong lần chạy. Xem `docs/HANDOFF_MOC2_20261025.md`.
+
 **Đề xuất làm cấu hình tham chiếu cho các bước triển khai Mốc 2.** ADR này không khẳng định cấu hình tối ưu, không thay đổi default/code hiện tại và không thay thế quyết định của giảng viên. Mọi kết luận định lượng bên dưới giới hạn trong snapshot G0 và development pilot nhỏ.
 
 ## Bối cảnh

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "corpus_snapshot.json",
+    "sha256": "5a3c9fb2ace339371e47ac0b8d471d1227ab582cef5387fd906e5f40789a071f",
+    "local_source": "data\\manifests\\corpus_snapshot.json",
+    "source_sha256": "51a4be7fd9bc54b7488ae8be16987eaf3db466232e718fcf508768965732fc86"
+  },
+  {
+    "file": "input_artifacts_summary.json",
+    "sha256": "6362600a93c2d0ebbeca16bf723bb0abcd0bcb5fac1debc9d45e14c131ac0811",
+    "local_source": "artifacts\\results\\m2_input\\input_artifacts_metrics.json",
+    "source_sha256": "b8d139c6f33d57a65e966eb9b0f23c1debbe51b83718d5d3563476a48e537b67"
+  },
+  {
+    "file": "controlled_evaluation.json",
+    "sha256": "4cdebfb74180bff5c7f9f82ed03719d9452bdf8dbdf08e01cbe2018c78d1c763",
+    "local_source": "artifacts\\results\\m2_eval\\controlled_run_20261024T125011Z.json",
+    "source_sha256": "4654b95a3fbf80ffe1587260c407dc7fc62c182b168160bf72e77eb2ac418631"
+  },
+  {
+    "file": "console_generation.json",
+    "sha256": "48af44a96a1fc65de2f8caea3028496b56e98a13eef229953f3c62709193e549",
+    "local_source": "artifacts\\results\\m2_console\\20261024T130313Z\\metrics.json",
+    "source_sha256": "2ec601269e1c36182356aaf2d195f529918e1b67e4d48a93dca16b044fd2e788"
+  },
+  {
+    "file": "console_cold.json",
+    "sha256": "3f4cc43ea723541c081d430ede9e1858c2cbcc10f29418b7ebfca7f721671f89",
+    "local_source": "artifacts\\results\\m2_console\\cold.json",
+    "source_sha256": "b654ff3f65f07c4d61bb93bdc6a670f449e4f66ba429d7fbaa8f522e695edaf4"
+  },
+  {
+    "file": "console_warm.json",
+    "sha256": "88bb97cfb1d1a1e4fab490f8d94489d3355fcc2018ab671803fc55dbc725402a",
+    "local_source": "artifacts\\results\\m2_console\\warm_interactive_20261025.json",
+    "source_sha256": "98de05397e97fea7e45eb3c0436546b5d7b1003432a2b5ef521d32dec40f2233"
+  }
+]

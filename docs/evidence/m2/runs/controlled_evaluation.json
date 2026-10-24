@@ -1,0 +1,4257 @@
+{
+  "created_at": "2026-10-24T12:50:11.740730+00:00",
+  "git_revision_before_run": "8c949988442a49ffe6de8f6c7a998eb4530b4429",
+  "source_sha256": {
+    "scripts\\run_m2_controlled_evaluation.py": "23412c13c22300bdb8c1ebce202d969e7ba699192823e7a82bb3dcfe0e614bbb",
+    "src\\rag_hcmute\\evaluation\\controlled_embedding.py": "cc5bc84b9bfc664f57dd3f09d6475e37e73d99d17317587b44f3a9179c53feaa",
+    "src\\rag_hcmute\\evaluation\\interval_metrics.py": "7919eb6c248fb8739c16958bd73da04c77f6a2156aeca8c68bad679842ee632d",
+    "scripts\\run_chunk_strategy_ablation.py": "6ab3eb0477456051253c50c125617d84aa2ee3dac539fede9098ce472da1ea86",
+    "data\\question_sets\\pilot_questions.csv": "8ecfe8fcf87e1c1e6424385b86fa4ec59b61f54607f5d1f0e01d9faf6b84780f",
+    "data\\question_sets\\pilot_evidence_annotations.json": "0c89f97a2251ab9553423d30fff371e73a380a591c77472f60aa4381c202e998",
+    "data\\manifests\\corpus_manifest.csv": "8dccaddaabb79fb9323113d24898e603494a54fc2ef8bde531878459d9d5bd77",
+    "data\\processed\\g0_reproduction\\snapshot.json": "803958d9a8b3d13ac2e164ebd6f29fb5d56ec6d8aed0db02cd1e34b4fed98795"
+  },
+  "snapshot_id": "5da3bd4d5de54492",
+  "partition": "development",
+  "holdout_used": false,
+  "human_review_status": "No new human labels; reuse existing evidence annotations; generation not evaluated",
+  "question_count": 10,
+  "answerable_count": 7,
+  "gold_span_count": 10,
+  "baseline_chunk_count": 156,
+  "shared_chunk_count": 289,
+  "shared_chunk_signature": "23053f6114beadea98fcc7b17a850f7897177ff5c630d561dce05a06682e7a71",
+  "chunk_policy": {
+    "word_cap": 250,
+    "overlap_whitespace_tokens": 40,
+    "model_token_cap": 512,
+    "section_aware": false,
+    "gold_used_in_construction": false,
+    "description": "document-wide sliding windows; decrease end until both prefix+text+special-token lengths fit; no tail merge"
+  },
+  "baseline_input_lengths": {
+    "bge-m3": {
+      "over_original_limit": 4,
+      "original_limit": 1024,
+      "max": 1088
+    },
+    "multilingual-e5-small": {
+      "over_original_limit": 125,
+      "original_limit": 512,
+      "max": 1090
+    }
+  },
+  "shared_input_lengths": {
+    "bge-m3": {
+      "over_512": 0,
+      "max": 510,
+      "median": 299,
+      "query_max": 23
+    },
+    "multilingual-e5-small": {
+      "over_512": 0,
+      "max": 512,
+      "median": 301,
+      "query_max": 26
+    }
+  },
+  "retrieval": {
+    "bm25": {
+      "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+      "top_k": 10,
+      "hit_k": 5,
+      "evidence_span_coverage": {
+        "covered": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "evidence_span_recall_at_5": {
+        "hits": 2,
+        "denominator": 10,
+        "value": 0.2
+      },
+      "conditional_recall_at_5_given_covered": {
+        "hits": 2,
+        "denominator": 6,
+        "value": 0.3333333333333333
+      },
+      "complete_evidence_hit_at_5": {
+        "hits": 1,
+        "denominator": 7,
+        "value": 0.14285714285714285
+      },
+      "first_evidence_mrr_at_10": {
+        "value": 0.21428571428571427,
+        "denominator": 7
+      },
+      "per_question": [
+        {
+          "question_id": "P001",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P002",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P003",
+          "evidence_span_count": 2,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P004",
+          "evidence_span_count": 1,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P005",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P007",
+          "evidence_span_count": 2,
+          "covered_span_count": 2,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P008",
+          "evidence_span_count": 2,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        }
+      ],
+      "character_coverage": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "relevance_threshold": 0.5,
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "macro": {
+          "character_recall_at_5": 0.24347653261529498,
+          "character_precision_at_5": 0.011814613201679213,
+          "character_iou_at_5": 0.011233815363200304,
+          "hit_at_5_threshold_05": 0.2857142857142857,
+          "mrr_at_10_threshold_05": 0.2619047619047619,
+          "ndcg_at_5_linear_span_coverage": 0.22762599010313886
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_SOTAYSV_2024__shared512_0080",
+              "HCMUTE_QCDT_1727_2021__shared512_0068",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_QCDT_1727_2021__shared512_0069",
+              "HCMUTE_SOTAYSV_2024__shared512_0002",
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_QCDT_1727_2021__shared512_0067",
+              "HCMUTE_SOTAYSV_2024__shared512_0003"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_SOTAYSV_2024__shared512_0035",
+              "HCMUTE_SOTAYSV_2024__shared512_0034",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_SOTAYSV_2024__shared512_0029",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_QCDT_1727_2021__shared512_0033"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.017537097706687224,
+            "character_iou_at_5": 0.017537097706687224,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0066",
+              "HCMUTE_QCDT_1727_2021__shared512_0050",
+              "HCMUTE_SOTAYSV_2024__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0051",
+              "HCMUTE_SOTAYSV_2024__shared512_0019",
+              "HCMUTE_SOTAYSV_2024__shared512_0165",
+              "HCMUTE_SOTAYSV_2024__shared512_0021",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_SOTAYSV_2024__shared512_0164",
+              "HCMUTE_SOTAYSV_2024__shared512_0134"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0077",
+              "HCMUTE_SOTAYSV_2024__shared512_0003",
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_SOTAYSV_2024__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0011",
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_QCDT_1727_2021__shared512_0050",
+              "HCMUTE_QCDT_1727_2021__shared512_0040",
+              "HCMUTE_QCDT_1727_2021__shared512_0062"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.16666666666666666,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0002",
+              "HCMUTE_SOTAYSV_2024__shared512_0080",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_QCDT_1727_2021__shared512_0069",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_QCDT_1727_2021__shared512_0013",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_QCDT_1727_2021__shared512_0024"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_QCDT_1727_2021__shared512_0033",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_SOTAYSV_2024__shared512_0021",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_SOTAYSV_2024__shared512_0036"
+            ],
+            "character_recall_at_5": 0.4386422976501306,
+            "character_precision_at_5": 0.03174003400717929,
+            "character_iou_at_5": 0.030501089324618737,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.38685280723454163
+          },
+          {
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0055",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0042",
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_SOTAYSV_2024__shared512_0134",
+              "HCMUTE_QCDT_1727_2021__shared512_0070",
+              "HCMUTE_SOTAYSV_2024__shared512_0046"
+            ],
+            "character_recall_at_5": 0.2656934306569343,
+            "character_precision_at_5": 0.03342516069788797,
+            "character_iou_at_5": 0.030598520511096166,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.16666666666666666,
+            "ndcg_at_5_linear_span_coverage": 0.20652912348743044
+          }
+        ]
+      }
+    },
+    "dense_bge-m3": {
+      "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+      "top_k": 10,
+      "hit_k": 5,
+      "evidence_span_coverage": {
+        "covered": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "evidence_span_recall_at_5": {
+        "hits": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "conditional_recall_at_5_given_covered": {
+        "hits": 6,
+        "denominator": 6,
+        "value": 1.0
+      },
+      "complete_evidence_hit_at_5": {
+        "hits": 4,
+        "denominator": 7,
+        "value": 0.5714285714285714
+      },
+      "first_evidence_mrr_at_10": {
+        "value": 0.5714285714285714,
+        "denominator": 7
+      },
+      "per_question": [
+        {
+          "question_id": "P001",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P002",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P003",
+          "evidence_span_count": 2,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P004",
+          "evidence_span_count": 1,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P005",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P007",
+          "evidence_span_count": 2,
+          "covered_span_count": 2,
+          "evidence_span_hits_at_5": 2,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P008",
+          "evidence_span_count": 2,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        }
+      ],
+      "character_coverage": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "relevance_threshold": 0.5,
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "macro": {
+          "character_recall_at_5": 0.8943596039781583,
+          "character_precision_at_5": 0.07403348900783313,
+          "character_iou_at_5": 0.07342316817029144,
+          "hit_at_5_threshold_05": 1,
+          "mrr_at_10_threshold_05": 0.8571428571428571,
+          "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0058",
+              "HCMUTE_SOTAYSV_2024__shared512_0043",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_SOTAYSV_2024__shared512_0044",
+              "HCMUTE_SOTAYSV_2024__shared512_0102",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_QCDT_1727_2021__shared512_0055",
+              "HCMUTE_QCDT_1727_2021__shared512_0057",
+              "HCMUTE_SOTAYSV_2024__shared512_0026"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.09606817741623087,
+            "character_iou_at_5": 0.09606817741623087,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0035",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_SOTAYSV_2024__shared512_0053",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0052",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_SOTAYSV_2024__shared512_0055"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.016340456096247083,
+            "character_iou_at_5": 0.016340456096247083,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0052",
+              "HCMUTE_QCDT_1727_2021__shared512_0054",
+              "HCMUTE_SOTAYSV_2024__shared512_0041",
+              "HCMUTE_SOTAYSV_2024__shared512_0093",
+              "HCMUTE_QCDT_1727_2021__shared512_0051",
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_SOTAYSV_2024__shared512_0092",
+              "HCMUTE_SOTAYSV_2024__shared512_0094",
+              "HCMUTE_SOTAYSV_2024__shared512_0082",
+              "HCMUTE_SOTAYSV_2024__shared512_0091"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.1732191514207863,
+            "character_iou_at_5": 0.1732191514207863,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+          },
+          {
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_SOTAYSV_2024__shared512_0029",
+              "HCMUTE_QCDT_1727_2021__shared512_0028",
+              "HCMUTE_QCDT_1727_2021__shared512_0067",
+              "HCMUTE_QCDT_1727_2021__shared512_0024",
+              "HCMUTE_QCDT_1727_2021__shared512_0034"
+            ],
+            "character_recall_at_5": 0.8736559139784946,
+            "character_precision_at_5": 0.06314357878375752,
+            "character_iou_at_5": 0.06257219869079707,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+          },
+          {
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_FIT_TTTN_2022__shared512_0001",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0058",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_SOTAYSV_2024__shared512_0026",
+              "HCMUTE_SOTAYSV_2024__shared512_0034"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.044186046511627906,
+            "character_iou_at_5": 0.044186046511627906,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_SOTAYSV_2024__shared512_0133",
+              "HCMUTE_SOTAYSV_2024__shared512_0042",
+              "HCMUTE_SOTAYSV_2024__shared512_0035",
+              "HCMUTE_QCDT_1727_2021__shared512_0055"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.07506860054880439,
+            "character_iou_at_5": 0.07506860054880439,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+          },
+          {
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_SOTAYSV_2024__shared512_0042",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_SOTAYSV_2024__shared512_0130",
+              "HCMUTE_SOTAYSV_2024__shared512_0133",
+              "HCMUTE_QCDT_1727_2021__shared512_0052",
+              "HCMUTE_SOTAYSV_2024__shared512_0132",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0127"
+            ],
+            "character_recall_at_5": 0.38686131386861317,
+            "character_precision_at_5": 0.050208412277377795,
+            "character_iou_at_5": 0.04650754650754651,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+          }
+        ]
+      }
+    },
+    "rrf_bge-m3": {
+      "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+      "top_k": 10,
+      "hit_k": 5,
+      "evidence_span_coverage": {
+        "covered": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "evidence_span_recall_at_5": {
+        "hits": 3,
+        "denominator": 10,
+        "value": 0.3
+      },
+      "conditional_recall_at_5_given_covered": {
+        "hits": 3,
+        "denominator": 6,
+        "value": 0.5
+      },
+      "complete_evidence_hit_at_5": {
+        "hits": 2,
+        "denominator": 7,
+        "value": 0.2857142857142857
+      },
+      "first_evidence_mrr_at_10": {
+        "value": 0.2684240362811791,
+        "denominator": 7
+      },
+      "per_question": [
+        {
+          "question_id": "P001",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P002",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P003",
+          "evidence_span_count": 2,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P004",
+          "evidence_span_count": 1,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P005",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P007",
+          "evidence_span_count": 2,
+          "covered_span_count": 2,
+          "evidence_span_hits_at_5": 2,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P008",
+          "evidence_span_count": 2,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        }
+      ],
+      "character_coverage": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "relevance_threshold": 0.5,
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "macro": {
+          "character_recall_at_5": 0.5632199571081743,
+          "character_precision_at_5": 0.04515368628195291,
+          "character_iou_at_5": 0.043744926253221385,
+          "hit_at_5_threshold_05": 0.7142857142857143,
+          "mrr_at_10_threshold_05": 0.4742063492063492,
+          "ndcg_at_5_linear_span_coverage": 0.39987129134322963
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_QCDT_1727_2021__shared512_0068",
+              "HCMUTE_QCDT_1727_2021__shared512_0069",
+              "HCMUTE_SOTAYSV_2024__shared512_0022",
+              "HCMUTE_QCDT_1727_2021__shared512_0057",
+              "HCMUTE_QCDT_1727_2021__shared512_0067",
+              "HCMUTE_QCDT_1727_2021__shared512_0058",
+              "HCMUTE_SOTAYSV_2024__shared512_0043"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.1111111111111111,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0035",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_SOTAYSV_2024__shared512_0034",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_QCDT_1727_2021__shared512_0060"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.0164676076728194,
+            "character_iou_at_5": 0.0164676076728194,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_SOTAYSV_2024__shared512_0038",
+              "HCMUTE_QCDT_1727_2021__shared512_0052",
+              "HCMUTE_SOTAYSV_2024__shared512_0066",
+              "HCMUTE_QCDT_1727_2021__shared512_0050",
+              "HCMUTE_QCDT_1727_2021__shared512_0054",
+              "HCMUTE_SOTAYSV_2024__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0041",
+              "HCMUTE_SOTAYSV_2024__shared512_0051"
+            ],
+            "character_recall_at_5": 0.6820224719101123,
+            "character_precision_at_5": 0.1165067178502879,
+            "character_iou_at_5": 0.1105042781722192,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.25,
+            "ndcg_at_5_linear_span_coverage": 0.35678110265697593
+          },
+          {
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0028",
+              "HCMUTE_QCDT_1727_2021__shared512_0055",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_SOTAYSV_2024__shared512_0031",
+              "HCMUTE_SOTAYSV_2024__shared512_0077",
+              "HCMUTE_SOTAYSV_2024__shared512_0003"
+            ],
+            "character_recall_at_5": 0.8736559139784946,
+            "character_precision_at_5": 0.06046511627906977,
+            "character_iou_at_5": 0.059940981187753595,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.35036310332990045
+          },
+          {
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0013",
+              "HCMUTE_QCDT_1727_2021__shared512_0067",
+              "HCMUTE_QCDT_1727_2021__shared512_0070",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_SOTAYSV_2024__shared512_0002",
+              "HCMUTE_FIT_TTTN_2022__shared512_0001"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.125,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_QCDT_1727_2021__shared512_0033",
+              "HCMUTE_SOTAYSV_2024__shared512_0070",
+              "HCMUTE_SOTAYSV_2024__shared512_0077",
+              "HCMUTE_SOTAYSV_2024__shared512_0030"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.07506860054880439,
+            "character_iou_at_5": 0.07506860054880439,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.6240505200038379
+          },
+          {
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_SOTAYSV_2024__shared512_0042",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_QCDT_1727_2021__shared512_0055",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_SOTAYSV_2024__shared512_0133",
+              "HCMUTE_SOTAYSV_2024__shared512_0132",
+              "HCMUTE_SOTAYSV_2024__shared512_0046"
+            ],
+            "character_recall_at_5": 0.38686131386861317,
+            "character_precision_at_5": 0.04756776162268892,
+            "character_iou_at_5": 0.044233016190953094,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+          }
+        ]
+      }
+    },
+    "dense_multilingual-e5-small": {
+      "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+      "top_k": 10,
+      "hit_k": 5,
+      "evidence_span_coverage": {
+        "covered": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "evidence_span_recall_at_5": {
+        "hits": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "conditional_recall_at_5_given_covered": {
+        "hits": 6,
+        "denominator": 6,
+        "value": 1.0
+      },
+      "complete_evidence_hit_at_5": {
+        "hits": 4,
+        "denominator": 7,
+        "value": 0.5714285714285714
+      },
+      "first_evidence_mrr_at_10": {
+        "value": 0.4928571428571429,
+        "denominator": 7
+      },
+      "per_question": [
+        {
+          "question_id": "P001",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P002",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P003",
+          "evidence_span_count": 2,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P004",
+          "evidence_span_count": 1,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P005",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P007",
+          "evidence_span_count": 2,
+          "covered_span_count": 2,
+          "evidence_span_hits_at_5": 2,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P008",
+          "evidence_span_count": 2,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        }
+      ],
+      "character_coverage": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "relevance_threshold": 0.5,
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "macro": {
+          "character_recall_at_5": 0.8901862492430057,
+          "character_precision_at_5": 0.0707024354027813,
+          "character_iou_at_5": 0.07000279420646881,
+          "hit_at_5_threshold_05": 1,
+          "mrr_at_10_threshold_05": 0.7428571428571429,
+          "ndcg_at_5_linear_span_coverage": 0.6921967919622708
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0058",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_SOTAYSV_2024__shared512_0022",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_SOTAYSV_2024__shared512_0043",
+              "HCMUTE_SOTAYSV_2024__shared512_0044",
+              "HCMUTE_QCDT_1727_2021__shared512_0068",
+              "HCMUTE_QCDT_1727_2021__shared512_0069",
+              "HCMUTE_QCDT_1727_2021__shared512_0070",
+              "HCMUTE_SOTAYSV_2024__shared512_0048"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.09284912017970798,
+            "character_iou_at_5": 0.09284912017970798,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_SOTAYSV_2024__shared512_0035",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_SOTAYSV_2024__shared512_0034",
+              "HCMUTE_QCDT_1727_2021__shared512_0011",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0031",
+              "HCMUTE_QCDT_1727_2021__shared512_0027"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.0169839492347891,
+            "character_iou_at_5": 0.0169839492347891,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0041",
+              "HCMUTE_QCDT_1727_2021__shared512_0052",
+              "HCMUTE_SOTAYSV_2024__shared512_0094",
+              "HCMUTE_QCDT_1727_2021__shared512_0054",
+              "HCMUTE_SOTAYSV_2024__shared512_0081",
+              "HCMUTE_SOTAYSV_2024__shared512_0093",
+              "HCMUTE_SOTAYSV_2024__shared512_0140",
+              "HCMUTE_SOTAYSV_2024__shared512_0137",
+              "HCMUTE_SOTAYSV_2024__shared512_0091",
+              "HCMUTE_SOTAYSV_2024__shared512_0141"
+            ],
+            "character_recall_at_5": 0.9707865168539326,
+            "character_precision_at_5": 0.15935079306528957,
+            "character_iou_at_5": 0.15859030837004406,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.5428629875373778
+          },
+          {
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_QCDT_1727_2021__shared512_0028",
+              "HCMUTE_SOTAYSV_2024__shared512_0031",
+              "HCMUTE_QCDT_1727_2021__shared512_0010",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0029",
+              "HCMUTE_QCDT_1727_2021__shared512_0027"
+            ],
+            "character_recall_at_5": 0.8736559139784946,
+            "character_precision_at_5": 0.059907834101382486,
+            "character_iou_at_5": 0.05939327485380117,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.7007262066598009
+          },
+          {
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_FIT_TTTN_2022__shared512_0001",
+              "HCMUTE_SOTAYSV_2024__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0010",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0058"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.043163981825691866,
+            "character_iou_at_5": 0.043163981825691866,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.2,
+            "ndcg_at_5_linear_span_coverage": 0.38685280723454163
+          },
+          {
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_SOTAYSV_2024__shared512_0055",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0133",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0033"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.07300800609988563,
+            "character_iou_at_5": 0.07300800609988563,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.9197207891481876
+          },
+          {
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0042",
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_SOTAYSV_2024__shared512_0130",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_SOTAYSV_2024__shared512_0126",
+              "HCMUTE_SOTAYSV_2024__shared512_0127",
+              "HCMUTE_SOTAYSV_2024__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0052"
+            ],
+            "character_recall_at_5": 0.38686131386861317,
+            "character_precision_at_5": 0.04965336331272251,
+            "character_iou_at_5": 0.04603091888136182,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.2952147531559878
+          }
+        ]
+      }
+    },
+    "rrf_multilingual-e5-small": {
+      "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+      "top_k": 10,
+      "hit_k": 5,
+      "evidence_span_coverage": {
+        "covered": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "evidence_span_recall_at_5": {
+        "hits": 3,
+        "denominator": 10,
+        "value": 0.3
+      },
+      "conditional_recall_at_5_given_covered": {
+        "hits": 3,
+        "denominator": 6,
+        "value": 0.5
+      },
+      "complete_evidence_hit_at_5": {
+        "hits": 2,
+        "denominator": 7,
+        "value": 0.2857142857142857
+      },
+      "first_evidence_mrr_at_10": {
+        "value": 0.3174603174603175,
+        "denominator": 7
+      },
+      "per_question": [
+        {
+          "question_id": "P001",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P002",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 1,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P003",
+          "evidence_span_count": 2,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P004",
+          "evidence_span_count": 1,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P005",
+          "evidence_span_count": 1,
+          "covered_span_count": 1,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        },
+        {
+          "question_id": "P007",
+          "evidence_span_count": 2,
+          "covered_span_count": 2,
+          "evidence_span_hits_at_5": 2,
+          "complete_evidence_hit_at_5": true
+        },
+        {
+          "question_id": "P008",
+          "evidence_span_count": 2,
+          "covered_span_count": 0,
+          "evidence_span_hits_at_5": 0,
+          "complete_evidence_hit_at_5": false
+        }
+      ],
+      "character_coverage": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "relevance_threshold": 0.5,
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "macro": {
+          "character_recall_at_5": 0.4808764579107425,
+          "character_precision_at_5": 0.03128066024626621,
+          "character_iou_at_5": 0.03038772118421248,
+          "hit_at_5_threshold_05": 0.5714285714285714,
+          "mrr_at_10_threshold_05": 0.4444444444444444,
+          "ndcg_at_5_linear_span_coverage": 0.377461364612221
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_QCDT_1727_2021__shared512_0068",
+              "HCMUTE_QCDT_1727_2021__shared512_0069",
+              "HCMUTE_SOTAYSV_2024__shared512_0022",
+              "HCMUTE_QCDT_1727_2021__shared512_0070",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_QCDT_1727_2021__shared512_0058",
+              "HCMUTE_SOTAYSV_2024__shared512_0080"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.1111111111111111,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_SOTAYSV_2024__shared512_0035",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_SOTAYSV_2024__shared512_0034",
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0062"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.017591339648173207,
+            "character_iou_at_5": 0.017591339648173207,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0
+          },
+          {
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_SOTAYSV_2024__shared512_0041",
+              "HCMUTE_SOTAYSV_2024__shared512_0066",
+              "HCMUTE_QCDT_1727_2021__shared512_0050",
+              "HCMUTE_QCDT_1727_2021__shared512_0052",
+              "HCMUTE_SOTAYSV_2024__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0094",
+              "HCMUTE_QCDT_1727_2021__shared512_0054",
+              "HCMUTE_SOTAYSV_2024__shared512_0051"
+            ],
+            "character_recall_at_5": 0.10561797752808989,
+            "character_precision_at_5": 0.017216117216117217,
+            "character_iou_at_5": 0.015025575447570333,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.16666666666666666,
+            "ndcg_at_5_linear_span_coverage": 0.08895306735262071
+          },
+          {
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_QCDT_1727_2021__shared512_0032",
+              "HCMUTE_SOTAYSV_2024__shared512_0032",
+              "HCMUTE_QCDT_1727_2021__shared512_0027",
+              "HCMUTE_QCDT_1727_2021__shared512_0028",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_SOTAYSV_2024__shared512_0031",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_QCDT_1727_2021__shared512_0029",
+              "HCMUTE_QCDT_1727_2021__shared512_0033"
+            ],
+            "character_recall_at_5": 0.8736559139784946,
+            "character_precision_at_5": 0.059996307919512645,
+            "character_iou_at_5": 0.05948023426061493,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+          },
+          {
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0026",
+              "HCMUTE_QCDT_1727_2021__shared512_0059",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0009",
+              "HCMUTE_QCDT_1727_2021__shared512_0025",
+              "HCMUTE_QCDT_1727_2021__shared512_0031",
+              "HCMUTE_QCDT_1727_2021__shared512_0010",
+              "HCMUTE_QCDT_1727_2021__shared512_0024",
+              "HCMUTE_QCDT_1727_2021__shared512_0068",
+              "HCMUTE_QCDT_1727_2021__shared512_0027"
+            ],
+            "character_recall_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_iou_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0
+          },
+          {
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_SOTAYSV_2024__shared512_0045",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_QCDT_1727_2021__shared512_0033",
+              "HCMUTE_SOTAYSV_2024__shared512_0055",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_SOTAYSV_2024__shared512_0030",
+              "HCMUTE_SOTAYSV_2024__shared512_0049"
+            ],
+            "character_recall_at_5": 1.0,
+            "character_precision_at_5": 0.07506860054880439,
+            "character_iou_at_5": 0.07506860054880439,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.8772153153380493
+          },
+          {
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0042",
+              "HCMUTE_QCDT_1727_2021__shared512_0062",
+              "HCMUTE_QCDT_1727_2021__shared512_0053",
+              "HCMUTE_QCDT_1727_2021__shared512_0063",
+              "HCMUTE_SOTAYSV_2024__shared512_0047",
+              "HCMUTE_SOTAYSV_2024__shared512_0046",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_SOTAYSV_2024__shared512_0130",
+              "HCMUTE_QCDT_1727_2021__shared512_0070",
+              "HCMUTE_SOTAYSV_2024__shared512_0133"
+            ],
+            "character_recall_at_5": 0.38686131386861317,
+            "character_precision_at_5": 0.04909225639125602,
+            "character_iou_at_5": 0.04554829838432451,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.2339521567059466
+          }
+        ]
+      }
+    }
+  },
+  "embedding_models": [
+    {
+      "key": "bge-m3",
+      "model_id": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "dimension": 1024,
+      "input_signature": "23053f6114beadea98fcc7b17a850f7897177ff5c630d561dce05a06682e7a71",
+      "max_seq_length": 512,
+      "dtype": "torch.float32",
+      "query_prefix": "",
+      "passage_prefix": "",
+      "truncated_passages": 0,
+      "load_seconds": 7.94868729999871,
+      "corpus_encode_seconds_after_one_warmup": 37.40248989999964,
+      "query_encode_latency": {
+        "n": 21,
+        "p50_ms": 54.395999999542255,
+        "p95_nearest_rank_ms": 84.46999999432592
+      },
+      "query_encode_latency_ms_by_question": {
+        "P001": [
+          54.246100000455044,
+          51.87479999585776,
+          84.46999999432592
+        ],
+        "P002": [
+          138.6925999977393,
+          59.58449999889126,
+          54.24409999977797
+        ],
+        "P003": [
+          55.43949999992037,
+          52.95569999725558,
+          57.214699998439755
+        ],
+        "P004": [
+          54.82260000280803,
+          50.70210000121733,
+          53.335700002207886
+        ],
+        "P005": [
+          54.395999999542255,
+          54.952500002400484,
+          49.09320000297157
+        ],
+        "P007": [
+          52.18069999682484,
+          47.81189999630442,
+          49.63230000430485
+        ],
+        "P008": [
+          75.39359999645967,
+          77.81529999920167,
+          60.694100000546314
+        ]
+      },
+      "latency_scope": "query encoding includes tokenizer, CPU/GPU transfer and synchronization; 3 repetitions per 7 queries"
+    },
+    {
+      "key": "multilingual-e5-small",
+      "model_id": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "dimension": 384,
+      "input_signature": "23053f6114beadea98fcc7b17a850f7897177ff5c630d561dce05a06682e7a71",
+      "max_seq_length": 512,
+      "dtype": "torch.float32",
+      "query_prefix": "query: ",
+      "passage_prefix": "passage: ",
+      "truncated_passages": 0,
+      "load_seconds": 5.00281669999822,
+      "corpus_encode_seconds_after_one_warmup": 3.6600802000029944,
+      "query_encode_latency": {
+        "n": 21,
+        "p50_ms": 27.924399997573346,
+        "p95_nearest_rank_ms": 29.449399997247383
+      },
+      "query_encode_latency_ms_by_question": {
+        "P001": [
+          27.77780000178609,
+          27.924399997573346,
+          24.088900005153846
+        ],
+        "P002": [
+          29.095500001858454,
+          24.48480000020936,
+          28.495599995949306
+        ],
+        "P003": [
+          27.687800000421703,
+          29.449399997247383,
+          30.24199999345001
+        ],
+        "P004": [
+          27.868000004673377,
+          27.971099996648263,
+          20.739099993079435
+        ],
+        "P005": [
+          21.699599994462915,
+          23.753900000883732,
+          28.137000001152046
+        ],
+        "P007": [
+          27.31620000122348,
+          28.162099995824974,
+          28.150800004368648
+        ],
+        "P008": [
+          28.158500004792586,
+          25.8209999956307,
+          28.340200005914085
+        ]
+      },
+      "latency_scope": "query encoding includes tokenizer, CPU/GPU transfer and synchronization; 3 repetitions per 7 queries"
+    }
+  ],
+  "vector_indexes": [
+    {
+      "name": "FlatIP",
+      "M": null,
+      "efConstruction": null,
+      "efSearch": null,
+      "nlist": null,
+      "nprobe": null,
+      "build_ms": 0.5754000012530014,
+      "serialized_index_bytes": 1183789,
+      "mean_neighbor_recall_at_10_vs_flat": 1.0,
+      "exact_order_match_at_10_vs_flat": 1,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.05989999772282317,
+        "p95_nearest_rank_ms": 0.0883999964571558
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    },
+    {
+      "name": "HNSW_M16_ef8",
+      "M": 16,
+      "efConstruction": 40,
+      "efSearch": 8,
+      "nlist": null,
+      "nprobe": null,
+      "build_ms": 17.94800000061514,
+      "serialized_index_bytes": 1225542,
+      "mean_neighbor_recall_at_10_vs_flat": 0.9571428571428572,
+      "exact_order_match_at_10_vs_flat": 0.7142857142857143,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.026199999410891905,
+        "p95_nearest_rank_ms": 0.04239999543642625
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0019"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_QCDT_1727_2021__shared512_0061"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    },
+    {
+      "name": "HNSW_M16_ef32",
+      "M": 16,
+      "efConstruction": 40,
+      "efSearch": 32,
+      "nlist": null,
+      "nprobe": null,
+      "build_ms": 14.69599999836646,
+      "serialized_index_bytes": 1225542,
+      "mean_neighbor_recall_at_10_vs_flat": 1.0,
+      "exact_order_match_at_10_vs_flat": 1,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.052200000936863944,
+        "p95_nearest_rank_ms": 0.06410000059986487
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    },
+    {
+      "name": "HNSW_M16_ef64",
+      "M": 16,
+      "efConstruction": 40,
+      "efSearch": 64,
+      "nlist": null,
+      "nprobe": null,
+      "build_ms": 14.772100003028754,
+      "serialized_index_bytes": 1225542,
+      "mean_neighbor_recall_at_10_vs_flat": 1.0,
+      "exact_order_match_at_10_vs_flat": 1,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.055199998314492404,
+        "p95_nearest_rank_ms": 0.09500000305706635
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    },
+    {
+      "name": "IVF4_nprobe1",
+      "M": null,
+      "efConstruction": null,
+      "efSearch": null,
+      "nlist": 4,
+      "nprobe": 1,
+      "build_ms": 10.183999998844229,
+      "serialized_index_bytes": 1202611,
+      "mean_neighbor_recall_at_10_vs_flat": 0.8142857142857143,
+      "exact_order_match_at_10_vs_flat": 0.42857142857142855,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.02769999991869554,
+        "p95_nearest_rank_ms": 0.04510000144364312
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 5,
+          "denominator": 10,
+          "value": 0.5
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 5,
+          "denominator": 6,
+          "value": 0.8333333333333334
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.7521281128415577,
+            "character_precision_at_5": 0.04929623250015463,
+            "character_iou_at_5": 0.04869340677764433,
+            "hit_at_5_threshold_05": 0.8571428571428571,
+            "mrr_at_10_threshold_05": 0.7142857142857143,
+            "ndcg_at_5_linear_span_coverage": 0.6771883039815213
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0081"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0051"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.01632579834947973,
+              "character_iou_at_5": 0.01632579834947973,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091",
+                "HCMUTE_SOTAYSV_2024__shared512_0023",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0098",
+                "HCMUTE_SOTAYSV_2024__shared512_0126",
+                "HCMUTE_SOTAYSV_2024__shared512_0128"
+              ],
+              "character_recall_at_5": 0.0,
+              "character_precision_at_5": 0.0,
+              "character_iou_at_5": 0.0,
+              "hit_at_5_threshold_05": false,
+              "mrr_at_10_threshold_05": 0.0,
+              "ndcg_at_5_linear_span_coverage": 0.0
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 0.39124087591240875,
+              "character_precision_at_5": 0.05028142589118199,
+              "character_iou_at_5": 0.046633025926570384,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.6047827113644483
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    },
+    {
+      "name": "IVF4_nprobe2",
+      "M": null,
+      "efConstruction": null,
+      "efSearch": null,
+      "nlist": 4,
+      "nprobe": 2,
+      "build_ms": 4.6898000000510365,
+      "serialized_index_bytes": 1202611,
+      "mean_neighbor_recall_at_10_vs_flat": 1.0,
+      "exact_order_match_at_10_vs_flat": 1,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.03944999843952246,
+        "p95_nearest_rank_ms": 0.06520000169984996
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    },
+    {
+      "name": "IVF4_nprobe4",
+      "M": null,
+      "efConstruction": null,
+      "efSearch": null,
+      "nlist": 4,
+      "nprobe": 4,
+      "build_ms": 5.524499996681698,
+      "serialized_index_bytes": 1202611,
+      "mean_neighbor_recall_at_10_vs_flat": 1.0,
+      "exact_order_match_at_10_vs_flat": 1,
+      "search_latency": {
+        "n": 350,
+        "p50_ms": 0.06605000089621171,
+        "p95_nearest_rank_ms": 0.0948999950196594
+      },
+      "retrieval_metrics": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "latency_scope": "CPU index.search only, precomputed normalized vectors, single thread, 50 repeats x 7 queries after one warmup"
+    }
+  ],
+  "reranking": {
+    "dense_bge-m3": {
+      "before": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5714285714285714,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.8943596039781583,
+            "character_precision_at_5": 0.07403348900783313,
+            "character_iou_at_5": 0.07342316817029144,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.8571428571428571,
+            "ndcg_at_5_linear_span_coverage": 0.7873522509061806
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0102",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_SOTAYSV_2024__shared512_0026"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.016340456096247083,
+              "character_iou_at_5": 0.016340456096247083,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0092",
+                "HCMUTE_SOTAYSV_2024__shared512_0094",
+                "HCMUTE_SOTAYSV_2024__shared512_0082",
+                "HCMUTE_SOTAYSV_2024__shared512_0091"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.1732191514207863,
+              "character_iou_at_5": 0.1732191514207863,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9080260264251697
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06314357878375752,
+              "character_iou_at_5": 0.06257219869079707,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.44210901288893034
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.044186046511627906,
+              "character_iou_at_5": 0.044186046511627906,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0055"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_SOTAYSV_2024__shared512_0130",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0127"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.050208412277377795,
+              "character_iou_at_5": 0.04650754650754651,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "after": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.9777798333837892,
+            "character_precision_at_5": 0.08503035273015115,
+            "character_iou_at_5": 0.08488717734915267,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.7142857142857143,
+            "ndcg_at_5_linear_span_coverage": 0.7452612160234201
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0079",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0022",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0045"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09314553990610329,
+              "character_iou_at_5": 0.09314553990610329,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_SOTAYSV_2024__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0011"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.017163334590720482,
+              "character_iou_at_5": 0.017163334590720482,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0040",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0038",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_SOTAYSV_2024__shared512_0133"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.17936316001612254,
+              "character_iou_at_5": 0.17936316001612254,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9173984692631292
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0050",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0063"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.05841121495327103,
+              "character_iou_at_5": 0.05792193904829799,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.7007262066598009
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_QCDT_1727_2021__shared512_0013",
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_SOTAYSV_2024__shared512_0034",
+                "HCMUTE_QCDT_1727_2021__shared512_0031"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.041206624605678234,
+              "character_iou_at_5": 0.041206624605678234,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0033",
+                "HCMUTE_SOTAYSV_2024__shared512_0077",
+                "HCMUTE_SOTAYSV_2024__shared512_0070",
+                "HCMUTE_SOTAYSV_2024__shared512_0035"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0131"
+              ],
+              "character_recall_at_5": 0.9708029197080292,
+              "character_precision_at_5": 0.13085399449035812,
+              "character_iou_at_5": 0.13034104272834182,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6434179254808251
+            }
+          ]
+        }
+      },
+      "candidate_count_per_query": 20,
+      "max_length": 1024,
+      "truncated_pairs_first_pass": 0,
+      "model_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "load_seconds": 8.691152699997474,
+      "latency": {
+        "n": 14,
+        "p50_ms": 501.5928499997244,
+        "p95_nearest_rank_ms": 570.7264000011492
+      },
+      "latency_scope": "2 passes per 7 queries, same fixed top20, after one warmup; tokenization/truncation audit included"
+    },
+    "rrf_bge-m3": {
+      "before": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 3,
+          "denominator": 10,
+          "value": 0.3
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 3,
+          "denominator": 6,
+          "value": 0.5
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 2,
+          "denominator": 7,
+          "value": 0.2857142857142857
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.2684240362811791,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.5632199571081743,
+            "character_precision_at_5": 0.04515368628195291,
+            "character_iou_at_5": 0.043744926253221385,
+            "hit_at_5_threshold_05": 0.7142857142857143,
+            "mrr_at_10_threshold_05": 0.4742063492063492,
+            "ndcg_at_5_linear_span_coverage": 0.39987129134322963
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_QCDT_1727_2021__shared512_0068",
+                "HCMUTE_QCDT_1727_2021__shared512_0069",
+                "HCMUTE_SOTAYSV_2024__shared512_0022",
+                "HCMUTE_QCDT_1727_2021__shared512_0057",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_SOTAYSV_2024__shared512_0043"
+              ],
+              "character_recall_at_5": 0.0,
+              "character_precision_at_5": 0.0,
+              "character_iou_at_5": 0.0,
+              "hit_at_5_threshold_05": false,
+              "mrr_at_10_threshold_05": 0.1111111111111111,
+              "ndcg_at_5_linear_span_coverage": 0.0
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0034",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_QCDT_1727_2021__shared512_0060"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.0164676076728194,
+              "character_iou_at_5": 0.0164676076728194,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_SOTAYSV_2024__shared512_0038",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0066",
+                "HCMUTE_QCDT_1727_2021__shared512_0050",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_SOTAYSV_2024__shared512_0051"
+              ],
+              "character_recall_at_5": 0.6820224719101123,
+              "character_precision_at_5": 0.1165067178502879,
+              "character_iou_at_5": 0.1105042781722192,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.25,
+              "ndcg_at_5_linear_span_coverage": 0.35678110265697593
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0028",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_SOTAYSV_2024__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0077",
+                "HCMUTE_SOTAYSV_2024__shared512_0003"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06046511627906977,
+              "character_iou_at_5": 0.059940981187753595,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.3333333333333333,
+              "ndcg_at_5_linear_span_coverage": 0.35036310332990045
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0013",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0070",
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_SOTAYSV_2024__shared512_0002",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001"
+              ],
+              "character_recall_at_5": 0.0,
+              "character_precision_at_5": 0.0,
+              "character_iou_at_5": 0.0,
+              "hit_at_5_threshold_05": false,
+              "mrr_at_10_threshold_05": 0.125,
+              "ndcg_at_5_linear_span_coverage": 0.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0033",
+                "HCMUTE_SOTAYSV_2024__shared512_0070",
+                "HCMUTE_SOTAYSV_2024__shared512_0077",
+                "HCMUTE_SOTAYSV_2024__shared512_0030"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6240505200038379
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0131",
+                "HCMUTE_QCDT_1727_2021__shared512_0055",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_SOTAYSV_2024__shared512_0132",
+                "HCMUTE_SOTAYSV_2024__shared512_0046"
+              ],
+              "character_recall_at_5": 0.38686131386861317,
+              "character_precision_at_5": 0.04756776162268892,
+              "character_iou_at_5": 0.044233016190953094,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.4679043134118932
+            }
+          ]
+        }
+      },
+      "after": {
+        "metric_scope": "exact source-token span; uncovered spans count as retrieval misses",
+        "top_k": 10,
+        "hit_k": 5,
+        "evidence_span_coverage": {
+          "covered": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "evidence_span_recall_at_5": {
+          "hits": 6,
+          "denominator": 10,
+          "value": 0.6
+        },
+        "conditional_recall_at_5_given_covered": {
+          "hits": 6,
+          "denominator": 6,
+          "value": 1.0
+        },
+        "complete_evidence_hit_at_5": {
+          "hits": 4,
+          "denominator": 7,
+          "value": 0.5714285714285714
+        },
+        "first_evidence_mrr_at_10": {
+          "value": 0.5,
+          "denominator": 7
+        },
+        "per_question": [
+          {
+            "question_id": "P001",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P002",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P003",
+            "evidence_span_count": 2,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P004",
+            "evidence_span_count": 1,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          },
+          {
+            "question_id": "P005",
+            "evidence_span_count": 1,
+            "covered_span_count": 1,
+            "evidence_span_hits_at_5": 1,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P007",
+            "evidence_span_count": 2,
+            "covered_span_count": 2,
+            "evidence_span_hits_at_5": 2,
+            "complete_evidence_hit_at_5": true
+          },
+          {
+            "question_id": "P008",
+            "evidence_span_count": 2,
+            "covered_span_count": 0,
+            "evidence_span_hits_at_5": 0,
+            "complete_evidence_hit_at_5": false
+          }
+        ],
+        "character_coverage": {
+          "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+          "relevance_threshold": 0.5,
+          "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+          "macro": {
+            "character_recall_at_5": 0.9777798333837892,
+            "character_precision_at_5": 0.08643897510410214,
+            "character_iou_at_5": 0.08628805473380871,
+            "hit_at_5_threshold_05": 1,
+            "mrr_at_10_threshold_05": 0.7142857142857143,
+            "ndcg_at_5_linear_span_coverage": 0.7542635631412393
+          },
+          "per_question": [
+            {
+              "question_id": "P001",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0043",
+                "HCMUTE_QCDT_1727_2021__shared512_0058",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0059",
+                "HCMUTE_SOTAYSV_2024__shared512_0044",
+                "HCMUTE_SOTAYSV_2024__shared512_0022",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_QCDT_1727_2021__shared512_0068"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.09606817741623087,
+              "character_iou_at_5": 0.09606817741623087,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+            },
+            {
+              "question_id": "P002",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0035",
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_SOTAYSV_2024__shared512_0034",
+                "HCMUTE_QCDT_1727_2021__shared512_0031",
+                "HCMUTE_SOTAYSV_2024__shared512_0029",
+                "HCMUTE_QCDT_1727_2021__shared512_0060",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_SOTAYSV_2024__shared512_0053"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.017163334590720482,
+              "character_iou_at_5": 0.017163334590720482,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+            },
+            {
+              "question_id": "P003",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0041",
+                "HCMUTE_QCDT_1727_2021__shared512_0051",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_SOTAYSV_2024__shared512_0038",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_SOTAYSV_2024__shared512_0030",
+                "HCMUTE_SOTAYSV_2024__shared512_0093",
+                "HCMUTE_QCDT_1727_2021__shared512_0050"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.18335393489905233,
+              "character_iou_at_5": 0.18335393489905233,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.9804148990878634
+            },
+            {
+              "question_id": "P004",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_QCDT_1727_2021__shared512_0032",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0040",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_QCDT_1727_2021__shared512_0027",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_QCDT_1727_2021__shared512_0034",
+                "HCMUTE_SOTAYSV_2024__shared512_0030"
+              ],
+              "character_recall_at_5": 0.8736559139784946,
+              "character_precision_at_5": 0.06157635467980296,
+              "character_iou_at_5": 0.06103286384976526,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 0.7007262066598009
+            },
+            {
+              "question_id": "P005",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_FIT_TTTN_2022__shared512_0000",
+                "HCMUTE_QCDT_1727_2021__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0024",
+                "HCMUTE_FIT_TTTN_2022__shared512_0001",
+                "HCMUTE_QCDT_1727_2021__shared512_0067",
+                "HCMUTE_SOTAYSV_2024__shared512_0026",
+                "HCMUTE_QCDT_1727_2021__shared512_0009",
+                "HCMUTE_QCDT_1727_2021__shared512_0013",
+                "HCMUTE_QCDT_1727_2021__shared512_0025",
+                "HCMUTE_QCDT_1727_2021__shared512_0060"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.04098842910374583,
+              "character_iou_at_5": 0.04098842910374583,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 1.0,
+              "ndcg_at_5_linear_span_coverage": 1.0
+            },
+            {
+              "question_id": "P007",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0046",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_SOTAYSV_2024__shared512_0045",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0033",
+                "HCMUTE_SOTAYSV_2024__shared512_0021",
+                "HCMUTE_SOTAYSV_2024__shared512_0077",
+                "HCMUTE_SOTAYSV_2024__shared512_0070"
+              ],
+              "character_recall_at_5": 1.0,
+              "character_precision_at_5": 0.07506860054880439,
+              "character_iou_at_5": 0.07506860054880439,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+            },
+            {
+              "question_id": "P008",
+              "retrieved_chunk_ids_top10": [
+                "HCMUTE_SOTAYSV_2024__shared512_0042",
+                "HCMUTE_QCDT_1727_2021__shared512_0053",
+                "HCMUTE_QCDT_1727_2021__shared512_0054",
+                "HCMUTE_SOTAYSV_2024__shared512_0133",
+                "HCMUTE_QCDT_1727_2021__shared512_0052",
+                "HCMUTE_SOTAYSV_2024__shared512_0047",
+                "HCMUTE_QCDT_1727_2021__shared512_0063",
+                "HCMUTE_QCDT_1727_2021__shared512_0062",
+                "HCMUTE_QCDT_1727_2021__shared512_0061",
+                "HCMUTE_SOTAYSV_2024__shared512_0131"
+              ],
+              "character_recall_at_5": 0.9708029197080292,
+              "character_precision_at_5": 0.13085399449035812,
+              "character_iou_at_5": 0.13034104272834182,
+              "hit_at_5_threshold_05": true,
+              "mrr_at_10_threshold_05": 0.5,
+              "ndcg_at_5_linear_span_coverage": 0.6434179254808251
+            }
+          ]
+        }
+      },
+      "candidate_count_per_query": 20,
+      "max_length": 1024,
+      "truncated_pairs_first_pass": 0,
+      "model_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "load_seconds": 8.691152699997474,
+      "latency": {
+        "n": 14,
+        "p50_ms": 510.95970000096713,
+        "p95_nearest_rank_ms": 590.4363000008743
+      },
+      "latency_scope": "2 passes per 7 queries, same fixed top20, after one warmup; tokenization/truncation audit included"
+    }
+  },
+  "runtime": {
+    "python": "3.11.16",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.14.0+cu126",
+    "cuda": "12.6",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "faiss_threads": 1,
+    "sentence_transformers": "6.1.0",
+    "transformers": "5.17.0"
+  },
+  "limitations": [
+    "Development-only, seven answerable questions and ten source spans; no independent holdout.",
+    "Both models see identical complete passage text; prefixes/pooling/model size remain model-specific.",
+    "This experiment changes chunk policy from the production section-aware 500/80 baseline; cross-run differences are not pure model effects.",
+    "A gold span split across chunks is counted as missed even if two returned chunks jointly cover it; coverage is reported separately.",
+    "Three unanswerable questions have no positive evidence labels and are excluded from retrieval recall/MRR, not counted as retrieval successes.",
+    "Latency measurements are sequential on one machine and a tiny corpus, not a production capacity benchmark."
+  ],
+  "paired_comparison_e5_minus_bge": {
+    "character_recall_at_5": {
+      "mean_right_minus_left": -0.004173354735152489,
+      "ci95_percentile": [
+        -0.012520064205457466,
+        0.0
+      ],
+      "wins_ties_losses_right": [
+        0,
+        6,
+        1
+      ],
+      "n": 7,
+      "repetitions": 5000,
+      "seed": 22110068,
+      "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+    },
+    "mrr_at_10_threshold_05": {
+      "mean_right_minus_left": -0.1142857142857143,
+      "ci95_percentile": [
+        -0.4571428571428572,
+        0.21428571428571427
+      ],
+      "wins_ties_losses_right": [
+        2,
+        2,
+        3
+      ],
+      "n": 7,
+      "repetitions": 5000,
+      "seed": 22110068,
+      "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+    }
+  },
+  "completed": true
+}

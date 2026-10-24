@@ -1,0 +1,47 @@
+{
+  "method": "hybrid-rerank",
+  "top_k": 5,
+  "generator_model": "qwen3:4b",
+  "chunks": 156,
+  "startup": {
+    "dense": {
+      "cache_hit": false,
+      "batch_size": 4,
+      "library_import_seconds": 21.95287980000103,
+      "model_load_seconds": 9.393275899999935,
+      "device": "cuda:0",
+      "cache_key": "35ebeed6b3b3a4b22f8c225affdf73478d0f6af928a4109e3861b5402442e025",
+      "cache_check_seconds": 3.6075093999988894,
+      "corpus_encode_and_cache_write_seconds": 15.151143499999307,
+      "index_build_seconds": 0.0017559999996592524
+    },
+    "reranker_load_seconds": 7.423113799999555,
+    "total_seconds": 57.606524799999534
+  },
+  "query": {
+    "retrieval_gpu_restore_ms": 9.578400000464171,
+    "retrieval_total_ms": 1144.231199998103,
+    "hit_count": 5,
+    "retrieved_chunk_ids": [
+      "HCMUTE_QCDT_1727_2021__c0038",
+      "HCMUTE_SOTAYSV_2024__c0023",
+      "HCMUTE_SOTAYSV_2024__c0022",
+      "HCMUTE_SOTAYSV_2024__c0021",
+      "HCMUTE_QCDT_1727_2021__c0033"
+    ],
+    "retrieval_ms": 186.69219999901543,
+    "reranker_ms": 957.5389999990875,
+    "truncated_pairs": 14,
+    "candidate_count": 20,
+    "retrieval_gpu_release_ms": 1084.5003999984328,
+    "generation_ms": 76619.54130000049,
+    "status": "generated_citations_unverified",
+    "abstained": false,
+    "citation_count": 1,
+    "citation_ids": [
+      "S1"
+    ]
+  },
+  "total_seconds": 136.47866489999979,
+  "success": true
+}
