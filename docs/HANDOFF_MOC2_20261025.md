@@ -24,6 +24,8 @@ Bản DEMO và mọi bản Mốc 1 được giữ nguyên; Mốc 2 là báo cáo
 
 ## Đường dẫn chính
 
+- Commit chứa mã, số liệu và DOCX của đợt này: `df73d34` (chỉ ở local).
+
 - Báo cáo đã kiểm tra 15 trang: `reports/22110068_RAG_Bao_Cao_Tien_Do_Moc_2_v3.docx`.
   v1/v2 là bản QA cục bộ, không dùng để nộp; bản v6 Mốc 1 không thay đổi.
 
@@ -61,3 +63,5 @@ revision trước-run và SHA-256 để không giả vờ đã chạy trên mộ
 Kiểm tra ngày 25/10: 138 tests passed; ảnh của cả 15 trang DOCX được xem lại sau render
 Word. Không có bảng vỡ dòng/tràn lề hoặc hình bị cắt mất nhãn ở bản v3. Kiểm định số
 liệu và cấu trúc: `scripts/verify_m2_delivery.py`; đây không phải chấm đúng ngữ nghĩa.
+
+Biên bản QA và SHA-256 báo cáo: `docs/evidence/M2_DELIVERY_CHECK_20261025.md`.
