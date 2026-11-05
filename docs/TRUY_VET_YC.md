@@ -48,4 +48,10 @@ Số liệu: `docs/evidence/m2/runs/manifest.json`. Chi tiết: `docs/HANDOFF_MO
 
 ## Quy tắc cập nhật
 
+### Bổ sung Mốc 3 · 05/11/2026
+
+YC1–YC3 và YC12 được đối chiếu qua bìa, mô tả Document/PageText/Chunk và lượt console P007 có Điều 17 ở hạng 1. YC4 có lượt OCR 10 trang G0, còn thiếu chấm bản chép và đánh giá ngữ nghĩa hình. YC5 có so sánh sáu thuật toán chia đoạn ở cùng trần 384 token và hai ngân sách ngữ cảnh. YC6 có sáu embedding trên cùng 1.175 đoạn tiếng Việt. YC7 kế thừa thử nghiệm vector store Mốc 2, chưa có lượt mở rộng mới.
+
+YC8–YC9 có bốn phép hợp và chín cấu hình reranker. YC10–YC11 có 30 lượt sinh, phân biệt model từ chối với lỗi kỹ thuật và kiểm tra trích đoạn. YC13 có phân tích từng câu tại DOCX trang 4 và 7. Điểm số retrieval dùng bảy câu dev có bằng chứng. Ba mươi câu trả lời đang đợi chấm ngữ nghĩa, còn tập test đang đợi duyệt. [Hồ sơ và tệp theo yêu cầu](MOC3_HUONG_DAN.md)
+
 Không chuyển trạng thái “một phần” thành “đạt” chỉ vì đã viết phần mô tả. Cập nhật YC cùng đường dẫn evidence, run ID, split và giới hạn. Khi một phép đo cần câu hỏi/gold mới, người học phải tự rà soát nguồn trước khi dữ liệu vào benchmark.

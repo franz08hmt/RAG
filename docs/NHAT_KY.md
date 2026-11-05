@@ -279,3 +279,7 @@
 - Cập nhật ma trận YC12 và handoff để làm rõ đang bắt đầu Mốc 2, trong khi các yêu cầu Mốc 1 chưa có semantic review/holdout vẫn mở. Không sửa DOCX và không thay dữ liệu/gold.
 - Chưa đụng tới phiếu chấm riêng ở `D:\RAG\private_eval\`; nhãn answer/claim vẫn do người học rà và điền. Không gọi Gemini/cloud API, không dùng model 8B, không push/merge/tạo PR.
 - Sau đó thử đường console tích hợp Hybrid + reranker + generation ở chế độ cold-start. Lượt đầu Ollama chưa chạy; lượt sau khởi động Ollama loopback nhưng quá trình vẫn nạp model retrieval/reranker hơn hai phút và chưa phát request inference; đã dừng cả lần chạy lẫn server do agent khởi động. Không có output mới và không tính đây là kết quả benchmark; cần profiling/thời gian warm-up riêng trước khi trình diễn đường tích hợp.
+
+## 05/11/2026 · Báo cáo tiến độ Mốc 3
+
+Đã hoàn tất các lượt OCR, chunking, embedding, hợp điểm, reranking và sinh có dẫn nguồn trên tập phát triển G0. Bản DOCX 8 trang đã xuất qua Microsoft Word và đối chiếu bố cục. Chạy lại console BM25 với P007, kết quả hạng đầu là Điều 17, PDF 23–24. Bộ kiểm thử đạt 163/163. Các phiếu mới chưa có người chấm, chưa khóa test. Xem [hướng dẫn Mốc 3](MOC3_HUONG_DAN.md).

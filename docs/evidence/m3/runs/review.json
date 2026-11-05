@@ -1,0 +1,20 @@
+{
+  "counts": {},
+  "errors": [],
+  "input_sha256": "6495e93fb1c4f2502d6275ccdd17ab531fb1e3b9e969e436e17e852ce96ea79d",
+  "interpretation": "Checks recorded labels and exact source quotes; does not replace human correctness/answerability review. No labels or splits changed.",
+  "minimum_deficits": {
+    "human_authored": 24,
+    "lexical_gap": 20,
+    "multi_span": 10,
+    "requires_table_or_image": 10,
+    "reviewed": 80,
+    "unanswerable": 15
+  },
+  "pending_rows": 27,
+  "ready_for_freeze": false,
+  "row_count": 27,
+  "snapshot_id": "5da3bd4d5de54492",
+  "split_counts": {},
+  "target_question_count": 100
+}

@@ -1,0 +1,1431 @@
+{
+  "chunk_count": 1175,
+  "chunk_signature": "a71e9c9d4bc73508b946edec396544c9e01bbfe0e4bca318226f100936d39147",
+  "completed": true,
+  "config": {
+    "batch_size": 8,
+    "faiss": "IndexFlatIP",
+    "normalized": true,
+    "overlap_words": 10,
+    "shared_encoder_tokens": 128,
+    "word_cap": 64
+  },
+  "holdout_used": false,
+  "limitations": [
+    "Seven development questions only; not a Vietnamese-wide ranking or holdout result.",
+    "Shared 128-token source windows favor comparability and do not exploit long-context model capacity.",
+    "PhoBERT preprocessing changes input representation but never source offsets; PyVi may introduce segmentation errors.",
+    "Single corpus encoding run per model; query timing uses three repetitions after warm-up."
+  ],
+  "models": [
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 13.265494500000386,
+      "dimension": 1024,
+      "e5": false,
+      "input_max": 126,
+      "license": "mit",
+      "load_seconds": 7.5990357999999105,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.20349689687160896,
+          "character_precision_at_5": 0.22578611827849973,
+          "character_recall_at_5": 0.7710100865109095,
+          "hit_at_5_threshold_05": 1,
+          "mrr_at_10_threshold_05": 0.5595238095238095,
+          "ndcg_at_5_linear_span_coverage": 0.5876664193723214
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.297464016449623,
+            "character_precision_at_5": 0.31066571224051537,
+            "character_recall_at_5": 0.875,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.5632936191970715,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0227",
+              "HCMUTE_SOTAYSV_2024__shared512_0212",
+              "HCMUTE_QCDT_1727_2021__shared512_0236",
+              "HCMUTE_SOTAYSV_2024__shared512_0219",
+              "HCMUTE_SOTAYSV_2024__shared512_0215",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_SOTAYSV_2024__shared512_0443"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.07210776545166403,
+            "character_precision_at_5": 0.07210776545166403,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.5763665556193467,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0179",
+              "HCMUTE_QCDT_1727_2021__shared512_0126",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_SOTAYSV_2024__shared512_0178",
+              "HCMUTE_SOTAYSV_2024__shared512_0180",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_SOTAYSV_2024__shared512_0250",
+              "HCMUTE_QCDT_1727_2021__shared512_0234",
+              "HCMUTE_SOTAYSV_2024__shared512_0226"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.36446886446886445,
+            "character_precision_at_5": 0.44386617100371745,
+            "character_recall_at_5": 0.6707865168539325,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.25,
+            "ndcg_at_5_linear_span_coverage": 0.47689312588625304,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_QCDT_1727_2021__shared512_0213",
+              "HCMUTE_QCDT_1727_2021__shared512_0202",
+              "HCMUTE_QCDT_1727_2021__shared512_0210",
+              "HCMUTE_QCDT_1727_2021__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0204",
+              "HCMUTE_SOTAYSV_2024__shared512_0205",
+              "HCMUTE_SOTAYSV_2024__shared512_0361",
+              "HCMUTE_SOTAYSV_2024__shared512_0405",
+              "HCMUTE_SOTAYSV_2024__shared512_0163"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.26611068991660347,
+            "character_precision_at_5": 0.27041602465331277,
+            "character_recall_at_5": 0.9435483870967742,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.8536777302793976,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0128",
+              "HCMUTE_QCDT_1727_2021__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0098",
+              "HCMUTE_QCDT_1727_2021__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0132",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0268",
+              "HCMUTE_QCDT_1727_2021__shared512_0271",
+              "HCMUTE_SOTAYSV_2024__shared512_0529"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.15550595238095238,
+            "character_precision_at_5": 0.15550595238095238,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.943061659300917,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_QCDT_1727_2021__shared512_0096",
+              "HCMUTE_FIT_TTTN_2022__shared512_0004",
+              "HCMUTE_FIT_TTTN_2022__shared512_0003",
+              "HCMUTE_QCDT_1727_2021__shared512_0038",
+              "HCMUTE_QCDT_1727_2021__shared512_0123",
+              "HCMUTE_SOTAYSV_2024__shared512_0177",
+              "HCMUTE_QCDT_1727_2021__shared512_0231",
+              "HCMUTE_SOTAYSV_2024__shared512_0204",
+              "HCMUTE_QCDT_1727_2021__shared512_0227"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1333758774728781,
+            "character_precision_at_5": 0.15003589375448673,
+            "character_recall_at_5": 0.5456919060052219,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.35460331077099266,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_SOTAYSV_2024__shared512_0222",
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_SOTAYSV_2024__shared512_0221",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_SOTAYSV_2024__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0241",
+              "HCMUTE_SOTAYSV_2024__shared512_0225"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.13544511196067724,
+            "character_precision_at_5": 0.17790530846484937,
+            "character_recall_at_5": 0.362043795620438,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.34576893455227137,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0223",
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_QCDT_1727_2021__shared512_0252",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_SOTAYSV_2024__shared512_0562",
+              "HCMUTE_SOTAYSV_2024__shared512_0209",
+              "HCMUTE_SOTAYSV_2024__shared512_0552",
+              "HCMUTE_SOTAYSV_2024__shared512_0553",
+              "HCMUTE_SOTAYSV_2024__shared512_0534",
+              "HCMUTE_QCDT_1727_2021__shared512_0212"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "BAAI/bge-m3",
+      "native_max_seq_length": 8192,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          0.0,
+          0.0
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": 0.0,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          0,
+          7,
+          0
+        ]
+      },
+      "peak_allocated_vram_bytes": 2330392064,
+      "query_encoding_p50_ms": 55.665899999894464,
+      "query_encoding_p95_ms": 99.17040000027555,
+      "query_timing_n": 21,
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "segmented": false,
+      "serialized_index_bytes": 4812845,
+      "truncated_input_count": 0,
+      "variant": "recommended_preprocessing"
+    },
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 5.496039099999962,
+      "dimension": 384,
+      "e5": true,
+      "input_max": 128,
+      "license": "mit",
+      "load_seconds": 5.638388899999882,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.1556875332782258,
+          "character_precision_at_5": 0.17605983590501298,
+          "character_recall_at_5": 0.6895260436127932,
+          "hit_at_5_threshold_05": 0.7142857142857143,
+          "mrr_at_10_threshold_05": 0.5357142857142857,
+          "ndcg_at_5_linear_span_coverage": 0.5553144699258683
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.10220214568040654,
+            "character_precision_at_5": 0.12431318681318682,
+            "character_recall_at_5": 0.3649193548387097,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.3903400243226175,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_SOTAYSV_2024__shared512_0215",
+              "HCMUTE_SOTAYSV_2024__shared512_0219",
+              "HCMUTE_QCDT_1727_2021__shared512_0236",
+              "HCMUTE_SOTAYSV_2024__shared512_0230",
+              "HCMUTE_QCDT_1727_2021__shared512_0233",
+              "HCMUTE_QCDT_1727_2021__shared512_0267",
+              "HCMUTE_SOTAYSV_2024__shared512_0211"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.06962509563886764,
+            "character_precision_at_5": 0.06962509563886764,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0126",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_SOTAYSV_2024__shared512_0178",
+              "HCMUTE_SOTAYSV_2024__shared512_0179",
+              "HCMUTE_QCDT_1727_2021__shared512_0103",
+              "HCMUTE_SOTAYSV_2024__shared512_0180",
+              "HCMUTE_QCDT_1727_2021__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0057"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.12349397590361445,
+            "character_precision_at_5": 0.1824925816023739,
+            "character_recall_at_5": 0.27640449438202247,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.13665729786077166,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_QCDT_1727_2021__shared512_0213",
+              "HCMUTE_QCDT_1727_2021__shared512_0202",
+              "HCMUTE_SOTAYSV_2024__shared512_0411",
+              "HCMUTE_SOTAYSV_2024__shared512_0399",
+              "HCMUTE_SOTAYSV_2024__shared512_0560",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_QCDT_1727_2021__shared512_0204",
+              "HCMUTE_SOTAYSV_2024__shared512_0368"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.18371467025572005,
+            "character_precision_at_5": 0.19682768565248737,
+            "character_recall_at_5": 0.7338709677419355,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.7206612068133693,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0128",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_QCDT_1727_2021__shared512_0115",
+              "HCMUTE_QCDT_1727_2021__shared512_0102",
+              "HCMUTE_QCDT_1727_2021__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0105",
+              "HCMUTE_SOTAYSV_2024__shared512_0178"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1450381679389313,
+            "character_precision_at_5": 0.1450381679389313,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.25,
+            "ndcg_at_5_linear_span_coverage": 0.4061545494787018,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0096",
+              "HCMUTE_FIT_TTTN_2022__shared512_0004",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_QCDT_1727_2021__shared512_0037",
+              "HCMUTE_QCDT_1727_2021__shared512_0102",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_SOTAYSV_2024__shared512_0218",
+              "HCMUTE_SOTAYSV_2024__shared512_0144"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.2847432024169184,
+            "character_precision_at_5": 0.2860394537177542,
+            "character_recall_at_5": 0.9843342036553525,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.6457997852250669,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_QCDT_1727_2021__shared512_0241",
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_SOTAYSV_2024__shared512_0221",
+              "HCMUTE_SOTAYSV_2024__shared512_0222",
+              "HCMUTE_SOTAYSV_2024__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0225"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.18099547511312217,
+            "character_precision_at_5": 0.22808267997148968,
+            "character_recall_at_5": 0.46715328467153283,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.5875884257805507,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_SOTAYSV_2024__shared512_0534",
+              "HCMUTE_SOTAYSV_2024__shared512_0562",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_SOTAYSV_2024__shared512_0209",
+              "HCMUTE_QCDT_1727_2021__shared512_0246",
+              "HCMUTE_SOTAYSV_2024__shared512_0531",
+              "HCMUTE_QCDT_1727_2021__shared512_0214",
+              "HCMUTE_QCDT_1727_2021__shared512_0239"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "intfloat/multilingual-e5-small",
+      "native_max_seq_length": 512,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          -0.29974255266960226,
+          0.14041937758552958
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": -0.08148404289811623,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          2,
+          2,
+          3
+        ]
+      },
+      "peak_allocated_vram_bytes": 500028416,
+      "query_encoding_p50_ms": 41.86810000010155,
+      "query_encoding_p95_ms": 48.55180000004111,
+      "query_timing_n": 21,
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "segmented": false,
+      "serialized_index_bytes": 1804845,
+      "truncated_input_count": 0,
+      "variant": "recommended_preprocessing"
+    },
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 5.653312899999946,
+      "dimension": 384,
+      "e5": true,
+      "input_max": 126,
+      "license": "mit",
+      "load_seconds": 5.638388899999882,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.15534659576909388,
+          "character_precision_at_5": 0.17535274521826336,
+          "character_recall_at_5": 0.6895260436127932,
+          "hit_at_5_threshold_05": 0.7142857142857143,
+          "mrr_at_10_threshold_05": 0.42142857142857143,
+          "ndcg_at_5_linear_span_coverage": 0.4955928926582955
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.10162829870859068,
+            "character_precision_at_5": 0.12346521145975443,
+            "character_recall_at_5": 0.3649193548387097,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.3903400243226175,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_SOTAYSV_2024__shared512_0215",
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0233",
+              "HCMUTE_QCDT_1727_2021__shared512_0216",
+              "HCMUTE_SOTAYSV_2024__shared512_0219",
+              "HCMUTE_QCDT_1727_2021__shared512_0236",
+              "HCMUTE_SOTAYSV_2024__shared512_0230"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.06962509563886764,
+            "character_precision_at_5": 0.06962509563886764,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 1.0,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0126",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_SOTAYSV_2024__shared512_0178",
+              "HCMUTE_QCDT_1727_2021__shared512_0103",
+              "HCMUTE_SOTAYSV_2024__shared512_0179",
+              "HCMUTE_SOTAYSV_2024__shared512_0180",
+              "HCMUTE_QCDT_1727_2021__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0057"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.12250996015936255,
+            "character_precision_at_5": 0.18035190615835778,
+            "character_recall_at_5": 0.27640449438202247,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.15865420963715815,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_QCDT_1727_2021__shared512_0202",
+              "HCMUTE_QCDT_1727_2021__shared512_0213",
+              "HCMUTE_SOTAYSV_2024__shared512_0560",
+              "HCMUTE_SOTAYSV_2024__shared512_0411",
+              "HCMUTE_QCDT_1727_2021__shared512_0204",
+              "HCMUTE_SOTAYSV_2024__shared512_0163",
+              "HCMUTE_SOTAYSV_2024__shared512_0399",
+              "HCMUTE_SOTAYSV_2024__shared512_0368"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1852103120759837,
+            "character_precision_at_5": 0.19854545454545455,
+            "character_recall_at_5": 0.7338709677419355,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.25,
+            "ndcg_at_5_linear_span_coverage": 0.31037188808739957,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0102",
+              "HCMUTE_QCDT_1727_2021__shared512_0115",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0128",
+              "HCMUTE_QCDT_1727_2021__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_QCDT_1727_2021__shared512_0105",
+              "HCMUTE_QCDT_1727_2021__shared512_0082"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1450381679389313,
+            "character_precision_at_5": 0.1450381679389313,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.2,
+            "ndcg_at_5_linear_span_coverage": 0.3648260502958246,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0096",
+              "HCMUTE_FIT_TTTN_2022__shared512_0004",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_QCDT_1727_2021__shared512_0037",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_QCDT_1727_2021__shared512_0102",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0231",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0040"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.2847432024169184,
+            "character_precision_at_5": 0.2860394537177542,
+            "character_recall_at_5": 0.9843342036553525,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.6457997852250669,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_QCDT_1727_2021__shared512_0241",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_SOTAYSV_2024__shared512_0225",
+              "HCMUTE_SOTAYSV_2024__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0221",
+              "HCMUTE_SOTAYSV_2024__shared512_0127"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1786711334450028,
+            "character_precision_at_5": 0.2244039270687237,
+            "character_recall_at_5": 0.46715328467153283,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.5991582910400017,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_SOTAYSV_2024__shared512_0534",
+              "HCMUTE_QCDT_1727_2021__shared512_0246",
+              "HCMUTE_SOTAYSV_2024__shared512_0562",
+              "HCMUTE_QCDT_1727_2021__shared512_0214",
+              "HCMUTE_SOTAYSV_2024__shared512_0531",
+              "HCMUTE_QCDT_1727_2021__shared512_0207",
+              "HCMUTE_QCDT_1727_2021__shared512_0239"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "intfloat/multilingual-e5-small",
+      "native_max_seq_length": 512,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          -0.29974255266960226,
+          0.14041937758552958
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": -0.08148404289811623,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          2,
+          2,
+          3
+        ]
+      },
+      "peak_allocated_vram_bytes": 499975680,
+      "query_encoding_p50_ms": 39.56930000003922,
+      "query_encoding_p95_ms": 45.37530000015977,
+      "query_timing_n": 21,
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "segmented": false,
+      "serialized_index_bytes": 1804845,
+      "truncated_input_count": 0,
+      "variant": "no_prefix_ablation"
+    },
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 7.211227299999791,
+      "dimension": 768,
+      "download_bytes": 540920074,
+      "e5": false,
+      "input_max": 128,
+      "license": "apache-2.0",
+      "load_seconds": 2.2064985000001798,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.12451464354444626,
+          "character_precision_at_5": 0.14794341499665076,
+          "character_recall_at_5": 0.4520420559162835,
+          "hit_at_5_threshold_05": 0.5714285714285714,
+          "mrr_at_10_threshold_05": 0.26785714285714285,
+          "ndcg_at_5_linear_span_coverage": 0.3191426884508278
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.10254957507082153,
+            "character_precision_at_5": 0.12482758620689655,
+            "character_recall_at_5": 0.3649193548387097,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.16666666666666666,
+            "ndcg_at_5_linear_span_coverage": 0.3903400243226175,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_SOTAYSV_2024__shared512_0230",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_SOTAYSV_2024__shared512_0325",
+              "HCMUTE_QCDT_1727_2021__shared512_0227",
+              "HCMUTE_QCDT_1727_2021__shared512_0249",
+              "HCMUTE_SOTAYSV_2024__shared512_0506",
+              "HCMUTE_SOTAYSV_2024__shared512_0239",
+              "HCMUTE_SOTAYSV_2024__shared512_0240"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.018093249826026444,
+            "character_precision_at_5": 0.018950437317784258,
+            "character_recall_at_5": 0.2857142857142857,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.125,
+            "ndcg_at_5_linear_span_coverage": 0.15273311123869335,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0180",
+              "HCMUTE_QCDT_1727_2021__shared512_0126",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_QCDT_1727_2021__shared512_0103",
+              "HCMUTE_SOTAYSV_2024__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0178",
+              "HCMUTE_QCDT_1727_2021__shared512_0048",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_SOTAYSV_2024__shared512_0179",
+              "HCMUTE_QCDT_1727_2021__shared512_0245"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.31020642201834864,
+            "character_precision_at_5": 0.3878136200716846,
+            "character_recall_at_5": 0.6078651685393258,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.5312544423848145,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0204",
+              "HCMUTE_QCDT_1727_2021__shared512_0210",
+              "HCMUTE_QCDT_1727_2021__shared512_0202",
+              "HCMUTE_SOTAYSV_2024__shared512_0163",
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_QCDT_1727_2021__shared512_0211",
+              "HCMUTE_SOTAYSV_2024__shared512_0205",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_QCDT_1727_2021__shared512_0168"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_recall_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0133",
+              "HCMUTE_QCDT_1727_2021__shared512_0096",
+              "HCMUTE_SOTAYSV_2024__shared512_0227",
+              "HCMUTE_QCDT_1727_2021__shared512_0244",
+              "HCMUTE_QCDT_1727_2021__shared512_0097",
+              "HCMUTE_QCDT_1727_2021__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_SOTAYSV_2024__shared512_0279"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.15424354243542435,
+            "character_precision_at_5": 0.15424354243542435,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.5950056603054173,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_FIT_TTTN_2022__shared512_0004",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_FIT_TTTN_2022__shared512_0003",
+              "HCMUTE_SOTAYSV_2024__shared512_0695",
+              "HCMUTE_QCDT_1727_2021__shared512_0122",
+              "HCMUTE_SOTAYSV_2024__shared512_0176",
+              "HCMUTE_SOTAYSV_2024__shared512_0175",
+              "HCMUTE_QCDT_1727_2021__shared512_0054",
+              "HCMUTE_QCDT_1727_2021__shared512_0123",
+              "HCMUTE_SOTAYSV_2024__shared512_0359"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.10673443456162643,
+            "character_precision_at_5": 0.12362030905077263,
+            "character_recall_at_5": 0.4386422976501306,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.2890839337171595,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_SOTAYSV_2024__shared512_0279",
+              "HCMUTE_SOTAYSV_2024__shared512_0222",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_QCDT_1727_2021__shared512_0241",
+              "HCMUTE_QCDT_1727_2021__shared512_0219",
+              "HCMUTE_SOTAYSV_2024__shared512_0567",
+              "HCMUTE_QCDT_1727_2021__shared512_0247"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1797752808988764,
+            "character_precision_at_5": 0.22614840989399293,
+            "character_recall_at_5": 0.46715328467153283,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.25,
+            "ndcg_at_5_linear_span_coverage": 0.27558164718709266,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0534",
+              "HCMUTE_SOTAYSV_2024__shared512_0209",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_SOTAYSV_2024__shared512_0223",
+              "HCMUTE_QCDT_1727_2021__shared512_0244",
+              "HCMUTE_SOTAYSV_2024__shared512_0562",
+              "HCMUTE_SOTAYSV_2024__shared512_0553",
+              "HCMUTE_QCDT_1727_2021__shared512_0252"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "bkai-foundation-models/vietnamese-bi-encoder",
+      "native_max_seq_length": 256,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          -0.604388572005209,
+          -0.05182614505338675
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": -0.318968030594626,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          1,
+          1,
+          5
+        ]
+      },
+      "peak_allocated_vram_bytes": 586997248,
+      "query_encoding_p50_ms": 32.85460000006424,
+      "query_encoding_p95_ms": 39.32510000004186,
+      "query_timing_n": 21,
+      "revision": "84f9d9ada0d1a3c37557398b9ae9fcedcdf40be0",
+      "segmented": true,
+      "serialized_index_bytes": 3609645,
+      "truncated_input_count": 0,
+      "variant": "recommended_preprocessing"
+    },
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 4.4952626000003875,
+      "dimension": 768,
+      "download_bytes": 540924352,
+      "e5": false,
+      "input_max": 128,
+      "license": "apache-2.0",
+      "load_seconds": 1.6112868000000162,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.08760074702040263,
+          "character_precision_at_5": 0.10031890546311467,
+          "character_recall_at_5": 0.40305853052358026,
+          "hit_at_5_threshold_05": 0.42857142857142855,
+          "mrr_at_10_threshold_05": 0.16825396825396827,
+          "ndcg_at_5_linear_span_coverage": 0.24507969243120165
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.10011061946902655,
+            "character_precision_at_5": 0.12123241795043536,
+            "character_recall_at_5": 0.3649193548387097,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.1111111111111111,
+            "ndcg_at_5_linear_span_coverage": 0.3903400243226175,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0222",
+              "HCMUTE_SOTAYSV_2024__shared512_0215",
+              "HCMUTE_QCDT_1727_2021__shared512_0236",
+              "HCMUTE_QCDT_1727_2021__shared512_0256",
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0019",
+              "HCMUTE_QCDT_1727_2021__shared512_0082",
+              "HCMUTE_QCDT_1727_2021__shared512_0227",
+              "HCMUTE_QCDT_1727_2021__shared512_0216"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.07233704292527822,
+            "character_precision_at_5": 0.07233704292527822,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.2,
+            "ndcg_at_5_linear_span_coverage": 0.48050068563288095,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0179",
+              "HCMUTE_QCDT_1727_2021__shared512_0126",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_SOTAYSV_2024__shared512_0178",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_SOTAYSV_2024__shared512_0180",
+              "HCMUTE_QCDT_1727_2021__shared512_0254",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_QCDT_1727_2021__shared512_0048"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.044424297370806894,
+            "character_precision_at_5": 0.06930693069306931,
+            "character_recall_at_5": 0.1101123595505618,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.054440712155917156,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_QCDT_1727_2021__shared512_0213",
+              "HCMUTE_QCDT_1727_2021__shared512_0107",
+              "HCMUTE_QCDT_1727_2021__shared512_0204",
+              "HCMUTE_QCDT_1727_2021__shared512_0036",
+              "HCMUTE_SOTAYSV_2024__shared512_0163",
+              "HCMUTE_QCDT_1727_2021__shared512_0140",
+              "HCMUTE_SOTAYSV_2024__shared512_0363",
+              "HCMUTE_SOTAYSV_2024__shared512_0206",
+              "HCMUTE_QCDT_1727_2021__shared512_0206"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_recall_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0098",
+              "HCMUTE_QCDT_1727_2021__shared512_0248",
+              "HCMUTE_SOTAYSV_2024__shared512_0235",
+              "HCMUTE_SOTAYSV_2024__shared512_0227",
+              "HCMUTE_QCDT_1727_2021__shared512_0108",
+              "HCMUTE_QCDT_1727_2021__shared512_0219",
+              "HCMUTE_QCDT_1727_2021__shared512_0272",
+              "HCMUTE_QCDT_1727_2021__shared512_0220"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_recall_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.16666666666666666,
+            "ndcg_at_5_linear_span_coverage": 0.0,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_FIT_TTTN_2022__shared512_0004",
+              "HCMUTE_FIT_TTTN_2022__shared512_0003",
+              "HCMUTE_QCDT_1727_2021__shared512_0096",
+              "HCMUTE_QCDT_1727_2021__shared512_0082",
+              "HCMUTE_QCDT_1727_2021__shared512_0037",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_QCDT_1727_2021__shared512_0263",
+              "HCMUTE_QCDT_1727_2021__shared512_0098",
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0359"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.26162387231089523,
+            "character_precision_at_5": 0.2627177700348432,
+            "character_recall_at_5": 0.9843342036553525,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.5782691733407673,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_SOTAYSV_2024__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_QCDT_1727_2021__shared512_0246",
+              "HCMUTE_SOTAYSV_2024__shared512_0222",
+              "HCMUTE_SOTAYSV_2024__shared512_0221",
+              "HCMUTE_SOTAYSV_2024__shared512_0226"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1347093970668115,
+            "character_precision_at_5": 0.17663817663817663,
+            "character_recall_at_5": 0.362043795620438,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.2,
+            "ndcg_at_5_linear_span_coverage": 0.21200725156622868,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0244",
+              "HCMUTE_SOTAYSV_2024__shared512_0534",
+              "HCMUTE_SOTAYSV_2024__shared512_0552",
+              "HCMUTE_SOTAYSV_2024__shared512_0209",
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_SOTAYSV_2024__shared512_0562",
+              "HCMUTE_SOTAYSV_2024__shared512_0227",
+              "HCMUTE_SOTAYSV_2024__shared512_0531",
+              "HCMUTE_SOTAYSV_2024__shared512_0533",
+              "HCMUTE_SOTAYSV_2024__shared512_0558"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "dangvantuan/vietnamese-embedding",
+      "native_max_seq_length": 512,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          -0.7629608294930875,
+          -0.017530772099962677
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": -0.36795155598732926,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          1,
+          2,
+          4
+        ]
+      },
+      "peak_allocated_vram_bytes": 586997248,
+      "query_encoding_p50_ms": 15.47179999988657,
+      "query_encoding_p95_ms": 21.807799999805866,
+      "query_timing_n": 21,
+      "revision": "4ab46e46ba5902328ba0742e489e75f787932f2b",
+      "segmented": true,
+      "serialized_index_bytes": 3609645,
+      "truncated_input_count": 0,
+      "variant": "recommended_preprocessing"
+    },
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 4.617053100000248,
+      "dimension": 768,
+      "download_bytes": 1134534380,
+      "e5": true,
+      "input_max": 128,
+      "license": "mit",
+      "load_seconds": 4.575435599999764,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.16301424684688737,
+          "character_precision_at_5": 0.18297385574957054,
+          "character_recall_at_5": 0.7080870446555462,
+          "hit_at_5_threshold_05": 0.7142857142857143,
+          "mrr_at_10_threshold_05": 0.4523809523809524,
+          "ndcg_at_5_linear_span_coverage": 0.5192176519555496
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.1017425519955031,
+            "character_precision_at_5": 0.12363387978142076,
+            "character_recall_at_5": 0.3649193548387097,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.3903400243226175,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_SOTAYSV_2024__shared512_0219",
+              "HCMUTE_SOTAYSV_2024__shared512_0215",
+              "HCMUTE_QCDT_1727_2021__shared512_0236",
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_SOTAYSV_2024__shared512_0443",
+              "HCMUTE_QCDT_1727_2021__shared512_0267",
+              "HCMUTE_QCDT_1727_2021__shared512_0262"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.06705969049373618,
+            "character_precision_at_5": 0.06705969049373618,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.5763665556193467,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0178",
+              "HCMUTE_QCDT_1727_2021__shared512_0126",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_SOTAYSV_2024__shared512_0180",
+              "HCMUTE_SOTAYSV_2024__shared512_0179",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_SOTAYSV_2024__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0234",
+              "HCMUTE_QCDT_1727_2021__shared512_0103"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.12058823529411765,
+            "character_precision_at_5": 0.17621776504297995,
+            "character_recall_at_5": 0.27640449438202247,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.15865420963715815,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0213",
+              "HCMUTE_SOTAYSV_2024__shared512_0207",
+              "HCMUTE_QCDT_1727_2021__shared512_0202",
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_QCDT_1727_2021__shared512_0107",
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_QCDT_1727_2021__shared512_0204",
+              "HCMUTE_SOTAYSV_2024__shared512_0502",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_QCDT_1727_2021__shared512_0235"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1826086956521739,
+            "character_precision_at_5": 0.19555873925501432,
+            "character_recall_at_5": 0.7338709677419355,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.7206612068133693,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0128",
+              "HCMUTE_QCDT_1727_2021__shared512_0160",
+              "HCMUTE_QCDT_1727_2021__shared512_0115",
+              "HCMUTE_QCDT_1727_2021__shared512_0098",
+              "HCMUTE_QCDT_1727_2021__shared512_0132",
+              "HCMUTE_QCDT_1727_2021__shared512_0040",
+              "HCMUTE_SOTAYSV_2024__shared512_0146",
+              "HCMUTE_QCDT_1727_2021__shared512_0231",
+              "HCMUTE_SOTAYSV_2024__shared512_0161",
+              "HCMUTE_QCDT_1727_2021__shared512_0105"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.1512301013024602,
+            "character_precision_at_5": 0.1512301013024602,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.5,
+            "ndcg_at_5_linear_span_coverage": 0.5950056603054173,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0096",
+              "HCMUTE_FIT_TTTN_2022__shared512_0000",
+              "HCMUTE_QCDT_1727_2021__shared512_0098",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_SOTAYSV_2024__shared512_0146",
+              "HCMUTE_QCDT_1727_2021__shared512_0040",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0102",
+              "HCMUTE_SOTAYSV_2024__shared512_0215",
+              "HCMUTE_QCDT_1727_2021__shared512_0037"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.27398255813953487,
+            "character_precision_at_5": 0.2751824817518248,
+            "character_recall_at_5": 0.9843342036553525,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.3333333333333333,
+            "ndcg_at_5_linear_span_coverage": 0.531138350234678,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_SOTAYSV_2024__shared512_0221",
+              "HCMUTE_SOTAYSV_2024__shared512_0226",
+              "HCMUTE_SOTAYSV_2024__shared512_0222",
+              "HCMUTE_QCDT_1727_2021__shared512_0248",
+              "HCMUTE_QCDT_1727_2021__shared512_0241"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.24388789505068575,
+            "character_precision_at_5": 0.2919343326195575,
+            "character_recall_at_5": 0.5970802919708029,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.6623575567562603,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_SOTAYSV_2024__shared512_0209",
+              "HCMUTE_QCDT_1727_2021__shared512_0214",
+              "HCMUTE_QCDT_1727_2021__shared512_0246",
+              "HCMUTE_SOTAYSV_2024__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0252",
+              "HCMUTE_SOTAYSV_2024__shared512_0534",
+              "HCMUTE_QCDT_1727_2021__shared512_0212",
+              "HCMUTE_QCDT_1727_2021__shared512_0244",
+              "HCMUTE_QCDT_1727_2021__shared512_0207"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "intfloat/multilingual-e5-base",
+      "native_max_seq_length": 512,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          -0.2919393672655724,
+          0.1652259095469781
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": -0.06292304185536336,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          2,
+          2,
+          3
+        ]
+      },
+      "peak_allocated_vram_bytes": 1158767616,
+      "query_encoding_p50_ms": 19.95020000003933,
+      "query_encoding_p95_ms": 22.322499999972933,
+      "query_timing_n": 21,
+      "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+      "segmented": false,
+      "serialized_index_bytes": 3609645,
+      "truncated_input_count": 0,
+      "variant": "recommended_preprocessing"
+    },
+    {
+      "actual_max_seq_length": 128,
+      "corpus_encoding_seconds": 2.674033799999961,
+      "dimension": 384,
+      "download_bytes": 499561295,
+      "e5": false,
+      "input_max": 126,
+      "license": "apache-2.0",
+      "load_seconds": 2.818287000000055,
+      "metrics": {
+        "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+        "macro": {
+          "character_iou_at_5": 0.07385542613671528,
+          "character_precision_at_5": 0.08638164916792311,
+          "character_recall_at_5": 0.3429488492085205,
+          "hit_at_5_threshold_05": 0.42857142857142855,
+          "mrr_at_10_threshold_05": 0.2,
+          "ndcg_at_5_linear_span_coverage": 0.2318013541848508
+        },
+        "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+        "per_question": [
+          {
+            "character_iou_at_5": 0.1046242774566474,
+            "character_precision_at_5": 0.12791519434628976,
+            "character_recall_at_5": 0.3649193548387097,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.3903400243226175,
+            "question_id": "P001",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0233",
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_SOTAYSV_2024__shared512_0307",
+              "HCMUTE_QCDT_1727_2021__shared512_0231",
+              "HCMUTE_QCDT_1727_2021__shared512_0148",
+              "HCMUTE_QCDT_1727_2021__shared512_0275",
+              "HCMUTE_QCDT_1727_2021__shared512_0270"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.06254295532646048,
+            "character_precision_at_5": 0.06254295532646048,
+            "character_recall_at_5": 1.0,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.2,
+            "ndcg_at_5_linear_span_coverage": 0.32776757439418763,
+            "question_id": "P002",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0272",
+              "HCMUTE_QCDT_1727_2021__shared512_0244",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_QCDT_1727_2021__shared512_0248",
+              "HCMUTE_QCDT_1727_2021__shared512_0125",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_QCDT_1727_2021__shared512_0221",
+              "HCMUTE_QCDT_1727_2021__shared512_0124",
+              "HCMUTE_QCDT_1727_2021__shared512_0060",
+              "HCMUTE_QCDT_1727_2021__shared512_0235"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_recall_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0,
+            "question_id": "P003",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0107",
+              "HCMUTE_QCDT_1727_2021__shared512_0187",
+              "HCMUTE_SOTAYSV_2024__shared512_0203",
+              "HCMUTE_SOTAYSV_2024__shared512_0361",
+              "HCMUTE_QCDT_1727_2021__shared512_0272",
+              "HCMUTE_QCDT_1727_2021__shared512_0039",
+              "HCMUTE_QCDT_1727_2021__shared512_0061",
+              "HCMUTE_QCDT_1727_2021__shared512_0227",
+              "HCMUTE_QCDT_1727_2021__shared512_0172",
+              "HCMUTE_SOTAYSV_2024__shared512_0213"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_recall_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0,
+            "question_id": "P004",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0066",
+              "HCMUTE_QCDT_1727_2021__shared512_0073",
+              "HCMUTE_QCDT_1727_2021__shared512_0246",
+              "HCMUTE_QCDT_1727_2021__shared512_0099",
+              "HCMUTE_QCDT_1727_2021__shared512_0275",
+              "HCMUTE_QCDT_1727_2021__shared512_0076",
+              "HCMUTE_QCDT_1727_2021__shared512_0252",
+              "HCMUTE_SOTAYSV_2024__shared512_0695",
+              "HCMUTE_SOTAYSV_2024__shared512_0528",
+              "HCMUTE_QCDT_1727_2021__shared512_0000"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.0,
+            "character_precision_at_5": 0.0,
+            "character_recall_at_5": 0.0,
+            "hit_at_5_threshold_05": false,
+            "mrr_at_10_threshold_05": 0.0,
+            "ndcg_at_5_linear_span_coverage": 0.0,
+            "question_id": "P005",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0233",
+              "HCMUTE_SOTAYSV_2024__shared512_0131",
+              "HCMUTE_QCDT_1727_2021__shared512_0232",
+              "HCMUTE_QCDT_1727_2021__shared512_0226",
+              "HCMUTE_QCDT_1727_2021__shared512_0231",
+              "HCMUTE_QCDT_1727_2021__shared512_0270",
+              "HCMUTE_SOTAYSV_2024__shared512_0211",
+              "HCMUTE_QCDT_1727_2021__shared512_0275",
+              "HCMUTE_QCDT_1727_2021__shared512_0269",
+              "HCMUTE_QCDT_1727_2021__shared512_0099"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.10909090909090909,
+            "character_precision_at_5": 0.12679245283018867,
+            "character_recall_at_5": 0.4386422976501306,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 1.0,
+            "ndcg_at_5_linear_span_coverage": 0.578167867434319,
+            "question_id": "P007",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0242",
+              "HCMUTE_QCDT_1727_2021__shared512_0241",
+              "HCMUTE_QCDT_1727_2021__shared512_0247",
+              "HCMUTE_QCDT_1727_2021__shared512_0243",
+              "HCMUTE_QCDT_1727_2021__shared512_0132",
+              "HCMUTE_QCDT_1727_2021__shared512_0239",
+              "HCMUTE_SOTAYSV_2024__shared512_0127",
+              "HCMUTE_QCDT_1727_2021__shared512_0104",
+              "HCMUTE_SOTAYSV_2024__shared512_0224",
+              "HCMUTE_SOTAYSV_2024__shared512_0262"
+            ]
+          },
+          {
+            "character_iou_at_5": 0.24072984108299,
+            "character_precision_at_5": 0.28742094167252286,
+            "character_recall_at_5": 0.5970802919708029,
+            "hit_at_5_threshold_05": true,
+            "mrr_at_10_threshold_05": 0.2,
+            "ndcg_at_5_linear_span_coverage": 0.32633401314283134,
+            "question_id": "P008",
+            "retrieved_chunk_ids_top10": [
+              "HCMUTE_QCDT_1727_2021__shared512_0057",
+              "HCMUTE_QCDT_1727_2021__shared512_0272",
+              "HCMUTE_QCDT_1727_2021__shared512_0214",
+              "HCMUTE_QCDT_1727_2021__shared512_0246",
+              "HCMUTE_QCDT_1727_2021__shared512_0206",
+              "HCMUTE_QCDT_1727_2021__shared512_0238",
+              "HCMUTE_QCDT_1727_2021__shared512_0252",
+              "HCMUTE_QCDT_1727_2021__shared512_0271",
+              "HCMUTE_SOTAYSV_2024__shared512_0533",
+              "HCMUTE_SOTAYSV_2024__shared512_0552"
+            ]
+          }
+        ],
+        "relevance_threshold": 0.5
+      },
+      "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "native_max_seq_length": 128,
+      "paired_vs_bge": {
+        "ci95_percentile": [
+          -0.7782536306866721,
+          -0.10628946057277897
+        ],
+        "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence.",
+        "mean_right_minus_left": -0.42806123730238904,
+        "n": 7,
+        "repetitions": 1000,
+        "seed": 22110068,
+        "wins_ties_losses_right": [
+          1,
+          1,
+          5
+        ]
+      },
+      "peak_allocated_vram_bytes": 499975680,
+      "query_encoding_p50_ms": 16.145899999628455,
+      "query_encoding_p95_ms": 24.060000000190485,
+      "query_timing_n": 21,
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "segmented": false,
+      "serialized_index_bytes": 1804845,
+      "truncated_input_count": 0,
+      "variant": "recommended_preprocessing"
+    }
+  ],
+  "partition": "development",
+  "question_count": 7,
+  "revision_before_run": "7014e5d3c0d2c58d54adf75f826d0d968b431cc6",
+  "run_id": "embeddings_20261105T010154Z",
+  "runtime": {
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "python": "3.11.16",
+    "pyvi": "0.1.1",
+    "sentence_transformers": "6.1.0",
+    "torch": "2.14.0+cu126"
+  },
+  "snapshot_id": "5da3bd4d5de54492",
+  "source_sha256": {
+    "data\\question_sets\\pilot_evidence_annotations.json": "0c89f97a2251ab9553423d30fff371e73a380a591c77472f60aa4381c202e998",
+    "data\\question_sets\\pilot_questions.csv": "8ecfe8fcf87e1c1e6424385b86fa4ec59b61f54607f5d1f0e01d9faf6b84780f",
+    "scripts\\run_m3_embedding_study.py": "5f681b7de4857f278e55770b5f9813350eaf8c0fdf1c25d65da0081a3a10d3c4",
+    "src\\rag_hcmute\\evaluation\\controlled_embedding.py": "cc5bc84b9bfc664f57dd3f09d6475e37e73d99d17317587b44f3a9179c53feaa",
+    "src\\rag_hcmute\\evaluation\\interval_metrics.py": "7919eb6c248fb8739c16958bd73da04c77f6a2156aeca8c68bad679842ee632d"
+  }
+}

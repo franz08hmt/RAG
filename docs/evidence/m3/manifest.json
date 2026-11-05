@@ -1,0 +1,32 @@
+{
+  "chunking": {
+    "export_sha256": "9c3a5b99378e8bcdecce85e6e13aad59ba7739a34ec227be0a6323fd7babb404",
+    "source_file": "chunking_20261104T135721Z.json",
+    "source_sha256": "b7fe065be81d94f4ee1b25e233db42873cc05bd9a19a9780c2c5dfedb777e24d"
+  },
+  "embeddings": {
+    "export_sha256": "9aefd7ff82bf037485f8fd45d44b6fb33e2e71cbfc5fd89edc5aa503aa605ec0",
+    "source_file": "embeddings_20261105T010154Z.json",
+    "source_sha256": "996f3f0ed6b7371cc7f40a92bf1bd9125ff839e87bfef6d007bb0838058310a3"
+  },
+  "generation": {
+    "export_sha256": "8945f7f2cfcf174dd1a8759a8d6d776993c8e5fb98aea3a393ab4b8024be4b3d",
+    "source_file": "generation_20261104T140158Z.json",
+    "source_sha256": "c493060b6d04c37f6600a91153fe6cfa0548a71739939e22c8bc848003edc973"
+  },
+  "ocr": {
+    "export_sha256": "8573c86fe6f414864fde17d730f4347d545b1c9d57b7267d8fa0d2b3f5053de8",
+    "source_file": "ocr_20261105T010203Z.json",
+    "source_sha256": "771e6fcc4b57788f82c897ddde4f4267e0c057ba477a198bde69b7f17a535d30"
+  },
+  "ranking": {
+    "export_sha256": "6b9242a483cd93edea8da5f48be05cd8c61db3fa4839fe951831caf8756508fe",
+    "source_file": "ranking_20261105T010609Z.json",
+    "source_sha256": "6833f908531703fb5b974aac5d2e503f62fadc6c7909ee338cca0ce822557fa9"
+  },
+  "review": {
+    "export_sha256": "df873bf27197b5845b7c94dd416d526605f0c5ad62d13fe440a01bd3c98bac64",
+    "source_file": "review_audit_20261105.json",
+    "source_sha256": "de0184f2fbc7d2d5384d94bf21a4aabc0d18d029e261dee31a3dc21418383a37"
+  }
+}

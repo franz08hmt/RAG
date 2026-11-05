@@ -1,0 +1,102 @@
+{
+  "accuracy_evaluation": "pending_human_transcription",
+  "engine": "tesseract 5.5.3",
+  "image_dpi": 180,
+  "language": "vie",
+  "pages": [
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "image_sha256": "3539e7eb497c4da60a9ce83c41fca6f218e37d555ce1a8af833e8176e17b0bea",
+      "native_characters": 2668,
+      "ocr_characters": 2668,
+      "pdf_page": 2,
+      "pdf_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa",
+      "seconds": 2.9959180000000742
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "image_sha256": "b0087cf130f2d7c8ce6f9c1cbb349682812051bbd7117248d85e6fec018c97cd",
+      "native_characters": 2865,
+      "ocr_characters": 2889,
+      "pdf_page": 6,
+      "pdf_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa",
+      "seconds": 3.1069573999998283
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "image_sha256": "135d373716f14ac2091c0dca5028f101b64290df03a239e8be0302a0d748cbe2",
+      "native_characters": 2058,
+      "ocr_characters": 1883,
+      "pdf_page": 20,
+      "pdf_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa",
+      "seconds": 2.487656700000116
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "image_sha256": "0383dce8fe032b082c0fdc8452d67a035f111aadb8eaef03d559b8a44c1f4595",
+      "native_characters": 2635,
+      "ocr_characters": 2667,
+      "pdf_page": 23,
+      "pdf_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa",
+      "seconds": 5.793141500000274
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "image_sha256": "8af1a88561ca13ada7dc6c4b56e29b649dd1e604a4a8b06bca4ea571cc4aa509",
+      "native_characters": 1709,
+      "ocr_characters": 1720,
+      "pdf_page": 1,
+      "pdf_sha256": "80c932a92dee7f92228f8cb6e8ffaf45d342559b6b1491939be103c946f003ab",
+      "seconds": 2.959801999999854
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "image_sha256": "e4c1f83d0f52294b628e5aaaac1a7f59da81dabdfd134055bda8a181f597ab74",
+      "native_characters": 3,
+      "ocr_characters": 400,
+      "pdf_page": 107,
+      "pdf_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47",
+      "seconds": 1.5004346000000623
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "image_sha256": "7a4f077d6ac77c1faff0f6f2c8e502774c4c36b61c711af105ea247cf0f04651",
+      "native_characters": 3,
+      "ocr_characters": 765,
+      "pdf_page": 109,
+      "pdf_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47",
+      "seconds": 3.426500699999906
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "image_sha256": "5d7d5aa8d3e348e9869ff9cab79f16ee61d63ea60a8a8110d7a44bd1c9eb4fb6",
+      "native_characters": 3,
+      "ocr_characters": 1428,
+      "pdf_page": 116,
+      "pdf_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47",
+      "seconds": 7.855004399999871
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "image_sha256": "42dd98280f19f97b3f8bd78b4d324a974e53019c4ce8e119aaca305743b0f839",
+      "native_characters": 3,
+      "ocr_characters": 533,
+      "pdf_page": 136,
+      "pdf_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47",
+      "seconds": 2.6693484000002172
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "image_sha256": "5d32683f8c9188844abe3e195f2593744e1ad09653fd213fb1d380896769a98a",
+      "native_characters": 2929,
+      "ocr_characters": 2901,
+      "pdf_page": 140,
+      "pdf_sha256": "99940caca9799b5de43b9e6386304261a80f42b11fbd76acc13904786d738e47",
+      "seconds": 11.239520500000253
+    }
+  ],
+  "psm": 6,
+  "run_id": "ocr_20261105T010203Z",
+  "script_sha256": "3310dfac1eacb35a3ffbb9529c6b5be22ada15d006e10322f7763faf93ee621b",
+  "traineddata_sha256": "b6b49293d95d0b6dbd8780174627e82c75be957b6f4ed9862155540d6b00bb45"
+}

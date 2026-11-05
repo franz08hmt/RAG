@@ -1,0 +1,543 @@
+{
+  "api_cost_usd": 0,
+  "cases": [
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 52138.0449000003,
+      "question_id": "P001",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S2"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 3130.6006999998317,
+      "question_id": "P002",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S2"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 3695.0386000003164,
+      "question_id": "P003",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 2713.999199999762,
+      "question_id": "P004",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 2732.303299999785,
+      "question_id": "P005",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "unanswerable",
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": false,
+      "generation_ms": 2185.1423000002796,
+      "question_id": "P006",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 3041.196300000138,
+      "question_id": "P007",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 4356.979900000169,
+      "question_id": "P008",
+      "status": "generated_citations_unverified",
+      "variant": "standard"
+    },
+    {
+      "abstained": true,
+      "answerability": "unanswerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 1801.2817999997424,
+      "question_id": "P009",
+      "status": "invalid_or_missing_citation",
+      "variant": "standard"
+    },
+    {
+      "abstained": true,
+      "answerability": "unanswerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 13533.545400000094,
+      "question_id": "P010",
+      "status": "invalid_model_json",
+      "variant": "standard"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 3303.9229000000887,
+      "question_id": "P001",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S4"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 2342.486999999892,
+      "question_id": "P002",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S2"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 2767.7834999999504,
+      "question_id": "P003",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 1930.8571999999913,
+      "question_id": "P004",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 1825.330799999847,
+      "question_id": "P005",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "unanswerable",
+      "citation_ids": [
+        "S1",
+        "S3"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": false,
+      "generation_ms": 1434.5617999997557,
+      "question_id": "P006",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 3635.948399999961,
+      "question_id": "P007",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 3501.995299999635,
+      "question_id": "P008",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": true,
+      "answerability": "unanswerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 866.6111000002275,
+      "question_id": "P009",
+      "status": "invalid_or_missing_citation",
+      "variant": "schema"
+    },
+    {
+      "abstained": false,
+      "answerability": "unanswerable",
+      "citation_ids": [
+        "S5"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": false,
+      "generation_ms": 2198.615599999812,
+      "question_id": "P010",
+      "status": "generated_citations_unverified",
+      "variant": "schema"
+    },
+    {
+      "abstained": true,
+      "answerability": "answerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 13882.880600000135,
+      "question_id": "P001",
+      "status": "invalid_evidence_quote",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S4"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 7181.6788000001,
+      "question_id": "P002",
+      "status": "generated_quotes_verified_semantics_pending",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": true,
+      "answerability": "answerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 9030.80639999962,
+      "question_id": "P003",
+      "status": "invalid_evidence_quote",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": false,
+      "answerability": "answerable",
+      "citation_ids": [
+        "S1",
+        "S4"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": true,
+      "generation_ms": 8535.049099999924,
+      "question_id": "P004",
+      "status": "generated_quotes_verified_semantics_pending",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": true,
+      "answerability": "answerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 6399.094100000184,
+      "question_id": "P005",
+      "status": "invalid_evidence_quote",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": false,
+      "answerability": "unanswerable",
+      "citation_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "citation_ids_valid": true,
+      "cited_expected_document": false,
+      "generation_ms": 10109.916899999916,
+      "question_id": "P006",
+      "status": "generated_quotes_verified_semantics_pending",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": true,
+      "answerability": "answerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 9890.947800000049,
+      "question_id": "P007",
+      "status": "invalid_evidence_quote",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": true,
+      "answerability": "answerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 15481.146600000102,
+      "question_id": "P008",
+      "status": "invalid_evidence_quote",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": true,
+      "answerability": "unanswerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 2488.9780000003157,
+      "question_id": "P009",
+      "status": "model_abstained",
+      "variant": "evidence_first"
+    },
+    {
+      "abstained": true,
+      "answerability": "unanswerable",
+      "citation_ids": [],
+      "citation_ids_valid": null,
+      "cited_expected_document": false,
+      "generation_ms": 11301.991300000282,
+      "question_id": "P010",
+      "status": "invalid_evidence_quote",
+      "variant": "evidence_first"
+    }
+  ],
+  "completed": true,
+  "context_sha256": {
+    "P001": "6603cf812635516e48b1bf13bb86d4fd17b3c8c691efb0f94c2de4ae5a5f92b4",
+    "P002": "b8d800fac74f65731059afdebcc05d6b8cdb7f59410fa9aefe0b5b5aa429ab64",
+    "P003": "ba19dbf93af4717f45978b479f1b36d75db892b3285c704304356d5b6fbd4425",
+    "P004": "672b5fa12143399d3e77a74b4ab2f499953b7729a857bd269343e97def1dcd25",
+    "P005": "20468bd01df5a25d3ecff9db5be03f5fc91c53924b5bab24d7959a40925bfcef",
+    "P006": "ef2ff8ebb4faef0c390554a98e69bccdfb74a81039d65d4b28e07afb1d668305",
+    "P007": "abb7782599925709d3d9e8f1e2524847dc2ac2cc43df15e421233c4efc6fa81b",
+    "P008": "5fc6394da88e2809a7c4b2fc6dc547a8f8bc254a9d7584984ae6c58723494949",
+    "P009": "7579873a08017a48b18c6e1e27ded5d38c4f9d30c481a0c0ea415ea61ba4d5ff",
+    "P010": "8a33a92de38a8ea303168ccfaccb95aa1ed6b3c4353836ed63875ce6148dc447"
+  },
+  "holdout_used": false,
+  "human_semantic_review": "pending",
+  "limitations": [
+    "Fixed saved retrieval contexts; generation-only experiment, not new retrieval/end-to-end timing.",
+    "Prompt variants run in sequence on ten reused dev questions; no holdout.",
+    "evidence_first changes prompt, schema and validator; not a single-variable schema ablation.",
+    "Matching a quoted string verifies location only, not claim entailment or answer correctness.",
+    "Model refusal labels must still be checked by a human; technical withheld outputs are separate."
+  ],
+  "max_output_tokens": 1024,
+  "model": "qwen3:4b",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "partition": "development",
+  "reused_retrieval_run": "m2_console_20261024T130313Z",
+  "revision_before_run": "7014e5d3c0d2c58d54adf75f826d0d968b431cc6",
+  "run_id": "generation_20261104T140158Z",
+  "snapshot_id": "5da3bd4d5de54492",
+  "source_sha256": {
+    "scripts\\run_m3_generation_study.py": "111b8ec1f33a8163fbc2ef1d6ec1e3f5a3d9a2a5321f6afcca1a99af94ba3af4",
+    "src\\rag_hcmute\\evaluation\\generation_pilot.py": "81a8c39e8307c3cd337fde9980f8516c55b4b0c956ec8c3351bc001b2326bd1e",
+    "src\\rag_hcmute\\generation\\ollama.py": "23800d1b1ceebdb1eba5c54912a12bb9159c9a33939f7fdfa1ece40c72b375f3"
+  },
+  "summary": {
+    "evidence_first": {
+      "answerable_citing_expected_document_rate": {
+        "count": 2,
+        "denominator": 7,
+        "value": 0.2857142857142857
+      },
+      "answerable_count": 7,
+      "answerable_model_refusal_count": 0,
+      "answerable_response_rate": {
+        "count": 2,
+        "denominator": 7,
+        "value": 0.2857142857142857
+      },
+      "interpretation": "Development-only process metrics. Answer text is not judged for correctness or entailment; source-ID validity and expected-document overlap are not semantic citation verification. Refusal rate counts only model_abstained, not technical failures or missing legacy status. The model's refusal reason still requires human review.",
+      "question_count": 10,
+      "status_counts": {
+        "generated_quotes_verified_semantics_pending": 3,
+        "invalid_evidence_quote": 6,
+        "model_abstained": 1
+      },
+      "unanswerable_count": 3,
+      "unanswerable_output_withheld_rate": {
+        "count": 2,
+        "denominator": 3,
+        "value": 0.6666666666666666
+      },
+      "unanswerable_refusal_rate": {
+        "count": 1,
+        "denominator": 3,
+        "value": 0.3333333333333333
+      },
+      "valid_citation_id_rate": {
+        "count": 3,
+        "denominator": 3,
+        "value": 1.0
+      }
+    },
+    "schema": {
+      "answerable_citing_expected_document_rate": {
+        "count": 7,
+        "denominator": 7,
+        "value": 1.0
+      },
+      "answerable_count": 7,
+      "answerable_model_refusal_count": 0,
+      "answerable_response_rate": {
+        "count": 7,
+        "denominator": 7,
+        "value": 1.0
+      },
+      "interpretation": "Development-only process metrics. Answer text is not judged for correctness or entailment; source-ID validity and expected-document overlap are not semantic citation verification. Refusal rate counts only model_abstained, not technical failures or missing legacy status. The model's refusal reason still requires human review.",
+      "question_count": 10,
+      "status_counts": {
+        "generated_citations_unverified": 9,
+        "invalid_or_missing_citation": 1
+      },
+      "unanswerable_count": 3,
+      "unanswerable_output_withheld_rate": {
+        "count": 1,
+        "denominator": 3,
+        "value": 0.3333333333333333
+      },
+      "unanswerable_refusal_rate": {
+        "count": 0,
+        "denominator": 3,
+        "value": 0.0
+      },
+      "valid_citation_id_rate": {
+        "count": 9,
+        "denominator": 9,
+        "value": 1.0
+      }
+    },
+    "standard": {
+      "answerable_citing_expected_document_rate": {
+        "count": 7,
+        "denominator": 7,
+        "value": 1.0
+      },
+      "answerable_count": 7,
+      "answerable_model_refusal_count": 0,
+      "answerable_response_rate": {
+        "count": 7,
+        "denominator": 7,
+        "value": 1.0
+      },
+      "interpretation": "Development-only process metrics. Answer text is not judged for correctness or entailment; source-ID validity and expected-document overlap are not semantic citation verification. Refusal rate counts only model_abstained, not technical failures or missing legacy status. The model's refusal reason still requires human review.",
+      "question_count": 10,
+      "status_counts": {
+        "generated_citations_unverified": 8,
+        "invalid_model_json": 1,
+        "invalid_or_missing_citation": 1
+      },
+      "unanswerable_count": 3,
+      "unanswerable_output_withheld_rate": {
+        "count": 2,
+        "denominator": 3,
+        "value": 0.6666666666666666
+      },
+      "unanswerable_refusal_rate": {
+        "count": 0,
+        "denominator": 3,
+        "value": 0.0
+      },
+      "valid_citation_id_rate": {
+        "count": 8,
+        "denominator": 8,
+        "value": 1.0
+      }
+    }
+  },
+  "temperature": 0,
+  "think": false
+}

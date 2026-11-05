@@ -1,5 +1,11 @@
 # Preserve exact evidence bytes used by SHA-256 manifests on Windows.
 docs/evidence/m2/runs/*.json text eol=lf
+docs/evidence/m3/runs/*.json text eol=lf
+docs/evidence/m3/manifest.json text eol=lf
+scripts/run_m3*.py text eol=lf
+src/rag_hcmute/evaluation/context_budget.py text eol=lf
+src/rag_hcmute/evaluation/generation_pilot.py text eol=lf
+src/rag_hcmute/ingestion/experimental_splitters.py text eol=lf
 reports/*.docx binary
 # Source files fingerprinted in the M2 runs use LF consistently.
 scripts/run_m2_controlled_evaluation.py text eol=lf

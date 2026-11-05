@@ -17,6 +17,7 @@ dev = ["pytest>=8"]
 dense = ["sentence-transformers>=3.0", "faiss-cpu>=1.8", "numpy>=1.26"]
 ocr = ["pytesseract>=0.3.13", "Pillow>=10"]
 vector-benchmark = ["qdrant-client==1.19.1"]
+vietnamese = ["pyvi==0.1.1"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

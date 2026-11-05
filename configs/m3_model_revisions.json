@@ -1,0 +1,36 @@
+{
+  "embeddings": [
+    {
+      "model_id": "bkai-foundation-models/vietnamese-bi-encoder",
+      "revision": "84f9d9ada0d1a3c37557398b9ae9fcedcdf40be0",
+      "license": "apache-2.0"
+    },
+    {
+      "model_id": "dangvantuan/vietnamese-embedding",
+      "revision": "4ab46e46ba5902328ba0742e489e75f787932f2b",
+      "license": "apache-2.0"
+    },
+    {
+      "model_id": "intfloat/multilingual-e5-base",
+      "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+      "license": "mit"
+    },
+    {
+      "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "license": "apache-2.0"
+    }
+  ],
+  "rerankers": [
+    {
+      "model_id": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+      "revision": "1427fd652930e4ba29e8149678df786c240d8825",
+      "license": "apache-2.0"
+    },
+    {
+      "model_id": "BAAI/bge-reranker-base",
+      "revision": "2cfc18c9415c912f9d8155881c133215df768a70",
+      "license": "mit"
+    }
+  ]
+}

@@ -336,8 +336,8 @@ def summarize_manual_reviews(
             "citation_location_correctness": _distribution(
                 [row["citation_location_correctness"].lower() for row in cited]
             ),
-            "unanswerable_refusal_rate": _rate(unanswerable_refusals, len(unanswerable)),
-            "answerable_false_refusal_rate": _rate(answerable_false_refusals, len(answerable)),
+            "unanswerable_output_withheld_rate": _rate(unanswerable_refusals, len(unanswerable)),
+            "answerable_output_withheld_rate": _rate(answerable_false_refusals, len(answerable)),
         },
         "claim_review": {
             "row_count": len(claim_rows),
@@ -354,7 +354,9 @@ def summarize_manual_reviews(
         },
         "interpretation": (
             "Descriptive human-review counts only; do not combine these dimensions into one score. "
-            "Rates use reviewed rows and their stated denominators; the development pilot is not a holdout."
+            "Rates use reviewed rows and their stated denominators; the development pilot is not a holdout. "
+            "Legacy review sheets record system_abstained without a refusal cause. Withheld-output rates "
+            "cannot be interpreted as semantic refusal correctness; join the original generation statuses separately."
         ),
         "privacy_note": "Only IDs, labels, counts and rates are included; question, answer and source text are not serialized.",
     }

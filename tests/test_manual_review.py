@@ -109,8 +109,9 @@ def test_manual_review_summary_keeps_dimensions_and_denominators_separate(tmp_pa
     summary = summarize_manual_reviews(answers, claims)
 
     answer_summary = summary["answer_review"]
-    assert answer_summary["unanswerable_refusal_rate"] == {"count": 1, "denominator": 2, "value": 0.5}
-    assert answer_summary["answerable_false_refusal_rate"] == {"count": 1, "denominator": 2, "value": 0.5}
+    assert answer_summary["unanswerable_output_withheld_rate"] == {"count": 1, "denominator": 2, "value": 0.5}
+    assert answer_summary["answerable_output_withheld_rate"] == {"count": 1, "denominator": 2, "value": 0.5}
+    assert "unanswerable_refusal_rate" not in answer_summary
     assert answer_summary["answer_correctness"]["counts"] == {"correct": 1, "incorrect": 1}
     assert summary["claim_review"]["support_distribution"]["counts"] == {
         "partially_supported": 1,
