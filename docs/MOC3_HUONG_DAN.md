@@ -1,5 +1,7 @@
 # Mốc 3 · Hồ sơ thực nghiệm và bàn giao ngày 05/11/2026
 
+[Báo cáo tiến độ tổng hợp từ Mốc 1 đến Mốc 3](../reports/22110068_RAG_Bao_Cao_Tien_Do_Tong_Hop_Moc_1_2_3_v1.docx) là bản đọc liền mạch gồm 24 trang. Bản này tổ chức theo năm chương, bổ sung phần nền tảng, xử lý tài liệu, chỉ mục và console từ các mốc trước vào các kết quả mới. Cấu hình và cách tính chỉ số được ghi riêng cho mỗi phép thử. Phụ lục B đối chiếu YC1–YC13 với nội dung hiện có. Đã kiểm bố cục bằng Microsoft Word và rà toàn bộ 24 trang.
+
 [Bản Word để đọc trước khi nộp](../reports/22110068_RAG_Bao_Cao_Tien_Do_Moc_3_v1.docx) gồm tám trang. Nội dung theo tiếp Mốc 2, dùng bìa đã duyệt và snapshot G0 `5da3bd4d5de54492`. Nhánh cục bộ là `tim-hieu-rag-dot2`. Mở báo cáo từ thư mục reports. Đối chiếu bảng với [manifest minh chứng](evidence/m3/manifest.json) và các tệp dưới đây. Bản Mốc 3 hiện ở máy làm việc. Khi bàn giao qua email, có thể đính kèm bộ số liệu đã lọc cùng DOCX nếu nhánh GitHub chưa chứa commit này.
 
 | Câu cần giải thích | Minh chứng | Phạm vi kết luận |
