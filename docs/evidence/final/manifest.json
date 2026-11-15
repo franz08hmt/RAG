@@ -1,0 +1,50 @@
+{
+  "snapshot_id": "5da3bd4d5de54492",
+  "software_tests_passed": 164,
+  "files": [
+    {
+      "file": "console_bm25.json",
+      "sha256": "9ef12c0f4e972309d866440cc320799d890cc709a74b58078339fb424b7d371c"
+    },
+    {
+      "file": "console_outside.json",
+      "sha256": "5134ea5b91d5de29595b7f6e3eff3c1e29f62dbd10df5dd2d58266cf1903414e"
+    },
+    {
+      "file": "console_pause.json",
+      "sha256": "1703f22fb773b97e3c74dbacb37e9bf0ab31e536cecd000c16a27e5fd65343e0"
+    },
+    {
+      "file": "console_summer.json",
+      "sha256": "a317d74d4e501bd8380cd368c89ab2688c0e75f5012fcee5666a31347481dc0c"
+    },
+    {
+      "file": "context_lengths.json",
+      "sha256": "ad304c7e4eca73cbd2556c60db2eec6aadd12057a75b87775cf7287b2b04ee9e"
+    },
+    {
+      "file": "extended_a.json",
+      "sha256": "dbe4b31cc4af699bab4a0a5824d6983e27eb8de61bcf68a94cae598ca1eb6602"
+    },
+    {
+      "file": "pdf_tables.json",
+      "sha256": "82705f45d52b9f22b57b812deb80a83ce224ae62c90d801c2c52bd7940bf3c5e"
+    },
+    {
+      "file": "review_summary.json",
+      "sha256": "c0437963b777ee261871166372f7b41818d36737967c4e0fc6b1dbbe46ff61d3"
+    },
+    {
+      "file": "scope_8192.json",
+      "sha256": "5697525da76b26cd2b8b6ad2db86f567412592b1caaec4d8f0c73c15ff0c91f6"
+    },
+    {
+      "file": "scope_schema.json",
+      "sha256": "103622b5e34484bd6e5159fd3dc6081ec47c26a659789802fc98fe5fae3c9d84"
+    },
+    {
+      "file": "vector_filter.json",
+      "sha256": "e519023d91d395b22d7abd4e1af6d5d6f858c86ac0b1cf0fd7cfd873427f3893"
+    }
+  ]
+}

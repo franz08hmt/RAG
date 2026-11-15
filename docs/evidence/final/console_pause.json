@@ -1,0 +1,31 @@
+{
+  "method": "bm25",
+  "top_k": 5,
+  "generator_model": "qwen3:4b",
+  "chunks": 156,
+  "startup": {
+    "total_seconds": 0.04284269999971002
+  },
+  "query": {
+    "retrieval_gpu_restore_ms": 0.0039000005926936865,
+    "retrieval_total_ms": 0.8447999998679734,
+    "hit_count": 5,
+    "retrieved_chunk_ids": [
+      "HCMUTE_QCDT_1727_2021__c0038",
+      "HCMUTE_SOTAYSV_2024__c0023",
+      "HCMUTE_SOTAYSV_2024__c0022",
+      "HCMUTE_QCDT_1727_2021__c0022",
+      "HCMUTE_QCDT_1727_2021__c0019"
+    ],
+    "retrieval_gpu_release_ms": 0.001600000359758269,
+    "generation_ms": 5506.510199999866,
+    "status": "generated_citations_unverified",
+    "abstained": false,
+    "citation_count": 1,
+    "citation_ids": [
+      "S1"
+    ]
+  },
+  "total_seconds": 5.551045399999566,
+  "success": true
+}

@@ -1,0 +1,291 @@
+{
+  "snapshot_id": "5da3bd4d5de54492",
+  "vectors": 156,
+  "dimension": 1024,
+  "bge_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "vector_sha256": "659b7715f84b78cf227a9f446176b0f872565ccf70c5138052a5d6dc243b165f",
+  "runner_sha256": "7ea2afdcb58dad0338704a7d2c7340548307c7d71bccc672b3b848d3c0acf04d",
+  "faiss_version": "1.15.1",
+  "qdrant_client_version": "1.19.1",
+  "sizes_bytes": {
+    "faiss_global_vectors_only": 639021,
+    "qdrant_with_metadata": 1503778
+  },
+  "queries": 27,
+  "same_exact_ids": 27,
+  "postfilter_short_cases": 22,
+  "faiss_subset_p50_ms": 0.02519999998185085,
+  "qdrant_local_p50_ms": 3.896400000030553,
+  "rows": [
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0000",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 4,
+      "faiss_subset_query_ms": 0.15880000000834116,
+      "qdrant_local_query_ms": 7.367100000010396
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0019",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 4,
+      "faiss_subset_query_ms": 0.02519999998185085,
+      "qdrant_local_query_ms": 3.957899999932124
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 3,
+      "faiss_subset_query_ms": 0.024399999801971717,
+      "qdrant_local_query_ms": 3.8418000003730413
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0005",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.020899999981338624,
+      "qdrant_local_query_ms": 4.041300000153569
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0024",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 3,
+      "faiss_subset_query_ms": 0.027400000362831634,
+      "qdrant_local_query_ms": 4.308399999899848
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0043",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.025400000140507473,
+      "qdrant_local_query_ms": 3.7545000000136497
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0063",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.023099999907572055,
+      "qdrant_local_query_ms": 3.7523000000874163
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0082",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.022900000203662785,
+      "qdrant_local_query_ms": 4.686599999786267
+    },
+    {
+      "document_id": "HCMUTE_QCDT_1727_2021",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0102",
+      "eligible_vectors": 52,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.026000000161729986,
+      "qdrant_local_query_ms": 4.068100000040431
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0000",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.33489999987068586,
+      "qdrant_local_query_ms": 3.6508000002868357
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0019",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.011199999789823778,
+      "qdrant_local_query_ms": 3.6757000002580753
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.009900000350171467,
+      "qdrant_local_query_ms": 3.6402999999154417
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0005",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.00869999985297909,
+      "qdrant_local_query_ms": 4.535799999757728
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0024",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.011099999937869143,
+      "qdrant_local_query_ms": 3.7723999998888758
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0043",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.010100000054080738,
+      "qdrant_local_query_ms": 3.615799999806768
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0063",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.009200000022246968,
+      "qdrant_local_query_ms": 3.5847999997713487
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0082",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.009800000043469481,
+      "qdrant_local_query_ms": 3.896400000030553
+    },
+    {
+      "document_id": "HCMUTE_FIT_TTTN_2022",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0102",
+      "eligible_vectors": 1,
+      "expected_count": 1,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 0,
+      "faiss_subset_query_ms": 0.010400000064691994,
+      "qdrant_local_query_ms": 3.7276000002748333
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0000",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 1,
+      "faiss_subset_query_ms": 0.02679999988686177,
+      "qdrant_local_query_ms": 3.6817999998675077
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0019",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 1,
+      "faiss_subset_query_ms": 0.025600000299164094,
+      "qdrant_local_query_ms": 3.6531999999169784
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 2,
+      "faiss_subset_query_ms": 0.02519999998185085,
+      "qdrant_local_query_ms": 5.6681999999455
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0005",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 5,
+      "faiss_subset_query_ms": 0.0473000000056345,
+      "qdrant_local_query_ms": 6.503699999939272
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0024",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 2,
+      "faiss_subset_query_ms": 0.031200000194075983,
+      "qdrant_local_query_ms": 3.874500000165426
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0043",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 5,
+      "faiss_subset_query_ms": 0.03499999957057298,
+      "qdrant_local_query_ms": 6.025399999998626
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0063",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 5,
+      "faiss_subset_query_ms": 0.04129999979340937,
+      "qdrant_local_query_ms": 6.048400000054244
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0082",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 5,
+      "faiss_subset_query_ms": 0.042100000428035855,
+      "qdrant_local_query_ms": 5.551400000058493
+    },
+    {
+      "document_id": "HCMUTE_SOTAYSV_2024",
+      "query_chunk_id": "HCMUTE_SOTAYSV_2024__c0102",
+      "eligible_vectors": 103,
+      "expected_count": 5,
+      "qdrant_exact_ids_match": true,
+      "postfilter_count": 5,
+      "faiss_subset_query_ms": 0.04580000040732557,
+      "qdrant_local_query_ms": 5.09299999976065
+    }
+  ]
+}

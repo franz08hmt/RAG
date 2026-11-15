@@ -1,0 +1,186 @@
+{
+  "source_sha256": "71ed777e083b5b7be50e129f13dd714553fb8c53aead59d17db92f26b507eaaa",
+  "reference_sha256": "01944c0620c67e4806bea8e47a3069bea0d0b4d5b0640775cf96634fb6673913",
+  "reference_origin": "visual_transcription_by_ai_assistant_not_student_verified",
+  "pymupdf_version": "1.28.2",
+  "rows": [
+    {
+      "reference_id": 1,
+      "pdf_page": 3,
+      "table_index": 0,
+      "row_index": 2,
+      "exact_cells": 4,
+      "reference_cells": 4,
+      "exact_row": true
+    },
+    {
+      "reference_id": 2,
+      "pdf_page": 3,
+      "table_index": 0,
+      "row_index": 4,
+      "exact_cells": 4,
+      "reference_cells": 4,
+      "exact_row": true
+    },
+    {
+      "reference_id": 3,
+      "pdf_page": 3,
+      "table_index": 0,
+      "row_index": 5,
+      "exact_cells": 4,
+      "reference_cells": 4,
+      "exact_row": true
+    },
+    {
+      "reference_id": 4,
+      "pdf_page": 3,
+      "table_index": 0,
+      "row_index": 9,
+      "exact_cells": 4,
+      "reference_cells": 4,
+      "exact_row": true
+    },
+    {
+      "reference_id": 5,
+      "pdf_page": 15,
+      "table_index": 0,
+      "row_index": 2,
+      "exact_cells": 3,
+      "reference_cells": 4,
+      "exact_row": false
+    },
+    {
+      "reference_id": 6,
+      "pdf_page": 15,
+      "table_index": 0,
+      "row_index": 5,
+      "exact_cells": 3,
+      "reference_cells": 4,
+      "exact_row": false
+    },
+    {
+      "reference_id": 7,
+      "pdf_page": 15,
+      "table_index": 0,
+      "row_index": 8,
+      "exact_cells": 3,
+      "reference_cells": 4,
+      "exact_row": false
+    },
+    {
+      "reference_id": 8,
+      "pdf_page": 15,
+      "table_index": 0,
+      "row_index": 9,
+      "exact_cells": 4,
+      "reference_cells": 4,
+      "exact_row": true
+    },
+    {
+      "reference_id": 9,
+      "pdf_page": 19,
+      "table_index": 0,
+      "row_index": 2,
+      "exact_cells": 2,
+      "reference_cells": 2,
+      "exact_row": true
+    },
+    {
+      "reference_id": 10,
+      "pdf_page": 19,
+      "table_index": 1,
+      "row_index": 3,
+      "exact_cells": 2,
+      "reference_cells": 2,
+      "exact_row": true
+    },
+    {
+      "reference_id": 11,
+      "pdf_page": 20,
+      "table_index": 0,
+      "row_index": 0,
+      "exact_cells": 2,
+      "reference_cells": 2,
+      "exact_row": true
+    },
+    {
+      "reference_id": 12,
+      "pdf_page": 20,
+      "table_index": 1,
+      "row_index": 3,
+      "exact_cells": 2,
+      "reference_cells": 2,
+      "exact_row": true
+    }
+  ],
+  "exact_rows": 9,
+  "reference_rows": 12,
+  "exact_cells": 37,
+  "reference_cells": 40,
+  "detected_shapes": {
+    "3": {
+      "lines": [
+        [
+          14,
+          5
+        ]
+      ],
+      "text": [
+        [
+          61,
+          13
+        ]
+      ]
+    },
+    "15": {
+      "lines": [
+        [
+          10,
+          4
+        ]
+      ],
+      "text": [
+        [
+          58,
+          12
+        ]
+      ]
+    },
+    "19": {
+      "lines": [
+        [
+          7,
+          2
+        ],
+        [
+          5,
+          2
+        ]
+      ],
+      "text": [
+        [
+          62,
+          11
+        ]
+      ]
+    },
+    "20": {
+      "lines": [
+        [
+          2,
+          2
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "text": [
+        [
+          58,
+          12
+        ]
+      ]
+    }
+  }
+}

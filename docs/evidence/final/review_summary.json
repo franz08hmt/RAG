@@ -1,0 +1,110 @@
+{
+  "reviewer": "ai_assistant_source_comparison_not_human_verified",
+  "results": {
+    "scope_check": {
+      "BM25": {
+        "answerable": {
+          "total": 6,
+          "answer_emitted": 4,
+          "incorrect_or_unsupported": 1,
+          "unambiguous_total": 5,
+          "technical_block": 2,
+          "correct_supported": 3
+        },
+        "unanswerable": {
+          "total": 6,
+          "answer_emitted": 3,
+          "answer_despite_missing_evidence": 3,
+          "technical_block": 3
+        }
+      },
+      "Weighted75+rerank": {
+        "answerable": {
+          "total": 6,
+          "answer_emitted": 4,
+          "partial_supported": 1,
+          "unambiguous_total": 5,
+          "technical_block": 2,
+          "correct_supported": 3
+        },
+        "unanswerable": {
+          "total": 6,
+          "answer_emitted": 2,
+          "answer_despite_missing_evidence": 2,
+          "technical_block": 4
+        }
+      }
+    },
+    "scope_schema": {
+      "BM25": {
+        "answerable": {
+          "total": 6,
+          "answer_emitted": 6,
+          "incorrect_or_unsupported": 2,
+          "unambiguous_total": 5,
+          "correct_supported": 3,
+          "ambiguous_prompt": 1
+        },
+        "unanswerable": {
+          "total": 6,
+          "answer_emitted": 4,
+          "answer_despite_missing_evidence": 4,
+          "technical_block": 2
+        }
+      },
+      "Weighted75+rerank": {
+        "answerable": {
+          "total": 6,
+          "answer_emitted": 6,
+          "partial_supported": 1,
+          "unambiguous_total": 5,
+          "incorrect_or_unsupported": 1,
+          "correct_supported": 3,
+          "ambiguous_prompt": 1
+        },
+        "unanswerable": {
+          "total": 6,
+          "answer_emitted": 4,
+          "answer_despite_missing_evidence": 4,
+          "technical_block": 2
+        }
+      }
+    },
+    "scope_8192": {
+      "BM25": {
+        "answerable": {
+          "total": 6,
+          "answer_emitted": 6,
+          "incorrect_or_unsupported": 1,
+          "unambiguous_total": 5,
+          "correct_supported": 4,
+          "ambiguous_prompt": 1
+        },
+        "unanswerable": {
+          "total": 6,
+          "answer_emitted": 3,
+          "answer_despite_missing_evidence": 3,
+          "technical_block": 2,
+          "model_abstained": 1
+        }
+      },
+      "Weighted75+rerank": {
+        "answerable": {
+          "total": 6,
+          "answer_emitted": 6,
+          "partial_supported": 1,
+          "unambiguous_total": 5,
+          "incorrect_or_unsupported": 1,
+          "correct_supported": 3,
+          "ambiguous_prompt": 1
+        },
+        "unanswerable": {
+          "total": 6,
+          "answer_emitted": 4,
+          "answer_despite_missing_evidence": 4,
+          "technical_block": 2
+        }
+      }
+    }
+  }
+}

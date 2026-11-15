@@ -1,0 +1,31 @@
+{
+  "method": "bm25",
+  "top_k": 5,
+  "generator_model": "qwen3:4b",
+  "chunks": 156,
+  "startup": {
+    "total_seconds": 0.039550299999973504
+  },
+  "query": {
+    "retrieval_gpu_restore_ms": 0.0031999998100218363,
+    "retrieval_total_ms": 1.0259000000587548,
+    "hit_count": 5,
+    "retrieved_chunk_ids": [
+      "HCMUTE_SOTAYSV_2024__c0014",
+      "HCMUTE_QCDT_1727_2021__c0018",
+      "HCMUTE_QCDT_1727_2021__c0016",
+      "HCMUTE_SOTAYSV_2024__c0023",
+      "HCMUTE_SOTAYSV_2024__c0042"
+    ],
+    "retrieval_gpu_release_ms": 0.0015000005078036338,
+    "generation_ms": 2072.996200000489,
+    "status": "generated_citations_unverified",
+    "abstained": false,
+    "citation_count": 1,
+    "citation_ids": [
+      "S3"
+    ]
+  },
+  "total_seconds": 2.114340600000105,
+  "success": true
+}

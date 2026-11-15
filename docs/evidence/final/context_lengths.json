@@ -1,0 +1,31 @@
+{
+  "tokenizer_revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "active_context": 4096,
+  "output_budget": 384,
+  "template_estimated_prompt_tokens": {
+    "F07_bm25": 3719,
+    "F07_rerank": 3778,
+    "F13_bm25": 4049,
+    "F13_rerank": 4164,
+    "F21_bm25": 3802,
+    "F21_rerank": 3583,
+    "F29_bm25": 3360,
+    "F29_rerank": 2989,
+    "F35_bm25": 3687,
+    "F35_rerank": 3757,
+    "F39_bm25": 3991,
+    "F39_rerank": 4072,
+    "U01_bm25": 3844,
+    "U01_rerank": 3973,
+    "U04_bm25": 3930,
+    "U04_rerank": 3827,
+    "U08_bm25": 3960,
+    "U08_rerank": 3702,
+    "U11_bm25": 4320,
+    "U11_rerank": 4419,
+    "U13_bm25": 3749,
+    "U13_rerank": 3579,
+    "U15_bm25": 4286,
+    "U15_rerank": 4900
+  }
+}

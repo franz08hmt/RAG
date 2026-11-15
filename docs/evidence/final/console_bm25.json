@@ -1,0 +1,22 @@
+{
+  "method": "bm25",
+  "top_k": 5,
+  "generator_model": null,
+  "chunks": 156,
+  "startup": {
+    "total_seconds": 0.03959820000000036
+  },
+  "query": {
+    "retrieval_total_ms": 0.8250000000771252,
+    "hit_count": 5,
+    "retrieved_chunk_ids": [
+      "HCMUTE_QCDT_1727_2021__c0038",
+      "HCMUTE_SOTAYSV_2024__c0023",
+      "HCMUTE_SOTAYSV_2024__c0022",
+      "HCMUTE_QCDT_1727_2021__c0022",
+      "HCMUTE_QCDT_1727_2021__c0019"
+    ]
+  },
+  "total_seconds": 0.041139599999951315,
+  "success": true
+}

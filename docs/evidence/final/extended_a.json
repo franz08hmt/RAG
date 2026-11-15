@@ -1,0 +1,4236 @@
+{
+  "config": {
+    "run_id": "extended_20261115T130001Z",
+    "data_status": "ai_authored_source_anchored_not_student_verified",
+    "snapshot_id": "5da3bd4d5de54492",
+    "draft_sha256": "8d287fce39caa2713b92932cda56bba1ae9eeabeaf9cd45380925a9a64b79639",
+    "revision_before_run": "39b0cc9e1b1c16120c1c98faccb466db8c2a069b",
+    "runner_sha256": "dd5e98cc87d3a3cde7612e6e83c7fddbeb973c842ccba064294b5e1bff1f9cb6",
+    "answerable_count": 43,
+    "unanswerable_count": 15,
+    "source_span_count": 57,
+    "tag_counts": {
+      "lexical_gap": 24,
+      "multi_span": 14,
+      "requires_table_or_image": 10
+    },
+    "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "branch_depth": 50,
+    "dense_weight": 0.75,
+    "reranker_depth": 20,
+    "reranker_max_tokens": 512,
+    "generation_ids": [
+      "F07",
+      "F13",
+      "F21",
+      "F29",
+      "F35",
+      "F39",
+      "U01",
+      "U04",
+      "U08",
+      "U11",
+      "U13",
+      "U15"
+    ],
+    "generation_configurations": [
+      "BM25",
+      "Weighted75+rerank"
+    ],
+    "generation_model": "qwen3:4b",
+    "generation_prompt": "scope_check",
+    "generation_context_chunks": 5,
+    "generation_max_output_tokens": 384,
+    "generation_temperature": 0,
+    "generation_think": false
+  },
+  "retrieval": {
+    "BM25": {
+      "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+      "relevance_threshold": 0.5,
+      "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+      "macro": {
+        "character_recall_at_5": 0.9301765200336228,
+        "character_precision_at_5": 0.021636897709029292,
+        "character_iou_at_5": 0.02163679822293165,
+        "hit_at_5_threshold_05": 0.9302325581395349,
+        "mrr_at_10_threshold_05": 0.7259966777408637,
+        "ndcg_at_5_linear_span_coverage": 0.7681779196791173
+      },
+      "per_question": [
+        {
+          "question_id": "F01",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0011",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.048175627604431344,
+          "character_iou_at_5": 0.048175627604431344,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.5
+        },
+        {
+          "question_id": "F02",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0042",
+            "HCMUTE_QCDT_1727_2021__c0013",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.013030987071619126,
+          "character_iou_at_5": 0.013030987071619126,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F03",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_SOTAYSV_2024__c0037",
+            "HCMUTE_QCDT_1727_2021__c0049",
+            "HCMUTE_SOTAYSV_2024__c0090",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0070",
+            "HCMUTE_SOTAYSV_2024__c0076",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0075"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010291142580701908,
+          "character_iou_at_5": 0.010291142580701908,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.2,
+          "ndcg_at_5_linear_span_coverage": 0.38685280723454163
+        },
+        {
+          "question_id": "F04",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0014",
+            "HCMUTE_QCDT_1727_2021__c0013",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0083"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.030509921058246212,
+          "character_iou_at_5": 0.030509921058246212,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.25,
+          "ndcg_at_5_linear_span_coverage": 0.43067655807339306
+        },
+        {
+          "question_id": "F05",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0076",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0014"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.039566650965614694,
+          "character_iou_at_5": 0.039566650965614694,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F06",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0083",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0016",
+            "HCMUTE_SOTAYSV_2024__c0082",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_FIT_TTTN_2022__c0000"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024870081662954714,
+          "character_iou_at_5": 0.024870081662954714,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F07",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0040",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0013"
+          ],
+          "character_recall_at_5": 0.0,
+          "character_precision_at_5": 0.0,
+          "character_iou_at_5": 0.0,
+          "hit_at_5_threshold_05": false,
+          "mrr_at_10_threshold_05": 0.14285714285714285,
+          "ndcg_at_5_linear_span_coverage": 0.0
+        },
+        {
+          "question_id": "F08",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0021",
+            "HCMUTE_SOTAYSV_2024__c0057",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0020",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0027"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02425288400399673,
+          "character_iou_at_5": 0.02425288400399673,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F09",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_SOTAYSV_2024__c0016",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0027"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.016134416379214422,
+          "character_iou_at_5": 0.016134416379214422,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F10",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_SOTAYSV_2024__c0062"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03859791307871543,
+          "character_iou_at_5": 0.03859791307871543,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F11",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0076",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_SOTAYSV_2024__c0069",
+            "HCMUTE_SOTAYSV_2024__c0052",
+            "HCMUTE_SOTAYSV_2024__c0011",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_SOTAYSV_2024__c0070",
+            "HCMUTE_QCDT_1727_2021__c0027"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02663147792706334,
+          "character_iou_at_5": 0.02663147792706334,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.25,
+          "ndcg_at_5_linear_span_coverage": 0.43067655807339306
+        },
+        {
+          "question_id": "F12",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_QCDT_1727_2021__c0004"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.06582684945041373,
+          "character_iou_at_5": 0.06582684945041373,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.25,
+          "ndcg_at_5_linear_span_coverage": 0.43067655807339306
+        },
+        {
+          "question_id": "F13",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0021",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0012"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.025451929130317474,
+          "character_iou_at_5": 0.025451929130317474,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.5
+        },
+        {
+          "question_id": "F14",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_SOTAYSV_2024__c0009",
+            "HCMUTE_SOTAYSV_2024__c0097",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0003",
+            "HCMUTE_QCDT_1727_2021__c0026"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03333333333333333,
+          "character_iou_at_5": 0.03333333333333333,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F15",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0073",
+            "HCMUTE_SOTAYSV_2024__c0036",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0035",
+            "HCMUTE_SOTAYSV_2024__c0064"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04199732501114579,
+          "character_iou_at_5": 0.04199732501114579,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F16",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_SOTAYSV_2024__c0016",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0043"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.035512195121951216,
+          "character_iou_at_5": 0.035512195121951216,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6240505200038379
+        },
+        {
+          "question_id": "F17",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0067",
+            "HCMUTE_SOTAYSV_2024__c0077",
+            "HCMUTE_FIT_TTTN_2022__c0000",
+            "HCMUTE_QCDT_1727_2021__c0028"
+          ],
+          "character_recall_at_5": 0.0,
+          "character_precision_at_5": 0.0,
+          "character_iou_at_5": 0.0,
+          "hit_at_5_threshold_05": false,
+          "mrr_at_10_threshold_05": 0.16666666666666666,
+          "ndcg_at_5_linear_span_coverage": 0.0
+        },
+        {
+          "question_id": "F18",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0040",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0075"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.014056040422599909,
+          "character_iou_at_5": 0.014056040422599909,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F19",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0018"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.011062749365252086,
+          "character_iou_at_5": 0.011062749365252086,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F20",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_FIT_TTTN_2022__c0000"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.023563048407768905,
+          "character_iou_at_5": 0.023563048407768905,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F21",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0074",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0007"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04423806670661074,
+          "character_iou_at_5": 0.04423806670661074,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6271726129446352
+        },
+        {
+          "question_id": "F22",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0019"
+          ],
+          "character_recall_at_5": 0.0,
+          "character_precision_at_5": 0.0,
+          "character_iou_at_5": 0.0,
+          "hit_at_5_threshold_05": false,
+          "mrr_at_10_threshold_05": 0.125,
+          "ndcg_at_5_linear_span_coverage": 0.0
+        },
+        {
+          "question_id": "F23",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0057",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0035",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0024"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.025998142989786442,
+          "character_iou_at_5": 0.025998142989786442,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 0.9379803690240094
+        },
+        {
+          "question_id": "F24",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_FIT_TTTN_2022__c0000",
+            "HCMUTE_SOTAYSV_2024__c0075",
+            "HCMUTE_SOTAYSV_2024__c0076",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0079",
+            "HCMUTE_QCDT_1727_2021__c0027"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02565062722336641,
+          "character_iou_at_5": 0.02565062722336641,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F25",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0009",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0010",
+            "HCMUTE_SOTAYSV_2024__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02439276485788114,
+          "character_iou_at_5": 0.02439276485788114,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F26",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0058",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0060",
+            "HCMUTE_SOTAYSV_2024__c0067",
+            "HCMUTE_SOTAYSV_2024__c0023"
+          ],
+          "character_recall_at_5": 0.9975903614457832,
+          "character_precision_at_5": 0.042086001829826164,
+          "character_iou_at_5": 0.042081723927627566,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6398455484890109
+        },
+        {
+          "question_id": "F27",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0027",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0006",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_SOTAYSV_2024__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.013262074425969913,
+          "character_iou_at_5": 0.013262074425969913,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F28",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_FIT_TTTN_2022__c0000",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0018"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.031387613604422375,
+          "character_iou_at_5": 0.031387613604422375,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F29",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0042",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0020",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.041226434638491814,
+          "character_iou_at_5": 0.041226434638491814,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F30",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0034",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0020"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.029070344280186525,
+          "character_iou_at_5": 0.029070344280186525,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F31",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_SOTAYSV_2024__c0083",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0040",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0034",
+            "HCMUTE_QCDT_1727_2021__c0008"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.042735867258344586,
+          "character_iou_at_5": 0.042735867258344586,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F32",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0033",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0031",
+            "HCMUTE_SOTAYSV_2024__c0034",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_QCDT_1727_2021__c0041"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.026011872638963842,
+          "character_iou_at_5": 0.026011872638963842,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F33",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0067",
+            "HCMUTE_SOTAYSV_2024__c0082",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_SOTAYSV_2024__c0075",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0083"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.01866965925321363,
+          "character_iou_at_5": 0.01866965925321363,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.5
+        },
+        {
+          "question_id": "F34",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0031"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0029309397325517493,
+          "character_iou_at_5": 0.0029309397325517493,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F35",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0047"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.005399037989594581,
+          "character_iou_at_5": 0.005399037989594581,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F36",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0030",
+            "HCMUTE_SOTAYSV_2024__c0034",
+            "HCMUTE_SOTAYSV_2024__c0021"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0036031042128603103,
+          "character_iou_at_5": 0.0036031042128603103,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F37",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0053",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_SOTAYSV_2024__c0032"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0015878056525881232,
+          "character_iou_at_5": 0.0015878056525881232,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F38",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0053",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_SOTAYSV_2024__c0032"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0016936593627606647,
+          "character_iou_at_5": 0.0016936593627606647,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F39",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010161956176563989,
+          "character_iou_at_5": 0.010161956176563989,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F40",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0040",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.002350056196996015,
+          "character_iou_at_5": 0.002350056196996015,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F41",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0058",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_SOTAYSV_2024__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0023476078685339594,
+          "character_iou_at_5": 0.0023476078685339594,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.5
+        },
+        {
+          "question_id": "F42",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_SOTAYSV_2024__c0076"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.01038961038961039,
+          "character_iou_at_5": 0.01038961038961039,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F43",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.002328781623795914,
+          "character_iou_at_5": 0.002328781623795914,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        }
+      ],
+      "strata": {
+        "requires_table_or_image": {
+          "n": 10,
+          "character_recall_at_5": 1.0
+        },
+        "multi_span": {
+          "n": 14,
+          "character_recall_at_5": 0.8569707401032702
+        },
+        "lexical_gap": {
+          "n": 24,
+          "character_recall_at_5": 0.916566265060241
+        }
+      }
+    },
+    "Dense BGE": {
+      "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+      "relevance_threshold": 0.5,
+      "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+      "macro": {
+        "character_recall_at_5": 0.9491173998318857,
+        "character_precision_at_5": 0.02596552636883333,
+        "character_iou_at_5": 0.025955926603021165,
+        "hit_at_5_threshold_05": 0.9534883720930233,
+        "mrr_at_10_threshold_05": 0.7930509413067552,
+        "ndcg_at_5_linear_span_coverage": 0.829621489033145
+      },
+      "per_question": [
+        {
+          "question_id": "F01",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0000",
+            "HCMUTE_QCDT_1727_2021__c0003",
+            "HCMUTE_QCDT_1727_2021__c0001",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0026",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.10299869621903521,
+          "character_iou_at_5": 0.10299869621903521,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F02",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0012"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.012886859462201928,
+          "character_iou_at_5": 0.012886859462201928,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F03",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0037",
+            "HCMUTE_SOTAYSV_2024__c0099",
+            "HCMUTE_QCDT_1727_2021__c0049",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0034",
+            "HCMUTE_QCDT_1727_2021__c0005"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.011095305832147937,
+          "character_iou_at_5": 0.011095305832147937,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F04",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0014"
+          ],
+          "character_recall_at_5": 0.0,
+          "character_precision_at_5": 0.0,
+          "character_iou_at_5": 0.0,
+          "hit_at_5_threshold_05": false,
+          "mrr_at_10_threshold_05": 0.125,
+          "ndcg_at_5_linear_span_coverage": 0.0
+        },
+        {
+          "question_id": "F05",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0016"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04633204633204633,
+          "character_iou_at_5": 0.04633204633204633,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F06",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0083",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0029"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02471412762818148,
+          "character_iou_at_5": 0.02471412762818148,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F07",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0044"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.029411764705882353,
+          "character_iou_at_5": 0.029411764705882353,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F08",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_SOTAYSV_2024__c0014"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024832589285714284,
+          "character_iou_at_5": 0.024832589285714284,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.25,
+          "ndcg_at_5_linear_span_coverage": 0.43067655807339306
+        },
+        {
+          "question_id": "F09",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0008"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.01881894873458793,
+          "character_iou_at_5": 0.01881894873458793,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.5
+        },
+        {
+          "question_id": "F10",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.039861895794099184,
+          "character_iou_at_5": 0.039861895794099184,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F11",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0005"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02790346907993967,
+          "character_iou_at_5": 0.02790346907993967,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F12",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.08347689898198904,
+          "character_iou_at_5": 0.08347689898198904,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F13",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_SOTAYSV_2024__c0017"
+          ],
+          "character_recall_at_5": 0.0,
+          "character_precision_at_5": 0.0,
+          "character_iou_at_5": 0.0,
+          "hit_at_5_threshold_05": false,
+          "mrr_at_10_threshold_05": 0.14285714285714285,
+          "ndcg_at_5_linear_span_coverage": 0.0
+        },
+        {
+          "question_id": "F14",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0000",
+            "HCMUTE_QCDT_1727_2021__c0003",
+            "HCMUTE_QCDT_1727_2021__c0023",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0043"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.041595441595441596,
+          "character_iou_at_5": 0.041595441595441596,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F15",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0021"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04531460457956513,
+          "character_iou_at_5": 0.04531460457956513,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F16",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0027"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03359173126614987,
+          "character_iou_at_5": 0.03359173126614987,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+        },
+        {
+          "question_id": "F17",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0039",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0053",
+            "HCMUTE_QCDT_1727_2021__c0028"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.022349168169973944,
+          "character_iou_at_5": 0.022349168169973944,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F18",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0041",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0048"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.014801199574344587,
+          "character_iou_at_5": 0.014801199574344587,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F19",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0083",
+            "HCMUTE_QCDT_1727_2021__c0003"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.012240393297883014,
+          "character_iou_at_5": 0.012240393297883014,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 0.8002902302230953
+        },
+        {
+          "question_id": "F20",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0056"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.022286460276016412,
+          "character_iou_at_5": 0.022286460276016412,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F21",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0056",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.045703084700299185,
+          "character_iou_at_5": 0.045703084700299185,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.8325000016780069
+        },
+        {
+          "question_id": "F22",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0062"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04632094558619955,
+          "character_iou_at_5": 0.04632094558619955,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F23",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0032"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.027269775998268585,
+          "character_iou_at_5": 0.027269775998268585,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.25,
+          "ndcg_at_5_linear_span_coverage": 0.5419239395939182
+        },
+        {
+          "question_id": "F24",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0038"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02586858006042296,
+          "character_iou_at_5": 0.02586858006042296,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F25",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0002"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024624373956594323,
+          "character_iou_at_5": 0.024624373956594323,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F26",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0062",
+            "HCMUTE_SOTAYSV_2024__c0021"
+          ],
+          "character_recall_at_5": 0.8120481927710843,
+          "character_precision_at_5": 0.04243798010326155,
+          "character_iou_at_5": 0.04202519017333832,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 0.8274688666678904
+        },
+        {
+          "question_id": "F27",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0063",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.012984496124031008,
+          "character_iou_at_5": 0.012984496124031008,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F28",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0040",
+            "HCMUTE_QCDT_1727_2021__c0021",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0039"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03440838126540674,
+          "character_iou_at_5": 0.03440838126540674,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F29",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0042",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_QCDT_1727_2021__c0020",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0016",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0044"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.051998954794878496,
+          "character_iou_at_5": 0.051998954794878496,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F30",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0040",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03739152628892292,
+          "character_iou_at_5": 0.03739152628892292,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F31",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_FIT_TTTN_2022__c0000",
+            "HCMUTE_SOTAYSV_2024__c0024"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.043709916132215094,
+          "character_iou_at_5": 0.043709916132215094,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F32",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0013",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_SOTAYSV_2024__c0013"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03737013490463638,
+          "character_iou_at_5": 0.03737013490463638,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F33",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0063",
+            "HCMUTE_SOTAYSV_2024__c0011",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0020"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.025756509500351864,
+          "character_iou_at_5": 0.025756509500351864,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F34",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0007"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0032683076294556224,
+          "character_iou_at_5": 0.0032683076294556224,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F35",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0017"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0064721110849611675,
+          "character_iou_at_5": 0.0064721110849611675,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F36",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0012"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0045306691449814125,
+          "character_iou_at_5": 0.0045306691449814125,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F37",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0049",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0019"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0015191411788535547,
+          "character_iou_at_5": 0.0015191411788535547,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F38",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0049",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0015552099533437014,
+          "character_iou_at_5": 0.0015552099533437014,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F39",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0048",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0019"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010136205258156478,
+          "character_iou_at_5": 0.010136205258156478,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F40",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0048",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0041",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0049"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0021999043519846965,
+          "character_iou_at_5": 0.0021999043519846965,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F41",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0041",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0058",
+            "HCMUTE_SOTAYSV_2024__c0013"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0030733361593895717,
+          "character_iou_at_5": 0.0030733361593895717,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F42",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010973936899862825,
+          "character_iou_at_5": 0.010973936899862825,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F43",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0049",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0030"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0024325519681556835,
+          "character_iou_at_5": 0.0024325519681556835,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        }
+      ],
+      "strata": {
+        "requires_table_or_image": {
+          "n": 10,
+          "character_recall_at_5": 1.0
+        },
+        "multi_span": {
+          "n": 14,
+          "character_recall_at_5": 0.9151462994836489
+        },
+        "lexical_gap": {
+          "n": 24,
+          "character_recall_at_5": 0.9505020080321285
+        }
+      }
+    },
+    "Weighted75": {
+      "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+      "relevance_threshold": 0.5,
+      "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+      "macro": {
+        "character_recall_at_5": 0.9956290277388624,
+        "character_precision_at_5": 0.02518013707790704,
+        "character_iou_at_5": 0.025171991381473014,
+        "hit_at_5_threshold_05": 1,
+        "mrr_at_10_threshold_05": 0.8748062015503876,
+        "ndcg_at_5_linear_span_coverage": 0.9062588434585572
+      },
+      "per_question": [
+        {
+          "question_id": "F01",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0000",
+            "HCMUTE_QCDT_1727_2021__c0003",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0011",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0001",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0026"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.07034728406055209,
+          "character_iou_at_5": 0.07034728406055209,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F02",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.012886859462201928,
+          "character_iou_at_5": 0.012886859462201928,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F03",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_SOTAYSV_2024__c0037",
+            "HCMUTE_QCDT_1727_2021__c0049",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0099",
+            "HCMUTE_SOTAYSV_2024__c0034",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0010"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010747749402902811,
+          "character_iou_at_5": 0.010747749402902811,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F04",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0014",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03514808897628118,
+          "character_iou_at_5": 0.03514808897628118,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.2,
+          "ndcg_at_5_linear_span_coverage": 0.38685280723454163
+        },
+        {
+          "question_id": "F05",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0018"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04007251216486976,
+          "character_iou_at_5": 0.04007251216486976,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F06",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0083",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0018"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02471412762818148,
+          "character_iou_at_5": 0.02471412762818148,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F07",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0022"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.032037074350191416,
+          "character_iou_at_5": 0.032037074350191416,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F08",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0010"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024832589285714284,
+          "character_iou_at_5": 0.024832589285714284,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F09",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0016"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.015466666666666667,
+          "character_iou_at_5": 0.015466666666666667,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.5
+        },
+        {
+          "question_id": "F10",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0030"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.039861895794099184,
+          "character_iou_at_5": 0.039861895794099184,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F11",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0008"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02790346907993967,
+          "character_iou_at_5": 0.02790346907993967,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F12",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0686413393432067,
+          "character_iou_at_5": 0.0686413393432067,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F13",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0042"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.026281575037147103,
+          "character_iou_at_5": 0.026281575037147103,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.25,
+          "ndcg_at_5_linear_span_coverage": 0.43067655807339306
+        },
+        {
+          "question_id": "F14",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0000",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0023",
+            "HCMUTE_QCDT_1727_2021__c0003",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0004"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03980370774263904,
+          "character_iou_at_5": 0.03980370774263904,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F15",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0021",
+            "HCMUTE_QCDT_1727_2021__c0010"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04421289777527457,
+          "character_iou_at_5": 0.04421289777527457,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F16",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_SOTAYSV_2024__c0016"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03492276695768973,
+          "character_iou_at_5": 0.03492276695768973,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+        },
+        {
+          "question_id": "F17",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0039",
+            "HCMUTE_QCDT_1727_2021__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02159178931061193,
+          "character_iou_at_5": 0.02159178931061193,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F18",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0040",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0041",
+            "HCMUTE_QCDT_1727_2021__c0031"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.014476298609139937,
+          "character_iou_at_5": 0.014476298609139937,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F19",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0083",
+            "HCMUTE_SOTAYSV_2024__c0022"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.012240393297883014,
+          "character_iou_at_5": 0.012240393297883014,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 0.8949819333394515
+        },
+        {
+          "question_id": "F20",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0022"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.022286460276016412,
+          "character_iou_at_5": 0.022286460276016412,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F21",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04423806670661074,
+          "character_iou_at_5": 0.04423806670661074,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F22",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0044"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04632094558619955,
+          "character_iou_at_5": 0.04632094558619955,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F23",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0013"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.025843503230437905,
+          "character_iou_at_5": 0.025843503230437905,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.7120046854995813
+        },
+        {
+          "question_id": "F24",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_QCDT_1727_2021__c0019"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024868397168270103,
+          "character_iou_at_5": 0.024868397168270103,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F25",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_SOTAYSV_2024__c0020"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024624373956594323,
+          "character_iou_at_5": 0.024624373956594323,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F26",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0067",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0032"
+          ],
+          "character_recall_at_5": 0.8120481927710843,
+          "character_precision_at_5": 0.03907699443413729,
+          "character_iou_at_5": 0.038726729487474146,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 0.8274688666678904
+        },
+        {
+          "question_id": "F27",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0066",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0017"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.013071895424836602,
+          "character_iou_at_5": 0.013071895424836602,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F28",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0040",
+            "HCMUTE_QCDT_1727_2021__c0021"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03231719081612965,
+          "character_iou_at_5": 0.03231719081612965,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F29",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0042",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0020",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04136354188318437,
+          "character_iou_at_5": 0.04136354188318437,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F30",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0008"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03739152628892292,
+          "character_iou_at_5": 0.03739152628892292,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F31",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_FIT_TTTN_2022__c0000",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0005"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.041694117647058826,
+          "character_iou_at_5": 0.041694117647058826,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F32",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0004"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02547568710359408,
+          "character_iou_at_5": 0.02547568710359408,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F33",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0082",
+            "HCMUTE_SOTAYSV_2024__c0063"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.021618428824571767,
+          "character_iou_at_5": 0.021618428824571767,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F34",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0032683076294556224,
+          "character_iou_at_5": 0.0032683076294556224,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F35",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0012"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.006165228113440197,
+          "character_iou_at_5": 0.006165228113440197,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F36",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0044"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.004188594135968209,
+          "character_iou_at_5": 0.004188594135968209,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F37",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0049"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0015191411788535547,
+          "character_iou_at_5": 0.0015191411788535547,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F38",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0024"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0016204172574437918,
+          "character_iou_at_5": 0.0016204172574437918,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F39",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0046"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010136205258156478,
+          "character_iou_at_5": 0.010136205258156478,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F40",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0048",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0041",
+            "HCMUTE_SOTAYSV_2024__c0040",
+            "HCMUTE_SOTAYSV_2024__c0032"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.002289924332935086,
+          "character_iou_at_5": 0.002289924332935086,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F41",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0058",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0041",
+            "HCMUTE_SOTAYSV_2024__c0013"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.003090037293553543,
+          "character_iou_at_5": 0.003090037293553543,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F42",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_SOTAYSV_2024__c0022"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.011655272890283537,
+          "character_iou_at_5": 0.011655272890283537,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F43",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0046",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0019"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0024325519681556835,
+          "character_iou_at_5": 0.0024325519681556835,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        }
+      ],
+      "strata": {
+        "requires_table_or_image": {
+          "n": 10,
+          "character_recall_at_5": 1.0
+        },
+        "multi_span": {
+          "n": 14,
+          "character_recall_at_5": 0.9865748709122203
+        },
+        "lexical_gap": {
+          "n": 24,
+          "character_recall_at_5": 0.9921686746987952
+        }
+      }
+    },
+    "Weighted75+rerank": {
+      "coordinate_system": "characters in source whitespace-normalized text; union overlaps within each document",
+      "relevance_threshold": 0.5,
+      "ndcg_gain": "max character fraction of any gold span per chunk; linear gain",
+      "macro": {
+        "character_recall_at_5": 0.999943961894088,
+        "character_precision_at_5": 0.026206461066319804,
+        "character_iou_at_5": 0.02620635500086175,
+        "hit_at_5_threshold_05": 1,
+        "mrr_at_10_threshold_05": 0.8565891472868217,
+        "ndcg_at_5_linear_span_coverage": 0.8987903365480592
+      },
+      "per_question": [
+        {
+          "question_id": "F01",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_QCDT_1727_2021__c0049",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0003",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0023",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0044"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.06870560950862444,
+          "character_iou_at_5": 0.06870560950862444,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F02",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.014013019971311928,
+          "character_iou_at_5": 0.014013019971311928,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F03",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0050",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0093",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0049",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0090",
+            "HCMUTE_SOTAYSV_2024__c0037",
+            "HCMUTE_SOTAYSV_2024__c0099"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.011600237953599048,
+          "character_iou_at_5": 0.011600237953599048,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F04",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0014",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0040",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0019"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.049301844509567316,
+          "character_iou_at_5": 0.049301844509567316,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F05",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.046148774859905504,
+          "character_iou_at_5": 0.046148774859905504,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F06",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0024"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.026767878545745107,
+          "character_iou_at_5": 0.026767878545745107,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F07",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02881739918441323,
+          "character_iou_at_5": 0.02881739918441323,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F08",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0020",
+            "HCMUTE_QCDT_1727_2021__c0022"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024832589285714284,
+          "character_iou_at_5": 0.024832589285714284,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F09",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0006"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.016134416379214422,
+          "character_iou_at_5": 0.016134416379214422,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F10",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03906490310673639,
+          "character_iou_at_5": 0.03906490310673639,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F11",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0011",
+            "HCMUTE_SOTAYSV_2024__c0054",
+            "HCMUTE_QCDT_1727_2021__c0023"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.02670837343599615,
+          "character_iou_at_5": 0.02670837343599615,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F12",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0023",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.07541029994340691,
+          "character_iou_at_5": 0.07541029994340691,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F13",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_QCDT_1727_2021__c0024"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.025506985128436233,
+          "character_iou_at_5": 0.025506985128436233,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F14",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_QCDT_1727_2021__c0003",
+            "HCMUTE_QCDT_1727_2021__c0000",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_SOTAYSV_2024__c0062",
+            "HCMUTE_SOTAYSV_2024__c0056",
+            "HCMUTE_SOTAYSV_2024__c0039"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.045448885568422366,
+          "character_iou_at_5": 0.045448885568422366,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F15",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0012"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04506745765955411,
+          "character_iou_at_5": 0.04506745765955411,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F16",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_SOTAYSV_2024__c0016",
+            "HCMUTE_QCDT_1727_2021__c0020",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0008"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04003959960400396,
+          "character_iou_at_5": 0.04003959960400396,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6934264036172708
+        },
+        {
+          "question_id": "F17",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_SOTAYSV_2024__c0053",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0038"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.022387310510992874,
+          "character_iou_at_5": 0.022387310510992874,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F18",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0040",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0001",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0025"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.011305697184659722,
+          "character_iou_at_5": 0.011305697184659722,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F19",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0016",
+            "HCMUTE_QCDT_1727_2021__c0017",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0005"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.01256177924217463,
+          "character_iou_at_5": 0.01256177924217463,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F20",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_SOTAYSV_2024__c0043",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0022"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.021898479017775335,
+          "character_iou_at_5": 0.021898479017775335,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F21",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0029",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0024",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_SOTAYSV_2024__c0018",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0043"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0454872163466475,
+          "character_iou_at_5": 0.0454872163466475,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F22",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_SOTAYSV_2024__c0058"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04423878775551714,
+          "character_iou_at_5": 0.04423878775551714,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F23",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0058",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0024"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.026540284360189573,
+          "character_iou_at_5": 0.026540284360189573,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.3333333333333333,
+          "ndcg_at_5_linear_span_coverage": 0.7120046854995813
+        },
+        {
+          "question_id": "F24",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0027",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0021",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0028",
+            "HCMUTE_QCDT_1727_2021__c0008"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024355555555555554,
+          "character_iou_at_5": 0.024355555555555554,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F25",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0047",
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0002",
+            "HCMUTE_SOTAYSV_2024__c0012"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.024624373956594323,
+          "character_iou_at_5": 0.024624373956594323,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F26",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0067",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0058",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0030"
+          ],
+          "character_recall_at_5": 0.9975903614457832,
+          "character_precision_at_5": 0.043455442426787026,
+          "character_iou_at_5": 0.04345088161209068,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 0.9332558467351165
+        },
+        {
+          "question_id": "F27",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0027",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_QCDT_1727_2021__c0019",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0047"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.012318440889869461,
+          "character_iou_at_5": 0.012318440889869461,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F28",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0038",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0041",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0022",
+            "HCMUTE_SOTAYSV_2024__c0017",
+            "HCMUTE_QCDT_1727_2021__c0033"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0325148015141221,
+          "character_iou_at_5": 0.0325148015141221,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F29",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0042",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0034",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0041"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04617705070193758,
+          "character_iou_at_5": 0.04617705070193758,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F30",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0032",
+            "HCMUTE_QCDT_1727_2021__c0040",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_QCDT_1727_2021__c0009"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03460902433262462,
+          "character_iou_at_5": 0.03460902433262462,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F31",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_SOTAYSV_2024__c0025",
+            "HCMUTE_QCDT_1727_2021__c0043",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0015",
+            "HCMUTE_QCDT_1727_2021__c0019"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.04304314030314808,
+          "character_iou_at_5": 0.04304314030314808,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F32",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_QCDT_1727_2021__c0013",
+            "HCMUTE_QCDT_1727_2021__c0039",
+            "HCMUTE_QCDT_1727_2021__c0005",
+            "HCMUTE_SOTAYSV_2024__c0024",
+            "HCMUTE_QCDT_1727_2021__c0015",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_SOTAYSV_2024__c0023",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_QCDT_1727_2021__c0041"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.03135163262651229,
+          "character_iou_at_5": 0.03135163262651229,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F33",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0045",
+            "HCMUTE_SOTAYSV_2024__c0021",
+            "HCMUTE_QCDT_1727_2021__c0036",
+            "HCMUTE_SOTAYSV_2024__c0011",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0063",
+            "HCMUTE_QCDT_1727_2021__c0004",
+            "HCMUTE_SOTAYSV_2024__c0084",
+            "HCMUTE_QCDT_1727_2021__c0033"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.020301752828932772,
+          "character_iou_at_5": 0.020301752828932772,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F34",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0035",
+            "HCMUTE_QCDT_1727_2021__c0037"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0031437272816583163,
+          "character_iou_at_5": 0.0031437272816583163,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F35",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0009",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0012",
+            "HCMUTE_QCDT_1727_2021__c0007"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.005720228809152366,
+          "character_iou_at_5": 0.005720228809152366,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F36",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0008",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0047"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.00441326241937309,
+          "character_iou_at_5": 0.00441326241937309,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F37",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0045",
+            "HCMUTE_SOTAYSV_2024__c0049",
+            "HCMUTE_SOTAYSV_2024__c0034"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0015837820715869496,
+          "character_iou_at_5": 0.0015837820715869496,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F38",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0049",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0056"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.0016893675430260796,
+          "character_iou_at_5": 0.0016893675430260796,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F39",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0007",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.010136205258156478,
+          "character_iou_at_5": 0.010136205258156478,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 0.5,
+          "ndcg_at_5_linear_span_coverage": 0.6309297535714575
+        },
+        {
+          "question_id": "F40",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0049"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.002450719232818327,
+          "character_iou_at_5": 0.002450719232818327,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F41",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0044",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_SOTAYSV_2024__c0058"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.003090037293553543,
+          "character_iou_at_5": 0.003090037293553543,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F42",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0006",
+            "HCMUTE_SOTAYSV_2024__c0014",
+            "HCMUTE_SOTAYSV_2024__c0012",
+            "HCMUTE_SOTAYSV_2024__c0013",
+            "HCMUTE_QCDT_1727_2021__c0044",
+            "HCMUTE_QCDT_1727_2021__c0018",
+            "HCMUTE_QCDT_1727_2021__c0037",
+            "HCMUTE_SOTAYSV_2024__c0022",
+            "HCMUTE_QCDT_1727_2021__c0010",
+            "HCMUTE_QCDT_1727_2021__c0035"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.011655272890283537,
+          "character_iou_at_5": 0.011655272890283537,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        },
+        {
+          "question_id": "F43",
+          "retrieved_chunk_ids_top10": [
+            "HCMUTE_QCDT_1727_2021__c0031",
+            "HCMUTE_QCDT_1727_2021__c0026",
+            "HCMUTE_SOTAYSV_2024__c0020",
+            "HCMUTE_QCDT_1727_2021__c0030",
+            "HCMUTE_SOTAYSV_2024__c0032",
+            "HCMUTE_QCDT_1727_2021__c0025",
+            "HCMUTE_SOTAYSV_2024__c0019",
+            "HCMUTE_QCDT_1727_2021__c0033",
+            "HCMUTE_SOTAYSV_2024__c0042",
+            "HCMUTE_QCDT_1727_2021__c0011"
+          ],
+          "character_recall_at_5": 1.0,
+          "character_precision_at_5": 0.002256178853450928,
+          "character_iou_at_5": 0.002256178853450928,
+          "hit_at_5_threshold_05": true,
+          "mrr_at_10_threshold_05": 1.0,
+          "ndcg_at_5_linear_span_coverage": 1.0
+        }
+      ],
+      "strata": {
+        "requires_table_or_image": {
+          "n": 10,
+          "character_recall_at_5": 1.0
+        },
+        "multi_span": {
+          "n": 14,
+          "character_recall_at_5": 0.999827882960413
+        },
+        "lexical_gap": {
+          "n": 24,
+          "character_recall_at_5": 0.9998995983935743
+        }
+      }
+    }
+  },
+  "chunk_sensitivity": {
+    "250/0": {
+      "chunks": 243,
+      "macro": {
+        "character_recall_at_5": 0.8924983646659718,
+        "character_precision_at_5": 0.03632608343193154,
+        "character_iou_at_5": 0.036212495031689836,
+        "hit_at_5_threshold_05": 0.9069767441860465,
+        "mrr_at_10_threshold_05": 0.7327796234772979,
+        "ndcg_at_5_linear_span_coverage": 0.7647923494187429
+      }
+    },
+    "250/40": {
+      "chunks": 288,
+      "macro": {
+        "character_recall_at_5": 0.9566368440586438,
+        "character_precision_at_5": 0.04088244142980937,
+        "character_iou_at_5": 0.04077283667800823,
+        "hit_at_5_threshold_05": 0.9767441860465116,
+        "mrr_at_10_threshold_05": 0.7445736434108527,
+        "ndcg_at_5_linear_span_coverage": 0.7439330503318781
+      }
+    },
+    "500/0": {
+      "chunks": 122,
+      "macro": {
+        "character_recall_at_5": 0.9300452562319473,
+        "character_precision_at_5": 0.01858334002734718,
+        "character_iou_at_5": 0.018561804524765867,
+        "hit_at_5_threshold_05": 0.9534883720930233,
+        "mrr_at_10_threshold_05": 0.6846899224806201,
+        "ndcg_at_5_linear_span_coverage": 0.7347388483595949
+      }
+    },
+    "500/80": {
+      "chunks": 144,
+      "macro": {
+        "character_recall_at_5": 0.9302325581395349,
+        "character_precision_at_5": 0.020243040634826435,
+        "character_iou_at_5": 0.020243040634826435,
+        "hit_at_5_threshold_05": 0.9302325581395349,
+        "mrr_at_10_threshold_05": 0.7851052048726467,
+        "ndcg_at_5_linear_span_coverage": 0.7915552044194425
+      }
+    },
+    "750/120": {
+      "chunks": 97,
+      "macro": {
+        "character_recall_at_5": 0.8604651162790697,
+        "character_precision_at_5": 0.01196648820455779,
+        "character_iou_at_5": 0.01196648820455779,
+        "hit_at_5_threshold_05": 0.8604651162790697,
+        "mrr_at_10_threshold_05": 0.6601052048726467,
+        "ndcg_at_5_linear_span_coverage": 0.6734081986057572
+      }
+    }
+  },
+  "generation": [
+    {
+      "question_id": "F07",
+      "configuration": "BM25",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0043",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_SOTAYSV_2024__c0024",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_SOTAYSV_2024__c0025"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 70967.89519999993,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0043"
+      ]
+    },
+    {
+      "question_id": "F07",
+      "configuration": "Weighted75+rerank",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0008",
+        "HCMUTE_SOTAYSV_2024__c0013",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_SOTAYSV_2024__c0025",
+        "HCMUTE_QCDT_1727_2021__c0007"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 1996.7087999998512,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0008"
+      ]
+    },
+    {
+      "question_id": "F13",
+      "configuration": "BM25",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0016",
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_SOTAYSV_2024__c0042"
+      ],
+      "status": "invalid_model_schema",
+      "generation_ms": 3800.6664999998065,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "F13",
+      "configuration": "Weighted75+rerank",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_QCDT_1727_2021__c0016",
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_QCDT_1727_2021__c0047",
+        "HCMUTE_SOTAYSV_2024__c0017"
+      ],
+      "status": "invalid_model_json",
+      "generation_ms": 5431.878999999753,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "F21",
+      "configuration": "BM25",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0024",
+        "HCMUTE_QCDT_1727_2021__c0029",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0018",
+        "HCMUTE_QCDT_1727_2021__c0028"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2074.602600000162,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0029"
+      ]
+    },
+    {
+      "question_id": "F21",
+      "configuration": "Weighted75+rerank",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0029",
+        "HCMUTE_QCDT_1727_2021__c0028",
+        "HCMUTE_QCDT_1727_2021__c0024",
+        "HCMUTE_QCDT_1727_2021__c0027",
+        "HCMUTE_SOTAYSV_2024__c0018"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2597.1541000003526,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0029"
+      ]
+    },
+    {
+      "question_id": "F29",
+      "configuration": "BM25",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0015",
+        "HCMUTE_QCDT_1727_2021__c0042",
+        "HCMUTE_QCDT_1727_2021__c0034",
+        "HCMUTE_QCDT_1727_2021__c0009",
+        "HCMUTE_SOTAYSV_2024__c0012"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 1989.9442000000818,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0042"
+      ]
+    },
+    {
+      "question_id": "F29",
+      "configuration": "Weighted75+rerank",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0042",
+        "HCMUTE_QCDT_1727_2021__c0015",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_QCDT_1727_2021__c0034",
+        "HCMUTE_QCDT_1727_2021__c0008"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 1781.3107000001764,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0042"
+      ]
+    },
+    {
+      "question_id": "F35",
+      "configuration": "BM25",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0006",
+        "HCMUTE_SOTAYSV_2024__c0012",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_QCDT_1727_2021__c0016",
+        "HCMUTE_SOTAYSV_2024__c0022"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2417.381600000226,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0006"
+      ]
+    },
+    {
+      "question_id": "F35",
+      "configuration": "Weighted75+rerank",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0006",
+        "HCMUTE_QCDT_1727_2021__c0010",
+        "HCMUTE_SOTAYSV_2024__c0012",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0022"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2307.731100000183,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0006"
+      ]
+    },
+    {
+      "question_id": "F39",
+      "configuration": "BM25",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0025",
+        "HCMUTE_QCDT_1727_2021__c0026",
+        "HCMUTE_SOTAYSV_2024__c0019",
+        "HCMUTE_QCDT_1727_2021__c0031",
+        "HCMUTE_QCDT_1727_2021__c0030"
+      ],
+      "status": "invalid_model_schema",
+      "generation_ms": 4322.3064999997405,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "F39",
+      "configuration": "Weighted75+rerank",
+      "answerable": true,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0031",
+        "HCMUTE_QCDT_1727_2021__c0025",
+        "HCMUTE_QCDT_1727_2021__c0026",
+        "HCMUTE_SOTAYSV_2024__c0020",
+        "HCMUTE_QCDT_1727_2021__c0030"
+      ],
+      "status": "invalid_model_schema",
+      "generation_ms": 4328.546600000209,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U01",
+      "configuration": "BM25",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0076",
+        "HCMUTE_SOTAYSV_2024__c0080",
+        "HCMUTE_QCDT_1727_2021__c0028",
+        "HCMUTE_QCDT_1727_2021__c0029",
+        "HCMUTE_SOTAYSV_2024__c0084"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2098.864500000218,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0028"
+      ]
+    },
+    {
+      "question_id": "U01",
+      "configuration": "Weighted75+rerank",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0029",
+        "HCMUTE_SOTAYSV_2024__c0044",
+        "HCMUTE_SOTAYSV_2024__c0043",
+        "HCMUTE_SOTAYSV_2024__c0053",
+        "HCMUTE_FIT_TTTN_2022__c0000"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2122.489200000018,
+      "cited_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0043"
+      ]
+    },
+    {
+      "question_id": "U04",
+      "configuration": "BM25",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0024",
+        "HCMUTE_SOTAYSV_2024__c0017",
+        "HCMUTE_SOTAYSV_2024__c0029"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2396.4160999998967,
+      "cited_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_QCDT_1727_2021__c0038"
+      ]
+    },
+    {
+      "question_id": "U04",
+      "configuration": "Weighted75+rerank",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_SOTAYSV_2024__c0024"
+      ],
+      "status": "invalid_or_missing_citation",
+      "generation_ms": 2332.174600000144,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U08",
+      "configuration": "BM25",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_FIT_TTTN_2022__c0000",
+        "HCMUTE_SOTAYSV_2024__c0079",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_SOTAYSV_2024__c0080"
+      ],
+      "status": "invalid_or_missing_citation",
+      "generation_ms": 2405.6117000000086,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U08",
+      "configuration": "Weighted75+rerank",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0021",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_QCDT_1727_2021__c0036",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_SOTAYSV_2024__c0044"
+      ],
+      "status": "invalid_or_missing_citation",
+      "generation_ms": 2134.349100000236,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U11",
+      "configuration": "BM25",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0031",
+        "HCMUTE_SOTAYSV_2024__c0033",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_SOTAYSV_2024__c0001",
+        "HCMUTE_SOTAYSV_2024__c0037"
+      ],
+      "status": "invalid_model_json",
+      "generation_ms": 5804.672899999787,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U11",
+      "configuration": "Weighted75+rerank",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0033",
+        "HCMUTE_SOTAYSV_2024__c0037",
+        "HCMUTE_SOTAYSV_2024__c0031",
+        "HCMUTE_SOTAYSV_2024__c0035",
+        "HCMUTE_SOTAYSV_2024__c0001"
+      ],
+      "status": "invalid_model_json",
+      "generation_ms": 5691.6237000000365,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U13",
+      "configuration": "BM25",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0012",
+        "HCMUTE_QCDT_1727_2021__c0047",
+        "HCMUTE_QCDT_1727_2021__c0006",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0037"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 3361.800099999982,
+      "cited_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0012",
+        "HCMUTE_QCDT_1727_2021__c0047",
+        "HCMUTE_QCDT_1727_2021__c0006",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0037"
+      ]
+    },
+    {
+      "question_id": "U13",
+      "configuration": "Weighted75+rerank",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0043",
+        "HCMUTE_QCDT_1727_2021__c0047",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_SOTAYSV_2024__c0025",
+        "HCMUTE_QCDT_1727_2021__c0006"
+      ],
+      "status": "generated_citations_unverified",
+      "generation_ms": 2475.1909000001433,
+      "cited_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0043"
+      ]
+    },
+    {
+      "question_id": "U15",
+      "configuration": "BM25",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0054",
+        "HCMUTE_SOTAYSV_2024__c0069",
+        "HCMUTE_SOTAYSV_2024__c0010",
+        "HCMUTE_SOTAYSV_2024__c0005",
+        "HCMUTE_SOTAYSV_2024__c0070"
+      ],
+      "status": "invalid_model_json",
+      "generation_ms": 5849.936399999933,
+      "cited_chunk_ids": []
+    },
+    {
+      "question_id": "U15",
+      "configuration": "Weighted75+rerank",
+      "answerable": false,
+      "context_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0054",
+        "HCMUTE_SOTAYSV_2024__c0051",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_SOTAYSV_2024__c0096",
+        "HCMUTE_SOTAYSV_2024__c0069"
+      ],
+      "status": "invalid_model_json",
+      "generation_ms": 5783.818300000348,
+      "cited_chunk_ids": []
+    }
+  ],
+  "completed": true,
+  "reranker_runtime": {
+    "queries": 49,
+    "median_ms": 435.81910000011703,
+    "truncated_pairs": 723,
+    "pair_count": 980
+  },
+  "ollama_model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7"
+}

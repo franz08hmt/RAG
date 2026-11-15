@@ -1,0 +1,29 @@
+{
+  "method": "bm25",
+  "top_k": 5,
+  "generator_model": "qwen3:4b",
+  "chunks": 156,
+  "startup": {
+    "total_seconds": 0.03956839999955264
+  },
+  "query": {
+    "retrieval_gpu_restore_ms": 0.004699999408330768,
+    "retrieval_total_ms": 1.3610999994853046,
+    "hit_count": 5,
+    "retrieved_chunk_ids": [
+      "HCMUTE_SOTAYSV_2024__c0054",
+      "HCMUTE_SOTAYSV_2024__c0069",
+      "HCMUTE_SOTAYSV_2024__c0010",
+      "HCMUTE_SOTAYSV_2024__c0005",
+      "HCMUTE_SOTAYSV_2024__c0070"
+    ],
+    "retrieval_gpu_release_ms": 0.002499999936844688,
+    "generation_ms": 5462.817399999949,
+    "status": "model_abstained",
+    "abstained": true,
+    "citation_count": 0,
+    "citation_ids": []
+  },
+  "total_seconds": 5.504679900000156,
+  "success": true
+}
