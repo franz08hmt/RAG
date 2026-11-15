@@ -1,5 +1,10 @@
 # Tìm hiểu Retrieval Augmented Generation (RAG)
 
+## Báo cáo cuối kỳ
+
+Xem [bản Word cuối kỳ](reports/22110068_RAG_Bao_Cao_Cuoi_Ky_v1.docx) và [bàn giao](docs/BAN_GIAO_CUOI_KY.md).
+Hồ sơ mới gồm truy xuất trên 43 câu gắn nguồn, 72 lượt sinh trên 12 câu, kiểm cấu trúc bảng, lọc vector và ca chạy console.
+Chất lượng đầu-cuối được đối chiếu thử có ghi rõ nguồn nhãn. Bộ kiểm tra độc lập cần người học duyệt.
 ## Gói tiến độ Mốc 2 ngày 25/10/2026
 
 Xem [bàn giao Mốc 2](docs/HANDOFF_MOC2_20261025.md) và [hướng dẫn console](docs/MOC2_HUONG_DAN.md).
@@ -230,4 +235,3 @@ python tests/run_smoke_tests.py # smoke test không cần pytest, dùng được
 - `docs/TRUY_VET_YC.md`: YC1–YC13 đúng số thứ tự của giảng viên, trạng thái và phần còn thiếu.
 - `CAU_HOI_BAO_VE.md`: câu hỏi tự kiểm tra trước khi trình bày.
 - `data/eval/README.md`: tiêu chuẩn ghi nhận/duyệt câu hỏi và gold evidence; hiện chưa có holdout.
-

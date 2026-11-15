@@ -55,3 +55,12 @@ YC1–YC3 và YC12 được đối chiếu qua bìa, mô tả Document/PageText/
 YC8–YC9 có bốn phép hợp và chín cấu hình reranker. YC10–YC11 có 30 lượt sinh, phân biệt model từ chối với lỗi kỹ thuật và kiểm tra trích đoạn. YC13 có phân tích từng câu tại DOCX trang 4 và 7. Điểm số retrieval dùng bảy câu dev có bằng chứng. Ba mươi câu trả lời đang đợi chấm ngữ nghĩa, còn tập test đang đợi duyệt. [Hồ sơ và tệp theo yêu cầu](MOC3_HUONG_DAN.md)
 
 Không chuyển trạng thái “một phần” thành “đạt” chỉ vì đã viết phần mô tả. Cập nhật YC cùng đường dẫn evidence, run ID, split và giới hạn. Khi một phép đo cần câu hỏi/gold mới, người học phải tự rà soát nguồn trước khi dữ liệu vào benchmark.
+
+
+### Bổ sung báo cáo cuối kỳ ngày 15/11/2026
+
+- YC4 có đối chiếu 12 hàng từ ảnh nguồn, 37/40 ô và 9/12 hàng khớp với đầu ra PyMuPDF. Chưa xác minh ngữ nghĩa hình trên một bộ riêng.
+- YC5, YC7, YC8 và YC9 có phép quét kích thước, lọc metadata, so sánh BM25/dense/hợp điểm/reranker trên 43 câu gắn 57 khoảng bằng chứng. Cùng G0, cấu hình khóa trước lượt chạy.
+- YC10–YC11 có 72 đầu ra với cùng mô hình và ba điều kiện sinh. So kết quả có nguồn, sai hoặc thiếu ý, từ chối và lỗi kỹ thuật. Phiếu 85 mục còn cần người học kiểm và có câu tự viết trước khi lập tập test độc lập.
+- YC12 có ba lượt chạy console thật và một lượt BM25 từ G0 dựng lại. Bộ kiểm thử phần mềm có 164 trường hợp đạt.
+- Xem [bàn giao cuối kỳ](BAN_GIAO_CUOI_KY.md) và [manifest kết quả](evidence/final/manifest.json).
