@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--private-before", required=True, type=Path)
     parser.add_argument("--private-out", required=True, type=Path)
     parser.add_argument("--metrics", required=True, type=Path)
+    parser.add_argument("--context-window", type=int)
     args = parser.parse_args()
     if args.metrics.exists() or args.private_out.resolve().is_relative_to(ROOT):
         raise ValueError("Use a new metrics file and a private output directory outside Git.")
@@ -39,7 +40,7 @@ def main():
               "revision_before_run": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "model_digest": digest, "prompt_variant": "scope_schema",
               "generation_max_output_tokens": before["config"]["generation_max_output_tokens"],
-              "completed": False, "generation": []}
+              "context_window": args.context_window, "completed": False, "generation": []}
     for row in before["generation"]:
         qid, method = row["question_id"], row["configuration"]
         file = f"{qid}_{'bm25' if method == 'BM25' else 'rerank'}.json"
@@ -49,7 +50,8 @@ def main():
             raise ValueError(f"Stored context changed: {file}")
         print(file, flush=True)
         result = generate_grounded_answer(raw["case"]["question"], sources, prompt_variant="scope_schema",
-                                          timeout_seconds=180, max_output_tokens=report["generation_max_output_tokens"])
+                                          timeout_seconds=180, max_output_tokens=report["generation_max_output_tokens"],
+                                          context_window=args.context_window)
         raw["result"] = asdict(result)
         raw.pop("error", None)
         (args.private_out / file).write_text(json.dumps(raw, ensure_ascii=False, indent=2), encoding="utf-8")

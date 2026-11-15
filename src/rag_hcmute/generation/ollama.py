@@ -177,6 +177,7 @@ def generate_grounded_answer(
     base_url: str = DEFAULT_BASE_URL,
     timeout_seconds: float = 120.0,
     max_output_tokens: int = 512,
+    context_window: int | None = None,
     keep_alive: str | int = "5m",
     prompt_variant: str = "standard",
 ) -> GroundedAnswer:
@@ -192,6 +193,8 @@ def generate_grounded_answer(
         raise ValueError("Tên model Ollama không được để trống.")
     if timeout_seconds <= 0 or max_output_tokens < 32:
         raise ValueError("Timeout phải dương và max_output_tokens tối thiểu là 32.")
+    if context_window is not None and context_window <= max_output_tokens:
+        raise ValueError("Cửa sổ ngữ cảnh phải lớn hơn giới hạn token đầu ra.")
     if prompt_variant not in PROMPT_VARIANTS:
         raise ValueError("Unknown prompt variant.")
     endpoint = _validate_local_endpoint(base_url)
@@ -253,6 +256,8 @@ def generate_grounded_answer(
         "keep_alive": keep_alive,
         "options": {"temperature": 0, "num_predict": max_output_tokens},
     }
+    if context_window is not None:
+        payload["options"]["num_ctx"] = context_window
     request = Request(
         endpoint,
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),

@@ -58,6 +58,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--generator-model", default=DEFAULT_MODEL)
     parser.add_argument("--prompt-variant", choices=PROMPT_VARIANTS, default="standard")
+    parser.add_argument("--context-window", type=int, help="Cửa sổ num_ctx của Ollama khi dùng --answer.")
     parser.add_argument("--ollama-url", default=DEFAULT_BASE_URL)
     parser.add_argument("--query", help="Chạy một truy vấn rồi thoát; nếu bỏ trống thì mở chế độ tương tác.")
     return parser
@@ -267,6 +268,7 @@ def _run_one(
     answer: bool = False,
     generator_model: str = DEFAULT_MODEL,
     prompt_variant: str = "standard",
+    context_window: int | None = None,
     ollama_url: str = DEFAULT_BASE_URL,
     metrics: dict | None = None,
 ) -> bool:
@@ -305,6 +307,7 @@ def _run_one(
             base_url=ollama_url,
             keep_alive=0,
             prompt_variant=prompt_variant,
+            context_window=context_window,
         )
     except (RuntimeError, ValueError) as exc:
         print(f"\nKhông tạo được câu trả lời: {exc}")
@@ -394,6 +397,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             answer=args.answer,
             generator_model=args.generator_model,
             prompt_variant=args.prompt_variant,
+            context_window=args.context_window,
             ollama_url=args.ollama_url,
             metrics=query_metrics,
         )
@@ -429,6 +433,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             answer=args.answer,
             generator_model=args.generator_model,
             prompt_variant=args.prompt_variant,
+            context_window=args.context_window,
             ollama_url=args.ollama_url,
         )
     return 0
