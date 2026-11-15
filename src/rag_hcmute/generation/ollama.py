@@ -15,6 +15,7 @@ from rag_hcmute.retrieval.common import RetrievalHit
 _ALLOWED_LOOPBACK_HOSTS = {"localhost", "127.0.0.1", "::1"}
 DEFAULT_MODEL = "qwen3:4b"
 DEFAULT_BASE_URL = "http://127.0.0.1:11434"
+PROMPT_VARIANTS = ("standard", "scope_check", "schema", "scope_schema", "evidence_first")
 
 EVIDENCE_SCHEMA = {
     "type": "object", "additionalProperties": False,
@@ -191,7 +192,7 @@ def generate_grounded_answer(
         raise ValueError("Tên model Ollama không được để trống.")
     if timeout_seconds <= 0 or max_output_tokens < 32:
         raise ValueError("Timeout phải dương và max_output_tokens tối thiểu là 32.")
-    if prompt_variant not in {"standard", "scope_check", "schema", "evidence_first"}:
+    if prompt_variant not in PROMPT_VARIANTS:
         raise ValueError("Unknown prompt variant.")
     endpoint = _validate_local_endpoint(base_url)
     valid_sources = [source for source in sources if source.text.strip()]
@@ -208,7 +209,7 @@ def generate_grounded_answer(
         '{"abstain": boolean, "answer": string, "citation_ids": [string]}. '
         "Khi từ chối, đặt abstain=true, citation_ids=[] và answer là một câu ngắn nêu chưa đủ căn cứ."
     )
-    if prompt_variant == "scope_check":
+    if prompt_variant in {"scope_check", "scope_schema"}:
         system_prompt += (
             " Trước khi trả lời, đối chiếu từng yêu cầu trong câu hỏi với nguồn: đối tượng, thời điểm, "
             "điều kiện và số liệu. Quy định chung không chứng minh một lịch cụ thể, một mức tiền cụ thể "
@@ -235,7 +236,7 @@ def generate_grounded_answer(
     output_format = "json"
     if prompt_variant == "evidence_first":
         output_format = EVIDENCE_SCHEMA
-    elif prompt_variant == "schema":
+    elif prompt_variant in {"schema", "scope_schema"}:
         output_format = {"type": "object", "additionalProperties": False,
             "required": ["abstain", "answer", "citation_ids"],
             "properties": {"abstain": {"type": "boolean"}, "answer": {"type": "string"},
@@ -278,6 +279,8 @@ def generate_grounded_answer(
     if not isinstance(parsed, dict) or not isinstance(parsed.get("abstain"), bool):
         return _refusal(model, started, "invalid_model_schema")
     if parsed["abstain"]:
+        if prompt_variant == "scope_schema" and parsed.get("citation_ids") != []:
+            return _refusal(model, started, "inconsistent_model_refusal")
         return _refusal(model, started, "model_abstained")
 
     answer = parsed.get("answer")

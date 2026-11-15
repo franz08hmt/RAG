@@ -174,3 +174,18 @@ def test_scope_prompt_is_generic_and_invalid_variant_is_rejected(monkeypatch):
     assert payloads[0]['keep_alive'] == 0
     with pytest.raises(ValueError):
         generate_grounded_answer('Câu hỏi', [_source()], prompt_variant='invented')
+
+
+def test_scope_schema_rejects_refusal_with_citations(monkeypatch):
+    payloads = []
+
+    def fake(request, timeout):
+        payloads.append(json.loads(request.data))
+        return _mock_response(json.dumps({"abstain": True, "answer": "Thiếu căn cứ", "citation_ids": ["S1"]}))
+
+    monkeypatch.setattr("rag_hcmute.generation.ollama.urlopen", fake)
+    result = generate_grounded_answer("Câu hỏi", [_source()], prompt_variant="scope_schema")
+    assert result.status == "inconsistent_model_refusal"
+    assert result.citations == ()
+    assert payloads[0]["format"]["properties"]["citation_ids"]["items"]["enum"] == ["S1"]
+    assert "đối chiếu từng yêu cầu" in payloads[0]["messages"][0]["content"]

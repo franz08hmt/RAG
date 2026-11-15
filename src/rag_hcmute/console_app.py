@@ -14,6 +14,7 @@ from rag_hcmute.retrieval.reranked import RerankedRetriever
 from rag_hcmute.generation.ollama import (
     DEFAULT_BASE_URL,
     DEFAULT_MODEL,
+    PROMPT_VARIANTS,
     generate_grounded_answer,
     sources_from_hits,
 )
@@ -56,6 +57,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="Sinh câu trả lời bám nguồn bằng Ollama chạy cục bộ (không gọi cloud API).",
     )
     parser.add_argument("--generator-model", default=DEFAULT_MODEL)
+    parser.add_argument("--prompt-variant", choices=PROMPT_VARIANTS, default="standard")
     parser.add_argument("--ollama-url", default=DEFAULT_BASE_URL)
     parser.add_argument("--query", help="Chạy một truy vấn rồi thoát; nếu bỏ trống thì mở chế độ tương tác.")
     return parser
@@ -264,6 +266,7 @@ def _run_one(
     top_k: int,
     answer: bool = False,
     generator_model: str = DEFAULT_MODEL,
+    prompt_variant: str = "standard",
     ollama_url: str = DEFAULT_BASE_URL,
     metrics: dict | None = None,
 ) -> bool:
@@ -301,6 +304,7 @@ def _run_one(
             model=generator_model,
             base_url=ollama_url,
             keep_alive=0,
+            prompt_variant=prompt_variant,
         )
     except (RuntimeError, ValueError) as exc:
         print(f"\nKhông tạo được câu trả lời: {exc}")
@@ -317,7 +321,7 @@ def _run_one(
         print("Nguồn được trích dẫn:")
         for source in generated.citations:
             print(f"  [{source.source_id}] {source.location_label}")
-    if generated.status.startswith("invalid_"):
+    if generated.status.startswith(("invalid_", "inconsistent_")):
         print(f"Trạng thái: đầu ra model không hợp lệ ({generated.status}); đây là lỗi kỹ thuật, không phải từ chối ngữ nghĩa.")
         return False
     if generated.abstained:
@@ -389,6 +393,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             top_k=args.top_k,
             answer=args.answer,
             generator_model=args.generator_model,
+            prompt_variant=args.prompt_variant,
             ollama_url=args.ollama_url,
             metrics=query_metrics,
         )
@@ -423,6 +428,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             top_k=args.top_k,
             answer=args.answer,
             generator_model=args.generator_model,
+            prompt_variant=args.prompt_variant,
             ollama_url=args.ollama_url,
         )
     return 0
