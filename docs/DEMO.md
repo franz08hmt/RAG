@@ -29,3 +29,12 @@ Thời gian phụ thuộc vào máy, trạng thái nạp mô hình và độ dà
 ~~~
 
 Không dùng log cũ như câu trả lời vừa chạy. Log chứa câu hỏi, đoạn nguồn và câu trả lời, được giữ ngoài Git.
+## Lượt chạy ngày 25/11/2026
+
+Năm lượt hoàn tất về mặt vận hành, tổng thời gian từng câu 10,81; 7,45; 8,84; 7,01 và 8,38 giây. Đây là thời gian của một lần chạy trên máy, không phải cam kết độ trễ. Tệp log đầy đủ ở D:\RAG\private_eval\final_20261115\demo_v2_20261125 và thống kê mã hóa ở docs/evidence/v2/demo_console.json.
+
+- Câu 1 trả nội dung hai thời hạn và trỏ trang 23–24.
+- Câu 2 trả đúng số trong bảng nhưng metadata section_path gắn nhầm Điều 15; cần chỉ ra lỗi nhận diện đề mục và đối chiếu trực tiếp Bảng 1 ở trang 3.
+- Câu 3 nêu hai điều kiện học lực nhưng thiếu yêu cầu đã xếp trình độ năm thứ hai.
+- Câu 4 trả trạng thái model_abstained.
+- Câu 5 trả điều kiện môn học trước nhưng bỏ điều kiện môn tiên quyết.

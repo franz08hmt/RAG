@@ -1,0 +1,49 @@
+{
+  "run_id": "console_demo_20261125T061017Z",
+  "model": "qwen3:4b",
+  "method": "bm25",
+  "context_window": 8192,
+  "prompt": "scope_schema",
+  "cases": [
+    {
+      "id": "demo_01",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "total_seconds": 10.80685729999982,
+      "top_chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+      "log_sha256": "4497d86020b7e4d5aa77eaef37428ca7e86a6ae88083b03597cc8e6720db7d94"
+    },
+    {
+      "id": "demo_02",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "total_seconds": 7.4468875999998545,
+      "top_chunk_id": "HCMUTE_QCDT_1727_2021__c0006",
+      "log_sha256": "02bd413d8798bac8700584b9172d76b3120e5f0837683ef5148e3ed8fcac2ff7"
+    },
+    {
+      "id": "demo_03",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "total_seconds": 8.84119550000014,
+      "top_chunk_id": "HCMUTE_QCDT_1727_2021__c0043",
+      "log_sha256": "ea0e35b6a987a1d90c4bf32f7cec2158fe0716dd94d094abd2f5d11dc487485b"
+    },
+    {
+      "id": "demo_04",
+      "success": true,
+      "status": "model_abstained",
+      "total_seconds": 7.005918399999928,
+      "top_chunk_id": "HCMUTE_SOTAYSV_2024__c0054",
+      "log_sha256": "9a1df85729ab2885efa05452d744ad20ab89581d4aade44253ba04caee0683ab"
+    },
+    {
+      "id": "demo_05",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "total_seconds": 8.377880099999857,
+      "top_chunk_id": "HCMUTE_QCDT_1727_2021__c0018",
+      "log_sha256": "a64ca7c01a27e9e98d42fbdb2fdd172d5f2e0348dee785741c80082460f97308"
+    }
+  ]
+}
