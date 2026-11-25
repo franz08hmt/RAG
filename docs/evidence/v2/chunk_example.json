@@ -11,10 +11,15 @@
   "previous_chunk_id": "HCMUTE_QCDT_1727_2021__c0037",
   "next_chunk_id": "HCMUTE_QCDT_1727_2021__c0039",
   "token_counts": {
-    "whitespace_split_v1": 501
+    "whitespace_split_v1": 501,
+    "BGE-M3_with_special": 543,
+    "Qwen3_without_special": 618
   },
   "coordinate_system": "document_text_whitespace_normalized",
-  "run_id": "provenance_20261123_g0_c0038",
+  "run_id": "provenance_20261125T061748Z",
   "source_snapshot_id": "5da3bd4d5de54492",
-  "coordinate_definition": "cleaned document pages, words joined by one ASCII space, half-open Unicode code point offsets"
+  "tokenizer_revisions": {
+    "BGE-M3": "5617a9f61b028005a4858fdac845db406aefb181",
+    "Qwen3": "1cfa9a7208912126459214e8b04321603b3df60c"
+  }
 }
