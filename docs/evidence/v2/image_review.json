@@ -1,0 +1,27 @@
+{
+  "run_id": "image_review_20261125T060820Z",
+  "source_run_id": "image_qa_20261125T060641Z",
+  "reviewer": "assistant_provisional_not_student",
+  "counts": {
+    "ocr": {
+      "n": 12,
+      "correct": 2,
+      "partial": 1,
+      "incorrect": 5,
+      "model_abstained": 4
+    },
+    "vlm_inference": {
+      "n": 12,
+      "correct": 0,
+      "partial": 0,
+      "incorrect": 2,
+      "model_abstained": 10
+    }
+  },
+  "limitations": [
+    "All 12 questions have expected answers in the original source image.",
+    "Assistant labels require student confirmation.",
+    "Image selection is non-random.",
+    "No arrow diagram was evaluated."
+  ]
+}

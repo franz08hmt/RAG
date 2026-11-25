@@ -1,0 +1,20 @@
+{
+  "chunk_id": "HCMUTE_QCDT_1727_2021__c0038",
+  "document_id": "HCMUTE_QCDT_1727_2021",
+  "char_start": 58236,
+  "char_end": 60464,
+  "pdf_page_start": 23,
+  "pdf_page_end": 24,
+  "printed_page_start": 22,
+  "printed_page_end": 23,
+  "section_path": "Chương IV > Điều 17",
+  "previous_chunk_id": "HCMUTE_QCDT_1727_2021__c0037",
+  "next_chunk_id": "HCMUTE_QCDT_1727_2021__c0039",
+  "token_counts": {
+    "whitespace_split_v1": 501
+  },
+  "coordinate_system": "document_text_whitespace_normalized",
+  "run_id": "provenance_20261123_g0_c0038",
+  "source_snapshot_id": "5da3bd4d5de54492",
+  "coordinate_definition": "cleaned document pages, words joined by one ASCII space, half-open Unicode code point offsets"
+}

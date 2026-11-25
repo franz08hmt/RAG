@@ -1,0 +1,198 @@
+{
+  "run_id": "image_20261125T060406Z",
+  "snapshot_id": "5da3bd4d5de54492",
+  "model": "ahmadwaqar/smolvlm2-256m-video:q8_0",
+  "generator": "qwen3:4b",
+  "limitations": [
+    "Five image crops are tables; one is a numbered infographic. No arrow diagram is included.",
+    "VLM description is inference, not an exact quotation.",
+    "Keyword occurrence is a diagnostic; semantic correctness and directional hallucination require review."
+  ],
+  "images": [
+    {
+      "id": "I01",
+      "sha256": "99f754fe3b7a39a293c77b4c57fe81f51f55758cd15180450871d7dcaa92800a",
+      "pdf_page": 3,
+      "ocr_characters": 295,
+      "vlm_characters": 626,
+      "vlm_seconds": 2.703237500000114,
+      "questions": [
+        {
+          "question_id": "I01-Q1",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I01-Q1",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I01-Q2",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I01-Q2",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "I02",
+      "sha256": "d536a49fe9da1f0b8c1fa2b480f82436205170b942d49e6b3049aa88c4a41141",
+      "pdf_page": 15,
+      "ocr_characters": 51,
+      "vlm_characters": 778,
+      "vlm_seconds": 0.8336765999999898,
+      "questions": [
+        {
+          "question_id": "I02-Q1",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I02-Q1",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I02-Q2",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I02-Q2",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "I03",
+      "sha256": "1470be82b0d67b65a8d027ff1f6a1bb1e641697ac1c0249b65e61a18b95f8725",
+      "pdf_page": 19,
+      "ocr_characters": 0,
+      "vlm_characters": 427,
+      "vlm_seconds": 0.8702485999999681,
+      "questions": [
+        {
+          "question_id": "I03-Q1",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I03-Q1",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I03-Q2",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I03-Q2",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "I04",
+      "sha256": "4b9c8e1aecabe890e575df2be8604386361ced599fcfce613e4c7361b8176dfb",
+      "pdf_page": 19,
+      "ocr_characters": 0,
+      "vlm_characters": 693,
+      "vlm_seconds": 0.8209097999999813,
+      "questions": [
+        {
+          "question_id": "I04-Q1",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I04-Q1",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I04-Q2",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I04-Q2",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "I05",
+      "sha256": "e04257226d898c828b4be61b30fb50a076657c4e5f74edab14865b9f5c14fffb",
+      "pdf_page": 20,
+      "ocr_characters": 0,
+      "vlm_characters": 583,
+      "vlm_seconds": 0.8638800000001083,
+      "questions": [
+        {
+          "question_id": "I05-Q1",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I05-Q1",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I05-Q2",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I05-Q2",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        }
+      ]
+    },
+    {
+      "id": "I06",
+      "sha256": "96fe788c1b2bae06ac1a4c08deed85ffccf7bf0dc73e476f878cd77aa0e41311",
+      "pdf_page": 107,
+      "ocr_characters": 256,
+      "vlm_characters": 444,
+      "vlm_seconds": 1.060216900000114,
+      "questions": [
+        {
+          "question_id": "I06-Q1",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I06-Q1",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I06-Q2",
+          "modality": "ocr",
+          "review_status": "pending"
+        },
+        {
+          "question_id": "I06-Q2",
+          "modality": "vlm_inference",
+          "review_status": "pending"
+        }
+      ]
+    }
+  ],
+  "completed": true,
+  "model_digest": "5629de7afceb49e2acec43793049c10d429fa9ab00463546a659e61b12b1ae0c",
+  "generator_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "tesseract_version": "tesseract 5.5.3",
+  "script_sha256": "1afafb3d5430228d446e3fa567d59480f7771e49b6fd0ffd9ae1cd9a38fdd0fe"
+}

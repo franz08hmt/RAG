@@ -1,0 +1,159 @@
+{
+  "run_id": "image_qa_20261125T060641Z",
+  "image_run": "image_20261125T060406Z",
+  "model": "qwen3:4b",
+  "settings": {
+    "temperature": 0,
+    "num_ctx": 4096,
+    "num_predict": 384,
+    "format": "json_schema"
+  },
+  "source_sha256": "cadceb7dfc6995c1f7850868cfd309205e524ace9036f5976accbe5862fbdc2b",
+  "rows": [
+    {
+      "id": "I01-Q1",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I01-Q1",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I01-Q2",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I01-Q2",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I02-Q1",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I02-Q1",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I02-Q2",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I02-Q2",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I03-Q1",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I03-Q1",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I03-Q2",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I03-Q2",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I04-Q1",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I04-Q1",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I04-Q2",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I04-Q2",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I05-Q1",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I05-Q1",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I05-Q2",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I05-Q2",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I06-Q1",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I06-Q1",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I06-Q2",
+      "modality": "ocr",
+      "valid_json": true,
+      "review_status": "pending"
+    },
+    {
+      "id": "I06-Q2",
+      "modality": "vlm_inference",
+      "valid_json": true,
+      "review_status": "pending"
+    }
+  ],
+  "completed": true
+}

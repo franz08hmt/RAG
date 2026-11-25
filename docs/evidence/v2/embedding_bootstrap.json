@@ -1,0 +1,655 @@
+{
+  "run_id": "paired_bootstrap_20261125T060446Z",
+  "repetitions": 5000,
+  "seed": 22110068,
+  "inputs": [
+    {
+      "run_id": "embeddings43_20261123T004649Z",
+      "sha256": "9a8520b6406bcaf88e1c0d05b70c1c4fa03a2e38f3b5b2aacbc14df76b46fa06",
+      "comparisons": [
+        {
+          "model_id": "BAAI/bge-m3",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": 0.0,
+              "ci95_percentile": [
+                0.0,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                0,
+                43,
+                0
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": 0.0,
+              "ci95_percentile": [
+                0.0,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                0,
+                43,
+                0
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": 0.0,
+              "ci95_percentile": [
+                0.0,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                0,
+                43,
+                0
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "intfloat/multilingual-e5-small",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.06627284152414305,
+              "ci95_percentile": [
+                -0.13893253608318912,
+                -0.004687572708255184
+              ],
+              "wins_ties_losses_right": [
+                6,
+                29,
+                8
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.0029346622369878185,
+              "ci95_percentile": [
+                -0.09806201550387597,
+                0.08759689922480621
+              ],
+              "wins_ties_losses_right": [
+                12,
+                21,
+                10
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.04302071112102571,
+              "ci95_percentile": [
+                -0.10654316715424261,
+                0.0161585305470043
+              ],
+              "wins_ties_losses_right": [
+                16,
+                11,
+                16
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "bkai-foundation-models/vietnamese-bi-encoder",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.1529051434782651,
+              "ci95_percentile": [
+                -0.2562897072927651,
+                -0.05866301569386729
+              ],
+              "wins_ties_losses_right": [
+                3,
+                27,
+                13
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.013851974898486524,
+              "ci95_percentile": [
+                -0.1264857881136951,
+                0.09584717607973423
+              ],
+              "wins_ties_losses_right": [
+                11,
+                20,
+                12
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.0807708397828649,
+              "ci95_percentile": [
+                -0.16881817101809518,
+                0.0002137372730124515
+              ],
+              "wins_ties_losses_right": [
+                14,
+                12,
+                17
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "dangvantuan/vietnamese-embedding",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.15795160131134403,
+              "ci95_percentile": [
+                -0.2597253580046555,
+                -0.06802464471002287
+              ],
+              "wins_ties_losses_right": [
+                5,
+                22,
+                16
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.0037098560354374265,
+              "ci95_percentile": [
+                -0.09789590254706533,
+                0.09296788482834994
+              ],
+              "wins_ties_losses_right": [
+                8,
+                22,
+                13
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.10459579554649373,
+              "ci95_percentile": [
+                -0.17878760279509287,
+                -0.031744592867646956
+              ],
+              "wins_ties_losses_right": [
+                11,
+                11,
+                21
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "intfloat/multilingual-e5-base",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.12210719962566634,
+              "ci95_percentile": [
+                -0.22624939410386405,
+                -0.03191297107731932
+              ],
+              "wins_ties_losses_right": [
+                5,
+                28,
+                10
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.0034237726098191217,
+              "ci95_percentile": [
+                -0.08175526024363235,
+                0.07570136581764489
+              ],
+              "wins_ties_losses_right": [
+                7,
+                27,
+                9
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.06475726625738325,
+              "ci95_percentile": [
+                -0.13330451161710044,
+                -0.001880218651280372
+              ],
+              "wins_ties_losses_right": [
+                11,
+                16,
+                16
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.2400435741390682,
+              "ci95_percentile": [
+                -0.36364436677435297,
+                -0.12494169833508353
+              ],
+              "wins_ties_losses_right": [
+                4,
+                22,
+                17
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.17006275378368402,
+              "ci95_percentile": [
+                -0.28717238833517905,
+                -0.055334071613141377
+              ],
+              "wins_ties_losses_right": [
+                7,
+                14,
+                22
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.19078278758667952,
+              "ci95_percentile": [
+                -0.28841338379185744,
+                -0.09718782012118456
+              ],
+              "wins_ties_losses_right": [
+                12,
+                4,
+                27
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "embeddings43_native_20261125T060002Z",
+      "sha256": "caeb62dfe2c139ec8fcffbf24129e20dd152ea6a367ed43010286ed8dcf9f56e",
+      "comparisons": [
+        {
+          "model_id": "BAAI/bge-m3",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": 0.0,
+              "ci95_percentile": [
+                0.0,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                0,
+                43,
+                0
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": 0.0,
+              "ci95_percentile": [
+                0.0,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                0,
+                43,
+                0
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": 0.0,
+              "ci95_percentile": [
+                0.0,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                0,
+                43,
+                0
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "intfloat/multilingual-e5-small",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.018940879798262818,
+              "ci95_percentile": [
+                -0.06976744186046512,
+                0.012944802465676664
+              ],
+              "wins_ties_losses_right": [
+                1,
+                41,
+                1
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.024187892211148032,
+              "ci95_percentile": [
+                -0.14453672942045037,
+                0.09748062015503876
+              ],
+              "wins_ties_losses_right": [
+                10,
+                21,
+                12
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.025989985430890785,
+              "ci95_percentile": [
+                -0.12450853395469415,
+                0.0673116348609054
+              ],
+              "wins_ties_losses_right": [
+                12,
+                21,
+                10
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "bkai-foundation-models/vietnamese-bi-encoder",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.09302325581395349,
+              "ci95_percentile": [
+                -0.18604651162790697,
+                -0.023255813953488372
+              ],
+              "wins_ties_losses_right": [
+                0,
+                39,
+                4
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.13391472868217055,
+              "ci95_percentile": [
+                -0.22868217054263568,
+                -0.04227574750830565
+              ],
+              "wins_ties_losses_right": [
+                6,
+                20,
+                17
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.14551986152129223,
+              "ci95_percentile": [
+                -0.23440237633382893,
+                -0.06090016654796168
+              ],
+              "wins_ties_losses_right": [
+                5,
+                20,
+                18
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "dangvantuan/vietnamese-embedding",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.11627906976744186,
+              "ci95_percentile": [
+                -0.23255813953488372,
+                0.0
+              ],
+              "wins_ties_losses_right": [
+                1,
+                36,
+                6
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.14673311184939092,
+              "ci95_percentile": [
+                -0.27112403100775195,
+                -0.019407530454042088
+              ],
+              "wins_ties_losses_right": [
+                7,
+                20,
+                16
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.16569250761078586,
+              "ci95_percentile": [
+                -0.27810467789287896,
+                -0.05336515086354953
+              ],
+              "wins_ties_losses_right": [
+                7,
+                19,
+                17
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "intfloat/multilingual-e5-base",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.03398926654740608,
+              "ci95_percentile": [
+                -0.11627906976744186,
+                0.046511627906976744
+              ],
+              "wins_ties_losses_right": [
+                1,
+                39,
+                3
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.038953488372093024,
+              "ci95_percentile": [
+                -0.15310077519379844,
+                0.0753875968992248
+              ],
+              "wins_ties_losses_right": [
+                10,
+                20,
+                13
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.03794181222640188,
+              "ci95_percentile": [
+                -0.13556276708930956,
+                0.055641514238493055
+              ],
+              "wins_ties_losses_right": [
+                11,
+                19,
+                13
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        },
+        {
+          "model_id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+          "metrics": {
+            "character_recall_at_5": {
+              "mean_right_minus_left": -0.5348837209302325,
+              "ci95_percentile": [
+                -0.6744186046511628,
+                -0.3953488372093023
+              ],
+              "wins_ties_losses_right": [
+                0,
+                20,
+                23
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "mrr_at_10_threshold_05": {
+              "mean_right_minus_left": -0.5160852713178294,
+              "ci95_percentile": [
+                -0.6411960132890365,
+                -0.38745847176079734
+              ],
+              "wins_ties_losses_right": [
+                1,
+                9,
+                33
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            },
+            "ndcg_at_5_linear_span_coverage": {
+              "mean_right_minus_left": -0.5279501649304156,
+              "ci95_percentile": [
+                -0.6524866707440703,
+                -0.4002100185248481
+              ],
+              "wins_ties_losses_right": [
+                1,
+                11,
+                31
+              ],
+              "n": 43,
+              "repetitions": 5000,
+              "seed": 22110068,
+              "limitations": "Exploratory dev pairs; shared topics violate strict IID; not population or holdout evidence."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

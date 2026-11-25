@@ -1,0 +1,18 @@
+{
+  "run_id": "image_status_20261125T060734Z",
+  "source_run_id": "image_qa_20261125T060641Z",
+  "source_metrics_sha256": "4c05a3b82788ac75f7a6c38d52dda60bc7b3a6067f724eff55a5e4772392e30b",
+  "definition": "Operational counts from JSON abstain flag, not semantic correctness.",
+  "groups": {
+    "ocr": {
+      "n": 12,
+      "model_abstained": 4,
+      "answers_emitted": 8
+    },
+    "vlm_inference": {
+      "n": 12,
+      "model_abstained": 10,
+      "answers_emitted": 2
+    }
+  }
+}

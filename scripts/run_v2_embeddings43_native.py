@@ -13,6 +13,7 @@ sys.path[:0]=[str(ROOT),str(ROOT/'src')]
 for key in ('HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','HF_HUB_DISABLE_IMPLICIT_TOKEN'):
     os.environ[key]='1'
 import gc
+import argparse
 import json
 import time
 import hashlib
@@ -32,6 +33,9 @@ from rag_hcmute.evaluation.interval_metrics import character_metrics,paired_boot
 
 def main():
     print(f'Python executable: {sys.executable}',flush=True)
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--resume',type=Path)
+    args=parser.parse_args()
     import torch,faiss,numpy as np
     from transformers import AutoTokenizer
     from sentence_transformers import SentenceTransformer
@@ -60,7 +64,7 @@ def main():
     questions=[SimpleNamespace(question_id=qid,question=cases[qid]['question']) for qid in spans]
     answerable=questions
     stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-    output=ROOT/f'artifacts/results/v2/embeddings43_native_{stamp}.json'
+    output=args.resume or ROOT/f'artifacts/results/v2/embeddings43_native_{stamp}.json'
     output.parent.mkdir(parents=True,exist_ok=True)
     report={'run_id':f'embeddings43_native_{stamp}','snapshot_id':snapshot['snapshot_id'],'partition':'AI-draft extended; not human verified',
         'holdout_used':False,'question_count':len(answerable),'chunk_count':len(chunks),'chunk_signature':input_signature(chunks),
@@ -75,13 +79,29 @@ def main():
             'PhoBERT preprocessing changes input representation but never source offsets; PyVi may introduce segmentation errors.',
             'Single corpus encoding run per model; query timing uses three repetitions after warm-up.'],
         'models':[], 'completed':False}
+    if args.resume:
+        previous=json.loads(output.read_text(encoding='utf-8'))
+        if previous.get('completed') or previous.get('snapshot_id') != snapshot['snapshot_id'] or previous.get('chunk_signature') != input_signature(chunks):
+            raise ValueError('Cannot resume incompatible or complete run')
+        if previous['source_sha256'].get(qpath.name) != hashlib.sha256(qpath.read_bytes()).hexdigest():
+            raise ValueError('Question file changed since original run')
+        report['models']=previous['models']
+        report['resumed_from_run_id']=previous['run_id']
+        report['previous_run_source_sha256']=previous['source_sha256']
     def save(): output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     save(); print(f'Shared windows: {len(chunks)}',flush=True)
     for entry in entries:
+        if any(m['model_id']==entry['model_id'] and m['variant']=='recommended_preprocessing' for m in report['models']):
+            continue
         print(f'Encoding {entry["model_id"]}',flush=True)
         start=time.perf_counter()
         model=SentenceTransformer(entry['path'],device='cuda',local_files_only=True)
-        native_limit=model.max_seq_length
+        configured_limit=model.max_seq_length
+        transformer_config=model[0].auto_model.config
+        architectural_limit=transformer_config.max_position_embeddings
+        if transformer_config.model_type in ('roberta', 'xlm-roberta'):
+            architectural_limit -= (transformer_config.pad_token_id or 0) + 1
+        native_limit=architectural_limit
         model.max_seq_length=native_limit
         model.eval(); torch.cuda.synchronize()
         load_seconds=time.perf_counter()-start
@@ -109,7 +129,8 @@ def main():
                                      retriever=StoredVectorRetriever(chunks,index,qvectors))
             result={k:v for k,v in entry.items() if k!='path'}
             result.update(variant='no_prefix_ablation' if no_prefix else 'recommended_preprocessing',
-                native_max_seq_length=native_limit,actual_max_seq_length=native_limit,dimension=vectors.shape[1],
+                native_max_seq_length=native_limit,configured_max_seq_length=configured_limit,
+                actual_max_seq_length=native_limit,dimension=vectors.shape[1],
                 input_max=max(lengths),truncated_input_count=truncated_count,truncated_query_count=truncated_queries,load_seconds=load_seconds,corpus_encoding_seconds=corpus_seconds,
                 query_encoding_p50_ms=statistics.median(timings),query_encoding_p95_ms=sorted(timings)[-2],
                 query_timing_n=len(timings),peak_allocated_vram_bytes=torch.cuda.max_memory_allocated(),
