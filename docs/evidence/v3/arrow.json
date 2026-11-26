@@ -1,0 +1,58 @@
+{
+  "run_id": "arrow_20261126T153814Z",
+  "source": "HCMUTE_SOTAYSV_2024",
+  "pdf_page": 136,
+  "crop_sha256": "fb197cd93446b973c88971f83a1b360be83be428f7fa10c63cab4f8bc27591a2",
+  "privacy_review": "visually inspected diagram crop; no names, phone numbers, emails or photographs",
+  "models": [
+    "tesseract-vie",
+    "ahmadwaqar/smolvlm2-256m-video:q8_0",
+    "qwen2.5vl:3b"
+  ],
+  "generator": "qwen3:4b",
+  "questions": [
+    {
+      "id": "I07-Q1",
+      "method": "ocr",
+      "valid_json": true,
+      "abstain": false,
+      "review_status": "pending"
+    },
+    {
+      "id": "I07-Q2",
+      "method": "ocr",
+      "valid_json": true,
+      "abstain": false,
+      "review_status": "pending"
+    },
+    {
+      "id": "I07-Q1",
+      "method": "ahmadwaqar/smolvlm2-256m-video:q8_0",
+      "valid_json": true,
+      "abstain": false,
+      "review_status": "pending"
+    },
+    {
+      "id": "I07-Q2",
+      "method": "ahmadwaqar/smolvlm2-256m-video:q8_0",
+      "valid_json": true,
+      "abstain": false,
+      "review_status": "pending"
+    },
+    {
+      "id": "I07-Q1",
+      "method": "qwen2.5vl:3b",
+      "valid_json": true,
+      "abstain": false,
+      "review_status": "pending"
+    },
+    {
+      "id": "I07-Q2",
+      "method": "qwen2.5vl:3b",
+      "valid_json": true,
+      "abstain": false,
+      "review_status": "pending"
+    }
+  ],
+  "completed": true
+}
