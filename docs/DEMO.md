@@ -1,11 +1,13 @@
 # Kịch bản trình bày console RAG
 
-Chạy tại thư mục dự án trên PowerShell. Dùng Python 3.11 của env rag-hcmute và Ollama với qwen3:4b. Khởi động Ollama trước, kiểm tra bằng ollama list. Snapshot G0 gồm ba tài liệu học vụ đã được trích xuất.
+Chạy tại thư mục dự án trên PowerShell. Dùng Python 3.11 của env rag-hcmute và Ollama với qwen3:4b. Khởi động Ollama trước, kiểm tra bằng ollama list. Snapshot G0 gồm ba tài liệu học vụ đã được trích xuất. Cấu hình được chọn là BM25 + BGE-M3, RRF k=60, 50 ứng viên mỗi nhánh, không reranker; Qwen3 dùng JSON Schema và context 8.192. BM25 đơn lẻ vẫn có thể chọn để đối chứng.
 
 ~~~powershell
 Set-Location D:\RAG\rag-hcmute-dot2
 $ragPython = 'C:\Users\Dell\anaconda3\envs\rag-hcmute\python.exe'
-& $ragPython -m rag_hcmute.console_app --method bm25 --answer --prompt-variant scope_schema --context-window 8192
+$bgeModel = 'D:\RAG\models\huggingface\hub\models--BAAI--bge-m3\snapshots\5617a9f61b028005a4858fdac845db406aefb181'
+& $ragPython -c "import sys; print('Python executable:', sys.executable)"
+& $ragPython -m rag_hcmute.console_app --method hybrid --dense-model $bgeModel --answer --prompt-variant scope_schema --context-window 8192
 ~~~
 
 Nhập từng câu rồi gõ :q để kết thúc. Kiểm văn bản PDF theo các trang dưới đây. Model có thể trả sai ở lần chạy mới, kể cả khi cùng cấu hình.
@@ -19,7 +21,7 @@ Nhập từng câu rồi gõ :q để kết thúc. Kiểm văn bản PDF theo c�
 Có thể chạy từng câu một bằng cách thêm --query "câu hỏi". Để chạy lại cả năm câu và lưu log cục bộ, chọn một thư mục mới ngoài repo:
 
 ~~~powershell
-.\scripts\demo_final_v2.ps1 -OutputDirectory 'D:\RAG\private_eval\demo_v2_ho_ten_lan_chay'
+.\scripts\demo_v4_rrf.ps1 -OutputDirectory 'D:\RAG\private_eval\demo_rrf_lan_chay_moi'
 ~~~
 
 Thời gian phụ thuộc vào máy, trạng thái nạp mô hình và độ dài context. Theo các lượt đo trước với BM25 và mô hình đã được nạp, mỗi câu thường mất vài giây; lần nạp đầu có thể lâu hơn. Nếu thiếu VRAM hoặc Ollama không phản hồi, dùng chế độ truy xuất BM25 không sinh câu trả lời để vẫn giải thích được nguồn:
@@ -28,7 +30,11 @@ Thời gian phụ thuộc vào máy, trạng thái nạp mô hình và độ dà
 & $ragPython -m rag_hcmute.console_app --method bm25 --query 'Thủ tục xin nghỉ học tạm thời được quy định ra sao?'
 ~~~
 
-Không dùng log cũ như câu trả lời vừa chạy. Log chứa câu hỏi, đoạn nguồn và câu trả lời, được giữ ngoài Git.
+Không dùng log cũ như câu trả lời vừa chạy. Log chứa câu hỏi, đoạn nguồn và câu trả lời, được giữ ngoài Git. Lệnh BM25 ở trên là cấu hình đối chứng hoặc dự phòng, không phải cấu hình RRF đã chọn.
+
+## Lượt RRF ngày 27/11/2026
+
+Run `console_rrf_20261127T011915Z` có 4/5 lượt thành công về mặt kỹ thuật. Câu ngoài phạm vi gặp `invalid_or_missing_citation`; thông báo không tìm thấy căn cứ không được tính là từ chối hợp lệ. Câu Bảng 1 vẫn dẫn nhầm metadata Điều 15; câu chương trình thứ hai thiếu điều kiện về năm học; câu học trước/tiên quyết gộp hai điều kiện. Nhật ký đầy đủ lưu ngoài repo, tại thư mục `D:\RAG\private_eval\final_20261115\demo_v4_20261127a`. Không xem trạng thái thành công kỹ thuật là kiểm chứng nội dung.
 ## Lượt chạy ngày 25/11/2026
 
 Năm lượt hoàn tất về mặt vận hành, tổng thời gian từng câu 10,81; 7,45; 8,84; 7,01 và 8,38 giây. Đây là thời gian của một lần chạy trên máy, không phải cam kết độ trễ. Tệp log đầy đủ ở D:\RAG\private_eval\final_20261115\demo_v2_20261125 và thống kê mã hóa ở docs/evidence/v2/demo_console.json.

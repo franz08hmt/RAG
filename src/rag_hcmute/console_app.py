@@ -23,6 +23,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CHUNKS_PATH = PROJECT_ROOT / "data/processed/g0_reproduction/chunks/chunks.jsonl"
 APPROVED_RERANKER_REVISION = "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
 RERANKER_CANDIDATE_DEPTH = 20
+FUSION_BRANCH_DEPTH = 50
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -36,7 +37,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--method",
         choices=("bm25", "dense", "hybrid", "dense-rerank", "hybrid-rerank"),
-        default="bm25",
+        default="hybrid",
     )
     parser.add_argument("--dense-model", type=Path, help="Thư mục model BGE-M3 đã có sẵn; không tải model.")
     parser.add_argument("--dense-batch-size", type=int, default=4)
@@ -57,8 +58,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="Sinh câu trả lời bám nguồn bằng Ollama chạy cục bộ (không gọi cloud API).",
     )
     parser.add_argument("--generator-model", default=DEFAULT_MODEL)
-    parser.add_argument("--prompt-variant", choices=PROMPT_VARIANTS, default="standard")
-    parser.add_argument("--context-window", type=int, help="Cửa sổ num_ctx của Ollama khi dùng --answer.")
+    parser.add_argument("--prompt-variant", choices=PROMPT_VARIANTS, default="scope_schema")
+    parser.add_argument("--context-window", type=int, default=8192, help="Cửa sổ num_ctx của Ollama khi dùng --answer.")
     parser.add_argument("--ollama-url", default=DEFAULT_BASE_URL)
     parser.add_argument("--query", help="Chạy một truy vấn rồi thoát; nếu bỏ trống thì mở chế độ tương tác.")
     return parser
@@ -131,7 +132,7 @@ def create_retriever(
         from rag_hcmute.retrieval.hybrid import ReciprocalRankFusionRetriever  # noqa: PLC0415
 
         base_retriever = ReciprocalRankFusionRetriever(
-            BM25Retriever(chunks), dense, rank_constant=60, candidate_k=RERANKER_CANDIDATE_DEPTH
+            BM25Retriever(chunks), dense, rank_constant=60, candidate_k=FUSION_BRANCH_DEPTH
         )
 
     if not use_reranker:

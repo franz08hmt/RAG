@@ -92,15 +92,36 @@ def test_empty_retrieval_does_not_claim_a_semantic_refusal() -> None:
     assert "từ chối" not in output.lower()
 
 
-def test_console_defaults_to_bm25_and_the_approved_g0_snapshot() -> None:
+def test_console_defaults_to_rrf_schema_and_the_approved_g0_snapshot() -> None:
     args = build_parser().parse_args([])
 
-    assert args.method == "bm25"
+    assert args.method == "hybrid"
+    assert args.prompt_variant == "scope_schema"
+    assert args.context_window == 8192
     assert args.chunks.name == "chunks.jsonl"
     assert "g0_reproduction" in str(args.chunks)
     assert args.top_k == 5
     assert args.reranker_max_length == 512
     assert args.reranker_batch_size == 4
+
+
+def test_hybrid_console_queries_50_candidates_per_branch(tmp_path: Path, monkeypatch) -> None:
+    import rag_hcmute.retrieval.dense_index as dense_index
+
+    chunks_file = tmp_path / "chunks.jsonl"
+    chunks_file.write_text(json.dumps(_chunk().to_dict()) + "\n", encoding="utf-8")
+    model_path = tmp_path / "model"
+    model_path.mkdir()
+
+    class DenseStub:
+        def __init__(self, chunks, **_kwargs):
+            self.chunks = chunks
+            self.startup_metrics = {}
+
+    monkeypatch.setattr(dense_index, "DenseRetriever", DenseStub)
+    retriever = create_retriever(method="hybrid", chunks_path=chunks_file, dense_model=model_path)
+    assert retriever.rank_constant == 60
+    assert retriever.candidate_k == 50
 
 
 def test_console_accepts_rerank_method_but_requires_explicit_models(tmp_path: Path) -> None:

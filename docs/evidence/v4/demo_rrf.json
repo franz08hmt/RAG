@@ -1,0 +1,97 @@
+{
+  "run_id": "console_rrf_20261127T011915Z",
+  "revision_before_summary": "a90b5ee478867bb601af0e059e88c4a9735a91be",
+  "runner_sha256_at_summary": "a054c29af1dbdc4ae78dc224d0ce23f7a0b0f3b194e241155c77c1349d75cbb8",
+  "runner_note": "Case 05 was resumed separately after case 04 exit 3; script error handling was adjusted after the first four cases.",
+  "console_sha256": "96b2bb61d34845febd195f4eb76a58627f1da8ecffca6263402a04d15a748538",
+  "method": "hybrid_rrf",
+  "rank_constant": 60,
+  "branch_depth": 50,
+  "reranker": false,
+  "model": "qwen3:4b",
+  "context_window": 8192,
+  "prompt": "scope_schema",
+  "cases": [
+    {
+      "id": "demo_01",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "citation_count": 1,
+      "total_seconds": 58.16094050000015,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0038",
+        "HCMUTE_SOTAYSV_2024__c0023",
+        "HCMUTE_SOTAYSV_2024__c0022",
+        "HCMUTE_QCDT_1727_2021__c0022",
+        "HCMUTE_SOTAYSV_2024__c0015"
+      ],
+      "log_sha256": "58e3898e1da134afdc875a258fe8c8188695661739b437236c53d68de01375f9"
+    },
+    {
+      "id": "demo_02",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "citation_count": 1,
+      "total_seconds": 57.69327720000001,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0006",
+        "HCMUTE_SOTAYSV_2024__c0012",
+        "HCMUTE_SOTAYSV_2024__c0014",
+        "HCMUTE_QCDT_1727_2021__c0037",
+        "HCMUTE_QCDT_1727_2021__c0041"
+      ],
+      "log_sha256": "06a5e34fd69611d96baa8058f253009d2a4237195a41ee32a532dfb8fec70e93"
+    },
+    {
+      "id": "demo_03",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "citation_count": 1,
+      "total_seconds": 33.1659009,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0043",
+        "HCMUTE_SOTAYSV_2024__c0025",
+        "HCMUTE_SOTAYSV_2024__c0024",
+        "HCMUTE_QCDT_1727_2021__c0008",
+        "HCMUTE_QCDT_1727_2021__c0018"
+      ],
+      "log_sha256": "2d9060624f5dc9372d1d4586f9ca98f7a7e843e5921fbdde7f2aad398765576b"
+    },
+    {
+      "id": "demo_04",
+      "success": false,
+      "status": "invalid_or_missing_citation",
+      "abstained": true,
+      "citation_count": 0,
+      "total_seconds": 39.0513684,
+      "retrieved_chunk_ids": [
+        "HCMUTE_SOTAYSV_2024__c0054",
+        "HCMUTE_SOTAYSV_2024__c0051",
+        "HCMUTE_SOTAYSV_2024__c0090",
+        "HCMUTE_SOTAYSV_2024__c0069",
+        "HCMUTE_SOTAYSV_2024__c0088"
+      ],
+      "log_sha256": "7fcb622d653670b63fd98054fba1d8d4171ed64885d6d39922e0e9b45314ae3d"
+    },
+    {
+      "id": "demo_05",
+      "success": true,
+      "status": "generated_citations_unverified",
+      "abstained": false,
+      "citation_count": 1,
+      "total_seconds": 46.62335759999996,
+      "retrieved_chunk_ids": [
+        "HCMUTE_QCDT_1727_2021__c0008",
+        "HCMUTE_SOTAYSV_2024__c0013",
+        "HCMUTE_QCDT_1727_2021__c0018",
+        "HCMUTE_QCDT_1727_2021__c0043",
+        "HCMUTE_SOTAYSV_2024__c0025"
+      ],
+      "log_sha256": "75b490caf48d1e5cc4c3379ae75d1a4da91cb51cd93a84a8a6acd46208d6a15d"
+    }
+  ],
+  "private_content_published": false
+}
