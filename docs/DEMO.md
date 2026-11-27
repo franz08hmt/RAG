@@ -35,6 +35,8 @@ Không dùng log cũ như câu trả lời vừa chạy. Log chứa câu hỏi, 
 ## Lượt RRF ngày 27/11/2026
 
 Run `console_rrf_20261127T011915Z` có 4/5 lượt thành công về mặt kỹ thuật. Câu ngoài phạm vi gặp `invalid_or_missing_citation`; thông báo không tìm thấy căn cứ không được tính là từ chối hợp lệ. Câu Bảng 1 vẫn dẫn nhầm metadata Điều 15; câu chương trình thứ hai thiếu điều kiện về năm học; câu học trước/tiên quyết gộp hai điều kiện. Nhật ký đầy đủ lưu ngoài repo, tại thư mục `D:\RAG\private_eval\final_20261115\demo_v4_20261127a`. Không xem trạng thái thành công kỹ thuật là kiểm chứng nội dung.
+
+Sau khi ràng buộc hai nhánh schema, lượt `console_rrf_v5_20261127T013434Z` có năm lượt hoàn tất kỹ thuật, trong đó câu ngoài phạm vi được đánh dấu `model_abstained`. Đây là một lần chạy; chưa kết luận câu trả lời hoặc khả năng từ chối chính xác. Log cục bộ nằm tại `D:\RAG\private_eval\final_20261115\demo_v5_20261127a`.
 ## Lượt chạy ngày 25/11/2026
 
 Năm lượt hoàn tất về mặt vận hành, tổng thời gian từng câu 10,81; 7,45; 8,84; 7,01 và 8,38 giây. Đây là thời gian của một lần chạy trên máy, không phải cam kết độ trễ. Tệp log đầy đủ ở D:\RAG\private_eval\final_20261115\demo_v2_20261125 và thống kê mã hóa ở docs/evidence/v2/demo_console.json.

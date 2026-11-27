@@ -187,5 +187,26 @@ def test_scope_schema_rejects_refusal_with_citations(monkeypatch):
     result = generate_grounded_answer("Câu hỏi", [_source()], prompt_variant="scope_schema")
     assert result.status == "inconsistent_model_refusal"
     assert result.citations == ()
-    assert payloads[0]["format"]["properties"]["citation_ids"]["items"]["enum"] == ["S1"]
+    assert payloads[0]["format"]["oneOf"][1]["properties"]["citation_ids"]["items"]["enum"] == ["S1"]
     assert "đối chiếu từng yêu cầu" in payloads[0]["messages"][0]["content"]
+
+
+@pytest.mark.parametrize(("content", "expected"), [
+    ({"abstain": True, "answer": "Chưa đủ căn cứ.", "citation_ids": []}, "model_abstained"),
+    ({"abstain": False, "answer": "Câu trả lời thiếu nguồn.", "citation_ids": []}, "invalid_or_missing_citation"),
+])
+def test_scope_schema_has_disjoint_refusal_and_answer_branches(monkeypatch, content, expected):
+    payloads = []
+
+    def fake(request, timeout):
+        payloads.append(json.loads(request.data))
+        return _mock_response(json.dumps(content, ensure_ascii=False))
+
+    monkeypatch.setattr("rag_hcmute.generation.ollama.urlopen", fake)
+    result = generate_grounded_answer("Câu hỏi", [_source()], prompt_variant="scope_schema")
+    assert result.status == expected
+    branches = payloads[0]["format"]["oneOf"]
+    assert branches[0]["properties"]["abstain"]["const"] is True
+    assert branches[0]["properties"]["citation_ids"]["maxItems"] == 0
+    assert branches[1]["properties"]["abstain"]["const"] is False
+    assert branches[1]["properties"]["citation_ids"]["minItems"] == 1
