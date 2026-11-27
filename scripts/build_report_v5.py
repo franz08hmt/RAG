@@ -52,12 +52,12 @@ summary=Table(find('Bảng 26  Tổng kết')._p.getnext(),doc)
 for row in summary.rows[1:]:
  if row.cells[0].text.strip()=='Chunking':
   replace(row.cells[2].paragraphs[0],'Giữ G0 500/80; có ranh giới Điều và cửa sổ dự phòng')
-  replace(row.cells[3].paragraphs[0],'Để embedding, fusion và reranker so sánh trên cùng tập G0.')
+  replace(row.cells[3].paragraphs[0],'Giữ cùng G0 cho các lượt đối chiếu embedding, fusion và reranker trên G0.')
   replace(row.cells[4].paragraphs[0],'Chia theo Điều phủ 0,873 ở 1.000 token, cắt 9/57 span; cần kiểm với cùng cấu hình truy xuất ở vòng sau.')
   break
 else:raise ValueError('Chunking summary row not found')
 current=find('Cấu hình mặc định được chọn')
-replace(current,current.text+' G0 được giữ để các phép thử embedding, fusion và reranker dùng chung tập đoạn; cách chia theo Điều được cân nhắc cho vòng sau, chưa kiểm với cùng cấu hình truy xuất.')
+replace(current,current.text+' G0 được giữ để các lượt embedding, fusion và reranker trên G0 dùng chung tập đoạn; lượt embedding trần chung có tập đoạn riêng. Cách chia theo Điều được cân nhắc cho vòng sau, chưa kiểm với cùng cấu hình truy xuất.')
 find('PHỤ LỤC A MINH CHỨNG').paragraph_format.page_break_before=False
 find('PHỤ LỤC B ĐỐI CHIẾU').paragraph_format.page_break_before=False
 replace(find('Bảng đối chiếu cập nhật đến ngày'), 'Bảng đối chiếu cập nhật đến ngày 27/11/2026; kết quả chấm người và tập test riêng chưa có.')
