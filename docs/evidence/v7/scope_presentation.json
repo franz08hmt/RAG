@@ -1,0 +1,61 @@
+{
+  "run_id": "scope_presentation_20261128T091022Z",
+  "description": "Deterministic presentation from existing draft answerability and model status; not human-verified and no model calls.",
+  "source_runs": {
+    "qa": "scope_rrf12_20261127T013058Z",
+    "demo": "console_rrf_v5_20261127T013434Z",
+    "judge_summary": "judge_summary_20261128T085842Z"
+  },
+  "source_sha256": {
+    "qa": "b0c4ccb3989d7a82e3666a66cd5558a82bc7bf16219658c1ea876b46c3d868e6",
+    "demo": "704dfac6a791511c6d3a1d7c2e399043882c5cef7bd62cf96806a62c6f18fbd1",
+    "judge": "c8834ce099ecccb1c51bf2d06895f174e6e4c585f0357fc687800e9a14471ef3",
+    "summary": "041d273d5da1fc88e4d537fd4ab234236834f27dd5e7cd8bf08880ddecda1d91",
+    "demo_spec": "b94baa1c1d43a6faa0eca34e89f8cde4223046cead45c82510295a0b8c49b328"
+  },
+  "demo_answerability_rule": "demo_04 is outside HCMUTE corpus; other four use source-linked questions; see docs/DEMO.md",
+  "qa": {
+    "group": "qa12",
+    "total": 12,
+    "answerable_draft": 6,
+    "unanswerable_draft": 6,
+    "unanswerable_model_abstained": 1,
+    "unanswerable_answered_should_refuse": 5,
+    "unanswerable_technical_error": 0,
+    "judge_labels_on_answerable": {
+      "correct": 6
+    },
+    "judge_conflicts": [
+      {
+        "id": "qa_U04",
+        "judge_label": "correct"
+      },
+      {
+        "id": "qa_U08",
+        "judge_label": "correct"
+      },
+      {
+        "id": "qa_U11",
+        "judge_label": "correct"
+      },
+      {
+        "id": "qa_U13",
+        "judge_label": "correct"
+      }
+    ]
+  },
+  "demo": {
+    "group": "demo5",
+    "total": 5,
+    "answerable_draft": 4,
+    "unanswerable_draft": 1,
+    "unanswerable_model_abstained": 1,
+    "unanswerable_answered_should_refuse": 0,
+    "unanswerable_technical_error": 0,
+    "judge_labels_on_answerable": {
+      "correct": 4
+    },
+    "judge_conflicts": []
+  },
+  "note": "Judge correct on unanswerable answered questions is excluded; labels on answerable remain unverified AI judgments."
+}
