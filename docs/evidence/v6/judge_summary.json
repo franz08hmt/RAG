@@ -1,0 +1,164 @@
+{
+  "run_id": "judge_summary_20261128T085842Z",
+  "judge_b_run_id": "judge_b_20261128T085238Z",
+  "judge_b_text_run_id": "judge_b_20261128T085721Z",
+  "judge_b_model": "gemma3:4b",
+  "judge_b_digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+  "private_run_sha256": "a9ca83626cfb2f0ad249dfff199f2af241dd3670198a5cc32999c0854d71a8d5",
+  "private_text_run_sha256": "3a498beaca18c72e6b9fb2bf94bce6f56230aeea14c1896becb6905809b4d8d9",
+  "judge_a_run_id": "image_review_20261125T060820Z",
+  "judge_a": "Codex",
+  "judge_a_source_sha256": "9a6d1f22dfcfb497c578c1f6615b9a7f774ffc42527d3cc898ecd87e396ec619",
+  "rubric": [
+    "correct",
+    "partial",
+    "incorrect",
+    "correct_refusal",
+    "should_refuse"
+  ],
+  "groups": {
+    "arrow_ahmadwaqar/smolvlm2-256m-video:q8_0": {
+      "item_count": 2,
+      "valid_count": 2,
+      "labels": {
+        "incorrect": 2
+      },
+      "support": {
+        "unsupported": 2
+      }
+    },
+    "arrow_ocr": {
+      "item_count": 2,
+      "valid_count": 2,
+      "labels": {
+        "incorrect": 2
+      },
+      "support": {
+        "unsupported": 2
+      }
+    },
+    "arrow_qwen2.5vl:3b": {
+      "item_count": 2,
+      "valid_count": 2,
+      "labels": {
+        "incorrect": 2
+      },
+      "support": {
+        "unsupported": 2
+      }
+    },
+    "demo5": {
+      "item_count": 5,
+      "valid_count": 5,
+      "labels": {
+        "correct": 4,
+        "correct_refusal": 1
+      },
+      "support": {
+        "supported": 4,
+        "unsupported": 1
+      }
+    },
+    "image_ocr": {
+      "item_count": 12,
+      "valid_count": 12,
+      "labels": {
+        "incorrect": 8,
+        "correct": 4
+      },
+      "support": {
+        "unsupported": 8,
+        "supported": 4
+      }
+    },
+    "image_qwen_vl": {
+      "item_count": 12,
+      "valid_count": 12,
+      "labels": {
+        "incorrect": 2,
+        "correct": 10
+      },
+      "support": {
+        "unsupported": 2,
+        "supported": 10
+      }
+    },
+    "image_vlm_inference": {
+      "item_count": 12,
+      "valid_count": 12,
+      "labels": {
+        "incorrect": 8,
+        "correct": 4
+      },
+      "support": {
+        "unsupported": 8,
+        "supported": 4
+      }
+    },
+    "qa12": {
+      "item_count": 12,
+      "valid_count": 12,
+      "labels": {
+        "correct": 10,
+        "incorrect": 1,
+        "correct_refusal": 1
+      },
+      "support": {
+        "supported": 10,
+        "unsupported": 1,
+        "not_applicable": 1
+      }
+    }
+  },
+  "judge_b_status": {
+    "selected_calls": 118,
+    "actual_calls_including_discarded_initial_text": 152,
+    "valid_calls": 118
+  },
+  "judge_b_repeat_stability": {
+    "paired_valid": 59,
+    "label_agree": 59,
+    "support_agree": 58,
+    "label_agreement": 1.0,
+    "support_agreement": 0.9830508474576272
+  },
+  "judge_a_vs_b": {
+    "a_original_count": 24,
+    "comparable_count": 10,
+    "excluded": {
+      "model_abstained": 14
+    },
+    "observed_agreement": 0.8,
+    "chance_agreement": 0.5,
+    "cohen_kappa": 0.6000000000000001,
+    "contingency": {
+      "correct|correct": 2,
+      "correct|incorrect": 0,
+      "correct|partial": 0,
+      "incorrect|correct": 1,
+      "incorrect|incorrect": 6,
+      "incorrect|partial": 0,
+      "partial|correct": 1,
+      "partial|incorrect": 0,
+      "partial|partial": 0
+    },
+    "disagreements": [
+      {
+        "id": "image_I04-Q2_vlm_inference",
+        "judge_a": "incorrect",
+        "judge_b": "correct"
+      },
+      {
+        "id": "image_I06-Q2_ocr",
+        "judge_a": "partial",
+        "judge_b": "correct"
+      }
+    ]
+  },
+  "limitations": [
+    "Codex A has pre-existing labels only for OCR/SmolVLM2; no A labels for new QA, demo, Qwen-VL or arrow outputs.",
+    "A model_abstained records model behavior, not a correctness judgment; excluded from kappa.",
+    "AI-drafted references and AI judges have no independent human adjudication.",
+    "The two judges use shared source material and are not independent observations of ground truth."
+  ]
+}
